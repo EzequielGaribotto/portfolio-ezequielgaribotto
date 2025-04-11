@@ -1,0 +1,93 @@
+/* Import Tailwind CSS */
+@import "tailwindcss";
+
+/* Root Variables */
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --link-color: #0070f3;
+  --link-hover-color: #0056b3;
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* Dark Mode Variables */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    --link-color: #4c98af;
+    --link-hover-color: #81bfc7;
+  }
+}
+
+/* Global Styles */
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+a {
+  color: var(--link-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--link-hover-color);
+}
+
+/* Header Styles */
+header {
+  background: var(--foreground);
+  color: var(--background);
+  padding: 1rem;
+}
+
+header ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  padding: 0;
+  margin: 0;
+}
+
+header a {
+  color: var(--background);
+  font-family: var(--font-sans);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Footer Styles */
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: var(--foreground);
+  color: var(--background);
+  font-family: var(--font-sans);
+}
+
+/* Utility Classes */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}

@@ -1,0 +1,19 @@
+{
+    "projects": "My Projects",
+    "projectTitles": {
+      "m04-adivina-numero-secreto": "Guess the Secret Number",
+      "m04-play-html-css": "Play with HTML & CSS",
+      "m08-p4-maps-app": "Maps App",
+      "trivial-app-jetpack-compose": "Trivial App",
+      "zomb": "Zomb Game",
+      "competitive-programming": "Competitive Programming"
+    },
+    "projectDescriptions": {
+      "m04-adivina-numero-secreto": "'Guess the secret number' - A basic HTML, CSS, and JavaScript project.",
+      "m04-play-html-css": "A very basic HTML & CSS project with simple design and animations.",
+      "m08-p4-maps-app": "CRUD app for map markers with Firebase integration for user data and photos.",
+      "trivial-app-jetpack-compose": "A trivia app with customizable game settings like difficulty, themes, and categories.",
+      "zomb": "Infinite horizontal scroller retro game with enemies, collisions, and more.",
+      "competitive-programming": "Solved problems on JO-EL and AceptaElReto to prepare for the ProgramaMe 2024 contest."
+    }
+  }
