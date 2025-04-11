@@ -3,8 +3,8 @@ import { TranslationProvider } from "../context/TranslationContext";
 import LanguageSwitcher from "../components/LanguageSwitcher";
 
 export const metadata = {
-  title: "My Portfolio",
-  description: "Welcome to my portfolio website!",
+  title: "Portfolio de Ezequiel Garibotto - Desarrollador de Software",
+  description: "Bienvenido a mi sitio web de portafolio!",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

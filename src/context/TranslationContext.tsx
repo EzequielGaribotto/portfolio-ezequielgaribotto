@@ -1,3 +1,4 @@
+// filepath: c:\Dev\github\Portfolio_EzequielGaribotto\portfolio-ezequielgaribotto\src\context\TranslationContext.tsx
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
@@ -20,8 +21,7 @@ export const TranslationProvider = ({
   }, [initialLocale]);
 
   if (!locale) {
-    // Prevent rendering until the locale is determined
-    return null;
+    return null; // Prevent rendering until locale is determined
   }
 
   const t = (key: string) => {
@@ -31,10 +31,10 @@ export const TranslationProvider = ({
       value = value?.[k];
       if (value === undefined) {
         console.warn(`Missing translation for key: ${key}`);
-        return key;
+        return key; // Return the key itself if translation is missing
       }
     }
-    return value;
+    return typeof value === "string" ? value : key; // Ensure a string is returned
   };
 
   const changeLocale = (newLocale: string) => {
@@ -43,13 +43,7 @@ export const TranslationProvider = ({
   };
 
   return (
-    <TranslationContext.Provider
-      value={{
-        t,
-        locale,
-        changeLocale,
-      }}
-    >
+    <TranslationContext.Provider value={{ t, locale, changeLocale }}>
       {children}
     </TranslationContext.Provider>
   );
