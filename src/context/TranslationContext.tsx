@@ -1,10 +1,28 @@
-// filepath: c:\Dev\github\Portfolio_EzequielGaribotto\portfolio-ezequielgaribotto\src\context\TranslationContext.tsx
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
 import translations from "../app/translations";
 
-const TranslationContext = createContext<any>(null);
+// Define proper interfaces for translation context
+interface TranslationContextType {
+  t: (key: string) => string;
+  locale: string;
+  changeLocale: (newLocale: string) => void;
+  theme: string;
+  changeTheme: (newTheme: string) => void;
+  pageLoadTime: number | null;
+}
+
+// Define recursive type for translations
+interface NestedTranslation {
+  [key: string]: string | NestedTranslation;
+}
+
+type TranslationsType = {
+  [locale: string]: NestedTranslation;
+};
+
+const TranslationContext = createContext<TranslationContextType | null>(null);
 
 export const TranslationProvider = ({
   children,
@@ -15,6 +33,7 @@ export const TranslationProvider = ({
 }) => {
   const [locale, setLocale] = useState<string | null>(null);
   const [theme, setTheme] = useState<string>("light");
+  const [pageLoadTime, setPageLoadTime] = useState<number | null>(null);
 
   useEffect(() => {
     const savedLocale = localStorage.getItem("locale") || initialLocale;
@@ -22,6 +41,10 @@ export const TranslationProvider = ({
     setLocale(savedLocale);
     setTheme(savedTheme);
     document.documentElement.setAttribute("data-theme", savedTheme);
+    
+    // Measure page load time
+    const loadTime = performance.now();
+    setPageLoadTime(Math.round(loadTime));
   }, [initialLocale]);
 
   const changeTheme = (newTheme: string) => {
@@ -36,15 +59,35 @@ export const TranslationProvider = ({
 
   const t = (key: string) => {
     const keys = key.split(".");
-    let value = translations[locale];
+    // Use type assertion with Record for safe indexing
+    let value: Record<string, unknown> = (translations as TranslationsType)[locale] as Record<string, unknown>;
+
+    // Navigate through the nested properties
     for (const k of keys) {
-      value = value?.[k];
-      if (value === undefined) {
+      if (value === undefined || value === null) {
         console.warn(`Missing translation for key: ${key}`);
-        return key; // Return the key itself if translation is missing
+        return key;
+      }
+      // Safe indexing with Record type
+      const nextValue = value[k];
+      
+      // Handle leaf node
+      if (typeof nextValue === 'string') {
+        return nextValue;
+      }
+      
+      // Continue traversing if we have a nested object
+      if (nextValue && typeof nextValue === 'object') {
+        value = nextValue as Record<string, unknown>;
+      } else {
+        // We've reached an undefined or non-object value that's not a string
+        console.warn(`Invalid translation for key: ${key}`);
+        return key;
       }
     }
-    return typeof value === "string" ? value : key; // Ensure a string is returned
+
+    // If we've gone through all keys and ended with an object, return the key
+    return key;
   };
 
   const changeLocale = (newLocale: string) => {
@@ -53,10 +96,16 @@ export const TranslationProvider = ({
   };
 
   return (
-    <TranslationContext.Provider value={{ t, locale, changeLocale, theme, changeTheme }}>
+    <TranslationContext.Provider value={{ t, locale, changeLocale, theme, changeTheme, pageLoadTime }}>
       {children}
     </TranslationContext.Provider>
   );
 };
 
-export const useTranslation = () => useContext(TranslationContext);
+export const useTranslation = () => {
+  const context = useContext(TranslationContext);
+  if (!context) {
+    throw new Error("useTranslation must be used within a TranslationProvider");
+  }
+  return context;
+};
