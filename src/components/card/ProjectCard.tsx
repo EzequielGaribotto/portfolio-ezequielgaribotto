@@ -1,12 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
-import { useState, useRef } from "react";
-import { useTranslation } from "../context/TranslationContext";
-import { Project } from "../models/Project";
-import { FaGooglePlay, FaGamepad, FaTrophy, FaExpandAlt, FaCompressAlt } from "react-icons/fa";
-import ClickableButton from "./ClickableButton";
+import { FaExpand, FaCompress, FaTrophy, FaGooglePlay, FaGamepad } from "../../utils/icons";import { useState, useRef } from "react";
+import { useTranslation } from "../../context/TranslationContext";
+import { Project } from "../../models/Project";
+import ClickableButton from "../button/ClickableButton";
+import OptimizedImage from '../OptimizedImage';
 
 interface ProjectCardProps {
   project: Project;
@@ -15,16 +14,8 @@ interface ProjectCardProps {
 export default function ProjectCard({ project }: ProjectCardProps) {
   const { t } = useTranslation();
   const fallbackImage = "/images/projects/fallback.jpg";
-  const [isImageLoaded, setIsImageLoaded] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
-
-  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
-    const img = e.target as HTMLImageElement;
-    if (img.src !== fallbackImage) {
-      img.src = fallbackImage;
-    }
-  };
 
   const toggleExpand = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -53,41 +44,35 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         </p>
       </Link>
       
-      <div className="project-image-container mt-4">
-        <div 
-          className="expand-control"
-          onClick={toggleExpand}
+      <div className="project-image-container">
+        <button 
+          className="expand-control" 
+          onClick={toggleExpand} 
+          aria-label={isExpanded ? "Collapse image" : "Expand image"}
         >
-          {isExpanded ? (
-            <FaCompressAlt className="text-white cursor-pointer" size={16} />
-          ) : (
-            <FaExpandAlt className="text-white cursor-pointer" size={16} />
-          )}
-        </div>
-        
+          {isExpanded ? <FaCompress size={16} /> : <FaExpand size={16} />}
+        </button>
         <div 
           className={`project-image-wrapper transform ${isExpanded ? 'expanded scale-100' : 'scale-95'}`}
           style={{ 
             height: isExpanded ? 'auto' : '200px',
-            maxHeight: isExpanded ? '2000px' : '200px', // Using a very large max-height for smooth animation
+            maxHeight: isExpanded ? '2000px' : '200px',
             transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)'
           }}
         >
-          <Image
+          <OptimizedImage
             src={project.image || fallbackImage}
             alt={t(project.titleKey) || "Project image"}
             width={600}
             height={isExpanded ? 800 : 400}
             className={`rounded-lg cursor-pointer transition-all duration-500 ease-in-out transform ${
               isExpanded ? 'object-contain h-auto w-full scale-100' : 'object-cover h-[200px] scale-95'
-            } ${isImageLoaded ? '' : 'loading'}`}
-            onError={handleImageError}
-            onLoad={() => setIsImageLoaded(true)}
-            priority={false}
-            loading="lazy"
-            sizes="(max-width: 768px) 100vw, 600px"
-            quality={isExpanded ? 90 : 80}
-            unoptimized={isExpanded} // Disable optimization for expanded images to show full resolution
+            }`}
+            loading={isExpanded ? "eager" : "lazy"}
+            sizes={isExpanded 
+              ? "(max-width: 640px) 95vw, (max-width: 768px) 90vw, 800px" 
+              : "(max-width: 640px) 95vw, (max-width: 768px) 45vw, 400px"}
+            quality={isExpanded ? 90 : 75}
           />
         </div>
       </div>

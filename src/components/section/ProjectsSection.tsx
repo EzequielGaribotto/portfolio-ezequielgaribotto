@@ -1,8 +1,8 @@
 "use client";
 
-import ProjectCard from "./ProjectCard";
-import { useTranslation } from "../context/TranslationContext";
-import { Project } from "../models/Project";
+import ProjectCard from "../card/ProjectCard";
+import { useTranslation } from "../../context/TranslationContext";
+import { Project } from "../../models/Project";
 
 const projects: Project[] = [
   {

@@ -1,7 +1,7 @@
 "use client";
 
-import ProfileSection from "../components/ProfileSection";
-import ProjectsSection from "../components/ProjectsSection";
+import ProfileSection from "../components/section/ProfileSection";
+import ProjectsSection from "../components/section/ProjectsSection";
 
 export default function Home() {
   return (

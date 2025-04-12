@@ -364,3 +364,35 @@ body.modal-open {
 .fixed {
   will-change: transform;
 }
+
+/* Image optimization styles */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.image-placeholder {
+  animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  background-color: var(--secondary);
+}
+
+/* For low quality image placeholders */
+.blur-up {
+  filter: blur(5px);
+  transition: filter 0.3s ease-in-out;
+}
+
+.blur-up.loaded {
+  filter: blur(0);
+}
+
+/* Prevent layout shift during image loading */
+.image-container {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--secondary-lighter);
+}

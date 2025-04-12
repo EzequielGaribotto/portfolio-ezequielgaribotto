@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
-import { Project } from '../models/Project';
+import { Project } from '../../models/Project';
 
-const ProjectCardComponent = dynamic(() => import('./ProjectCard'), {
+const ProjectCardComponent = dynamic(() => import('../ProjectCard'), {
   loading: () => (
     <div className="project-card-skeleton bg-secondary rounded-lg shadow-md p-4 animate-pulse">
       <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-3/4 mb-2"></div>

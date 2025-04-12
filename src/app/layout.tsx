@@ -1,13 +1,22 @@
 import "./globals.css";
 import { TranslationProvider } from "../context/TranslationContext";
 import LanguageSwitcher from "../components/LanguageSwitcher";
-import ThemeToggleButton from "../components/ThemeToggleButton";
-import Footer from "../components/Footer";
+import ThemeToggleButton from "../components/button/ThemeToggleButton";
+import Footer from "../components/section/Footer";
+import { Metadata } from 'next';
+import translations from '../app/translations/translations';
 
-export const metadata = {
-  title: "Portfolio de Ezequiel Garibotto - Desarrollador de Software",
-  description: "Bienvenido a mi sitio web de portafolio!",
-};
+// Generate metadata with translations
+export function generateMetadata(): Metadata {
+  // Use Spanish as default language for static metadata generation
+  const locale = 'es';
+  const meta = translations[locale].meta;
+  
+  return {
+    title: meta.title,
+    description: meta.description,
+  };
+}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const initialLocale = "es"; // Default language

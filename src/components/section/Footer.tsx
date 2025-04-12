@@ -1,7 +1,7 @@
 "use client";
 
-import { useTranslation } from "../context/TranslationContext";
-import ClickableButton from "./ClickableButton";
+import { useTranslation } from "../../context/TranslationContext";
+import ClickableButton from "../button/ClickableButton";
 
 export default function Footer() {
   const { t } = useTranslation();

@@ -1,7 +1,7 @@
 "use client";
 
-import { useTranslation } from "../context/TranslationContext";
-import { FaSun, FaMoon } from "react-icons/fa";
+import { useTranslation } from "../../context/TranslationContext";
+import { FaSun, FaMoon } from "../../utils/icons";
 
 export default function ThemeToggleButton() {
   const { theme, changeTheme } = useTranslation();
