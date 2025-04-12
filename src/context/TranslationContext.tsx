@@ -15,7 +15,7 @@ interface TranslationContextType {
 
 // Define recursive type for translations
 interface NestedTranslation {
-  [key: string]: string | NestedTranslation;
+  [key: string]: string | NestedTranslation | Record<string, unknown>[] | string[]; // Allow arrays of strings
 }
 
 type TranslationsType = {
@@ -59,8 +59,8 @@ export const TranslationProvider = ({
 
   const t = (key: string) => {
     const keys = key.split(".");
-    // Use type assertion with Record for safe indexing
-    let value: Record<string, unknown> = (translations as TranslationsType)[locale] as Record<string, unknown>;
+    // Adjust type assertion to match the updated NestedTranslation type
+    let value: NestedTranslation = (translations as TranslationsType)[locale];
 
     // Navigate through the nested properties
     for (const k of keys) {
@@ -68,25 +68,20 @@ export const TranslationProvider = ({
         console.warn(`Missing translation for key: ${key}`);
         return key;
       }
-      // Safe indexing with Record type
       const nextValue = value[k];
-      
-      // Handle leaf node
-      if (typeof nextValue === 'string') {
+
+      if (typeof nextValue === "string") {
         return nextValue;
       }
-      
-      // Continue traversing if we have a nested object
-      if (nextValue && typeof nextValue === 'object') {
-        value = nextValue as Record<string, unknown>;
+
+      if (nextValue && typeof nextValue === "object") {
+        value = nextValue as NestedTranslation;
       } else {
-        // We've reached an undefined or non-object value that's not a string
         console.warn(`Invalid translation for key: ${key}`);
         return key;
       }
     }
 
-    // If we've gone through all keys and ended with an object, return the key
     return key;
   };
 

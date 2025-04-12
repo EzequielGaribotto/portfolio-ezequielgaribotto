@@ -3,6 +3,7 @@ import React from "react";
 import Section from "./Section";
 import styles from "./ExperienceSection.module.css";
 import { useTranslation } from "../../context/TranslationContext";
+import Image from 'next/image';
 
 interface Experience {
   id: string;
@@ -55,9 +56,11 @@ const ExperienceSection: React.FC = () => {
           <div key={exp.id} className={styles.experienceItem}>
             <div className={styles.experienceHeader}>
               {exp.imageUrl && (
-                <img
+                <Image
                   src={exp.imageUrl}
                   alt={`${exp.company} logo`}
+                  width={500}
+                  height={300}
                   className={styles.companyLogo}
                 />
               )}
