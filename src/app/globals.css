@@ -280,23 +280,85 @@ social-icon:hover {
   max-width: fit-content;
 }
 
+/* Modal-like image expansion that prevents layout shifts */
 .project-image-wrapper {
   position: relative;
   overflow: hidden;
   border-radius: 0.5rem;
-  transform-origin: center top;
-}
-
-.project-image-wrapper.expanded {
-  overflow: visible;
+  height: auto; /* Changed from fixed 200px height */
+  max-height: 350px; /* Add reasonable max height */
+  transition: none; /* Remove transition from wrapper */
 }
 
 .project-image-wrapper img {
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   width: 100%;
-  transform-origin: center top;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  transition: transform 0.3s ease;
 }
 
+/* Expanded image overlay */
+.expanded-image-overlay {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: auto;
+  max-width: min(1200px, 90vw);
+  height: auto;
+  max-height: 85vh; 
+  background-color: transparent;
+  border-radius: 2.5rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  z-index: 100;
+  overflow: hidden;
+  display: none;
+  box-sizing: border-box;
+}
+
+.expanded-image-overlay.active {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.expanded-image-overlay img {
+  max-width: 100%;
+  max-height: 75vh;
+  object-fit: contain;
+  margin: auto;
+  border-radius: 0.25rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Backdrop for expanded image */
+.expanded-backdrop {
+  backdrop-filter: blur(5px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 99;
+  display: none;
+  cursor: pointer;
+}
+
+.expanded-backdrop.active {
+  display: block;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Controls for expanded image */
 .expand-control {
   position: absolute;
   top: 10px;
@@ -315,39 +377,31 @@ social-icon:hover {
   transform: scale(1.1);
 }
 
-.project-expanded {
-  z-index: 5;
-}
-
-.expanded-image-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: var(--secondary);
-  border-radius: 0.5rem;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  padding: 1rem;
-  z-index: 5;
-}
-
 /* Masonry grid layout */
 .masonry-grid {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  gap: 2rem;
-  grid-auto-flow: dense;
+  column-count: 1;
+  column-gap: 2rem;
+  width: 100%;
+  position: relative; /* Create stacking context */
 }
 
 @media (min-width: 640px) {
   .masonry-grid {
-    grid-template-columns: repeat(2, 1fr);
+    column-count: 2;
+  }
+}
+
+@media (min-width: 1024px) {
+  .masonry-grid {
+    column-count: 3;
   }
 }
 
 .masonry-item {
   break-inside: avoid;
   margin-bottom: 2rem;
+  display: inline-block;
+  width: 100%;
 }
 
 /* Modal Styles */

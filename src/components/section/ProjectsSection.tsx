@@ -1,6 +1,5 @@
 "use client";
-
-import ProjectCard from "../card/ProjectCard";
+import LazyProjectCard from "../card/LazyProjectCard";
 import { useTranslation } from "../../context/TranslationContext";
 import { Project } from "../../models/Project";
 
@@ -73,12 +72,12 @@ export default function ProjectsSection() {
   const { t } = useTranslation();
 
   return (
-    <section className="projects-section">
+    <section className="projects-section mx-auto px-4">
       <h2 className="section-title text-foreground">{t("projects.myprojects")}</h2>
       <div className="masonry-grid">
         {projects.map((project) => (
           <div key={project.id} className="masonry-item">
-            <ProjectCard project={project} />
+            <LazyProjectCard project={project} />
           </div>
         ))}
       </div>
