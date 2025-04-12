@@ -4,8 +4,8 @@ export interface Project {
   image: string;
   titleKey: string;
   descriptionKey: string;
-  startDateKey: string; // Translation key for start date
-  endDateKey: string | null; // Translation key for end date (null for ongoing projects)
+  startDateKey: string;
+  endDateKey: string | null;
   repoLink?: string;
   programameLink?: string;
   arcadeLink?: string;

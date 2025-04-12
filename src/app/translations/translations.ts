@@ -39,7 +39,9 @@ export const baseTranslations = {
   }
 };
 
-// English translations combining auto-generated structure with JSON data
+/**
+ * English translations
+ */
 export const en = {
   ...baseTranslations,
   footer: {
@@ -62,7 +64,7 @@ export const en = {
     "neutral-news": "Neutral News",
     "eulix": "Eulix App"
   },
-  "projectDescriptions": {
+  projectDescriptions: {
     "m04-adivina-numero-secreto": "'Guess the secret number' - A basic HTML, CSS, and JavaScript project.",
     "m04-play-html-css": "A very basic HTML & CSS project with simple design and animations.",
     "m08-p4-maps-app": "CRUD app for map markers with Firebase integration for user data and photos.",
@@ -82,8 +84,8 @@ export const en = {
     error: "Something went wrong. Please try again."
   },
   meta: {
-    title: "Ezequiel Garibotto | Full Stack Developer",
-    description: "Portfolio of Ezequiel Garibotto, Full Stack Developer specializing in React, Next.js and Node.js applications."
+    title: "Ezequiel Garibotto | Software Developer",
+    description: "Portfolio of Ezequiel Garibotto, Software developer specialized in Android applications."
   },
   dates: {
     jan2023: "JAN 2023",
@@ -110,18 +112,29 @@ export const en = {
     oct2024: "OCT 2024",
     nov2024: "NOV 2024",
     dec2024: "DEC 2024",
-    oct2022: "OCT 2022",
-    nov2022: "NOV 2022",
-    dec2022: "DEC 2022"
+    jan2025: "JAN 2025",
+    feb2025: "FEB 2025",
+    mar2025: "MAR 2025",
+    apr2025: "APR 2025",
+    may2025: "MAY 2025",
+    jun2025: "JUN 2025",
+    jul2025: "JUL 2025",
+    aug2025: "AUG 2025",
+    sep2025: "SEP 2025",
+    oct2025: "OCT 2025",
+    nov2025: "NOV 2025",
+    dec2025: "DEC 2025"
   },
   aboutMe: {
-    title: "About Me",
-    description: "Hi! I'm Ezequiel Garibotto, a passionate software developer with experience in web and mobile development. I love creating innovative solutions and learning new technologies.",
+    title: "Ezequiel Garibotto",
+    description: "Software developer with experience in mobile and web development. Inspired by the challenge.",
     photoAlt: "Photo of Ezequiel Garibotto"
   },
 };
 
-// Spanish translations combining auto-generated structure with JSON data
+/**
+ * Spanish translations
+ */
 export const es = {
   ...baseTranslations,
   footer: {
@@ -134,7 +147,7 @@ export const es = {
     viewAll: "Ver Todos",
     current: "ACTUAL"
   },
-  "projectTitles": {
+  projectTitles: {
     "m04-adivina-numero-secreto": "Adivina el Número Secreto",
     "m04-play-html-css": "Juega con HTML y CSS",
     "m08-p4-maps-app": "Aplicación de Mapas",
@@ -144,7 +157,7 @@ export const es = {
     "neutral-news": "Noticias Neutrales",
     "eulix": "Aplicación Eulix"
   },
-  "projectDescriptions": {
+  projectDescriptions: {
     "m04-adivina-numero-secreto": "'Adivina el número secreto' - Un proyecto básico de HTML, CSS y JavaScript.",
     "m04-play-html-css": "Un proyecto muy básico de HTML y CSS con diseño simple y animaciones.",
     "m08-p4-maps-app": "Aplicación CRUD para marcadores de mapas con integración de Firebase.",
@@ -154,18 +167,9 @@ export const es = {
     "neutral-news": "Una aplicación de noticias que proporciona resúmenes imparciales y neutrales.",
     "eulix": "Desarrollo Android de una aplicación con el objetivo de recomendar contenidos (películas, series) basándose en la personalidad, estado de ánimo y preferencias del usuario."
   },
-  contact: {
-    title: "Contáctame",
-    name: "Nombre",
-    email: "Correo",
-    message: "Mensaje",
-    submit: "Enviar",
-    success: "¡Mensaje enviado! Te responderé pronto.",
-    error: "Algo salió mal. Por favor intenta de nuevo."
-  },
   meta: {
-    title: "Ezequiel Garibotto | Desarrollador Full Stack",
-    description: "Portfolio de Ezequiel Garibotto, Desarrollador Full Stack especializado en aplicaciones React, Next.js y Node.js."
+    title: "Ezequiel Garibotto | Desarrollador de Software",
+    description: "Portfolio de Ezequiel Garibotto, Desarrollador de Software especializado en aplicaciones Android."
   },
   dates: {
     jan2023: "ENE 2023",
@@ -192,19 +196,29 @@ export const es = {
     oct2024: "OCT 2024",
     nov2024: "NOV 2024",
     dec2024: "DIC 2024",
-    oct2022: "OCT 2022",
-    nov2022: "NOV 2022",
-    dec2022: "DIC 2022"
+    jan2025: "ENE 2025",
+    feb2025: "FEB 2025",
+    mar2025: "MAR 2025",
+    apr2025: "ABR 2025",
+    may2025: "MAY 2025",
+    jun2025: "JUN 2025",
+    jul2025: "JUL 2025",
+    aug2025: "AGO 2025",
+    sep2025: "SEP 2025",
+    oct2025: "OCT 2025",
+    nov2025: "NOV 2025",
+    dec2025: "DIC 2025"
   },
-
   aboutMe: {
     title: "Ezequiel Garibotto",
-    description: "Desarrollador de software con experiencia en desarrollo móvil y web. Me encanta crear soluciones innovadoras y aprender nuevas tecnologías.",
+    description: "Desarrollador de software con experiencia en desarrollo móvil y web. Inspirado por el desafío.",
     photoAlt: "Foto de Ezequiel Garibotto"
   },
 };
 
-// Export all translations as a single object
+/**
+ * Combined translations object for all supported languages
+ */
 const translations = {
   en,
   es
