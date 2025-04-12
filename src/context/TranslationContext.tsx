@@ -14,11 +14,21 @@ export const TranslationProvider = ({
   initialLocale?: string;
 }) => {
   const [locale, setLocale] = useState<string | null>(null);
+  const [theme, setTheme] = useState<string>("light");
 
   useEffect(() => {
     const savedLocale = localStorage.getItem("locale") || initialLocale;
+    const savedTheme = localStorage.getItem("theme") || "light";
     setLocale(savedLocale);
+    setTheme(savedTheme);
+    document.documentElement.setAttribute("data-theme", savedTheme);
   }, [initialLocale]);
+
+  const changeTheme = (newTheme: string) => {
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+    document.documentElement.setAttribute("data-theme", newTheme);
+  };
 
   if (!locale) {
     return null; // Prevent rendering until locale is determined
@@ -43,7 +53,7 @@ export const TranslationProvider = ({
   };
 
   return (
-    <TranslationContext.Provider value={{ t, locale, changeLocale }}>
+    <TranslationContext.Provider value={{ t, locale, changeLocale, theme, changeTheme }}>
       {children}
     </TranslationContext.Provider>
   );

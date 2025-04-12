@@ -60,7 +60,7 @@ export default function ProjectsSection() {
 
   return (
     <section className="projects-section">
-      <h2 className="section-title">{t("projects.myprojects")}</h2>
+      <h2 className="section-title text-foreground">{t("projects.myprojects")}</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
         {projects.map((project) => (
           <ProjectCard key={project.id} project={project} />

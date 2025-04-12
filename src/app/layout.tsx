@@ -1,6 +1,8 @@
 import "./globals.css";
 import { TranslationProvider } from "../context/TranslationContext";
 import LanguageSwitcher from "../components/LanguageSwitcher";
+import ThemeToggleButton from "../components/ThemeToggleButton";
+import Footer from "../components/Footer";
 
 export const metadata = {
   title: "Portfolio de Ezequiel Garibotto - Desarrollador de Software",
@@ -14,10 +16,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang={initialLocale} suppressHydrationWarning>
       <body className="antialiased">
         <TranslationProvider initialLocale={initialLocale}>
-          <header>
+          <header className="flex justify-between items-center p-4">
             <LanguageSwitcher />
+            <ThemeToggleButton />
           </header>
           <main>{children}</main>
+          <Footer />
         </TranslationProvider>
       </body>
     </html>

@@ -28,5 +28,9 @@
     "competitive-programming": "Problemas resueltos en JO-EL y AceptaElReto para el concurso ProgramaMe 2024.",
     "neutral-news": "Una aplicación de noticias que proporciona resúmenes imparciales y neutrales.",
     "eulix": "Desarrollo Android de una aplicación con el objetivo de recomendar contenidos (películas, series) basándose en la personalidad, estado de ánimo y preferencias del usuario."
+  },
+  "footer": {
+    "disclaimer": "Inspirado por el desafío",
+    "githubLink": "Repositorio en GitHub"
   }
 }
