@@ -15,7 +15,7 @@ export default function ProfileSection() {
       <div className="w-[150px] h-[150px] sm:w-[200px] sm:h-[200px] rounded-full overflow-hidden mb-6">
         <Image
           src={profileImage}
-          alt={t("aboutMe.photoAlt")}
+          alt={t("aboutMe.photoAlt") || "Ezequiel Garibotto's profile picture"}
           className="object-cover"
           width={200}
           height={200}

@@ -33,7 +33,6 @@ body {
   margin: 0;
   padding: 0;
   line-height: 1.6;
-  transition: background 0.3s ease, color 0.3s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -57,26 +56,25 @@ button {
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
   cursor: pointer;
-  transition: background 0.3s ease, color 0.3s ease;
+  transition: background 0.5s ease-in-out, color 0.5s ease-in-out;
 }
 
 button:hover {
   background: var(--primary-hover);
 }
 
-/* Header Button Styles */
 .headerbutton {
   background: transparent;
   color: var(--foreground);
   padding: 0.5rem;
   border-radius: 50%;
   cursor: pointer;
-  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
+  transition: background 0.5s ease-in-out, color 0.5s ease-in-out, border-color 0.5s ease-in-out, opacity 0.5s ease-in-out;
 }
 
 .headerbutton:hover {
-  background: var(--foreground);
-  color: var(--background);
+  background: transparent;
+  color: var(--foreground);
   border-color: var(--background);
 }
 
@@ -88,7 +86,6 @@ button:hover {
 .headerbutton.selected {
   opacity: 1;
   cursor: default;
-  box-shadow: 4px 2px 4px  var(--foreground);
 }
 
 .headerbutton.unselected {
@@ -130,6 +127,11 @@ footer {
   padding: 1rem;
   font-family: var(--font-sans);
   transition: background 0.3s ease, color 0.3s ease;
+}
+
+footer a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 /* Utility Classes */
@@ -216,7 +218,7 @@ footer {
   color: #fff;
 }
 
-.social-icon:hover {
+social-icon:hover {
   transform: scale(1.1);
 }
 
@@ -242,6 +244,11 @@ footer {
   color: var(--foreground);
   border: 1px solid var(--secondary-hover);
   transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  position: relative;
+  overflow: visible;
 }
 
 .project-card h3,
@@ -251,4 +258,109 @@ footer {
 
 .project-card:hover {
   border-color: var(--primary);
+  transform: scale(1.02);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Project card image expansion styles */
+.project-image-container {
+  position: relative;
+  overflow: visible;
+}
+
+.project-date {
+  display: inline-block;
+  letter-spacing: 0.05em;
+  margin-top: 0.25rem;
+  border-radius: 0.25rem;
+  padding: 0 0.25rem;
+  background-color: var(--primary);
+  color: white;
+  line-height: 1.5;
+  max-width: fit-content;
+}
+
+.project-image-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  transform-origin: center top;
+}
+
+.project-image-wrapper.expanded {
+  overflow: visible;
+}
+
+.project-image-wrapper img {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+  transform-origin: center top;
+}
+
+.expand-control {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.expand-control:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  transform: scale(1.1);
+}
+
+.project-expanded {
+  z-index: 5;
+}
+
+.expanded-image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--secondary);
+  border-radius: 0.5rem;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  z-index: 5;
+}
+
+/* Masonry grid layout */
+.masonry-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 2rem;
+  grid-auto-flow: dense;
+}
+
+@media (min-width: 640px) {
+  .masonry-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 2rem;
+}
+
+/* Modal Styles */
+body.modal-open {
+  overflow: hidden;
+}
+
+/* Ensure modals are always on top */
+[role="dialog"] {
+  z-index: 1000;
+}
+
+/* Prevent flickering by isolating stacking contexts */
+.fixed {
+  will-change: transform;
 }

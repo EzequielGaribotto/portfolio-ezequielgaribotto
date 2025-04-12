@@ -1,9 +1,13 @@
 export interface Project {
   id: string;
   shortName: string;
-  image?: string;
+  image: string;
   titleKey: string;
   descriptionKey: string;
-  playStoreLink?: string; // Optional property for Play Store links
-  repoLink?: string; // Optional property for GitHub repository links
+  startDateKey: string; // Translation key for start date
+  endDateKey: string | null; // Translation key for end date (null for ongoing projects)
+  repoLink?: string;
+  programameLink?: string;
+  arcadeLink?: string;
+  playStoreLink?: string;
 }

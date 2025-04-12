@@ -11,7 +11,7 @@ export default function Footer() {
       <span>{t("footer.disclaimer")}</span>
       <ClickableButton
         href="https://github.com/EzequielGaribotto/portfolio-ezequielgaribotto"
-        className="text-primary hover:text-primary-hover"
+        className="text-primary hover:text-primary-hover underline hover:underline-offset-4"
       >
         {t("footer.githubLink")}
       </ClickableButton>
