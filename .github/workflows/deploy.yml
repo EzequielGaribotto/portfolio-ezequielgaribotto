@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node.js ⚙️
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20
           cache: 'npm'
           
       - name: Clean install dependencies 📦
@@ -24,9 +24,14 @@ jobs:
           rm -rf node_modules
           npm ci
           
-      - name: Rebuild Tailwind oxide dependency 🔨
+      - name: Install Tailwind dependencies 🧩
         run: |
-          npm rebuild @tailwindcss/oxide
+          npm install -D tailwindcss@latest postcss@latest autoprefixer@latest
+      
+      - name: Fix Tailwind Oxide issue 🔧
+        run: |
+          npm install @tailwindcss/oxide-linux-x64-gnu --ignore-scripts
+          npm rebuild @tailwindcss/oxide --platform=linux --arch=x64
           
       - name: Build 🔧
         run: |
