@@ -5,7 +5,7 @@
   "homepage": "https://ezequielgaribotto.com",
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build && next export", 
+    "build": "next build && next export",
     "predeploy": "next build && (IF NOT EXIST out\\.nojekyll (echo.> out\\.nojekyll))",
     "deploy": "gh-pages -d out --dotfiles",
     "start": "next start",
@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "i18next": "^24.2.3",
+    "lightningcss": "^1.29.3",
     "next": "15.3.0",
     "next-i18next": "^15.4.2",
     "react": "^19.1.0",
@@ -32,5 +33,4 @@
     "tailwindcss": "^4",
     "typescript": "^5"
   }
-
 }
