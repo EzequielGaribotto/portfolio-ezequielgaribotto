@@ -14,20 +14,26 @@ export default function LanguageSwitcher() {
 
   return (
     <div className="flex justify-end p-4">
-      <button
-        onClick={() => handleLocaleChange("en")}
-        disabled={locale === "en"}
-        className={`mr-2 ${locale === "en" ? "font-bold" : ""}`}
-      >
-        English
-      </button>
-      <button
-        onClick={() => handleLocaleChange("es")}
-        disabled={locale === "es"}
-        className={`${locale === "es" ? "font-bold" : ""}`}
-      >
-        Español
-      </button>
+      <div className="flex bg-gray-100 rounded-full p-2 shadow-md">
+        <button
+          onClick={() => handleLocaleChange("en")}
+          disabled={locale === "en"}
+          className={`mr-2 px-4 py-2 rounded-full ${
+            locale === "en" ? "bg-gray-800 text-white font-bold" : "bg-gray-200 text-black"
+          }`}
+        >
+          English
+        </button>
+        <button
+          onClick={() => handleLocaleChange("es")}
+          disabled={locale === "es"}
+          className={`px-4 py-2 rounded-full ${
+            locale === "es" ? "bg-gray-800 text-white font-bold" : "bg-gray-200 text-black"
+          }`}
+        >
+          Español
+        </button>
+      </div>
     </div>
   );
 }
