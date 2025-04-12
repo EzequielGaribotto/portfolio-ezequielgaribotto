@@ -9,8 +9,7 @@
     "predeploy": "next build && (IF NOT EXIST out\\.nojekyll (echo.> out\\.nojekyll))",
     "deploy": "gh-pages -d out --dotfiles",
     "start": "next start",
-    "lint": "next lint",
-    "postinstall": "npx lightningcss-install"
+    "lint": "next lint"
   },
   "dependencies": {
     "i18next": "^24.2.3",
