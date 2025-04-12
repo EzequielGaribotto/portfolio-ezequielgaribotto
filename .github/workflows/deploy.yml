@@ -24,9 +24,9 @@ jobs:
           rm -rf node_modules
           npm ci
           
-      - name: Rebuild any native dependencies if needed
+      - name: Rebuild Tailwind oxide dependency 🔨
         run: |
-          npm rebuild
+          npm rebuild @tailwindcss/oxide
           
       - name: Build 🔧
         run: |
