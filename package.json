@@ -5,7 +5,7 @@
   "homepage": "https://ezequielgaribotto.com",
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build && next export",
+    "build": "next build",
     "predeploy": "next build && (IF NOT EXIST out\\.nojekyll (echo.> out\\.nojekyll))",
     "deploy": "gh-pages -d out --dotfiles",
     "start": "next start",
