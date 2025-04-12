@@ -5,6 +5,7 @@ import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { useTranslation } from "../../context/TranslationContext";
 import ClickableButton from "../button/ClickableButton";
 
+
 export default function ProfileSection() {
   const { t } = useTranslation();
   const profileImage = "/images/profile/ezequiel-garibotto.png";

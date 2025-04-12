@@ -165,8 +165,8 @@ footer a:hover {
   border-radius: 0.5rem;
   padding: 2rem;
   margin-bottom: 3rem;
-  max-width: 800px;
-  width: 100%;
+  max-width: 1000px; /* Increased width */
+  width: 90%;
   transition: background 0.3s ease, color 0.3s ease;
 }
 
@@ -218,14 +218,38 @@ footer a:hover {
   color: #fff;
 }
 
-social-icon:hover {
+.social-icon:hover {
   transform: scale(1.1);
+}
+
+/* Centered Container for Sections */
+.centered-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 100vh; /* Ensures full viewport height */
+  padding: 2rem;
+}
+
+/* Section Styling */
+.section {
+  max-width: 800px;
+  width: 100%;
+  background: var(--background);
+  color: var(--foreground);
+  transition: background 0.3s ease, color 0.3s ease;
+  margin-bottom: 3rem;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Projects Section */
 .projects-section {
-  max-width: 800px;
-  width: 100%;
+  max-width: 1000px; /* Increased width */
+  width: 90%;
   background: var(--background);
   color: var(--foreground);
   transition: background 0.3s ease, color 0.3s ease;
@@ -449,4 +473,12 @@ body.modal-open {
   position: relative;
   overflow: hidden;
   background-color: var(--secondary-lighter);
+}
+
+/* Experience Section */
+.experience-section {
+  max-width: 800px; /* Reduced width */
+  width: 85%;
+  background: var(--background);
+  color: var(--foreground);
 }
