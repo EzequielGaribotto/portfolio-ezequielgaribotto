@@ -1,7 +1,7 @@
 # Ezequiel Garibotto
 
 ### 👋 About Me
-- 🎓 21 years old, currently in my second year studying Multi-platform Application Development (DAM)
+- 🎓 21 years old, just finished my second year studying Multi-platform Application Development (DAM)
 - 🏆 Participated in ProgramaMe 2024 National competitive programming contest with Byte Busters team, finishing 4th place in the Madrid finals
 - 🔍 Currently looking for software development opportunities
 - 📰 Developing [Neutral News](https://github.com/EzequielGaribotto/neutral-news-android) in my free time
