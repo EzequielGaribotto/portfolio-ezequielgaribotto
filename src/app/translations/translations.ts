@@ -281,7 +281,7 @@ export const es = {
     "zomb": "Zomb",
     "competitive-programming": "Programación Competitiva",
     "neutral-news": "Neutral News",
-    "eulix": "Aplicación Eulix",
+    "eulix": " Eulix",
     "rick-and-morty-api-list": "API list de Rick y Morty"
   },
   projectDescriptions: {
