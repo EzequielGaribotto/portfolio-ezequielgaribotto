@@ -165,8 +165,7 @@ footer a:hover {
   border-radius: 0.5rem;
   padding: 2rem;
   margin-bottom: 3rem;
-  max-width: 1000px; /* Increased width */
-  width: 90%;
+  width: 50%;
   transition: background 0.3s ease, color 0.3s ease;
 }
 
@@ -248,8 +247,7 @@ footer a:hover {
 
 /* Projects Section */
 .projects-section {
-  max-width: 1000px; /* Increased width */
-  width: 90%;
+  width: 100%;
   background: var(--background);
   color: var(--foreground);
   transition: background 0.3s ease, color 0.3s ease;
@@ -267,12 +265,22 @@ footer a:hover {
   background: var(--secondary);
   color: var(--foreground);
   border: 1px solid var(--secondary-hover);
-  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  transition: background 0.3s ease, 
+              color 0.3s ease, 
+              border-color 0.4s ease, 
+              transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+              box-shadow 0.4s ease;
   display: flex;
   flex-direction: column;
   height: auto;
   position: relative;
   overflow: visible;
+}
+
+.project-card:hover {
+  border-color: var(--primary);
+  transform: scale(1.02);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .project-card h3,
@@ -417,7 +425,7 @@ footer a:hover {
 
 @media (min-width: 1024px) {
   .masonry-grid {
-    column-count: 3;
+    column-count: 2;
   }
 }
 

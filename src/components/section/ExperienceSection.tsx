@@ -85,9 +85,9 @@ const ExperienceSection: React.FC = () => {
               <p className={styles.period}>{exp.period}</p>
               <p className={styles.location}>{exp.location}</p>
             </div>
-            <div style={{ textAlign: 'left' }}>
-              {exp.description}
-            </div>
+          <div style={{ textAlign: 'left', whiteSpace: 'pre-line' }}>
+            {exp.description}
+          </div>
           </div>
         ))}
       </div>

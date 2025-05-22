@@ -63,13 +63,19 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     setIsExpanded(!isExpanded);
   };
 
+  // Prevent navigation when clicking on text content
+  const handleTextClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
   return (
     <>
       <div 
         ref={cardRef} 
         className="project-card bg-secondary text-foreground border border-secondary-hover rounded-lg shadow-md p-4 hover:shadow-lg transition-all duration-500 ease-in-out"
       >
-        <Link href={`/projects/${project.shortName}`} className="project-link">
+        <div onClick={handleTextClick}>
           <h3 className="project-title text-lg font-bold mt-4 text-foreground">
             {t(project.titleKey)}
           </h3>
@@ -84,7 +90,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           <p className="project-description text-sm mt-2 text-foreground">
             {t(project.descriptionKey)}
           </p>
-        </Link>
+        </div>
         
         <div className="project-image-container mt-3">
           <div className="project-image-wrapper">

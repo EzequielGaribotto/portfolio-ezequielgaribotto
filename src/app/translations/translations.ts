@@ -64,7 +64,7 @@ export const en = {
   },
   aboutMe: {
     title: "Ezequiel Garibotto",
-    description: "Software developer with experience in mobile and web development. Inspired by the challenge.",
+    description: "Software developer with experience in mobile, web and cloud services.",
     photoAlt: "Photo of Ezequiel Garibotto"
   },
   experience: {
@@ -145,23 +145,19 @@ export const en = {
   },
   projectTitles: {
     "m04-adivina-numero-secreto": "Guess the Secret Number",
-    "m04-play-html-css": "Play with HTML & CSS",
-    "m08-p4-maps-app": "Maps App",
-    "trivial-app-jetpack-compose": "Trivial App",
-    "zomb": "Zomb Game",
+    "zomb": "Zomb",
+    "rick-and-morty-api-list": "Rick and Morty API List",
     "competitive-programming": "Competitive Programming",
     "neutral-news": "Neutral News",
     "eulix": "Eulix App"
   },
   projectDescriptions: {
     "m04-adivina-numero-secreto": "'Guess the secret number' - A basic HTML, CSS, and JavaScript project.",
-    "m04-play-html-css": "A very basic HTML & CSS project with simple design and animations.",
-    "m08-p4-maps-app": "CRUD app for map markers with Firebase integration for user data and photos.",
-    "trivial-app-jetpack-compose": "A trivia app with customizable game settings like difficulty, themes, and categories.",
     "zomb": "Infinite horizontal scroller retro game with enemies, collisions, and more.",
     "competitive-programming": "Solved problems on JO-EL and AceptaElReto to prepare for the ProgramaMe 2024 contest.",
-    "neutral-news": "A news aggregation app that provides unbiased and neutral news summaries.",
-    "eulix": "Android development of an app designed to recommend content (movies, series) based on user personality, mood, and preferences."
+    "neutral-news": "Application under development that collects news from multiple Spanish media, groups them by topic and generates a neutral version of the events, with the aim of combating media bias through the combination of algorithms and advanced artificial intelligence techniques.",
+    "eulix": "Android development of an app designed to recommend content (movies, series) based on user personality, mood, and preferences.",
+    "rick-and-morty-api-list": "The typical API List in Android with Java8, DataBinding, Caché, Pagination, SDK-Like architecture, Quick response times and simple efficiency tracking"
   },
   experiences: {
     eulix: {
@@ -198,7 +194,7 @@ export const es = {
   },
   aboutMe: {
     title: "Ezequiel Garibotto",
-    description: "Desarrollador de software con experiencia en desarrollo móvil y web. Inspirado por el desafío.",
+    description: "Desarrollador de software con experiencia en desarrollo móvil, web y servicios cloud.",
     photoAlt: "Foto de Ezequiel Garibotto"
   },
   experience: {
@@ -282,10 +278,11 @@ export const es = {
     "m04-play-html-css": "Juega con HTML y CSS",
     "m08-p4-maps-app": "Aplicación de Mapas",
     "trivial-app-jetpack-compose": "Aplicación de Trivial",
-    "zomb": "Juego Zomb",
+    "zomb": "Zomb",
     "competitive-programming": "Programación Competitiva",
-    "neutral-news": "Noticias Neutrales",
-    "eulix": "Aplicación Eulix"
+    "neutral-news": "Neutral News",
+    "eulix": "Aplicación Eulix",
+    "rick-and-morty-api-list": "API list de Rick y Morty"
   },
   projectDescriptions: {
     "m04-adivina-numero-secreto": "'Adivina el número secreto' - Un proyecto básico de HTML, CSS y JavaScript.",
@@ -294,16 +291,21 @@ export const es = {
     "trivial-app-jetpack-compose": "Una aplicación de trivial con configuraciones personalizables.",
     "zomb": "Juego retro de desplazamiento horizontal infinito con enemigos y colisiones.",
     "competitive-programming": "Problemas resueltos en JO-EL y AceptaElReto para el concurso ProgramaMe 2024.",
-    "neutral-news": "Una aplicación de noticias que proporciona resúmenes imparciales y neutrales.",
-    "eulix": "Desarrollo Android de una aplicación con el objetivo de recomendar contenidos (películas, series) basándose en la personalidad, estado de ánimo y preferencias del usuario."
+    "neutral-news": "Aplicación en desarrollo que recopila noticias de múltiples medios de comunicación españoles, las agrupa por temática y genera una versión neutral de los acontecimientos.El objetivo es combatir el sesgo mediático mediante la combinación de algoritmos y técnicas avanzadas de inteligencia artificial.",
+    "eulix": "Desarrollo Android de una aplicación con el objetivo de recomendar contenidos (películas, series) basándose en la personalidad, estado de ánimo y preferencias del usuario.",
+    "rick-and-morty-api-list": "La típica lista de APIs en Android con Java8, DataBinding, Caché, Paginación, arquitectura tipo SDK, tiempos de respuesta rápidos y un seguimiento de eficiencia simple."
   },
   experiences: {
     eulix: {
       company: "Eulix",
       position: "Desarrollador Junior de Android",
-      description: "Desarrollo Android de una aplicación con el objetivo de recomendar contenidos (películas, series), basándose en la personalidad, estado de ánimo y preferencias del usuario.\n— Desarrollo del Asistente Virtual, Onboarding, sección 'Cómo Funciona'.\n— Diseño y mejoras en la interfaz gráfica (XML) y en la experiencia de usuario, generación de ideas y búsqueda de una constante mejora.\n— Integración de llamadas de la API (Swagger) en colaboración con el equipo de back-end.\n— Coordinación de la versión iOS con un equipo internacional en India.",
+      description: "Desarrollo Android de una aplicación con el objetivo de recomendar contenidos (películas, series), basándose en la personalidad, estado de ánimo y preferencias del usuario.\n"+
+                  "— Desarrollo del Asistente Virtual, Onboarding, sección 'Cómo Funciona'.\n"+
+                  "— Diseño y mejoras en la interfaz gráfica (XML) y en la experiencia de usuario, generación de ideas y búsqueda de una constante mejora.\n"+
+                  "— Integración de llamadas de la API (Swagger) en colaboración con el equipo de back-end.\n"+
+                  "— Coordinación de la versión iOS con un equipo internacional en India.",
       location: "España · Híbrido",
-      technologies: ["Gradle", "Android", "XML", "Integración de API", "Swagger"], // Ensure this is an array
+      technologies: ["Gradle", "Android", "XML", "API Integration", "Swagger"], // Ensure this is an array
     },
     telus: {
       company: "TELUS Digital",

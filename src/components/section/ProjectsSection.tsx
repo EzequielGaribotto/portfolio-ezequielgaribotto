@@ -7,12 +7,12 @@ const projects: Project[] = [
   {
     id: "neutral-news",
     shortName: "neutral-news",
-    image: "/images/projects/neutral-news.jpg",
+    image: "/images/projects/neutral-news-homeview.jpg",
     titleKey: "projectTitles.neutral-news",
     descriptionKey: "projectDescriptions.neutral-news",
-    startDateKey: "dates.sep2024",
+    startDateKey: "dates.dec2024",
     endDateKey: null,
-    playStoreLink: "https://play.google.com/store/apps/details?id=com.eulix.mobile.app&hl=en_US",
+    repoLink: "https://github.com/EzequielGaribotto/neutral-news-android"
   },
   {
     id: "eulix",
@@ -21,9 +21,21 @@ const projects: Project[] = [
     titleKey: "projectTitles.eulix",
     descriptionKey: "projectDescriptions.eulix",
     startDateKey: "dates.oct2024",
-    endDateKey: null, // Ongoing project
+    endDateKey: null,
     playStoreLink: "https://play.google.com/store/apps/details?id=com.eulix.mobile.app&hl=en_US",
   },
+  {
+    id: "competitive-programming",
+    shortName: "competitive",
+    image: "/images/projects/competitive.jpeg",
+    titleKey: "projectTitles.competitive-programming",
+    descriptionKey: "projectDescriptions.competitive-programming",
+    startDateKey: "dates.jan2023",
+    endDateKey: null,
+    repoLink: "https://github.com/EzequielGaribotto/CompetitiveProgramming",
+    programameLink: "https://programame.com/2024/nac/",
+  },
+  /* Zomb Game
   {
     id: "zomb",
     shortName: "zomb-game",
@@ -35,37 +47,20 @@ const projects: Project[] = [
     repoLink: "https://github.com/EzequielGaribotto/zomb",
     arcadeLink: "https://ezequielgaribotto.github.io/zomb/",
   },
+  */
+
   {
-    id: "competitive-programming",
-    shortName: "competitive",
-    image: "/images/projects/competitive.jpeg",
-    titleKey: "projectTitles.competitive-programming",
-    descriptionKey: "projectDescriptions.competitive-programming",
-    startDateKey: "dates.jan2023",
-    endDateKey: null, // Ongoing project
-    repoLink: "https://github.com/EzequielGaribotto/CompetitiveProgramming",
-    programameLink: "https://programame.com/2024/nac/",
+    id: "rick-and-morty-api-list",
+    shortName: "api-list",
+    image: "/images/projects/api-list.jpg",
+    titleKey: "projectTitles.rick-and-morty-api-list",
+    descriptionKey: "projectDescriptions.rick-and-morty-api-list",
+    startDateKey: "dates.apr2025",
+    endDateKey: "dates.apr2025",
+    repoLink: "https://github.com/EzequielGaribotto/Ricky-and-Morty-API",
   },
-  {
-    id: "m08-p4-maps-app",
-    shortName: "maps-app",
-    image: "/images/projects/maps-app.jpg",
-    titleKey: "projectTitles.m08-p4-maps-app",
-    descriptionKey: "projectDescriptions.m08-p4-maps-app",
-    startDateKey: "dates.mar2024",
-    endDateKey: "dates.jun2024",
-    repoLink: "https://github.com/EzequielGaribotto/M08-P4-MapsApp",
-  },
-  {
-    id: "trivial-app-jetpack-compose",
-    shortName: "trivial-app",
-    image: "/images/projects/trivial-app.jpg",
-    titleKey: "projectTitles.trivial-app-jetpack-compose",
-    descriptionKey: "projectDescriptions.trivial-app-jetpack-compose",
-    startDateKey: "dates.jan2024",
-    endDateKey: "dates.feb2024",
-    repoLink: "https://github.com/EzequielGaribotto/TrivialApp-Jetpack-Compose-Kotlin",
-  },
+
+
 ];
 
 export default function ProjectsSection() {
