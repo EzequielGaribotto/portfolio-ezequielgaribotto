@@ -16,9 +16,8 @@ const ProjectCardComponent = dynamic(() => import('./ProjectCard').then(mod => m
 
 interface LazyProjectCardProps {
   project: Project;
-  preventTextNavigation?: boolean;
 }
 
-export default function LazyProjectCard({ project, preventTextNavigation = true }: LazyProjectCardProps) {
-  return <ProjectCardComponent project={project} preventTextNavigation={preventTextNavigation} />;
+export default function LazyProjectCard({ project }: LazyProjectCardProps) {
+  return <ProjectCardComponent project={project} />;
 }
