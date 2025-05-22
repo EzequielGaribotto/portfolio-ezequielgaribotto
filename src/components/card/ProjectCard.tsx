@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { FaExpand, FaCompress, FaTrophy, FaGooglePlay, FaGamepad } from "../../utils/icons";
 import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "../../context/TranslationContext";
