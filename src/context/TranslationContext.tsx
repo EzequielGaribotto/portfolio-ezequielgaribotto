@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
-import translations from "../app/translations";
+import translations from "../app/translations"; // Updated import path
 
 // Define proper interfaces for translation context
 interface TranslationContextType {

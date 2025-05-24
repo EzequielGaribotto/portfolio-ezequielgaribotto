@@ -42,7 +42,7 @@ const ExperienceSection: React.FC = () => {
   return (
     <Section
       id="experience"
-      title={t("experience.title")}
+      title={t("experiences.title")}
       titleAlign="center"
     >
       <div className={styles.experienceList}>
