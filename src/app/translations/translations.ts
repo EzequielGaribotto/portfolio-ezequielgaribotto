@@ -144,7 +144,7 @@ export const en = {
     dec2025: "Dec 2025"
   },
   projectTitles: {
-    "rick-and-morty-api-list": "Rick and Morty API List",
+    "rick-and-morty-api-list": "Efficient API List",
     "competitive-programming": "Competitive Programming",
     "neutral-news": "Neutral News",
     "eulix": "Eulix App"
@@ -317,7 +317,7 @@ export const es = {
     "competitive-programming": "Programación Competitiva",
     "neutral-news": "Neutral News",
     "eulix": " Eulix",
-    "rick-and-morty-api-list": "API list de Rick y Morty"
+    "rick-and-morty-api-list": "API list eficiente"
   },
   projectDescriptions: {
     "competitive-programming": "Participación en concursos de programación competitiva en equipos, representando al instituto, quedando cuartos en el cuncurso nacional. Problemas resueltos en JO-EL y AceptaElReto para el concurso ProgramaMe 2024.",

@@ -46,6 +46,7 @@ const ExperienceSection: React.FC = () => {
       description: t("experiences.telus.description"),
       technologies: telusTech,
       imageUrl: "/images/companies/telus_logo.png",
+      companyUrl: "https://www.telus.com/en/digital",
     },
   ];
 

@@ -39,13 +39,13 @@
   font-size: 0.9rem;
   color: #666;
   margin-bottom: 0.25rem;
-  color: var(--color-primary);
+  color: var(--primary);
 }
 
 .location {
   font-size: 0.9rem;
   color: #666;
-  color: var(--color-primary);
+  color: var(--primary);
 }
 
 .content {
@@ -114,13 +114,14 @@
 }
 
 .company a {
-  color: inherit;
+  color: var(--link);
   text-decoration: none;
   transition: color 0.2s;
 }
 
 .company a:hover {
-  color: var(--color-primary);
+  color: var(--link-hover);
+  text-decoration: underline;
 }
 
 .position {
@@ -141,7 +142,7 @@
   font-size: 0.9rem;
   opacity: 0.8;
   margin: 0;
-  color: var(--color-primary);
+  color: var(--primary);
 }
 
 .description {
@@ -159,16 +160,20 @@
 
 .tech {
   padding: 0.25rem 0.75rem;
-  background-color: rgba(255, 255, 255, 0.1);
   border-radius: 20px;
   font-size: 0.85rem;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, border-color 0.2s;
   display: inline-block;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  
+  /* Use the CSS variables defined in globals.css */
+  background-color: var(--tech-bg);
+  border: 1px solid var(--tech-border);
+  color: var(--tech-text);
 }
 
 .tech:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: var(--tech-hover-bg);
+  border-color: var(--tech-hover-border);
 }
 
 @media (max-width: 768px) {

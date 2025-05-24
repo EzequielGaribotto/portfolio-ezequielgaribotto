@@ -12,17 +12,26 @@
   --secondary-hover: #cbd5e1;
   --button-bg: var(--black);
   --button-text: #ffffff;
+  --link: #0070f3;
+  --link-hover: #0056b3;
   
   /* Text colors for light mode */
   --mode-text: #000000; 
   --mode-desc: #4b5563;
+  
+  /* Tech tag specific variables for light mode */
+  --tech-bg: #e9f0f8;
+  --tech-border: #0070f3;
+  --tech-text: #1a1a1a;
+  --tech-hover-bg: #d1e2f5;
+  --tech-hover-border: #0056b3;
 }
 
 /* Dark Mode Variables */
 [data-theme="dark"] {
   --background: #1a1a1a;
   --foreground: #f5f5f5;
-  --primary: #4c98af;
+  --primary: #a5a9ad;
   --primary-hover: #81bfc7;
   --secondary: #2d3748;
   --secondary-hover: #4a5568;
@@ -30,6 +39,14 @@
   /* Text colors for dark mode */
   --mode-text: #ffffff;
   --mode-desc: #e5e7eb;
+  --link: #81bfc7;
+  --link-hover: #a0aec0;
+  /* Tech tag specific variables for dark mode */
+  --tech-bg: rgba(76, 152, 175, 0.15);
+  --tech-border: rgba(76, 152, 175, 0.6);
+  --tech-text: #f5f5f5;
+  --tech-hover-bg: rgba(76, 152, 175, 0.3);
+  --tech-hover-border: rgba(129, 191, 199, 0.8);
 }
 
 /* Global Styles */

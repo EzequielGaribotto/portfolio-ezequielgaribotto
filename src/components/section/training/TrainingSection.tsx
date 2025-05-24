@@ -12,9 +12,9 @@ interface Training {
   period: string;
   location: string;
   description: string;
-  technologies: string[]; // Make this required
+  technologies: string[];
   imageUrl?: string;
-  companyUrl?: string;
+  institutionUrl?: string; // Changed from companyUrl to institutionUrl for clarity
 }
 
 const TrainingSection: React.FC = () => {
@@ -35,6 +35,7 @@ const TrainingSection: React.FC = () => {
       description: t("training.itb.description"),
       technologies: itbTech,
       imageUrl: "/images/institutions/itb_logo.png",
+      institutionUrl: "https://www.itb.cat/",
     },
     {
       id: "upf",
@@ -45,6 +46,7 @@ const TrainingSection: React.FC = () => {
       description: t("training.upf.description"),
       technologies: upfTech,
       imageUrl: "/images/institutions/upf_logo.jpg",
+      institutionUrl: "https://www.upf.edu/",
     },
     {
       id: "rb4",
@@ -55,6 +57,7 @@ const TrainingSection: React.FC = () => {
       description: t("training.rb4.description"),
       technologies: rb4Tech,
       imageUrl: "/images/institutions/rb4_logo.jpg",
+      institutionUrl: "https://agora.xtec.cat/iesramonberenguer4/",
     },
   ];
 
@@ -79,9 +82,9 @@ const TrainingSection: React.FC = () => {
               )}
               <div>
                 <h3 className={styles.company}>
-                  {training.companyUrl ? (
+                  {training.institutionUrl ? (
                     <a
-                      href={training.companyUrl}
+                      href={training.institutionUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
