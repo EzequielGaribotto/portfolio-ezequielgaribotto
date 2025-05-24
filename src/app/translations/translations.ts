@@ -51,6 +51,13 @@ export const baseTranslations = {
   projectTitles: {} as Record<string, string>,
   projectDescriptions: {} as Record<string, string>,
   experiences: {} as Record<string, { company: string; position: string; description: string; location: string; technologies: string[] }>,
+  // Navigation translations
+  navigation: {
+    profile: "",
+    projects: "",
+    experience: "",
+    training: ""
+  }
 };
 
 /**
@@ -220,6 +227,12 @@ export const en = {
       description: "Baccalaureate with a focus on science and technology, preparing for higher studies in engineering and software development.",
       technologies: ["Excel", "Python", "Scratch"]
     }
+  },
+  navigation: {
+    profile: "Profile",
+    projects: "Projects",
+    experience: "Experience",
+    training: "Training"
   }
 };
 
@@ -379,6 +392,12 @@ export const es = {
       location: "Santa Coloma de Gramenet, España",
       description: "Bachillerato con enfoque en ciencias y tecnología, preparando para estudios superiores en ingeniería y desarrollo de software.",
     }
+  },
+  navigation: {
+    profile: "Perfil",
+    projects: "Proyectos",
+    experience: "Experiencia",
+    training: "Formación"
   }
 };
 

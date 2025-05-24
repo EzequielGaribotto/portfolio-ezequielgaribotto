@@ -59,7 +59,7 @@ export default function ProjectsSection() {
   const { t } = useTranslation();
 
   return (
-    <section className={styles.projectsSection}>
+    <section id="projects" className={styles.projectsSection}>
       <h2 className={styles.sectionTitle}>{t("projects.myprojects")}</h2>
       <div className={styles.masonryGrid}>
         {projects.map((project) => (

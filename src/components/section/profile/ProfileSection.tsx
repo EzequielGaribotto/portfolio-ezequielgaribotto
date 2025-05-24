@@ -13,7 +13,7 @@ export default function ProfileSection() {
   const profileImage = "/images/profile/ezequiel-garibotto.png";
 
   return (
-    <section className={styles.profileSection}>
+    <div id="profile" className={styles.profileSection}>
       {/* Profile Image - Always on the left */}
       <div className={styles.profileImageContainer}>
         <Image
@@ -68,6 +68,6 @@ export default function ProfileSection() {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

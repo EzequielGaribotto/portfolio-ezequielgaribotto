@@ -1,7 +1,6 @@
 import "./globals.css";
 import { TranslationProvider } from "../context/TranslationContext";
-import LanguageSwitcher from "../components/LanguageSwitcher";
-import ThemeToggleButton from "../components/button/ThemeToggleButton";
+import Header from "../components/header/Header";
 import Footer from "../components/section/footer/Footer";
 import { Metadata } from 'next';
 import translations from '../app/translations/translations';
@@ -64,11 +63,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="antialiased">
         <TranslationProvider initialLocale={initialLocale}>
-          <header className="flex justify-between items-center p-4">
-            <LanguageSwitcher />
-            <ThemeToggleButton />
-          </header>
-          <main>{children}</main>
+          <Header />
+          <main style={{ paddingTop: "80px" }}>{children}</main>
           <Footer />
         </TranslationProvider>
       </body>
