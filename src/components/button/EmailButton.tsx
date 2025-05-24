@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { FaEnvelope } from "react-icons/fa";
-import Tooltip from "../Tooltip";
+import Tooltip from "../tooltip/Tooltip";
 import { useTranslation } from "../../context/TranslationContext";
 
 interface EmailButtonProps {

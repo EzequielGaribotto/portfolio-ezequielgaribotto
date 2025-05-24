@@ -1,11 +1,11 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from '../../context/TranslationContext';
-import LanguageSwitcher from '../LanguageSwitcher';
+import LanguageSwitcher from '../language/LanguageSwitcher';
 import ThemeToggleButton from '../button/ThemeToggleButton';
 import styles from './Header.module.css';
 import Image from 'next/image';
-import Tooltip from '../Tooltip';
+import Tooltip from '../tooltip/Tooltip';
 
 const Header: React.FC = () => {
   const { t, theme } = useTranslation();

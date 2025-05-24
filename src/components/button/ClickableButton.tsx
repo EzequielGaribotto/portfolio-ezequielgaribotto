@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Tooltip from "../Tooltip";
+import Tooltip from "../tooltip/Tooltip";
 import { useTranslation } from "../../context/TranslationContext";
 
 interface ClickableButtonProps {

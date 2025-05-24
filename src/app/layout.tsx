@@ -66,9 +66,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <TranslationProvider initialLocale={initialLocale}>
           <Header />
           <main style={{ 
-            paddingTop: "120px", /* Increased from 80px for mobile */
-            maxWidth: "100vw",
-            overflowX: "hidden"
+            paddingTop: "100px", /* Reduced from 120px for mobile */
+            width: "100%"
           }}>{children}</main>
           <Footer />
         </TranslationProvider>
