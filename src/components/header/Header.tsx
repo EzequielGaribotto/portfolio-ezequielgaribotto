@@ -23,20 +23,23 @@ const Header: React.FC = () => {
       : 'rgba(0, 0, 0, 0.1)'}`
   };
   
-  // Handle smooth scrolling without immediately setting active section
+  // Handle smooth scrolling and update URL hash
   const scrollToSection = (sectionId: string) => (e: React.MouseEvent) => {
     e.preventDefault();
     const element = document.getElementById(sectionId);
     if (element) {
+      // Update URL with hash without causing page jump
+      window.history.pushState(null, '', `#${sectionId}`);
+      
+      // Smooth scroll to element
       window.scrollTo({
         top: element.offsetTop - 100, // Offset for header height
         behavior: 'smooth'
       });
-      // Removed setActiveSection to avoid immediate update
     }
   };
   
-  // Update active section based on scroll position
+  // Update active section based on scroll position and URL hash on initial load
   useEffect(() => {
     const handleScroll = () => {
       const sections = ['profile', 'projects', 'experience', 'training'];
@@ -52,6 +55,21 @@ const Header: React.FC = () => {
         }
       }
     };
+    
+    // Check URL hash on initial load
+    const initialHash = window.location.hash.replace('#', '');
+    if (initialHash) {
+      const element = document.getElementById(initialHash);
+      if (element) {
+        setTimeout(() => {
+          window.scrollTo({
+            top: element.offsetTop - 100,
+            behavior: 'smooth'
+          });
+          setActiveSection(initialHash);
+        }, 100); // Small delay to ensure the page is fully loaded
+      }
+    }
     
     window.addEventListener('scroll', handleScroll);
     // Initial call to set the active section on page load
