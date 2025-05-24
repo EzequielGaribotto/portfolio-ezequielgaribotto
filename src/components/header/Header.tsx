@@ -14,13 +14,13 @@ const Header: React.FC = () => {
   // Define styles directly in the component
   const headerContentStyle = {
     backgroundColor: theme === 'dark' 
-      ? 'rgba(45, 55, 72, 0.1)' // Very light background in dark mode
-      : 'rgba(226, 232, 240, 0.1)', // Very light background in light mode
-    backdropFilter: 'blur(8px)',
-    WebkitBackdropFilter: 'blur(8px)', // For Safari
+      ? 'rgba(45, 55, 72, 0.5)'
+      : 'rgba(226, 232, 240, 0.5)',
+    backdropFilter: 'blur(10px)',
+    WebkitBackdropFilter: 'blur(10px)', // For Safari
     border: `1px solid ${theme === 'dark' 
-      ? 'rgba(255, 255, 255, 0.1)' 
-      : 'rgba(0, 0, 0, 0.1)'}`
+      ? 'rgba(255, 255, 255, 0.2)'
+      : 'rgba(0, 0, 0, 0.2)'}`
   };
   
   // Handle smooth scrolling and update URL hash

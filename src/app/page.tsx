@@ -9,9 +9,7 @@ export default function Home() {
   return (
     <div className="centered-container">
       <ProfileSection />
-      <div style={{ width: '100%', maxWidth: '1200px' }}>
-        <ProjectsSection />
-      </div>
+      <ProjectsSection />
       <ExperienceSection />
       <TrainingSection />
     </div>
