@@ -94,7 +94,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             <button 
               className="expand-control" 
               onClick={toggleExpand} 
-              aria-label="Expand image"
+              aria-label={t("tooltips.expandImage")}
             >
               <FaExpand size={16} />
             </button>
@@ -124,6 +124,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             <ClickableButton
               href={project.programameLink}
               className="social-icon github bg-blue-600 text-white hover:bg-blue-500 transition-all duration-300 ease-in-out"
+              tooltipKey="tooltips.competition"
             >
               <FaTrophy size={20} />
             </ClickableButton>
@@ -132,6 +133,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             <ClickableButton
               href={project.arcadeLink}
               className="social-icon github bg-orange-500 text-white hover:bg-orange-400 transition-all duration-300 ease-in-out"
+              tooltipKey="tooltips.playGame"
             >
               <FaGamepad size={20} />
             </ClickableButton>
@@ -140,6 +142,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             <ClickableButton
               href={project.playStoreLink}
               className="social-icon github bg-black text-white hover:bg-gray-800 transition-all duration-300 ease-in-out"
+              tooltipKey="tooltips.playStore"
             >
               <FaGooglePlay size={20} />
             </ClickableButton>
@@ -148,6 +151,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             <ClickableButton
               href={project.repoLink}
               className="social-icon github bg-gray-800 text-white hover:bg-gray-700 flex items-center justify-center transform hover:scale-110 transition-all duration-300 ease-in-out"
+              tooltipKey={project.id === "competitive-programming" ? "tooltips.solvedProblems" : "tooltips.sourceCode"}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -175,7 +179,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         <button 
           className="expand-control" 
           onClick={() => setIsExpanded(false)} 
-          aria-label="Close expanded image"
+          aria-label={t("tooltips.closeImage")}
           style={{ position: 'absolute', top: '10px', right: '10px', zIndex: 101 }}
         >
           <FaCompress size={16} />

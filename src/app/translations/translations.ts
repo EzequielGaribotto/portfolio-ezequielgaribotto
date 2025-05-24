@@ -57,6 +57,20 @@ export const baseTranslations = {
     projects: "",
     experience: "",
     training: ""
+  },
+  // Tooltip translations
+  tooltips: {
+    github: "",
+    linkedin: "",
+    email: "",
+    emailCopied: "",
+    competition: "",
+    playGame: "",
+    playStore: "",
+    sourceCode: "",
+    logo: "",
+    expandImage: "",
+    closeImage: ""
   }
 };
 
@@ -233,6 +247,20 @@ export const en = {
     projects: "Projects",
     experience: "Experience",
     training: "Training"
+  },
+  tooltips: {
+    github: "Visit my GitHub profile",
+    linkedin: "Connect with me on LinkedIn",
+    email: "Copy email",
+    emailCopied: "✓ Copied!",
+    competition: "View competition details",
+    solvedProblems: "View solved problems", // For competitive programming source code
+    playGame: "Play the game",
+    playStore: "Download from Play Store",
+    sourceCode: "View source code",
+    logo: "Visit my GitHub profile",
+    expandImage: "Expand image",
+    closeImage: "Close image"
   }
 };
 
@@ -398,6 +426,20 @@ export const es = {
     projects: "Proyectos",
     experience: "Experiencia",
     training: "Formación"
+  },
+  tooltips: {
+    github: "Visita mi perfil de GitHub",
+    linkedin: "Conecta conmigo en LinkedIn",
+    email: "Copiar email",
+    emailCopied: "✓ ¡Copiado!",
+    competition: "Ver detalles de la competición",
+    solvedProblems: "Ver problemas resueltos", // For competitive programming source code
+    playGame: "Jugar al juego",
+    playStore: "Descargar en la Play Store",
+    sourceCode: "Ver código fuente",
+    logo: "Visita mi perfil de GitHub",
+    expandImage: "Ampliar imagen",
+    closeImage: "Cerrar imagen"
   }
 };
 

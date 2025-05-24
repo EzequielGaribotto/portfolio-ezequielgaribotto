@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { MdEmail } from "react-icons/md";
+import EmailButton from "../../button/EmailButton";
 import { useTranslation } from "../../../context/TranslationContext";
 import ClickableButton from "../../button/ClickableButton";
 import CVDownloadButton from "../../button/CVDownloadButton";
@@ -45,21 +45,23 @@ export default function ProfileSection() {
             <ClickableButton
               href="https://github.com/EzequielGaribotto"
               className={`${styles.socialButton} ${styles.githubButton}`}
+              tooltipKey="tooltips.github"
             >
-              <FaGithub size={22} className={styles.socialIcon} />
+              <FaGithub className={styles.socialIcon} />
             </ClickableButton>
+            
             <ClickableButton
-              href="https://linkedin.com/in/ezequiel-garibotto"
+              href="https://www.linkedin.com/in/ezequiel-garibotto/"
               className={`${styles.socialButton} ${styles.linkedinButton}`}
+              tooltipKey="tooltips.linkedin"
             >
-              <FaLinkedin size={22} className={styles.socialIcon} />
+              <FaLinkedin className={styles.socialIcon} />
             </ClickableButton>
-            <ClickableButton
-              href="mailto:ezequielgaribottovillanueva@gmail.com"
+            
+            <EmailButton
+              email="ezequielgaribottovillanueva@gmail.com"
               className={`${styles.socialButton} ${styles.emailButton}`}
-            >
-              <MdEmail size={22} className={styles.socialIcon} />
-            </ClickableButton>
+            />
           </div>
 
           {/* CV Download Button */}

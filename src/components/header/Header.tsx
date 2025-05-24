@@ -5,12 +5,25 @@ import LanguageSwitcher from '../LanguageSwitcher';
 import ThemeToggleButton from '../button/ThemeToggleButton';
 import styles from './Header.module.css';
 import Image from 'next/image';
+import Tooltip from '../Tooltip';
 
 const Header: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, theme } = useTranslation();
   const [activeSection, setActiveSection] = useState<string>('');
   
-  // Handle smooth scrolling
+  // Define styles directly in the component
+  const headerContentStyle = {
+    backgroundColor: theme === 'dark' 
+      ? 'rgba(45, 55, 72, 0.1)' // Very light background in dark mode
+      : 'rgba(226, 232, 240, 0.1)', // Very light background in light mode
+    backdropFilter: 'blur(8px)',
+    WebkitBackdropFilter: 'blur(8px)', // For Safari
+    border: `1px solid ${theme === 'dark' 
+      ? 'rgba(255, 255, 255, 0.1)' 
+      : 'rgba(0, 0, 0, 0.1)'}`
+  };
+  
+  // Handle smooth scrolling without immediately setting active section
   const scrollToSection = (sectionId: string) => (e: React.MouseEvent) => {
     e.preventDefault();
     const element = document.getElementById(sectionId);
@@ -19,7 +32,7 @@ const Header: React.FC = () => {
         top: element.offsetTop - 100, // Offset for header height
         behavior: 'smooth'
       });
-      setActiveSection(sectionId);
+      // Removed setActiveSection to avoid immediate update
     }
   };
   
@@ -41,30 +54,38 @@ const Header: React.FC = () => {
     };
     
     window.addEventListener('scroll', handleScroll);
+    // Initial call to set the active section on page load
+    handleScroll();
+    
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   
   return (
     <header className={styles.header}>
-      <div className={styles.headerContent}>
-        <a 
-          href="https://github.com/EzequielGaribotto" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className={styles.logoLink}
-          aria-label="Visit GitHub Profile"
-          title="Visit my GitHub Profile"
+      <div className={styles.headerContent} style={headerContentStyle}>
+        <Tooltip 
+          text={t("tooltips.logo")} 
+          position="bottom" 
+          forcePosition={true}
         >
-          <div className={styles.logo}>
-            <Image 
-              src="/images/logo/e332logo.png" 
-              alt="Logo" 
-              width={60} 
-              height={60}
-              className={styles.logoImage}
-            />
-          </div>
-        </a>
+          <a 
+            href="https://github.com/EzequielGaribotto" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className={styles.logoLink}
+            aria-label={t("tooltips.logo")}
+          >
+            <div className={styles.logo}>
+              <Image 
+                src="/images/logo/e332logo.png" 
+                alt="Logo" 
+                width={60} 
+                height={60}
+                className={styles.logoImage}
+              />
+            </div>
+          </a>
+        </Tooltip>
         
         <nav className={styles.navigation}>
           <ul className={styles.navList}>

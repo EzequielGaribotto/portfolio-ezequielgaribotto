@@ -15,6 +15,11 @@
   --link: #0070f3;
   --link-hover: #0056b3;
   
+  /* RGB versions for transparency */
+  --foreground-rgb: 26, 26, 26;
+  --background-rgb: 245, 245, 245;
+  --secondary-rgb: 226, 232, 240;
+  
   /* Text colors for light mode */
   --mode-text: #000000; 
   --mode-desc: #4b5563;
@@ -35,6 +40,11 @@
   --primary-hover: #81bfc7;
   --secondary: #2d3748;
   --secondary-hover: #4a5568;
+  
+  /* RGB versions for transparency */
+  --foreground-rgb: 245, 245, 245;
+  --background-rgb: 26, 26, 26;
+  --secondary-rgb: 45, 55, 72;
   
   /* Text colors for dark mode */
   --mode-text: #ffffff;
