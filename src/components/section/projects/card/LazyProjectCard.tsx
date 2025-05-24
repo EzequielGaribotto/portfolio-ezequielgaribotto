@@ -4,7 +4,7 @@ import { Project } from '../../../../models/Project';
 // Dynamic import with a more detailed loading skeleton
 const ProjectCardComponent = dynamic(() => import('./ProjectCard').then(mod => mod.default), {
   loading: () => (
-    <div className="project-card bg-secondary text-foreground border border-secondary-hover rounded-lg shadow-md p-4 hover:shadow-lg transition-all duration-500 ease-in-out">
+    <div className="project-card bg-secondary text-foreground border border-secondary-hover rounded-lg shadow-md p-4 hover:shadow-lg transition-all duration-300 ease-in-out">
       {/* Title skeleton */}
       <div className="project-title text-lg font-bold mb-2">
         <div className="h-6 bg-gray-300 dark:bg-gray-700 rounded w-3/4 mx-auto transition-colors duration-300"></div>

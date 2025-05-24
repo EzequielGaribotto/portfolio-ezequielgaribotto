@@ -36,6 +36,32 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang={initialLocale} suppressHydrationWarning>
+      <head>
+        {/* Preload script to prevent theme flashing */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  const savedTheme = localStorage.getItem('theme');
+                  if (savedTheme) {
+                    document.documentElement.dataset.theme = savedTheme;
+                    document.querySelector('meta[name="color-scheme"]')?.setAttribute(
+                      'content', 
+                      savedTheme === 'dark' ? 'dark' : 'light'
+                    );
+                  } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.dataset.theme = 'dark';
+                    document.querySelector('meta[name="color-scheme"]')?.setAttribute('content', 'dark');
+                  }
+                } catch (e) {
+                  console.error('Failed to apply theme:', e);
+                }
+              })();
+            `,
+          }}
+        />
+      </head>
       <body className="antialiased">
         <TranslationProvider initialLocale={initialLocale}>
           <header className="flex justify-between items-center p-4">

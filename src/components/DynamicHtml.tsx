@@ -10,23 +10,18 @@ export default function DynamicHtml({ children }: { children: React.ReactNode })
   useEffect(() => {
     if (document && locale && theme) {
       document.documentElement.lang = locale;
-      document.documentElement.dataset.theme = theme;
-      document.querySelector('meta[name="color-scheme"]')?.setAttribute(
-        'content', 
-        theme === 'dark' ? 'dark' : 'light'
-      );
+
+      // Add a short delay before applying the theme to ensure all CSS transitions work properly
+      setTimeout(() => {
+        document.documentElement.dataset.theme = theme;
+        document.querySelector('meta[name="color-scheme"]')?.setAttribute(
+          'content',
+          theme === 'dark' ? 'dark' : 'light'
+        );
+      }, 5); // Very short delay to ensure CSS transitions register the change
     }
   }, [locale, theme]);
 
-  // If locale or theme aren't determined yet, show a minimal loading state
-  if (!locale || !theme) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
-      </div>
-    );
-  }
-
-  // Just return children once everything is ready
+  // Just return children, we don't need a loading state as this component handles transitions
   return <>{children}</>;
 }

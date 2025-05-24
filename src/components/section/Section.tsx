@@ -22,11 +22,17 @@ const Section: React.FC<SectionProps> = ({
   backgroundColor,
   titleAlign = 'left'
 }) => {
+  // Only apply custom style if explicitly provided, otherwise use CSS variables
+  const style = backgroundColor ? { 
+    backgroundColor,
+    transition: 'background-color 0.3s ease-in-out, color 0.3s ease-in-out'
+  } : undefined;
+  
   return (
     <section 
       id={id}
       className={`${styles.section} ${className}`}
-      style={{ backgroundColor }}
+      style={style}
     >
       <div className={fullWidth ? styles.fullWidthContainer : styles.container}>
         <div className={styles.titleWrapper} style={{ textAlign: titleAlign }}>
