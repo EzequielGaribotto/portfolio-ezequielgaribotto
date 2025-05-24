@@ -2,6 +2,8 @@
   width: 100%;
   color: var(--foreground);
   transition: none;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .sectionTitle {
@@ -36,4 +38,15 @@
   margin-bottom: 2rem;
   display: inline-block;
   width: 100%;
+  padding: 0 0.5rem;
+  box-sizing: border-box;
+}
+
+@media (max-width: 639px) {
+  .masonryItem {
+    width: 100%;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }

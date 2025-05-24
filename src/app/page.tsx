@@ -7,9 +7,11 @@ import TrainingSection from "../components/section/training/TrainingSection";
 
 export default function Home() {
   return (
-    <div className="container centered-container">
+    <div className="centered-container">
       <ProfileSection />
-      <ProjectsSection />
+      <div style={{ width: '100%', maxWidth: '1200px' }}>
+        <ProjectsSection />
+      </div>
       <ExperienceSection />
       <TrainingSection />
     </div>

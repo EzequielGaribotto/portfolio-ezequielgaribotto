@@ -15,6 +15,7 @@ export function generateMetadata(): Metadata {
     title: meta.title,
     description: meta.description,
     manifest: '/images/logo/site.webmanifest',
+    viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no',
     icons: {
       icon: [
         { url: '/images/logo/favicon.ico' },
@@ -64,7 +65,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="antialiased">
         <TranslationProvider initialLocale={initialLocale}>
           <Header />
-          <main style={{ paddingTop: "80px" }}>{children}</main>
+          <main style={{ 
+            paddingTop: "120px", /* Increased from 80px for mobile */
+            maxWidth: "100vw",
+            overflowX: "hidden"
+          }}>{children}</main>
           <Footer />
         </TranslationProvider>
       </body>

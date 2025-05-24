@@ -120,16 +120,40 @@
 
 /* Responsive styles */
 @media (max-width: 640px) {
+  .profileSection {
+    flex-direction: column;
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+  }
+
   .profileImageContainer {
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
+    margin-bottom: 1.5rem;
+  }
+  
+  .name {
+    font-size: 1.8rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .description {
+    font-size: 1rem;
+    margin-bottom: 1.25rem;
   }
 }
 
 @media (min-width: 641px) and (max-width: 768px) {
+  .profileSection {
+    flex-direction: column;
+    padding: 2.5rem 1.5rem;
+    margin-top: 1rem;
+  }
+  
   .profileImageContainer {
-    width: 250px;
-    height: 250px;
+    width: 225px;
+    height: 225px;
+    margin-bottom: 2rem;
   }
 }
 
