@@ -1,8 +1,9 @@
 "use client";
 
 import ProfileSection from "../components/section/profile/ProfileSection";
-import ProjectsSection from "./../components/section/ProjectsSection";
+import ProjectsSection from "../components/section/projects/ProjectsSection";
 import ExperienceSection from "../components/section/experience/ExperienceSection";
+import TrainingSection from "../components/section/training/TrainingSection";
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <ProfileSection />
       <ProjectsSection />
       <ExperienceSection />
+      <TrainingSection />
     </div>
   );
 }

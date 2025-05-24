@@ -25,30 +25,62 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // Define styles that will be shared between button and dropdown
+  const buttonTextColor = "var(--foreground)";
+  const buttonBorderColor = "var(--foreground)";
+  
+  const buttonStyle = {
+    color: buttonTextColor,
+    backgroundColor: 'rgba(255, 255, 255, 0.1)', // Slight transparency
+    backdropFilter: 'blur(5px)',
+    WebkitBackdropFilter: 'blur(5px)', // For Safari
+    border: '2px solid',
+    borderColor: buttonBorderColor,
+    borderRadius: '9999px',
+  };
+
+  const dropdownStyle = {
+    color: buttonTextColor,
+    backgroundColor: 'rgba(255, 255, 255, 0.1)', // Slight transparency
+    backdropFilter: 'blur(5px)',
+    WebkitBackdropFilter: 'blur(5px)', // For Safari
+    border: '2px solid',
+    borderColor: buttonBorderColor,
+    maxWidth: 'max-content', // Only as wide as needed
+    minWidth: 'fit-content', // Ensure minimum width
+  };
+
   return (
     <div className={`relative ${className}`} ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-auto px-4 py-2 bg-primary hover:bg-primary-dark text-white font-semibold rounded-md flex items-center justify-center transform hover:scale-105 transition-transform"
+        className="w-auto px-5 py-2.5 font-semibold rounded-full flex items-center justify-center transition-all duration-300 shadow-sm hover:shadow-md"
+        style={buttonStyle}
       >
         <FaFileDownload className="mr-2" />
         {t("cv.download") || "Download CV"}
       </button>
       
       {isOpen && (
-        <div className="absolute mt-2 w-36 left-1/2 -translate-x-1/2 bg-white rounded-md shadow-lg z-10 overflow-hidden">
+        <div 
+          className="absolute mt-2 left-1/2 -translate-x-1/2 rounded-xl shadow-lg z-10 overflow-hidden whitespace-nowrap" 
+          style={dropdownStyle}
+        >
           <a 
             href="/cv/EzequielGaribotto_CV_ES.pdf" 
             download
-            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 text-center"
+            className="block px-4 py-3 text-sm text-center transition-colors duration-200 hover:opacity-80"
+            style={{ color: buttonTextColor }}
             onClick={() => setIsOpen(false)}
           >
             {t("cv.spanish") || "Spanish CV"}
           </a>
+          <div style={{ borderTop: `1px solid ${buttonBorderColor}` }}></div>
           <a 
             href="/cv/EzequielGaribotto_CV_EN.pdf" 
             download
-            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 text-center"
+            className="block px-4 py-3 text-sm text-center transition-colors duration-200 hover:opacity-80"
+            style={{ color: buttonTextColor }}
             onClick={() => setIsOpen(false)}
           >
             {t("cv.english") || "English CV"}

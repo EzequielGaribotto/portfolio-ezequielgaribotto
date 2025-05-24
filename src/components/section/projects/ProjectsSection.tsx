@@ -1,7 +1,8 @@
 "use client";
-import LazyProjectCard from "../card/LazyProjectCard";
-import { useTranslation } from "../../context/TranslationContext";
-import { Project } from "../../models/Project";
+import LazyProjectCard from "./card/LazyProjectCard";
+import { useTranslation } from "../../../context/TranslationContext";
+import { Project } from "../../../models/Project";
+import styles from './ProjectsSection.module.css';
 
 const projects: Project[] = [
   {
@@ -9,6 +10,7 @@ const projects: Project[] = [
     shortName: "neutral-news",
     image: "/images/projects/neutral-news-homeview.jpg",
     titleKey: "projectTitles.neutral-news",
+    footerKey: "projectFooters.neutral-news",
     descriptionKey: "projectDescriptions.neutral-news",
     startDateKey: "dates.dec2024",
     endDateKey: null,
@@ -19,6 +21,7 @@ const projects: Project[] = [
     shortName: "eulix-app",
     image: "/images/projects/eulix.jpg",
     titleKey: "projectTitles.eulix",
+    footerKey: "projectFooters.eulix",
     descriptionKey: "projectDescriptions.eulix",
     startDateKey: "dates.oct2024",
     endDateKey: "dates.apr2025",
@@ -29,9 +32,10 @@ const projects: Project[] = [
     shortName: "competitive",
     image: "/images/projects/competitive.jpeg",
     titleKey: "projectTitles.competitive-programming",
+    footerKey: "projectFooters.competitive-programming",
     descriptionKey: "projectDescriptions.competitive-programming",
-    startDateKey: "dates.jan2023",
-    endDateKey: "dates.jan2025",
+    startDateKey: "dates.sep2023",
+    endDateKey: null,
     repoLink: "https://github.com/EzequielGaribotto/CompetitiveProgramming",
     programameLink: "https://programame.com/2024/nac/",
   },
@@ -41,6 +45,7 @@ const projects: Project[] = [
     shortName: "api-list",
     image: "/images/projects/api-list.jpg",
     titleKey: "projectTitles.rick-and-morty-api-list",
+    footerKey: "projectFooters.rick-and-morty-api-list",
     descriptionKey: "projectDescriptions.rick-and-morty-api-list",
     startDateKey: "dates.apr2025",
     endDateKey: "dates.apr2025",
@@ -54,11 +59,11 @@ export default function ProjectsSection() {
   const { t } = useTranslation();
 
   return (
-    <section className="projects-section mx-auto px-4">
-      <h2 className="section-title text-foreground">{t("projects.myprojects")}</h2>
-      <div className="masonry-grid">
+    <section className={styles.projectsSection}>
+      <h2 className={styles.sectionTitle}>{t("projects.myprojects")}</h2>
+      <div className={styles.masonryGrid}>
         {projects.map((project) => (
-          <div key={project.id} className="masonry-item">
+          <div key={project.id} className={styles.masonryItem}>
             <LazyProjectCard project={project} />
           </div>
         ))}

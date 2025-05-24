@@ -12,13 +12,17 @@ interface Experience {
   period: string;
   location: string;
   description: string;
-  technologies?: string[];
+  technologies: string[]; // Changed to required like in Training interface
   imageUrl?: string;
   companyUrl?: string;
 }
 
 const ExperienceSection: React.FC = () => {
   const { t } = useTranslation();
+
+  // Define the technologies as constants, similar to TrainingSection
+  const telusTech = ["English", "JSON", "Data Analysis", "Data Classification", "Digital Competence"];
+  const eulixTech = ["Android", "XML", "API Integration", "Gradle", "AI/ML Integration", "Front-End", "Data Binding", "Android Jetpack", "Retrofit", "Kotlin DSL", "LiveData", "Android SDK", "Git"]; // Ensure this is an array
 
   const experiences: Experience[] = [
     {
@@ -28,7 +32,7 @@ const ExperienceSection: React.FC = () => {
       period: t("experiences.eulix.period"),
       location: t("experiences.eulix.location"),
       description: t("experiences.eulix.description"),
-      technologies: t("experiences.eulix.technologies") as unknown as string[], // Explicitly cast to array
+      technologies: eulixTech,
       imageUrl: "/images/companies/eulix_logo.jpeg",
       companyUrl:
         "https://play.google.com/store/apps/details?id=com.eulix.mobile.app&hl=en_US",
@@ -40,7 +44,7 @@ const ExperienceSection: React.FC = () => {
       period: t("experiences.telus.period"),
       location: t("experiences.telus.location"),
       description: t("experiences.telus.description"),
-      technologies: t("experiences.telus.technologies") as unknown as string[], // Explicitly cast to array
+      technologies: telusTech,
       imageUrl: "/images/companies/telus_logo.png",
     },
   ];
@@ -88,7 +92,15 @@ const ExperienceSection: React.FC = () => {
           <div style={{ textAlign: 'left', whiteSpace: 'pre-line' }}>
             {exp.description}
           </div>
-          </div>
+          
+          <div className={styles.technologies}>
+              {exp.technologies.map((tech, index) => (
+                <span key={index} className={styles.tech}>
+                  {tech}
+                </span>
+              ))}
+            </div>
+        </div>
         ))}
       </div>
     </Section>

@@ -1,11 +1,11 @@
 "use client";
 
-import { FaExpand, FaCompress, FaTrophy, FaGooglePlay, FaGamepad } from "../../utils/icons";
+import { FaExpand, FaCompress, FaTrophy, FaGooglePlay, FaGamepad } from "../../../../utils/icons";
 import { useState, useRef, useEffect } from "react";
-import { useTranslation } from "../../context/TranslationContext";
-import { Project } from "../../models/Project";
-import ClickableButton from "../button/ClickableButton";
-import OptimizedImage from '../OptimizedImage';
+import { useTranslation } from "../../../../context/TranslationContext";
+import { Project } from "../../../../models/Project";
+import ClickableButton from "../../../button/ClickableButton";
+import OptimizedImage from '../../../OptimizedImage';
 
 interface ProjectCardProps {
   project: Project;
@@ -75,20 +75,18 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         className="project-card bg-secondary text-foreground border border-secondary-hover rounded-lg shadow-md p-4 hover:shadow-lg transition-all duration-500 ease-in-out"
       >
         <div onClick={handleTextClick}>
-          <h3 className="project-title text-lg font-bold mt-4 text-foreground">
+          <h3 className="project-title text-lg font-bold text-foreground">
             {t(project.titleKey)}
           </h3>
-          
-          {/* Project date display */}
-          {project.startDateKey && (
-            <div className="project-date text-xs text-foreground/70 font-semibold uppercase mb-2">
-              {t(project.startDateKey)} {project.endDateKey ? `- ${t(project.endDateKey)}` : `- ${t("projects.current")}`}
-            </div>
-          )}
-          
           <p className="project-description text-sm mt-2 text-foreground">
             {t(project.descriptionKey)}
           </p>
+
+          {project.startDateKey && (
+            <div className="project-date text-xs text-foreground/70 font-semibold mb-2">
+              {t(project.startDateKey)} {project.endDateKey ? `- ${t(project.endDateKey)}` : `- ${t("projects.current")}`}
+            </div>
+          )}
         </div>
         
         <div className="project-image-container mt-3">
@@ -112,9 +110,16 @@ export default function ProjectCard({ project }: ProjectCardProps) {
               onClick={toggleExpand}
             />
           </div>
+          
+          {/* Project footer - added below image */}
+          {project.footerKey && (
+            <div className="project-footer text-xs mt-2 text-foreground/80 italic">
+              {t(project.footerKey)}
+            </div>
+          )}
         </div>
 
-        <div className="project-links flex justify-start mt-4 space-x-2">
+        <div className="project-links flex mt-4 space-x-2">
           {project.programameLink && (
             <ClickableButton
               href={project.programameLink}
@@ -158,7 +163,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       </div>
       
       {/* Modal-like expanded image overlay */}
-      <div className={`expanded-backdrop ${isExpanded ? 'active' : ''}`}></div>
+      <div className={`expanded-backdrop ${isExpanded ? 'active' : ''}`} onClick={() => setIsExpanded(false)}></div>
       <div 
         ref={overlayRef}
         className={`expanded-image-overlay ${isExpanded ? 'active' : ''}`}

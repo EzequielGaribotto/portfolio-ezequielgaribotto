@@ -4,6 +4,7 @@ export interface Project {
   image: string;
   titleKey: string;
   descriptionKey: string;
+  footerKey: string;
   startDateKey: string;
   endDateKey: string | null;
   repoLink?: string;

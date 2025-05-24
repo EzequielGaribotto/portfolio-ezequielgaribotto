@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
-import { Project } from '../../models/Project';
+import { Project } from '../../../../models/Project';
 
+// Try with explicit file extension and absolute path as fallback
 const ProjectCardComponent = dynamic(() => import('./ProjectCard').then(mod => mod.default), {
   loading: () => (
     <div className="project-card-skeleton bg-secondary rounded-lg shadow-md p-4 animate-pulse">
