@@ -23,15 +23,12 @@ const Header: React.FC = () => {
       : 'rgba(0, 0, 0, 0.2)'}`
   };
   
-  // Handle smooth scrolling and update URL hash
+  // Handle smooth scrolling without updating URL hash
   const scrollToSection = (sectionId: string) => (e: React.MouseEvent) => {
     e.preventDefault();
     const element = document.getElementById(sectionId);
     if (element) {
-      // Update URL with hash without causing page jump
-      window.history.pushState(null, '', `#${sectionId}`);
-      
-      // Smooth scroll to element
+      // Smooth scroll to element without updating URL
       window.scrollTo({
         top: element.offsetTop - 100, // Offset for header height
         behavior: 'smooth'
@@ -39,7 +36,7 @@ const Header: React.FC = () => {
     }
   };
   
-  // Update active section based on scroll position and URL hash on initial load
+  // Update active section based on scroll position only
   useEffect(() => {
     const handleScroll = () => {
       const sections = ['profile', 'projects', 'experience', 'training'];
@@ -55,21 +52,6 @@ const Header: React.FC = () => {
         }
       }
     };
-    
-    // Check URL hash on initial load
-    const initialHash = window.location.hash.replace('#', '');
-    if (initialHash) {
-      const element = document.getElementById(initialHash);
-      if (element) {
-        setTimeout(() => {
-          window.scrollTo({
-            top: element.offsetTop - 100,
-            behavior: 'smooth'
-          });
-          setActiveSection(initialHash);
-        }, 100); // Small delay to ensure the page is fully loaded
-      }
-    }
     
     window.addEventListener('scroll', handleScroll);
     // Initial call to set the active section on page load
@@ -109,7 +91,7 @@ const Header: React.FC = () => {
           <ul className={styles.navList}>
             <li className={styles.navItem}>
               <a 
-                href="#profile" 
+                href="javascript:void(0)" 
                 onClick={scrollToSection('profile')}
                 className={activeSection === 'profile' ? styles.active : ''}
               >
@@ -118,7 +100,7 @@ const Header: React.FC = () => {
             </li>
             <li className={styles.navItem}>
               <a 
-                href="#projects" 
+                href="javascript:void(0)" 
                 onClick={scrollToSection('projects')}
                 className={activeSection === 'projects' ? styles.active : ''}
               >
@@ -127,7 +109,7 @@ const Header: React.FC = () => {
             </li>
             <li className={styles.navItem}>
               <a 
-                href="#experience" 
+                href="javascript:void(0)" 
                 onClick={scrollToSection('experience')}
                 className={activeSection === 'experience' ? styles.active : ''}
               >
@@ -136,7 +118,7 @@ const Header: React.FC = () => {
             </li>
             <li className={styles.navItem}>
               <a 
-                href="#training" 
+                href="javascript:void(0)" 
                 onClick={scrollToSection('training')}
                 className={activeSection === 'training' ? styles.active : ''}
               >
