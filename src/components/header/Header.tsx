@@ -47,15 +47,24 @@ const Header: React.FC = () => {
   return (
     <header className={styles.header}>
       <div className={styles.headerContent}>
-        <div className={styles.logo}>
-          <Image 
-            src="/images/logo/e332logo.png" 
-            alt="Logo" 
-            width={60} 
-            height={60}
-            className={styles.logoImage}
-          />
-        </div>
+        <a 
+          href="https://github.com/EzequielGaribotto" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className={styles.logoLink}
+          aria-label="Visit GitHub Profile"
+          title="Visit my GitHub Profile"
+        >
+          <div className={styles.logo}>
+            <Image 
+              src="/images/logo/e332logo.png" 
+              alt="Logo" 
+              width={60} 
+              height={60}
+              className={styles.logoImage}
+            />
+          </div>
+        </a>
         
         <nav className={styles.navigation}>
           <ul className={styles.navList}>
