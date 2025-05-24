@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { useTranslation } from "../../context/TranslationContext";
-import ClickableButton from "../button/ClickableButton";
-import CVDownloadButton from "../button/CVDownloadButton";
+import { useTranslation } from "../../../context/TranslationContext";
+import ClickableButton from "../../button/ClickableButton";
+import CVDownloadButton from "../../button/CVDownloadButton";
 
 export default function ProfileSection() {
   const { t } = useTranslation();

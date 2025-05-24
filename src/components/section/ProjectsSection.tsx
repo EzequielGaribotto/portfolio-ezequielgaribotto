@@ -21,7 +21,7 @@ const projects: Project[] = [
     titleKey: "projectTitles.eulix",
     descriptionKey: "projectDescriptions.eulix",
     startDateKey: "dates.oct2024",
-    endDateKey: null,
+    endDateKey: "dates.apr2025",
     playStoreLink: "https://play.google.com/store/apps/details?id=com.eulix.mobile.app&hl=en_US",
   },
   {
@@ -31,23 +31,10 @@ const projects: Project[] = [
     titleKey: "projectTitles.competitive-programming",
     descriptionKey: "projectDescriptions.competitive-programming",
     startDateKey: "dates.jan2023",
-    endDateKey: null,
+    endDateKey: "dates.jan2025",
     repoLink: "https://github.com/EzequielGaribotto/CompetitiveProgramming",
     programameLink: "https://programame.com/2024/nac/",
   },
-  /* Zomb Game
-  {
-    id: "zomb",
-    shortName: "zomb-game",
-    image: "/images/projects/zomb-game.png",
-    titleKey: "projectTitles.zomb",
-    descriptionKey: "projectDescriptions.zomb",
-    startDateKey: "dates.oct2024",
-    endDateKey: "dates.nov2024",
-    repoLink: "https://github.com/EzequielGaribotto/zomb",
-    arcadeLink: "https://ezequielgaribotto.github.io/zomb/",
-  },
-  */
 
   {
     id: "rick-and-morty-api-list",

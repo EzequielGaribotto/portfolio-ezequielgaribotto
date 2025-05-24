@@ -102,8 +102,8 @@ export const en = {
     error: "Something went wrong. Please try again."
   },
   meta: {
-    title: "Ezequiel Garibotto | Software Developer",
-    description: "Portfolio of Ezequiel Garibotto, Software developer specialized in Android applications."
+    title: "Ezequiel Garibotto - Portfolio",
+    description: "Software developer with experience in mobile, web and cloud services.",
   },
   dates: {
     jan2023: "JAN 2023",
@@ -157,19 +157,25 @@ export const en = {
     "competitive-programming": "Solved problems on JO-EL and AceptaElReto to prepare for the ProgramaMe 2024 contest.",
     "neutral-news": "Application under development that collects news from multiple Spanish media, groups them by topic and generates a neutral version of the events, with the aim of combating media bias through the combination of algorithms and advanced artificial intelligence techniques.",
     "eulix": "Android development of an app designed to recommend content (movies, series) based on user personality, mood, and preferences.",
-    "rick-and-morty-api-list": "The typical API List in Android with Java8, DataBinding, Caché, Pagination, SDK-Like architecture, Quick response times and simple efficiency tracking"
+    "rick-and-morty-api-list": "Typical API List App, but made in Android with Java8, DataBinding, Caché, Pagination, SDK-Like architecture, Quick response times and simple efficiency tracking"
   },
   experiences: {
     eulix: {
       company: "Eulix",
       position: "Junior Android Developer",
-      description: "Developed an Android application aimed at recommending content (movies, series) based on user personality, mood, and preferences.\n— Developed the Virtual Assistant, Onboarding, and 'How It Works' section.\n— Designed and improved UI (XML) and user experience, generating ideas and seeking constant improvement.\n— Integrated API calls (Swagger) in collaboration with the back-end team.\n— Coordinated the iOS version with an international team in India.",
+      period: "October 2024 - April 2025",
+      description: "Developed an Android application aimed at recommending content (movies, series) based on user personality, mood, and preferences.\n"+
+                   "— Developed the Virtual Assistant, Onboarding, and 'How It Works' section.\n"+
+                   "— Designed and improved UI (XML) and user experience, generating ideas and seeking constant improvement.\n"+
+                   "— Integrated API calls (Swagger) in collaboration with the back-end team.\n"+
+                   "— Coordinated the iOS version with an international team in India.",
       location: "Spain · Hybrid",
       technologies: ["Gradle", "Android", "XML", "API Integration", "Swagger"], // Ensure this is an array
     },
     telus: {
       company: "TELUS Digital",
       position: "Online Data/Maps Analyst",
+      period: "July 2023 - January 2025",
       description: "Classified, evaluated, and organized searches (queries), audio, video, images, and data of all kinds using professional English, general culture, and digital competence.",
       location: "Remote · Fully Remote",
       technologies: [
@@ -237,8 +243,8 @@ export const es = {
     error: "Algo salió mal. Por favor, inténtalo de nuevo."
   },
   meta: {
-    title: "Ezequiel Garibotto | Desarrollador de Software",
-    description: "Portfolio de Ezequiel Garibotto, Desarrollador de Software especializado en aplicaciones Android."
+    title: "Ezequiel Garibotto - Portfolio",
+    description: "Desarrollador de software con experiencia en desarrollo móvil, web y servicios cloud."
   },
   dates: {
     jan2023: "ENE 2023",
@@ -298,12 +304,13 @@ export const es = {
     "competitive-programming": "Problemas resueltos en JO-EL y AceptaElReto para el concurso ProgramaMe 2024.",
     "neutral-news": "Aplicación en desarrollo que recopila noticias de múltiples medios de comunicación españoles, las agrupa por temática y genera una versión neutral de los acontecimientos.El objetivo es combatir el sesgo mediático mediante la combinación de algoritmos y técnicas avanzadas de inteligencia artificial.",
     "eulix": "Desarrollo Android de una aplicación con el objetivo de recomendar contenidos (películas, series) basándose en la personalidad, estado de ánimo y preferencias del usuario.",
-    "rick-and-morty-api-list": "La típica lista de APIs en Android con Java8, DataBinding, Caché, Paginación, arquitectura tipo SDK, tiempos de respuesta rápidos y un seguimiento de eficiencia simple."
+    "rick-and-morty-api-list": "La típica lista de APIs, pero hecha en Android con Java8, DataBinding, Caché, Paginación, arquitectura tipo SDK, tiempos de respuesta rápidos y un seguimiento de eficiencia simple."
   },
   experiences: {
     eulix: {
       company: "Eulix",
       position: "Desarrollador Junior de Android",
+      period: "Octubre 2024 - Abril 2025",
       description: "Desarrollo Android de una aplicación con el objetivo de recomendar contenidos (películas, series), basándose en la personalidad, estado de ánimo y preferencias del usuario.\n"+
                   "— Desarrollo del Asistente Virtual, Onboarding, sección 'Cómo Funciona'.\n"+
                   "— Diseño y mejoras en la interfaz gráfica (XML) y en la experiencia de usuario, generación de ideas y búsqueda de una constante mejora.\n"+
@@ -315,6 +322,7 @@ export const es = {
     telus: {
       company: "TELUS Digital",
       position: "Analista de Datos/Mapas en Línea",
+      period: "Julio 2023 - Enero 2025",
       description: "Clasificar, evaluar, describir y ordenar búsquedas (queries), audio, video, imágenes y datos de todo tipo, usando un inglés profesional, cultura general y competencia digital.",
       location: "Remoto · Totalmente Remoto",
       technologies: ["Inglés", "JSON", "Análisis de Datos", "Clasificación de Datos", "Competencia Digital"], // Ensure this is an array

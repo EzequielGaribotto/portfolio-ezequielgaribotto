@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
-import Section from "./Section";
+import Section from "../Section";
 import styles from "./ExperienceSection.module.css";
-import { useTranslation } from "../../context/TranslationContext";
+import { useTranslation } from "../../../context/TranslationContext";
 import Image from 'next/image';
 
 interface Experience {
@@ -25,7 +25,7 @@ const ExperienceSection: React.FC = () => {
       id: "eulix",
       company: t("experiences.eulix.company"),
       position: t("experiences.eulix.position"),
-      period: "Oct 2024 - Apr 2025 (7 months)",
+      period: t("experiences.eulix.period"),
       location: t("experiences.eulix.location"),
       description: t("experiences.eulix.description"),
       technologies: t("experiences.eulix.technologies") as unknown as string[], // Explicitly cast to array
@@ -37,7 +37,7 @@ const ExperienceSection: React.FC = () => {
       id: "telus",
       company: t("experiences.telus.company"),
       position: t("experiences.telus.position"),
-      period: "Jul 2023 - Jan 2025 (1 year 7 months)",
+      period: t("experiences.telus.period"),
       location: t("experiences.telus.location"),
       description: t("experiences.telus.description"),
       technologies: t("experiences.telus.technologies") as unknown as string[], // Explicitly cast to array

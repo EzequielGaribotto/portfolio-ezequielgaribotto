@@ -2,7 +2,7 @@ import "./globals.css";
 import { TranslationProvider } from "../context/TranslationContext";
 import LanguageSwitcher from "../components/LanguageSwitcher";
 import ThemeToggleButton from "../components/button/ThemeToggleButton";
-import Footer from "../components/section/Footer";
+import Footer from "../components/section/footer/Footer";
 import { Metadata } from 'next';
 import translations from '../app/translations/translations';
 
