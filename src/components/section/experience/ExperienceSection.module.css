@@ -9,7 +9,7 @@
   border-radius: 10px;
   padding: 2rem;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
+  transition: none;
 }
 
 .experienceCard:hover {
@@ -85,12 +85,13 @@
   border-radius: 12px;
   background-color: rgba(255, 255, 255, 0.05);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: none;
 }
 
 .experienceItem:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Only transition on hover */
 }
 
 .experienceHeader {
@@ -116,7 +117,7 @@
 .company a {
   color: var(--link);
   text-decoration: none;
-  transition: color 0.2s;
+  transition: none;
 }
 
 .company a:hover {
@@ -162,7 +163,7 @@
   padding: 0.25rem 0.75rem;
   border-radius: 20px;
   font-size: 0.85rem;
-  transition: background-color 0.2s, border-color 0.2s;
+  transition: none;
   display: inline-block;
   
   /* Use the CSS variables defined in globals.css */

@@ -54,7 +54,7 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
     <div className={`relative ${className}`} ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-auto px-5 py-2.5 font-semibold rounded-full flex items-center justify-center transition-all duration-300 shadow-sm hover:shadow-md"
+        className="w-auto px-5 py-2.5 font-semibold rounded-full flex items-center justify-center shadow-sm hover:shadow-md"
         style={buttonStyle}
       >
         <FaFileDownload className="mr-2" />
@@ -69,7 +69,7 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
           <a 
             href="/cv/EzequielGaribotto_CV_ES.pdf" 
             download
-            className="block px-4 py-3 text-sm text-center transition-colors duration-200 hover:opacity-80"
+            className="block px-4 py-3 text-sm text-center transition-colors duration-300 hover:opacity-80"
             style={{ color: buttonTextColor }}
             onClick={() => setIsOpen(false)}
           >
@@ -79,7 +79,7 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
           <a 
             href="/cv/EzequielGaribotto_CV_EN.pdf" 
             download
-            className="block px-4 py-3 text-sm text-center transition-colors duration-200 hover:opacity-80"
+            className="block px-4 py-3 text-sm text-center transition-colors duration-300 hover:opacity-80"
             style={{ color: buttonTextColor }}
             onClick={() => setIsOpen(false)}
           >

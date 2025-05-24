@@ -25,7 +25,7 @@ const Section: React.FC<SectionProps> = ({
   // Only apply custom style if explicitly provided, otherwise use CSS variables
   const style = backgroundColor ? { 
     backgroundColor,
-    transition: 'background-color 0.3s ease-in-out, color 0.3s ease-in-out'
+    transition: 'none',
   } : undefined;
   
   return (

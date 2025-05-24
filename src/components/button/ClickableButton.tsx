@@ -28,7 +28,7 @@ export default function ClickableButton({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className={`p-2 rounded-full transition-all duration-500 ease-in-out ${className}`}
+      className={`p-2 rounded-full ${className}`}
       onClick={(e) => {
         e.stopPropagation();
         if (onClick) onClick(e);

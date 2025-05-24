@@ -72,7 +72,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     <>
       <div 
         ref={cardRef} 
-        className="project-card bg-secondary text-foreground border border-secondary-hover rounded-lg shadow-md p-4 hover:shadow-lg transition-all duration-500 ease-in-out"
+        className="project-card bg-secondary text-foreground border border-secondary-hover rounded-lg shadow-md p-4 hover:shadow-lg"
       >
         <div onClick={handleTextClick}>
           <h3 className="project-title text-lg font-bold text-foreground">
@@ -123,7 +123,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           {project.programameLink && (
             <ClickableButton
               href={project.programameLink}
-              className="social-icon github bg-blue-600 text-white hover:bg-blue-500 transition-all duration-300 ease-in-out"
+              className="social-icon github bg-blue-600 text-white hover:bg-blue-500"
               tooltipKey="tooltips.competition"
             >
               <FaTrophy size={20} />
@@ -132,7 +132,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           {project.arcadeLink && (
             <ClickableButton
               href={project.arcadeLink}
-              className="social-icon github bg-orange-500 text-white hover:bg-orange-400 transition-all duration-300 ease-in-out"
+              className="social-icon github bg-orange-500 text-white hover:bg-orange-400"
               tooltipKey="tooltips.playGame"
             >
               <FaGamepad size={20} />
@@ -141,7 +141,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           {project.playStoreLink && (
             <ClickableButton
               href={project.playStoreLink}
-              className="social-icon github bg-black text-white hover:bg-gray-800 transition-all duration-300 ease-in-out"
+              className="social-icon github bg-black text-white hover:bg-gray-800"
               tooltipKey="tooltips.playStore"
             >
               <FaGooglePlay size={20} />
@@ -150,7 +150,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           {project.repoLink && (
             <ClickableButton
               href={project.repoLink}
-              className="social-icon github bg-gray-800 text-white hover:bg-gray-700 flex items-center justify-center transform hover:scale-110 transition-all duration-300 ease-in-out"
+              className="social-icon github bg-gray-800 text-white hover:bg-gray-700 flex items-center justify-center hover:scale-110"
               tooltipKey={project.id === "competitive-programming" ? "tooltips.solvedProblems" : "tooltips.sourceCode"}
             >
               <svg
