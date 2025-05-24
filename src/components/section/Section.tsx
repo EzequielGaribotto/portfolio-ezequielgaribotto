@@ -1,16 +1,6 @@
 import React from 'react';
 import styles from './Section.module.css';
-
-interface SectionProps {
-  id?: string;
-  title: string;
-  subtitle?: string;
-  children: React.ReactNode;
-  className?: string;
-  fullWidth?: boolean;
-  backgroundColor?: string;
-  titleAlign?: 'left' | 'center' | 'right';
-}
+import { SectionProps } from '../../models/interfaces';
 
 const Section: React.FC<SectionProps> = ({
   id,

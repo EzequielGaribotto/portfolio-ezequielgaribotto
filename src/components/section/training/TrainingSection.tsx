@@ -4,18 +4,7 @@ import Section from "../Section";
 import styles from "./TrainingSection.module.css";
 import { useTranslation } from "../../../context/TranslationContext";
 import Image from 'next/image';
-
-interface Training {
-  id: string;
-  institution: string;
-  course: string;
-  period: string;
-  location: string;
-  description: string;
-  technologies: string[];
-  imageUrl?: string;
-  institutionUrl?: string; // Changed from companyUrl to institutionUrl for clarity
-}
+import { Training } from "../../../models/Training";
 
 const TrainingSection: React.FC = () => {
   const { t } = useTranslation();

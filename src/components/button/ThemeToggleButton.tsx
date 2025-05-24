@@ -3,8 +3,9 @@
 import { useTranslation } from "../../context/TranslationContext";
 import { FaSun, FaMoon } from "../../utils/icons";
 import { useState, useEffect } from "react";
+import { ThemeToggleButtonProps } from "../../models/interfaces";
 
-export default function ThemeToggleButton() {
+export default function ThemeToggleButton({ className = "" }: ThemeToggleButtonProps) {
   const { theme, changeTheme } = useTranslation();
   const [iconSize, setIconSize] = useState(20);
 
@@ -48,6 +49,7 @@ export default function ThemeToggleButton() {
   return (
     <button
       onClick={toggleTheme}
+      className={className}
       style={buttonStyle}
       aria-label={
         theme === "light" ? "Switch to dark mode" : "Switch to light mode"

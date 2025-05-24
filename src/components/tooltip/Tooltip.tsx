@@ -1,29 +1,15 @@
 "use client";
 import React, { useState } from 'react';
+import { TooltipProps } from '../../models/interfaces';
 import styles from './Tooltip.module.css';
-
-interface TooltipProps {
-  text: string;
-  children: React.ReactNode;
-  position?: 'top' | 'bottom' | 'left' | 'right';
-  className?: string;
-  alternateText?: string;
-  showAlternate?: boolean;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-  forcePosition?: boolean; // New prop to force position regardless of screen position
-}
 
 const Tooltip: React.FC<TooltipProps> = ({
   text,
   children,
   position = 'top',
-  className = '',
+  forcePosition = false,
   alternateText,
-  showAlternate = false,
-  onMouseEnter,
-  onMouseLeave,
-  forcePosition = false
+  showAlternate = false
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [tooltipPosition, setTooltipPosition] = useState(position);
@@ -42,13 +28,10 @@ const Tooltip: React.FC<TooltipProps> = ({
         setTooltipPosition(position);
       }
     }
-    
-    if (onMouseEnter) onMouseEnter();
   };
   
   const handleMouseLeave = () => {
     setIsVisible(false);
-    if (onMouseLeave) onMouseLeave();
   };
   
   const displayText = showAlternate && alternateText ? alternateText : text;
@@ -56,7 +39,7 @@ const Tooltip: React.FC<TooltipProps> = ({
   return (
     <div 
       ref={containerRef}
-      className={`${styles.tooltipContainer} ${className}`}
+      className={`${styles.tooltipContainer}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >

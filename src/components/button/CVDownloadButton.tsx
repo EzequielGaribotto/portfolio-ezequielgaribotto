@@ -3,10 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { FaFileDownload } from "react-icons/fa";
 import { useTranslation } from "../../context/TranslationContext";
-
-interface CVDownloadButtonProps {
-  className?: string;
-}
+import { CVDownloadButtonProps } from "../../models/interfaces";
 
 export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
   const { t } = useTranslation();

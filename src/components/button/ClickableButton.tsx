@@ -3,15 +3,7 @@
 import React from "react";
 import Tooltip from "../tooltip/Tooltip";
 import { useTranslation } from "../../context/TranslationContext";
-
-interface ClickableButtonProps {
-  href: string;
-  children: React.ReactNode;
-  className?: string;
-  onClick?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
-  tooltipText?: string;
-  tooltipKey?: string; // New prop for translation key
-}
+import { ClickableButtonProps } from "../../models/interfaces";
 
 export default function ClickableButton({
   href,

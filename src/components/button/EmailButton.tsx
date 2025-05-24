@@ -4,11 +4,7 @@ import React, { useState } from "react";
 import { FaEnvelope } from "react-icons/fa";
 import Tooltip from "../tooltip/Tooltip";
 import { useTranslation } from "../../context/TranslationContext";
-
-interface EmailButtonProps {
-  email: string;
-  className?: string;
-}
+import { EmailButtonProps } from "../../models/interfaces";
 
 export default function EmailButton({ email, className = "" }: EmailButtonProps) {
   const { t } = useTranslation();

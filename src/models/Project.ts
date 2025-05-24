@@ -1,12 +1,12 @@
 export interface Project {
   id: string;
-  shortName: string;
+  title: string;
+  description: string;
+  footer: string;
+  startDate: string;
+  endDate: string | null;
   image: string;
-  titleKey: string;
-  descriptionKey: string;
-  footerKey: string;
-  startDateKey: string;
-  endDateKey: string | null;
+  technologies?: string[];
   repoLink?: string;
   programameLink?: string;
   arcadeLink?: string;

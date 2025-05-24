@@ -4,18 +4,7 @@ import Section from "../Section";
 import styles from "./ExperienceSection.module.css";
 import { useTranslation } from "../../../context/TranslationContext";
 import Image from 'next/image';
-
-interface Experience {
-  id: string;
-  company: string;
-  position: string;
-  period: string;
-  location: string;
-  description: string;
-  technologies: string[]; // Changed to required like in Training interface
-  imageUrl?: string;
-  companyUrl?: string;
-}
+import { Experience } from "../../../models/Experience";
 
 const ExperienceSection: React.FC = () => {
   const { t } = useTranslation();

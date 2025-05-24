@@ -111,7 +111,34 @@ export const en = {
     title: "My Projects",
     myprojects: "Projects",
     viewAll: "View All",
-    current: "Present"
+    current: "Present",
+    
+    neutralNews: {
+      title: "Neutral News",
+      description: "Application under development that collects news from multiple Spanish media, groups them by topic and generates a neutral version of the events, with the aim of combating media bias through the combination of algorithms and advanced artificial intelligence techniques.",
+      footer: "Academic project continuation",
+      startDate: "Dec 2024"
+    },
+    eulix: {
+      title: "Eulix App",
+      description: "Android development of an app designed to recommend content (movies, series) based on user personality, mood, and preferences.",
+      footer: "Internship",
+      startDate: "Oct 2024",
+      endDate: "Apr 2025"
+    },
+    competitiveProgramming: {
+      title: "Competitive Programming",
+      description: "Participation in competitive programming contests in teams, representing the institute, finishing fourth in the national contest. Problems solved on JO-EL and AceptaElReto for the ProgramaMe 2024 contest.",
+      footer: "Academic Elective",
+      startDate: "Sep 2023"
+    },
+    rickAndMorty: {
+      title: "Efficient API List",
+      description: "Typical API List App, but made in Android with Java8, DataBinding, Caché, Pagination, SDK-Like architecture, Quick response times and simple efficiency tracking",
+      footer: "Technical Interview",
+      startDate: "Apr 2025",
+      endDate: "Apr 2025"
+    }
   },
   contact: {
     title: "Contact Me",
@@ -301,7 +328,34 @@ export const es = {
     title: "Proyectos",
     myprojects: "Proyectos",
     viewAll: "Ver Todos",
-    current: "Actual"
+    current: "Actual",
+    
+    neutralNews: {
+      title: "Neutral News",
+      description: "Aplicación en desarrollo que recopila noticias de múltiples medios de comunicación españoles, las agrupa por temática y genera una versión neutral de los acontecimientos. El objetivo es combatir el sesgo mediático mediante la combinación de algoritmos y técnicas avanzadas de inteligencia artificial.",
+      footer: "Académico en continuidad",
+      startDate: "Dic 2024"
+    },
+    eulix: {
+      title: "Eulix",
+      description: "Desarrollo Android de una aplicación con el objetivo de recomendar contenidos (películas, series) basándose en la personalidad, estado de ánimo y preferencias del usuario.",
+      footer: "Prácticas formativas",
+      startDate: "Oct 2024",
+      endDate: "Abr 2025"
+    },
+    competitiveProgramming: {
+      title: "Programación Competitiva",
+      description: "Participación en concursos de programación competitiva en equipos, representando al instituto, quedando cuartos en el cuncurso nacional. Problemas resueltos en JO-EL y AceptaElReto para el concurso ProgramaMe 2024.",
+      footer: "Optativo Académico",
+      startDate: "Sep 2023"
+    },
+    rickAndMorty: {
+      title: "API list eficiente",
+      description: "La típica API list, pero hecha en Android con Java8, DataBinding, Caché, Paginación, arquitectura tipo SDK, tiempos de respuesta rápidos y un seguimiento de eficiencia simple.",
+      footer: "Entrevista técnica",
+      startDate: "Abr 2025",
+      endDate: "Abr 2025"
+    }
   },
   contact: {
     title: "Contáctame",

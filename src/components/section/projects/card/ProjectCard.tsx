@@ -76,15 +76,15 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       >
         <div onClick={handleTextClick}>
           <h3 className="project-title text-lg font-bold text-foreground">
-            {t(project.titleKey)}
+            {project.title}
           </h3>
           <p className="project-description text-sm mt-2 text-foreground">
-            {t(project.descriptionKey)}
+            {project.description}
           </p>
 
-          {project.startDateKey && (
+          {project.startDate && (
             <div className="project-date text-xs text-foreground/70 font-semibold mb-2">
-              {t(project.startDateKey)} {project.endDateKey ? `- ${t(project.endDateKey)}` : `- ${t("projects.current")}`}
+              {project.startDate} {project.endDate ? `- ${project.endDate}` : `- ${t("projects.current")}`}
             </div>
           )}
         </div>
@@ -100,7 +100,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             </button>
             <OptimizedImage
               src={project.image || fallbackImage}
-              alt={t(project.titleKey) || "Project image"}
+              alt={project.title || "Project image"}
               width={600}
               height={400}
               className="rounded-lg cursor-pointer"
@@ -112,12 +112,23 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           </div>
           
           {/* Project footer - added below image */}
-          {project.footerKey && (
+          {project.footer && (
             <div className="project-footer text-xs mt-2 text-foreground/80 italic">
-              {t(project.footerKey)}
+              {project.footer}
             </div>
           )}
         </div>
+
+        {/* Technologies */}
+        {project.technologies && project.technologies.length > 0 && (
+          <div className="technologies mt-3 flex flex-wrap gap-1">
+            {project.technologies.map((tech, index) => (
+              <span key={index} className="tech bg-tech-bg border border-tech-border text-tech-text text-xs px-2 py-1 rounded-full">
+                {tech}
+              </span>
+            ))}
+          </div>
+        )}
 
         <div className="project-links flex mt-4 space-x-2">
           {project.programameLink && (
@@ -188,7 +199,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           <div className="w-full flex justify-center items-center">
             <OptimizedImage
               src={project.image || fallbackImage}
-              alt={t(project.titleKey) || "Project image"}
+              alt={t(project.title) || "Project image"}
               width={1920}
               height={1080}
               className="rounded-lg object-contain"
