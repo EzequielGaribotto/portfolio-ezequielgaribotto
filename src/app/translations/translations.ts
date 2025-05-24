@@ -181,6 +181,11 @@ export const en = {
       ], // Ensure this is an array
     },
   },
+  cv: {
+    download: "Download CV",
+    spanish: "Spanish CV",
+    english: "English CV"
+  }
 };
 
 /**
@@ -315,6 +320,11 @@ export const es = {
       technologies: ["Inglés", "JSON", "Análisis de Datos", "Clasificación de Datos", "Competencia Digital"], // Ensure this is an array
     },
   },
+  cv: {
+    download: "Descargar CV",
+    spanish: "CV en Español",
+    english: "CV en Inglés"
+  }
 };
 
 /**

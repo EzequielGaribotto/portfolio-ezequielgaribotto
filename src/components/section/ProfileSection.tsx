@@ -4,7 +4,7 @@ import Image from "next/image";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { useTranslation } from "../../context/TranslationContext";
 import ClickableButton from "../button/ClickableButton";
-
+import CVDownloadButton from "../button/CVDownloadButton";
 
 export default function ProfileSection() {
   const { t } = useTranslation();
@@ -31,8 +31,13 @@ export default function ProfileSection() {
         <h1 className="text-4xl font-bold mb-4">{t("aboutMe.title")}</h1>
         <p className="text-lg max-w-[60%] mx-auto">{t("aboutMe.description")}</p>
 
+        {/* CV Download Button */}
+        <div className="mt-4 flex space-x-4 justify-center">
+          <CVDownloadButton className="mx-auto" />
+        </div>
+
         {/* Social Links */}
-        <div className="mt-6 flex space-x-4 justify-center">
+        <div className="mt-4 flex space-x-4 justify-center">
           <ClickableButton
             href="https://github.com/EzequielGaribotto"
             className="w-12 h-12 bg-gray-800 hover:bg-gray-700 text-white flex items-center justify-center transform hover:scale-110"
