@@ -41,7 +41,8 @@ export const baseTranslations = {
     cv: {
         download: "",
         spanish: "",
-        english: ""
+        english: "",
+        preview: "" // Add new translation key for preview
     },
     // Projects section translations
     projects: {

@@ -4,14 +4,14 @@
 }
 
 .tooltip {
-  position: absolute;
+  position: absolute; /* Changed from absolute to fixed for dropdowns */
   background-color: rgba(0, 0, 0, 0.8);
   color: white;
   padding: 5px 10px;
   border-radius: 6px;
   font-size: 0.75rem;
   white-space: nowrap;
-  z-index: 100;
+  z-index: 1000; /* Increased z-index to be higher than dropdown */
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.3s;

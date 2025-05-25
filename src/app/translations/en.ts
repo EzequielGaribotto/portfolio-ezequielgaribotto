@@ -41,7 +41,8 @@ export const en: Translations = {
   cv: {
     download: "Download CV",
     spanish: "Spanish CV",
-    english: "English CV"
+    english: "English CV",
+    preview: "Preview CV"
   },
   projects: {
     title: "Projects",

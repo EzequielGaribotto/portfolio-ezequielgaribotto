@@ -36,7 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const initialLocale = "es"; // Default language
 
   return (
-    <html lang={initialLocale}>
+    <html lang={initialLocale} suppressHydrationWarning={true}>
       <head>
         {/* Preload script to prevent theme flashing */}
         <script
