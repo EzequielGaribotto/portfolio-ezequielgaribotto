@@ -64,7 +64,7 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
           style={dropdownStyle}
         >
           <a 
-            href="/cv/EzequielGaribotto_CV_ES.pdf" 
+            href="/cv/CV_ES_EzequielGaribotto.pdf" 
             download
             className="block px-4 py-3 text-sm text-center transition-colors duration-300 hover:opacity-80"
             style={{ color: buttonTextColor }}
@@ -74,7 +74,7 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
           </a>
           <div style={{ borderTop: `1px solid ${buttonBorderColor}` }}></div>
           <a 
-            href="/cv/EzequielGaribotto_CV_EN.pdf" 
+            href="/cv/CV_EN_EzequielGaribotto.pdf" 
             download
             className="block px-4 py-3 text-sm text-center transition-colors duration-300 hover:opacity-80"
             style={{ color: buttonTextColor }}
