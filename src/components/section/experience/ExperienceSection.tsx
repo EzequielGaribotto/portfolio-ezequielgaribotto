@@ -22,7 +22,7 @@ const ExperienceSection: React.FC = () => {
       location: t("experiences.eulix.location"),
       description: t("experiences.eulix.description"),
       technologies: eulixTech,
-      imageUrl: "/images/companies/eulix_logo.jpeg",
+      imageUrl: "/images/companies/eulix_logo.webp",
       companyUrl:
         "https://play.google.com/store/apps/details?id=com.eulix.mobile.app&hl=en_US",
     },
@@ -34,7 +34,7 @@ const ExperienceSection: React.FC = () => {
       location: t("experiences.telus.location"),
       description: t("experiences.telus.description"),
       technologies: telusTech,
-      imageUrl: "/images/companies/telus_logo.png",
+      imageUrl: "/images/companies/telus_logo.webp",
       companyUrl: "https://www.telus.com/en/digital",
     },
   ];

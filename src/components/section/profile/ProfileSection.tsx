@@ -10,7 +10,7 @@ import styles from "./ProfileSection.module.css";
 
 export default function ProfileSection() {
   const { t } = useTranslation();
-  const profileImage = "/images/profile/ezequiel-garibotto.png";
+  const profileImage = "/images/profile/ezequiel-garibotto.webp";
 
   return (
     <div id="profile" className={styles.profileSection}>

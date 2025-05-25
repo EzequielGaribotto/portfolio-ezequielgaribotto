@@ -23,7 +23,7 @@ const TrainingSection: React.FC = () => {
       location: t("training.itb.location"),
       description: t("training.itb.description"),
       technologies: itbTech,
-      imageUrl: "/images/institutions/itb_logo.png",
+      imageUrl: "/images/institutions/itb_logo.webp",
       institutionUrl: "https://www.itb.cat/",
     },
     {
@@ -34,7 +34,7 @@ const TrainingSection: React.FC = () => {
       location: t("training.upf.location"),
       description: t("training.upf.description"),
       technologies: upfTech,
-      imageUrl: "/images/institutions/upf_logo.jpg",
+      imageUrl: "/images/institutions/upf_logo.webp",
       institutionUrl: "https://www.upf.edu/",
     },
     {
@@ -45,7 +45,7 @@ const TrainingSection: React.FC = () => {
       location: t("training.rb4.location"),
       description: t("training.rb4.description"),
       technologies: rb4Tech,
-      imageUrl: "/images/institutions/rb4_logo.jpg",
+      imageUrl: "/images/institutions/rb4_logo.webp",
       institutionUrl: "https://agora.xtec.cat/iesramonberenguer4/",
     },
   ];

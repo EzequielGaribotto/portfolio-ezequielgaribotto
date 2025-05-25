@@ -77,7 +77,7 @@ const Header: React.FC = () => {
           >
             <div className={styles.logo}>
               <Image 
-                src="/images/logo/e332logo.png" 
+                src="/images/logo/e332logo.webp" 
                 alt="Logo" 
                 width={60} 
                 height={60}
