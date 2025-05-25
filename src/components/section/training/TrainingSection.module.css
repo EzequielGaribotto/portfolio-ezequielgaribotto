@@ -7,7 +7,8 @@
 .trainingItem {
   padding: 2rem;
   border-radius: 12px;
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: var(--secondary); /* Match project card background */
+  opacity: 0.9; /* Add transparency */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   transition: none;
 }
@@ -15,7 +16,8 @@
 .trainingItem:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Only transition on hover */
+  opacity: 1; /* Full opacity on hover */
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease; /* Added opacity to transition */
 }
 
 .trainingHeader {
@@ -104,7 +106,9 @@
 
 @media (max-width: 768px) {
   .trainingItem {
-    padding: 1.5rem;
+    padding: 1rem; /* Reduced from 1.25rem */
+    width: 100%;
+    margin: 0 auto;
   }
   
   .metaInfo {
@@ -116,5 +120,21 @@
   .trainingHeader {
     flex-direction: column;
     align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .trainingItem {
+    padding: 0.75rem; /* Reduced from 1rem */
+    border-radius: 8px;
+  }
+  
+  .technologies {
+    margin-top: 0.75rem;
+  }
+  
+  .tech {
+    padding: 0.2rem 0.5rem;
+    font-size: 0.75rem;
   }
 }

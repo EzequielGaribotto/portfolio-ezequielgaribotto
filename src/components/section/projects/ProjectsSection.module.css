@@ -44,11 +44,24 @@
   box-sizing: border-box;
 }
 
+@media (max-width: 768px) {
+  .projectsSection {
+    padding: 0 0.5rem; /* Reduced from 0.75rem */
+    width: 95%; /* Match header width */
+  }
+}
+
 @media (max-width: 639px) {
+  .projectsSection {
+    padding: 0 0.5rem; /* Consistent with other sections */
+    width: 95%; /* Match header width */
+  }
+  
   .masonryItem {
     width: 100%;
-    max-width: 500px;
+    max-width: 100%;
     margin-left: auto;
     margin-right: auto;
+    padding: 0;
   }
 }

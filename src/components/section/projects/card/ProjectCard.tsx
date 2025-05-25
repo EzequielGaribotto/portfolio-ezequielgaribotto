@@ -1,6 +1,6 @@
 "use client";
 
-import { FaExpand, FaCompress, FaTrophy, FaGooglePlay, FaGamepad } from "../../../../utils/icons";
+import { FaExpand, FaCompress, FaTrophy, FaGooglePlay } from "../../../../utils/icons";
 import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "../../../../context/TranslationContext";
 import { Project } from "../../../../models/Project";
@@ -12,7 +12,7 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ project }: ProjectCardProps) {
-  const { t } = useTranslation();
+  const { t, theme } = useTranslation(); // Add theme destructuring here
   const fallbackImage = "/images/projects/fallback.webp";
   const [isExpanded, setIsExpanded] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -73,6 +73,23 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       <div 
         ref={cardRef} 
         className="project-card bg-secondary text-foreground border border-secondary-hover rounded-lg shadow-md p-4 hover:shadow-lg"
+        style={{ 
+          opacity: 0.9, 
+          transition: "opacity 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease",
+          transform: "scale(1.0)" 
+        }}
+        onMouseOver={(e) => { 
+          e.currentTarget.style.opacity = "1";
+          e.currentTarget.style.transform = "scale(1.02)";
+          e.currentTarget.style.boxShadow = "0 8px 16px rgba(0, 0, 0, 0.2)";
+          e.currentTarget.style.borderColor = "var(--primary)";
+        }}
+        onMouseOut={(e) => { 
+          e.currentTarget.style.opacity = "0.9";
+          e.currentTarget.style.transform = "scale(1.0)";
+          e.currentTarget.style.boxShadow = "";
+          e.currentTarget.style.borderColor = "";
+        }}
       >
         <div onClick={handleTextClick}>
           <h3 className="project-title text-lg font-bold" style={{ color: 'var(--project-title)' }}>
@@ -134,41 +151,38 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           {project.programameLink && (
             <ClickableButton
               href={project.programameLink}
-              className="social-icon github bg-blue-600 text-white hover:bg-blue-500"
+              className={`social-icon ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : 'bg-blue-400 hover:bg-blue-300'} rounded-full transition-all duration-400`}
               tooltipKey="tooltips.competition"
             >
-              <FaTrophy size={20} />
-            </ClickableButton>
-          )}
-          {project.arcadeLink && (
-            <ClickableButton
-              href={project.arcadeLink}
-              className="social-icon github bg-orange-500 text-white hover:bg-orange-400"
-              tooltipKey="tooltips.playGame"
-            >
-              <FaGamepad size={20} />
+              <FaTrophy 
+                size={20} 
+                className="text-white hover:text-primary transition-colors duration-400" 
+              />
             </ClickableButton>
           )}
           {project.playStoreLink && (
             <ClickableButton
               href={project.playStoreLink}
-              className="social-icon github bg-black text-white hover:bg-gray-800"
+              className={`social-icon ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : 'bg-blue-400 hover:bg-blue-300'} rounded-full transition-all duration-400`}
               tooltipKey="tooltips.playStore"
             >
-              <FaGooglePlay size={20} />
+              <FaGooglePlay 
+                size={20} 
+                className="text-white hover:text-primary transition-colors duration-400" 
+              />
             </ClickableButton>
           )}
           {project.repoLink && (
             <ClickableButton
               href={project.repoLink}
-              className="social-icon github bg-gray-800 text-white hover:bg-gray-700 flex items-center justify-center hover:scale-110"
+              className={`social-icon ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : 'bg-blue-400 hover:bg-blue-300'} rounded-full flex items-center justify-center transition-all duration-400`}
               tooltipKey={project.id === "competitive-programming" ? "tooltips.solvedProblems" : "tooltips.sourceCode"}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 16 16"
                 fill="currentColor"
-                className="w-5 h-5"
+                className="w-5 h-5 text-white hover:text-primary transition-colors duration-400"
               >
                 <path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.249.249 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z"></path>
               </svg>

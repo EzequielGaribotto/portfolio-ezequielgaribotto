@@ -13,14 +13,14 @@ export default function ClickableButton({
   tooltipText,
   tooltipKey,
 }: ClickableButtonProps) {
-  const { t } = useTranslation();
+  const { t } = useTranslation(); // Add theme to extract current theme
 
   const button = (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className={`p-2 rounded-full ${className}`}
+      className={`p-2 rounded-full transition-all duration-400 ${className}`}
       onClick={(e) => {
         e.stopPropagation();
         if (onClick) onClick(e);

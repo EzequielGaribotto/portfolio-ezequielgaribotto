@@ -278,12 +278,23 @@ footer a:hover {
 }
 
 .social-icon {
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
+  transition: all 0.4s ease;
+}
+
+.social-icon svg,
+.social-icon > * {
+  transition: color 0.4s ease, transform 0.4s ease;
+}
+
+.social-icon:hover svg,
+.social-icon:hover > * {
+  color: var(--primary);
+  transform: scale(1.1);
 }
 
 .social-icon.github {
@@ -410,7 +421,7 @@ body.modal-open {
   height: auto;
   position: relative;
   overflow: visible;
-  /* No default transition */
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease, opacity 0.4s ease;
 }
 
 .project-title {
@@ -471,7 +482,6 @@ body.modal-open {
   border-color: var(--primary);
   transform: scale(1.02);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; /* Only transition on hover */
 }
 
 /* Project card image expansion styles */

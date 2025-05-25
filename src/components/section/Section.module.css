@@ -55,10 +55,12 @@
 @media (max-width: 768px) {
   .section {
     padding: 3rem 0;
+    width: 95%; /* Match header width (95% of viewport) */
   }
   
-  .container {
-    padding: 0 1.5rem;
+  .container, .fullWidthContainer {
+    padding: 0 0.75rem; /* Reduced from 1rem */
+    width: 100%;
   }
   
   .title {
@@ -67,5 +69,17 @@
   
   .subtitle {
     font-size: 1rem;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+  .section {
+    padding: 2rem 0;
+    width: 95%; /* Ensure consistent width */
+  }
+  
+  .container, .fullWidthContainer {
+    padding: 0 0.5rem; /* Further reduced padding */
   }
 }

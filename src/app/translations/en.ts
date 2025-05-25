@@ -30,7 +30,7 @@ export const en: Translations = {
     closeImage: "Close image"
   },
   footer: {
-    disclaimer: "© 2025 Ezequiel Garibotto. All rights reserved.",
+    disclaimer: "© 2025 Ezequiel Garibotto.",
     githubLink: "GitHub repo"
   },
   aboutMe: {
