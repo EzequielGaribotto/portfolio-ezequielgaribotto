@@ -91,7 +91,7 @@ const Header: React.FC = () => {
           <ul className={styles.navList}>
             <li className={styles.navItem}>
               <a 
-                href="javascript:void(0)" 
+                href="#profile" // Replace javascript:void(0) with actual anchor
                 onClick={scrollToSection('profile')}
                 className={activeSection === 'profile' ? styles.active : ''}
               >
@@ -100,7 +100,7 @@ const Header: React.FC = () => {
             </li>
             <li className={styles.navItem}>
               <a 
-                href="javascript:void(0)" 
+                href="#projects" // Replace javascript:void(0) with actual anchor
                 onClick={scrollToSection('projects')}
                 className={activeSection === 'projects' ? styles.active : ''}
               >
@@ -109,7 +109,7 @@ const Header: React.FC = () => {
             </li>
             <li className={styles.navItem}>
               <a 
-                href="javascript:void(0)" 
+                href="#experience" // Replace javascript:void(0) with actual anchor
                 onClick={scrollToSection('experience')}
                 className={activeSection === 'experience' ? styles.active : ''}
               >
@@ -118,7 +118,7 @@ const Header: React.FC = () => {
             </li>
             <li className={styles.navItem}>
               <a 
-                href="javascript:void(0)" 
+                href="#training" // Replace javascript:void(0) with actual anchor
                 onClick={scrollToSection('training')}
                 className={activeSection === 'training' ? styles.active : ''}
               >

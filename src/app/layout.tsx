@@ -3,7 +3,8 @@ import { TranslationProvider } from "../context/TranslationContext";
 import Header from "../components/header/Header";
 import Footer from "../components/section/footer/Footer";
 import { Metadata } from 'next';
-import translations from '../app/translations'; // Updated import path
+import translations from '../app/translations';
+import Script from 'next/script';
 
 // Generate metadata with translations
 export function generateMetadata(): Metadata {
@@ -29,6 +30,21 @@ export function generateMetadata(): Metadata {
         { url: `${root}/android-chrome-512x512.png`, sizes: '512x512', type: 'image/png' },
       ],
     },
+    // Add Content Security Policy as metadata
+    other: {
+      'Content-Security-Policy': 
+        "default-src 'self'; " +
+        "script-src 'self' 'unsafe-inline' 'unsafe-eval'; " +
+        "style-src 'self' 'unsafe-inline'; " +
+        "img-src 'self' data: blob: https:; " +
+        "font-src 'self'; " +
+        "connect-src 'self'; " +
+        "frame-src 'self' blob: data:; " +  // Added blob: and data: to allow PDF viewing
+        "object-src 'self'; " +  // Changed from 'none' to 'self' to allow PDFs
+        "base-uri 'self'; " +
+        "form-action 'self'; " +
+        "frame-ancestors 'self';"
+    }
   };
 }
 
@@ -38,36 +54,34 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang={initialLocale} suppressHydrationWarning={true}>
       <head>
-        {/* Preload script to prevent theme flashing */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  const savedTheme = localStorage.getItem('theme');
-                  if (savedTheme) {
-                    document.documentElement.dataset.theme = savedTheme;
-                    document.querySelector('meta[name="color-scheme"]')?.setAttribute(
-                      'content', 
-                      savedTheme === 'dark' ? 'dark' : 'light'
-                    );
-                  } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                    document.documentElement.dataset.theme = 'dark';
-                    document.querySelector('meta[name="color-scheme"]')?.setAttribute('content', 'dark');
-                  }
-                } catch (e) {
-                  console.error('Failed to apply theme:', e);
+        {/* Replace dangerouslySetInnerHTML with Next.js Script component */}
+        <Script id="theme-script" strategy="beforeInteractive">
+          {`
+            (function() {
+              try {
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme) {
+                  document.documentElement.dataset.theme = savedTheme;
+                  document.querySelector('meta[name="color-scheme"]')?.setAttribute(
+                    'content', 
+                    savedTheme === 'dark' ? 'dark' : 'light'
+                  );
+                } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                  document.documentElement.dataset.theme = 'dark';
+                  document.querySelector('meta[name="color-scheme"]')?.setAttribute('content', 'dark');
                 }
-              })();
-            `,
-          }}
-        />
+              } catch (e) {
+                console.error('Failed to apply theme:', e);
+              }
+            })();
+          `}
+        </Script>
       </head>
       <body className="antialiased">
         <TranslationProvider initialLocale={initialLocale}>
           <Header />
           <main style={{ 
-            paddingTop: "100px", /* Reduced from 120px for mobile */
+            paddingTop: "100px",
             width: "100%"
           }}>{children}</main>
           <Footer />
