@@ -69,6 +69,12 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
     border: '2px solid',
     borderColor: buttonBorderColor,
     borderRadius: '9999px',
+    transition: 'border-color 0.2s ease, color 0.2s ease',
+  };
+
+  const buttonHoverStyle = {
+    color: ('var(--primary)'),
+    borderColor: ('var(--primary)'),
   };
 
   const dropdownStyle = {
@@ -94,6 +100,13 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
         onClick={() => setIsOpen(!isOpen)}
         className="w-auto px-5 py-2.5 font-semibold rounded-full flex items-center justify-center shadow-sm hover:shadow-md"
         style={buttonStyle}
+        onMouseOver={(e) => {
+          Object.assign(e.currentTarget.style, buttonHoverStyle);
+        }}
+        onMouseOut={(e) => {
+          e.currentTarget.style.color = buttonTextColor;
+          e.currentTarget.style.borderColor = buttonBorderColor;
+        }}
       >
         <FaFileDownload className="mr-2" />
         {t("cv.download")}

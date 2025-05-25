@@ -86,7 +86,7 @@
 }
 
 .navItem a.active {
-  color: var(--primary);
+  color: var(--navigation-current);
   font-weight: 600;
 }
 
@@ -98,7 +98,7 @@
   transform: translateX(-50%);
   width: 20px;
   height: 3px;
-  background: var(--primary);
+  background: var(--navigation-current);
   border-radius: 2px;
 }
 

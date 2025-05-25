@@ -37,7 +37,7 @@
   font-size: 2.25rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  color: var(--mode-text, #000000);
+  color: var(--name);
 }
 
 .description {
@@ -45,7 +45,10 @@
   margin-bottom: 1.5rem;
   text-align: center;
   color: var(--mode-desc, #4b5563);
-  max-width: min(100%, 30ch);
+  max-width: min(100%, 32ch); /* Increased from 30ch to accommodate the text */
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
 }
 
 .buttonSection {

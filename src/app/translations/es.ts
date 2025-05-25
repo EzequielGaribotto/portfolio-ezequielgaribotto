@@ -35,7 +35,7 @@ export const es: Translations = {
   },
   aboutMe: {
     title: "Ezequiel Garibotto",
-    description: "Desarrollador de software con experiencia en desarrollo móvil, web y servicios cloud.",
+    description: "Desarrollador de aplicaciones multiplataforma | Desarrollador de software Junior",
     photoAlt: "Foto de Ezequiel Garibotto"
   },
   cv: {

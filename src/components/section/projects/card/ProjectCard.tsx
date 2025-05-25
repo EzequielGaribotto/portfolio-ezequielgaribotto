@@ -75,7 +75,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         className="project-card bg-secondary text-foreground border border-secondary-hover rounded-lg shadow-md p-4 hover:shadow-lg"
       >
         <div onClick={handleTextClick}>
-          <h3 className="project-title text-lg font-bold text-foreground">
+          <h3 className="project-title text-lg font-bold" style={{ color: 'var(--project-title)' }}>
             {project.title}
           </h3>
           <p className="project-description text-sm mt-2 text-foreground">

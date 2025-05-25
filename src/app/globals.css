@@ -22,15 +22,19 @@
   --background-end-rgb: 230, 238, 255;
   
   --foreground: #1a1a1a;
-  --primary: #0070f3;
+  --primary: #1f62a0; /* Changed from #0070f3 to #caa550 */
   --black: #000000;
-  --primary-hover: #0056b3;
+  --primary-hover: #1f62a0; /* Darker variant of #caa550 */
   --secondary: #e2e8f0;
   --secondary-hover: #cbd5e1;
   --button-bg: var(--black);
   --button-text: #ffffff;
-  --link: #0070f3;
-  --link-hover: #0056b3;
+  --link: #1f62a0; /* Changed from #0070f3 to #caa550 */
+  --link-hover: #0056b3; /* Changed from #0056b3 to #b89040 */
+
+  --name: #1f62a0;
+  --project-title: #1f62a0;
+  --navigation-current: #1f62a0;
   
   /* RGB versions for transparency */
   --foreground-rgb: 26, 26, 26;
@@ -44,10 +48,10 @@
   
   /* Tech tag specific variables for light mode */
   --tech-bg: #e9f0f8;
-  --tech-border: #0070f3;
+  --tech-border: #1f62a0;
   --tech-text: #1a1a1a;
   --tech-hover-bg: #d1e2f5;
-  --tech-hover-border: #0056b3;
+  --tech-hover-border: #0070f3;
 }
 
 /* Dark Mode Variables */
@@ -60,11 +64,13 @@
   /* Main background now uses a gradient */
   --background: linear-gradient(135deg, var(--gradient-primary) 0%, var(--gradient-secondary) 100%);
   --foreground: #f5f5f5;
-  --primary: #a5a9ad;
-  --primary-hover: #81bfc7;
+  --primary: #caa550; /* Changed from #a5a9ad to #caa550 */
+  --primary-hover: #ddb968; /* Lighter variant of #caa550 for dark mode */
   --secondary: #2d3748;
   --secondary-hover: #4a5568;
-  
+  --name: #caa550;
+  --project-title: #caa550;
+  --navigation-current: #caa550;
   /* RGB versions for transparency */
   --foreground-rgb: 245, 245, 245;
   --background-start-rgb: 19, 21, 26;
@@ -74,8 +80,8 @@
   /* Text colors for dark mode */
   --mode-text: #ffffff;
   --mode-desc: #e5e7eb;
-  --link: #81bfc7;
-  --link-hover: #a0aec0;
+  --link: #caa550; /* Changed from #81bfc7 to #caa550 */
+  --link-hover: #ddb968; /* Changed from #a0aec0 to #ddb968 */
   /* Tech tag specific variables for dark mode */
   --tech-bg: rgba(76, 152, 175, 0.15);
   --tech-border: rgba(76, 152, 175, 0.6);

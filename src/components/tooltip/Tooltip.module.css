@@ -4,18 +4,24 @@
 }
 
 .tooltip {
-  position: absolute; /* Changed from absolute to fixed for dropdowns */
+  position: absolute;
   background-color: rgba(0, 0, 0, 0.8);
   color: white;
   padding: 5px 10px;
   border-radius: 6px;
   font-size: 0.75rem;
   white-space: nowrap;
-  z-index: 1000; /* Increased z-index to be higher than dropdown */
+  z-index: 1000;
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.3s;
   animation: fadeIn 0.3s forwards;
+  border: 1px solid transparent;
+}
+
+.tooltip:hover {
+  border-color: #caa550; /* Added gold border on tooltip hover */
+  box-shadow: 0 0 5px rgba(202, 165, 80, 0.5); /* Subtle gold glow */
 }
 
 @keyframes fadeIn {
