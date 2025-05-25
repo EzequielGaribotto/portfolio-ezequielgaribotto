@@ -88,7 +88,6 @@ export const baseTranslations = {
             period: "",
             location: "",
             description: "",
-            technologies: [] as string[]
         },
         telus: {
             company: "",
@@ -96,7 +95,6 @@ export const baseTranslations = {
             period: "",
             location: "",
             description: "",
-            technologies: [] as string[]
         }
     },
     training: {
@@ -107,7 +105,6 @@ export const baseTranslations = {
             period: "",
             location: "",
             description: "",
-            technologies: [] as string[]
         },
         upf: {
             institution: "",
@@ -115,7 +112,6 @@ export const baseTranslations = {
             period: "",
             location: "",
             description: "",
-            technologies: [] as string[]
         },
         rb4: {
             institution: "",
@@ -123,7 +119,6 @@ export const baseTranslations = {
             period: "",
             location: "",
             description: "",
-            technologies: [] as string[]
         }
     },
     dates: {} as Record<string, string>,

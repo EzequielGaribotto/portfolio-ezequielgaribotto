@@ -55,6 +55,7 @@ const TrainingSection: React.FC = () => {
       id="training"
       title={t("training.title")}
       titleAlign="center"
+      maxWidth="1200px" // Match projects section width
     >
       <div className={styles.trainingList}>
         {trainings.map((training) => (
@@ -69,7 +70,7 @@ const TrainingSection: React.FC = () => {
                   className={styles.companyLogo}
                 />
               )}
-              <div>
+              <div style={{ textAlign: 'left', width: '100%' }}>
                 <h3 className={styles.company}>
                   {training.institutionUrl ? (
                     <a

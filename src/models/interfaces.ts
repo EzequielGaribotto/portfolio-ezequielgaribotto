@@ -45,4 +45,5 @@ export interface SectionProps {
   fullWidth?: boolean;
   backgroundColor?: string;
   titleAlign?: 'left' | 'center' | 'right';
+  maxWidth?: string;  // Added new prop for maxWidth
 }

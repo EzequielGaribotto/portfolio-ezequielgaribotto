@@ -20,7 +20,7 @@
 
 .trainingHeader {
   display: flex;
-  align-items: center;
+  align-items: flex-start; /* Changed from center to flex-start */
   gap: 1rem;
   margin-bottom: 1rem;
 }
@@ -36,6 +36,7 @@
   font-size: 1.5rem;
   font-weight: 600;
   margin: 0 0 0.25rem 0;
+  text-align: left; /* Explicitly set to left alignment */
 }
 
 .company a {
@@ -54,6 +55,7 @@
   font-weight: 500;
   margin: 0;
   color: var(--mode-text);
+  text-align: left; /* Explicitly set to left alignment */
 }
 
 .metaInfo {

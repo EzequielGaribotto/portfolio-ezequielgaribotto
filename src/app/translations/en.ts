@@ -88,7 +88,6 @@ export const en: Translations = {
                    "— Integrated API calls (Swagger) in collaboration with the back-end team.\n"+
                    "— Coordinated the iOS version with an international team in India.",
       location: "Spain · Hybrid",
-      technologies: ["Android", "XML", "API Integration", "Gradle", "AI/ML Integration", "Front-End", "Data Binding", "Android Jetpack", "Retrofit", "Kotlin DSL", "LiveData", "Android SDK", "Git"],
     },
     telus: {
       company: "TELUS Digital",
@@ -96,13 +95,6 @@ export const en: Translations = {
       period: "July 2023 - January 2025",
       description: "Classified, evaluated, and organized searches (queries), audio, video, images, and data of all kinds using professional English, general culture, and digital competence.",
       location: "Spain · Fully Remote",
-      technologies: [
-        "English",
-        "JSON",
-        "Data Analysis",
-        "Data Classification",
-        "Digital Competence",
-      ],
     },
   },
   training: {
@@ -112,8 +104,13 @@ export const en: Translations = {
       course: "Cross-Platform Application Development",
       period: "2023 - 2025",
       location: "Nou Barris, Barcelona, Spain",
-      description: "Higher degree in cross-platform mobile and web application development, focusing on modern technologies and agile practices.",
-      technologies: ["Java", "Kotlin", "Python", "Android", "React", "Node.js", "AWS", "Cloud", "SQL", "NoSQL", "Git", "Docker", "CI/CD", "Agile", "Scrum"]
+      description: "Higher degree in cross-platform mobile and web application development, focusing on modern technologies and agile practices.\n\n" +
+        "— Kotlin, Jetpack Compose / XML, Retrofit for Android development\n" +
+        "— Machine Learning, Web Scraping, Sentiment Analysis, Classification, Decision and Prediction Algorithms\n" +
+        "— SQL and NoSQL database management including PostgreSQL, MongoDB and Firebase\n" +
+        "— Client-server communications with Ktor, file processing, data access\n" +
+        "— Participation in competitive programming contests using Java and Kotlin\n\n" +
+        "Grade: 9.01",
     },
     upf: {
       institution: "Universitat Pompeu Fabra (UPF)",
@@ -121,7 +118,6 @@ export const en: Translations = {
       period: "2021 - 2022 (abandoned studies)",
       location: "Barcelona, Spain",
       description: "Degree in engineering in audiovisual systems with a focus on theoretical and practical foundations of computer science, including programming, algorithms, and data structures.",
-      technologies: ["Python", "C++", "MatLab", "Processing", "Collab", "OOP", "Cisco Packet Tracer", "Assembly"]
     },
     rb4: {
       institution: "Ramón Berenguer IV (RB4)",
@@ -129,7 +125,6 @@ export const en: Translations = {
       period: "2019-2021",
       location: "Santa Coloma de Gramenet, Spain",
       description: "Baccalaureate with a focus on science and technology, preparing for higher studies in engineering and software development.",
-      technologies: ["Excel", "Python", "Scratch"]
     }
   },
   dates: {

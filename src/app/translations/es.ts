@@ -88,7 +88,6 @@ export const es: Translations = {
                   "— Integración de llamadas de la API (Swagger) en colaboración con el equipo de back-end.\n"+
                   "— Coordinación de la versión iOS con un equipo internacional en India.",
       location: "España · Híbrido",
-      technologies: ["Android", "XML", "API Integration", "Gradle", "AI/ML Integration", "Front-End", "Data Binding", "Android Jetpack", "Retrofit", "Kotlin DSL", "LiveData", "Android SDK", "Git"],
     },
     telus: {
       company: "TELUS Digital",
@@ -96,13 +95,6 @@ export const es: Translations = {
       period: "Julio 2023 - Enero 2025",
       description: "Clasificar, evaluar, describir y ordenar búsquedas (queries), audio, video, imágenes y datos de todo tipo, usando un inglés profesional, cultura general y competencia digital.",
       location: "España · Totalmente Remoto",
-      technologies: [
-        "English",
-        "JSON",
-        "Data Analysis",
-        "Data Classification",
-        "Digital Competence",
-      ],
     },
   },
   training: {
@@ -112,8 +104,13 @@ export const es: Translations = {
       course: "Desarrollo de Aplicaciones Multiplataforma (DAM)",
       period: "2023 - 2025",
       location: "Nou Barris, Barcelona, España",
-      description: "Grado superior de desarrollo de aplicaciones móviles y web, con énfasis en tecnologías modernas y metodología Agile.",
-      technologies: ["Java", "Kotlin", "Python", "Android", "React", "Node.js", "AWS", "Cloud", "SQL", "NoSQL", "Git", "Docker", "CI/CD", "Agile", "Scrum"]
+      description: "Grado superior de desarrollo de aplicaciones móviles y web, con énfasis en tecnologías modernas y metodología Agile y Scrum.\n\n" +
+        "— Kotlin, Jetpack Compose / XML, Retrofit, para desarrollo Android\n" +
+        "— Machine Learning, Web Scraping, Sentiment Analysis, Algoritmos de Clasificación, Decisión y Predicción\n" +
+        "— Gestión de bases de datos SQL y NoSQL como PostgreSQL, MongoDB y Firebase\n" +
+        "— Comunicaciones cliente-servidor con Ktor, lectura de ficheros, acceso a datos\n" +
+        "— Participación en concursos de programación competitiva, usando Java y Kotlin\n\n" +
+        "Nota: 9.01",
     },
     upf: {
       institution: "Universitat Pompeu Fabra (UPF)",
@@ -121,7 +118,6 @@ export const es: Translations = {
       period: "2021 - 2022 (estudios abandonados)",
       location: "Barcelona, España",
       description: "Grado en ingeniería en sistemas audiovisuales con enfoque en fundamentos teóricos y prácticos de la informática, incluyendo programación, algoritmos y estructuras de datos.",
-      technologies: ["Python", "C++", "MatLab", "Processing", "Collab", "OOP", "Cisco Packet Tracer", "Assembly"]
     },
     rb4: {
       institution: "Ramón Berenguer IV (RB4)",
@@ -129,7 +125,6 @@ export const es: Translations = {
       period: "2019-2021",
       location: "Santa Coloma de Gramenet, España",
       description: "Bachillerato con enfoque en ciencias y tecnología, preparando para estudios superiores en ingeniería y desarrollo de software.",
-      technologies: ["Excel", "Python", "Scratch"]
     }
   },
   dates: {
