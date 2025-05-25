@@ -1,20 +1,63 @@
 "use client";
 
 import { useTranslation } from "../../../context/TranslationContext";
-import ClickableButton from "../../button/ClickableButton";
+import { FaGithub } from "react-icons/fa";
+import styles from "./Footer.module.css";
+import { useEffect, useState } from "react";
 
 export default function Footer() {
-  const { t } = useTranslation();
+  const { t, theme } = useTranslation();
+  const [iconSize, setIconSize] = useState(24);
+  
+  // Define styles to match header
+  const footerContentStyle = {
+    backgroundColor: theme === 'dark' 
+      ? 'rgba(45, 55, 72, 0.5)'
+      : 'rgba(226, 232, 240, 0.5)',
+    backdropFilter: 'blur(10px)',
+    WebkitBackdropFilter: 'blur(10px)', // For Safari
+    border: `1px solid ${theme === 'dark' 
+      ? 'rgba(255, 255, 255, 0.2)'
+      : 'rgba(0, 0, 0, 0.2)'}`
+  };
+
+  // Update icon size based on screen width
+  useEffect(() => {
+    const updateIconSize = () => {
+      if (window.innerWidth <= 480) {
+        setIconSize(18);
+      } else if (window.innerWidth <= 768) {
+        setIconSize(20);
+      } else {
+        setIconSize(24);
+      }
+    };
+
+    // Set initial size
+    updateIconSize();
+
+    // Update size on resize
+    window.addEventListener("resize", updateIconSize);
+    return () => window.removeEventListener("resize", updateIconSize);
+  }, []);
 
   return (
-    <footer className="w-full bg-secondary text-foreground py-4 px-6 flex justify-between items-center transition">
-      <span>{t("footer.disclaimer")}</span>
-      <ClickableButton
-        href="https://github.com/EzequielGaribotto/portfolio-ezequielgaribotto"
-        className="text-primary hover:text-primary-hover underline hover:underline-offset-4"
+    <footer className="w-full py-3 px-4 flex justify-center">
+      <div 
+        className={styles.footerContent} 
+        style={footerContentStyle}
       >
-        {t("footer.githubLink")}
-      </ClickableButton>
+        <span className={styles.disclaimer}>{t("footer.disclaimer")}</span>
+        <a 
+          href="https://github.com/EzequielGaribotto/portfolio-ezequielgaribotto"
+          className={styles.githubLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub Repository"
+        >
+          <FaGithub size={iconSize} />
+        </a>
+      </div>
     </footer>
   );
 }

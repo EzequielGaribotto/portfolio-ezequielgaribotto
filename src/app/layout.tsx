@@ -18,6 +18,11 @@ export function generateMetadata(): Metadata {
     description: meta.description,
     manifest: `${root}/site.webmanifest`,
     viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no',
+    // Add theme-color for Android navigation bar
+    themeColor: [
+      { media: '(prefers-color-scheme: light)', color: '#f3f4f8' },
+      { media: '(prefers-color-scheme: dark)', color: '#13151a' }
+    ],
     icons: {
       icon: [
         { url: `${root}/favicon.ico` },
@@ -77,12 +82,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           `}
         </Script>
       </head>
-      <body className="antialiased">
+      <body className="antialiased flex flex-col min-h-screen">
         <TranslationProvider initialLocale={initialLocale}>
           <Header />
           <main style={{ 
             paddingTop: "100px",
-            width: "100%"
+            width: "100%",
+            flex: "1 0 auto" // Make main content take available space
           }}>{children}</main>
           <Footer />
         </TranslationProvider>
