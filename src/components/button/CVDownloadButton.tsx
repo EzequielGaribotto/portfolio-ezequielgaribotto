@@ -204,7 +204,6 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
                 </button>
               </div>
               <div className="flex-1 overflow-auto bg-[#3c3c3c]">
-                {/* Replace iframe with object tag for better PDF compatibility */}
                 <object
                   data={previewLang === 'es' 
                     ? '/cv/CV_ES_EzequielGaribotto.pdf' 
@@ -214,7 +213,7 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
                   style={{ border: 'none', margin: 0, padding: 0 }}
                 >
                   <div className="flex flex-col items-center justify-center h-full text-white">
-                    <p className="mb-4">Unable to display PDF file.</p>
+                    <p className="mb-4">{t("cv.unableToDisplay")}</p>
                     <a 
                       href={previewLang === 'es' 
                         ? '/cv/CV_ES_EzequielGaribotto.pdf' 
@@ -222,7 +221,7 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
                       download
                       className="px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded-md"
                     >
-                      Download Instead
+                      {t("cv.downloadInstead")}
                     </a>
                   </div>
                 </object>

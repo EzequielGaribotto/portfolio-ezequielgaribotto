@@ -42,7 +42,9 @@ export const baseTranslations = {
         download: "",
         spanish: "",
         english: "",
-        preview: "" // Add new translation key for preview
+        preview: "",
+        unableToDisplay: "", // New translation key
+        downloadInstead: ""  // New translation key
     },
     // Projects section translations
     projects: {

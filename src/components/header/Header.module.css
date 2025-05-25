@@ -111,6 +111,33 @@
   flex-shrink: 0;
 }
 
+/* Improved responsive styles for medium screens */
+@media (max-width: 930px) and (min-width: 769px) {
+  .headerContent {
+    padding: 8px 15px;
+    width: 98%;
+  }
+  
+  .logo {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+  }
+  
+  .navList {
+    gap: 15px;
+  }
+  
+  .navItem a {
+    padding: 6px 8px;
+    font-size: 0.85rem;
+  }
+  
+  .controls {
+    gap: 8px;
+  }
+}
+
 /* Mobile responsive styles */
 @media (max-width: 768px) {
   .header {

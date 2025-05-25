@@ -35,14 +35,16 @@ export const en: Translations = {
   },
   aboutMe: {
     title: "Ezequiel Garibotto",
-    description: "Cross platform app developer | Junior software developer",
+    description: "Multiplatform app developer | Junior software developer",
     photoAlt: "Photo of Ezequiel Garibotto"
   },
   cv: {
     download: "Download CV",
     spanish: "Spanish CV",
     english: "English CV",
-    preview: "Preview CV"
+    preview: "Preview CV",
+    unableToDisplay: "Unable to display PDF file.",
+    downloadInstead: "Download Instead"
   },
   projects: {
     title: "Projects",

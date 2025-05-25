@@ -1,7 +1,7 @@
 "use client";
 
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "../../context/TranslationContext";
-import { useEffect, useState } from "react";
 
 export default function LanguageSwitcher() {
   const { locale, changeLocale } = useTranslation();
@@ -27,48 +27,19 @@ export default function LanguageSwitcher() {
     return () => window.removeEventListener("resize", updateFontSize);
   }, []);
 
-  const handleLocaleChange = (newLocale: string) => {
-    if (locale !== newLocale) {
-      changeLocale(newLocale);
-    }
+  const toggleLanguage = () => {
+    const newLocale = locale === "en" ? "es" : "en";
+    changeLocale(newLocale);
   };
-
-  // Style for the language switcher container
-  const containerStyle = {
-    display: "flex",
-    gap: window.innerWidth <= 480 ? "4px" : "8px",
-    alignItems: "center",
-  };
-
-  // Style for the language buttons
-  const buttonStyle = (isActive: boolean) => ({
-    fontSize: fontSize,
-    fontWeight: isActive ? "600" : "400",
-    opacity: isActive ? "1" : "0.7",
-    padding: window.innerWidth <= 480 ? "2px 4px" : "4px 6px",
-    background: "transparent",
-    border: "none",
-    cursor: isActive ? "default" : "pointer",
-    color: "var(--foreground)",
-  });
 
   return (
-    <div style={containerStyle}>
-      <button
-        onClick={() => handleLocaleChange("en")}
-        disabled={locale === "en"}
-        style={buttonStyle(locale === "en")}
-      >
-        English
-      </button>
-      <span style={{ opacity: 0.5, fontSize }}>|</span>
-      <button
-        onClick={() => handleLocaleChange("es")}
-        disabled={locale === "es"}
-        style={buttonStyle(locale === "es")}
-      >
-        Español
-      </button>
-    </div>
+    <button
+      onClick={toggleLanguage}
+      className="text-sm font-medium hover:opacity-80 transition-opacity"
+      aria-label={locale === "en" ? "Switch to Spanish" : "Switch to English"}
+      style={{ fontSize: fontSize }}
+    >
+      {locale === "en" ? "EN | ES" : "ES | EN"}
+    </button>
   );
 }
