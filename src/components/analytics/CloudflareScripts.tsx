@@ -6,7 +6,7 @@ import Script from 'next/script';
 export default function CloudflareScripts() {
   // Handle and suppress Cloudflare script errors
   useEffect(() => {
-    // Create a function to intercept and handle 404 errors for Cloudflare scripts
+    // Create a function to intercept and handle network errors for Cloudflare scripts
     const originalFetch = window.fetch;
     window.fetch = async function(input, init) {
       // Convert input to string if it's a Request object
@@ -22,13 +22,19 @@ export default function CloudflareScripts() {
         });
       }
       
-      // In production, allow normal fetch but catch errors
-      if ((url.includes('cloudflare') && url.includes('.js')) || 
-          url.includes('/cdn-cgi/speculation')) {
+      // Handle Cloudflare analytics endpoints and network errors
+      if ((url.includes('cloudflareinsights.com') || url.includes('/cdn-cgi/')) && 
+          (url.includes('.js') || url.includes('/rum'))) {
         try {
-          return await originalFetch(input, init);
-        } catch {
-          // Return empty response to avoid console errors
+          const response = await originalFetch(input, init);
+          return response;
+        } catch (error) {
+          // Silently handle network errors, CORS issues, or connectivity problems
+          if (error instanceof Error) {
+            console.debug('Analytics request failed (this is normal if offline):', error.message);
+          } else {
+            console.debug('Analytics request failed (this is normal if offline):', error);
+          }
           return new Response('', {
             status: 200,
             headers: { 'Content-Type': 'application/javascript' }
@@ -39,17 +45,26 @@ export default function CloudflareScripts() {
       // Pass through all other requests
       return originalFetch(input, init);
     };
+
+    // Listen for online/offline events to provide user feedback
+    const handleOnlineStatus = () => {
+      if (!navigator.onLine && process.env.NODE_ENV === 'development') {
+        console.log('🔌 Currently offline - analytics will resume when connection is restored');
+      }
+    };
+
+    window.addEventListener('online', handleOnlineStatus);
+    window.addEventListener('offline', handleOnlineStatus);
     
-    // For development only - Check if analytics is likely blocked
+    // For development only - Check if analytics is likely blocked or network issues
     if (process.env.NODE_ENV === 'development') {
-      // Create a test element to detect if images from Cloudflare domains are blocked
-      const testImg = document.createElement('img');
-      testImg.style.display = 'none';
-      testImg.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='; // 1x1 transparent gif
-      testImg.setAttribute('data-cf-test', 'true');
-      document.body.appendChild(testImg);
-      
       setTimeout(() => {
+        // Check network status first
+        if (!navigator.onLine) {
+          console.log('🔌 Currently offline - analytics disabled');
+          return;
+        }
+
         // Check if our Cloudflare analytics is likely blocked
         const cfScript = document.querySelector('script[src*="cloudflareinsights"]');
         const hasAdBlocker = !cfScript || typeof window.__cfBeacon === 'undefined';
@@ -57,19 +72,16 @@ export default function CloudflareScripts() {
         if (hasAdBlocker) {
           console.log('ℹ️ Analytics may be blocked by an ad blocker - this is normal and won\'t affect site functionality');
         } else {
-          console.log('✅ Analytics working properly');
-        }
-        
-        // Clean up test element
-        if (testImg.parentNode) {
-          document.body.removeChild(testImg);
+          console.log('✅ Analytics script loaded successfully');
         }
       }, 2000);
     }
     
     return () => {
-      // Restore original fetch when component unmounts
+      // Restore original fetch and remove event listeners when component unmounts
       window.fetch = originalFetch;
+      window.removeEventListener('online', handleOnlineStatus);
+      window.removeEventListener('offline', handleOnlineStatus);
     };
   }, []);
 
@@ -99,6 +111,10 @@ export default function CloudflareScripts() {
         strategy="afterInteractive"
         src='https://static.cloudflareinsights.com/beacon.min.js' 
         data-cf-beacon={JSON.stringify(getBeaconConfig())}
+        onError={(e) => {
+          // Silently handle script loading errors
+          console.debug('Analytics script failed to load:', e);
+        }}
       />
     </>
   );
