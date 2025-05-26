@@ -6,8 +6,14 @@ import styles from "./Footer.module.css";
 import { useEffect, useState } from "react";
 
 export default function Footer() {
-  const { t, theme } = useTranslation();
+  const { t, theme, isHydrated } = useTranslation();
   const [iconSize, setIconSize] = useState(24);
+  const [isClient, setIsClient] = useState(false);
+  
+  // Set isClient to true when component mounts on client side
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
   
   // Define styles to match header
   const footerContentStyle = {
@@ -40,6 +46,16 @@ export default function Footer() {
     window.addEventListener("resize", updateIconSize);
     return () => window.removeEventListener("resize", updateIconSize);
   }, []);
+
+  // Don't render with styles until client-side hydration is complete
+  if (!isClient || !isHydrated) {
+    // Return a placeholder with the same dimensions to prevent layout shift
+    return (
+      <footer className="w-full py-3 px-4 flex justify-center">
+        <div className={styles.footerContent} style={{visibility: 'hidden'}}></div>
+      </footer>
+    );
+  }
 
   return (
     <footer className="w-full py-3 px-4 flex justify-center">

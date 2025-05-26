@@ -6,6 +6,7 @@ import { Metadata, Viewport } from 'next';
 import translations from '../app/translations';
 import Script from 'next/script';
 import ScrollRestorationWrapper from '../components/ScrollRestorationWrapper';
+import HydrationGuard from '../components/HydrationGuard';
 
 // Generate metadata with translations
 export function generateMetadata(): Metadata {
@@ -73,19 +74,45 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Add color-scheme meta tag to help browsers */}
         <meta name="color-scheme" content="dark light" />
         
-        {/* Single theme detection script with Next.js Script - much safer */}
+        {/* Critical script to set theme and locale ASAP */}
         <Script id="theme-script" strategy="beforeInteractive">
           {`
             (function() {
               try {
+                // Prevent any flash by setting a class immediately
+                document.documentElement.classList.add('initializing');
+                
+                // Handle theme
                 const savedTheme = localStorage.getItem('theme');
-                if (savedTheme) {
-                  document.documentElement.dataset.theme = savedTheme;
+                let resolvedTheme;
+                
+                if (savedTheme && (savedTheme.includes('light') || savedTheme.includes('dark'))) {
+                  resolvedTheme = JSON.parse(savedTheme);
                 } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                  document.documentElement.dataset.theme = 'dark';
+                  resolvedTheme = 'dark';
+                } else {
+                  resolvedTheme = 'light';
                 }
+                
+                // Apply theme to document
+                document.documentElement.dataset.theme = resolvedTheme;
+                
+                // Handle locale
+                const savedLocale = localStorage.getItem('locale');
+                let resolvedLocale = 'es'; // Default
+                
+                if (savedLocale && (savedLocale.includes('es') || savedLocale.includes('en'))) {
+                  resolvedLocale = JSON.parse(savedLocale);
+                }
+                
+                // Apply locale to document
+                document.documentElement.setAttribute('lang', resolvedLocale);
+                document.documentElement.dataset.locale = resolvedLocale;
+                
               } catch (e) {
-                console.error('Failed to apply theme:', e);
+                // Fallback to defaults if any error occurs
+                document.documentElement.dataset.theme = 'light';
+                console.error('Failed to apply theme/locale:', e);
               }
             })();
           `}
@@ -93,14 +120,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="antialiased flex flex-col min-h-screen">
         <TranslationProvider initialLocale={initialLocale}>
+          {/* Make ScrollRestorationWrapper the outermost wrapper */}
           <ScrollRestorationWrapper>
-            <Header />
-            <main style={{ 
-              paddingTop: "100px",
-              width: "100%",
-              flex: "1 0 auto" // Make main content take available space
-            }}>{children}</main>
-            <Footer />
+            {/* Apply HydrationGuard within ScrollRestorationWrapper */}
+            <HydrationGuard>
+              <Header />
+              <main style={{ 
+                paddingTop: "100px",
+                width: "100%",
+                flex: "1 0 auto"
+              }}>
+                {children}
+              </main>
+              <Footer />
+            </HydrationGuard>
           </ScrollRestorationWrapper>
         </TranslationProvider>
       </body>

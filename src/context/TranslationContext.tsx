@@ -12,6 +12,7 @@ interface TranslationContextType {
   theme: ThemeType;
   changeTheme: (newTheme: ThemeType) => void;
   pageLoadTime: number | null;
+  isHydrated: boolean;
 }
 
 interface NestedTranslation {
@@ -31,28 +32,66 @@ export const TranslationProvider = ({
   children: React.ReactNode;
   initialLocale?: string;
 }) => {
-  const [locale, setLocale] = useLocalStorage(STORAGE_KEYS.LOCALE, initialLocale);
-  const [theme, setTheme] = useLocalStorage<ThemeType>(STORAGE_KEYS.THEME, THEME.LIGHT);
+  // Add a state to track hydration completion
+  const [isHydrated, setIsHydrated] = useState(false);
+  
+  // Check if theme/locale was set by the script before React hydration
+  const getInitialTheme = (): ThemeType => {
+    if (typeof document !== 'undefined') {
+      const dataTheme = document.documentElement.dataset.theme as ThemeType;
+      if (dataTheme && (dataTheme === THEME.DARK || dataTheme === THEME.LIGHT)) {
+        return dataTheme;
+      }
+    }
+    return THEME.LIGHT;
+  };
+
+  const getInitialLocale = (): string => {
+    if (typeof document !== 'undefined') {
+      const dataLocale = document.documentElement.dataset.locale;
+      if (dataLocale) {
+        return dataLocale;
+      }
+    }
+    return initialLocale;
+  };
+
+  const [locale, setLocale] = useLocalStorage(STORAGE_KEYS.LOCALE, getInitialLocale());
+  const [theme, setTheme] = useLocalStorage<ThemeType>(STORAGE_KEYS.THEME, getInitialTheme());
   const [pageLoadTime, setPageLoadTime] = useState<number | null>(null);
 
+  // Mark hydration as complete after the initial render with a delay to ensure stability
   useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-    setPageLoadTime(Math.round(performance.now()));
-  }, [theme]);
-
-  // Apply theme transition class after initial load - increased delay for better initial rendering
-  useEffect(() => {
-    // Wait longer to ensure initial content is fully rendered before starting transitions
-    const timer = setTimeout(() => {
-      document.documentElement.classList.add('transition-theme');
-    }, 500);
-    
-    return () => clearTimeout(timer);
+    if (typeof window !== 'undefined') {
+      // Longer delay to ensure everything is stable
+      const timer = setTimeout(() => {
+        setIsHydrated(true);
+        setPageLoadTime(Math.round(performance.now()));
+      }, 50);
+      
+      return () => clearTimeout(timer);
+    }
   }, []);
+
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      document.documentElement.setAttribute("data-theme", theme);
+    }
+  }, [theme]);
 
   const changeTheme = (newTheme: ThemeType) => {
     setTheme(newTheme);
-    document.documentElement.setAttribute("data-theme", newTheme);
+    if (typeof document !== 'undefined') {
+      document.documentElement.setAttribute("data-theme", newTheme);
+    }
+  };
+
+  const changeLocale = (newLocale: string) => {
+    setLocale(newLocale);
+    if (typeof document !== 'undefined') {
+      document.documentElement.setAttribute('lang', newLocale);
+      document.documentElement.dataset.locale = newLocale;
+    }
   };
 
   const t = (key: string) => {
@@ -87,7 +126,15 @@ export const TranslationProvider = ({
   };
 
   return (
-    <TranslationContext.Provider value={{ t, locale, changeLocale: setLocale, theme, changeTheme, pageLoadTime }}>
+    <TranslationContext.Provider value={{ 
+      t, 
+      locale, 
+      changeLocale, 
+      theme, 
+      changeTheme, 
+      pageLoadTime, 
+      isHydrated 
+    }}>
       {children}
     </TranslationContext.Provider>
   );

@@ -377,3 +377,45 @@ body {
     var(--background);
   background-blend-mode: overlay;
 }
+
+/* Add these new styles at the end of the file */
+
+/* Initial state - prevent any transitions */
+html.initializing * {
+  transition: none !important;
+  animation: none !important;
+}
+
+/* Only enable transitions after hydration is complete */
+body:not(.client-mounted) * {
+  transition: none !important;
+  animation: none !important;
+}
+
+/* Once hydration is complete, enable smooth transitions */
+body.hydration-complete * {
+  /* Now transitions can occur */
+}
+
+/* Prevent any theme-related flicker by ensuring the body background applies immediately */
+[data-theme="dark"] {
+  background-color: var(--gradient-primary) !important;
+}
+
+[data-theme="light"] {
+  background-color: var(--gradient-primary) !important;
+}
+
+/* Improve fade-in after hydration */
+html.transition-theme {
+  transition: background-color 300ms ease;
+}
+
+body.hydration-complete {
+  animation: fadeIn 300ms ease-in forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0.98; }
+  to { opacity: 1; }
+}

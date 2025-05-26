@@ -8,8 +8,14 @@ import Image from 'next/image';
 import Tooltip from '../tooltip/Tooltip';
 
 const Header: React.FC = () => {
-  const { t, theme } = useTranslation();
+  const { t, theme, isHydrated } = useTranslation();
   const [activeSection, setActiveSection] = useState<string>('');
+  const [isClient, setIsClient] = useState(false);
+  
+  // Set isClient to true when component mounts on client side
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
   
   // Define styles directly in the component
   const headerContentStyle = {
@@ -59,6 +65,12 @@ const Header: React.FC = () => {
     
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Don't render until client-side hydration is complete
+  if (!isClient || !isHydrated) {
+    // Return a placeholder with the same dimensions to prevent layout shift
+    return <header className={styles.header}><div className={styles.headerContent} style={{visibility: 'hidden'}}></div></header>;
+  }
   
   return (
     <header className={styles.header}>
