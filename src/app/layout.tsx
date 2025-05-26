@@ -31,17 +31,17 @@ export function generateMetadata(): Metadata {
         { url: `${root}/android-chrome-512x512.png`, sizes: '512x512', type: 'image/png' },
       ],
     },
-    // Add Content Security Policy as metadata
+    // Update Content Security Policy to include cloudflareinsights.com
     other: {
       'Content-Security-Policy': 
         "default-src 'self'; " +
-        "script-src 'self' 'unsafe-inline' 'unsafe-eval'; " +
+        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://static.cloudflareinsights.com; " +
         "style-src 'self' 'unsafe-inline'; " +
         "img-src 'self' data: blob: https:; " +
         "font-src 'self'; " +
-        "connect-src 'self'; " +
-        "frame-src 'self' blob: data:; " +  // Added blob: and data: to allow PDF viewing
-        "object-src 'self'; " +  // Changed from 'none' to 'self' to allow PDFs
+        "connect-src 'self' https://cloudflareinsights.com; " + // Add cloudflareinsights.com to connect-src
+        "frame-src 'self' blob: data:; " +
+        "object-src 'self'; " +
         "base-uri 'self'; " +
         "form-action 'self'; " +
         "frame-ancestors 'self';"
