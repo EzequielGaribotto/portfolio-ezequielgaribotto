@@ -1,6 +1,6 @@
 "use client";
 
-import { FaExpand, FaCompress, FaTrophy, FaGooglePlay } from "../../../../utils/icons";
+import { FaExpand, FaCompress, FaTrophy, FaGooglePlay, FaNewspaper, FaFilm, FaCode, FaListAlt } from "../../../../utils/icons";
 import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "../../../../context/TranslationContext";
 import { Project } from "../../../../models/Project";
@@ -12,7 +12,7 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ project }: ProjectCardProps) {
-  const { t, theme } = useTranslation(); // Add theme destructuring here
+  const { t, theme } = useTranslation();
   const fallbackImage = "/images/projects/fallback.webp";
   const [isExpanded, setIsExpanded] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -28,13 +28,24 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     
     if (isExpanded) {
       document.body.style.overflow = 'hidden'; // Prevent scrolling when expanded
+      // Hide header when image is expanded
+      const header = document.querySelector('header');
+      if (header) header.style.display = 'none';
+      
       window.addEventListener('keydown', handleEscape);
     } else {
       document.body.style.overflow = '';
+      // Show header when image is closed
+      const header = document.querySelector('header');
+      if (header) header.style.display = '';
     }
     
     return () => {
       document.body.style.overflow = '';
+      // Ensure header is visible when component unmounts
+      const header = document.querySelector('header');
+      if (header) header.style.display = '';
+      
       window.removeEventListener('keydown', handleEscape);
     };
   }, [isExpanded]);
@@ -68,6 +79,22 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     e.stopPropagation();
   };
 
+  // Function to get the appropriate icon based on project ID
+  const getProjectIcon = () => {
+    switch (project.id) {
+      case 'neutral-news':
+        return <FaNewspaper className="mr-2 text-primary" />;
+      case 'eulix':
+        return <FaFilm className="mr-2 text-primary" />;
+      case 'competitive-programming':
+        return <FaCode className="mr-2 text-primary" />;
+      case 'rick-and-morty-api-list':
+        return <FaListAlt className="mr-2 text-primary" />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <>
       <div 
@@ -75,24 +102,30 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         className="project-card bg-secondary text-foreground border border-secondary-hover rounded-lg shadow-md p-4 hover:shadow-lg"
         style={{ 
           opacity: 0.9, 
-          transition: "opacity 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease",
-          transform: "scale(1.0)" 
+          // Use CSS variables for consistent transition timing
+          transition: "opacity var(--theme-transition-duration) var(--theme-transition-timing), box-shadow var(--theme-transition-duration) var(--theme-transition-timing), border-color var(--theme-transition-duration) var(--theme-transition-timing)",
         }}
         onMouseOver={(e) => { 
           e.currentTarget.style.opacity = "1";
-          e.currentTarget.style.transform = "scale(1.02)";
-          e.currentTarget.style.boxShadow = "0 8px 16px rgba(0, 0, 0, 0.2)";
+          // Removed transform scale
+          e.currentTarget.style.boxShadow = "0 10px 25px rgba(0, 0, 0, 0.25)"; // Enhanced shadow
           e.currentTarget.style.borderColor = "var(--primary)";
         }}
         onMouseOut={(e) => { 
           e.currentTarget.style.opacity = "0.9";
-          e.currentTarget.style.transform = "scale(1.0)";
+          // Removed transform scale reset
           e.currentTarget.style.boxShadow = "";
           e.currentTarget.style.borderColor = "";
         }}
       >
         <div onClick={handleTextClick}>
-          <h3 className="project-title text-lg font-bold" style={{ color: 'var(--project-title)' }}>
+          <h3 className="project-title text-lg font-bold flex items-center" 
+              style={{ 
+                color: 'var(--project-title)', 
+                textAlign: 'left',
+                justifyContent: 'flex-start'
+              }}>
+            {getProjectIcon()}
             {project.title}
           </h3>
           <p className="project-description text-sm mt-2 text-foreground">
@@ -100,8 +133,10 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           </p>
 
           {project.startDate && (
-            <div className="project-date text-xs text-foreground/70 font-semibold mb-2">
-              {project.startDate} {project.endDate ? `- ${project.endDate}` : `- ${t("projects.current")}`}
+            <div className="project-date text-xs text-foreground/70 mb-2">
+              {project.startDate} {project.endDate ? 
+                `- ${project.endDate}` : 
+                `- ${t("projects.current")}`}
             </div>
           )}
         </div>

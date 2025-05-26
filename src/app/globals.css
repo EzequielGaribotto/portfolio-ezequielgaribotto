@@ -52,6 +52,51 @@
   --tech-text: #1a1a1a;
   --tech-hover-bg: #d1e2f5;
   --tech-hover-border: #0070f3;
+  
+  /* Section padding variables - NEW */
+  --section-padding-horizontal: 2rem;
+  --section-padding-horizontal-mobile: 0;
+  
+  /* Theme transition variables - increased duration for smoother transition */
+  --theme-transition-duration: 500ms;
+  --theme-transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* System preference detection as CSS fallback - applies immediately before JS loads */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    /* Copy all dark mode variables here */
+    --gradient-primary: #13151a;
+    --gradient-secondary: #1a1f2e;
+    --gradient-accent: #202938;
+    --background: linear-gradient(135deg, var(--gradient-primary) 0%, var(--gradient-secondary) 100%);
+    --foreground: #f5f5f5;
+    --primary: #caa550;
+    --primary-hover: #ddb968;
+    --secondary: #2d3748;
+    --secondary-hover: #4a5568;
+    --name: #caa550;
+    --project-title: #caa550;
+    --navigation-current: #caa550;
+    --foreground-rgb: 245, 245, 245;
+    --background-start-rgb: 19, 21, 26;
+    --background-end-rgb: 26, 31, 46;
+    --secondary-rgb: 45, 55, 72;
+    --mode-text: #ffffff;
+    --mode-desc: #e5e7eb;
+    --link: #caa550;
+    --link-hover: #ddb968;
+    --tech-bg: rgba(76, 152, 175, 0.15);
+    --tech-border: rgba(76, 152, 175, 0.6);
+    --tech-text: #f5f5f5;
+    --tech-hover-bg: rgba(76, 152, 175, 0.3);
+    --tech-hover-border: rgba(129, 191, 199, 0.8);
+  }
+  
+  /* This immediately applies dark styling before any JS runs */
+  html:not([data-theme]) {
+    color-scheme: dark;
+  }
 }
 
 /* Dark Mode Variables */
@@ -88,6 +133,10 @@
   --tech-text: #f5f5f5;
   --tech-hover-bg: rgba(76, 152, 175, 0.3);
   --tech-hover-border: rgba(129, 191, 199, 0.8);
+}
+
+[data-theme="light"] {
+  color-scheme: light;
 }
 
 /* Global Styles */
@@ -421,20 +470,22 @@ body.modal-open {
   height: auto;
   position: relative;
   overflow: visible;
-  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease, opacity 0.4s ease;
+  transition: opacity 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease; /* Removed transform from transition */
 }
 
 .project-title {
   font-size: 1.3rem;
   font-weight: bold;
-  margin-top: 0.5rem !important; /* Reduced top margin */
+  margin-top: 0.5rem !important;
   margin-bottom: 0.25rem;
   color: var(--foreground);
-  text-align: center !important; /* Keep title centered */
+  text-align: left !important; /* Changed from center to left */
+  display: flex;
+  align-items: center;
 }
 
 .project-description {
-  font-size: 0.9rem;
+  font-size: 0.9rem; /* Increased from text-sm (0.875rem) to match footer */
   margin-top: 0.5rem;
   color: var(--foreground);
   text-align: left !important; /* Description left-aligned */
@@ -444,31 +495,30 @@ body.modal-open {
   display: block;
   letter-spacing: 0.05em;
   margin-top: 0.25rem;
-  font-size: 0.85rem;
+  font-size: 0.9rem; /* Increased from 0.85rem to match others */
   text-align: end; /* Keep date left-aligned */
-  color: var(--foreground-muted, #666666);
+  color: var(--primary); /* Changed from var(--foreground-muted, #666666) to match experience/training sections */
   line-height: 1.5;
   width: 100%;
   background-color: transparent;
+  font-weight: normal; /* Explicitly set to normal weight */
 }
 
 /* Add styling for the project footer */
 .project-footer {
   display: block;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   text-align: left;
-  color: var(--foreground-muted, #666666);
+  color: var(--primary); /* Already using primary color */
   margin-top: 0.5rem;
   font-style: italic;
   background-color: transparent;
+  font-weight: normal;
 }
 
-[data-theme="dark"] .project-date {
-  color: var(--foreground-muted, #a0a0a0);
-}
-
+/* Ensure dark mode also uses primary color */
 [data-theme="dark"] .project-footer {
-  color: var(--foreground-muted, #a0a0a0);
+  color: var(--primary);
 }
 
 .project-links {
@@ -480,8 +530,8 @@ body.modal-open {
 
 .project-card:hover {
   border-color: var(--primary);
-  transform: scale(1.02);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  /* Removed transform: scale(1.02); */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25); /* Enhanced shadow */
 }
 
 /* Project card image expansion styles */
@@ -584,4 +634,47 @@ body.modal-open {
   background-color: rgba(0, 0, 0, 0.8);
   transform: scale(1.1);
   transition: transform 0.2s ease, background-color 0.2s ease; /* Only transition on hover */
+}
+
+/* Remove the expensive universal transition */
+.transition-theme * {
+  /* Replace with empty ruleset to maintain compatibility with existing code */
+}
+
+/* Apply targeted transitions with smoother parameters */
+
+/* Main container elements */
+body,
+main,
+.section,
+.profile-section,
+.experience-section,
+.projects-section,
+header,
+footer {
+  transition: background var(--theme-transition-duration) var(--theme-transition-timing),
+              background-color var(--theme-transition-duration) var(--theme-transition-timing),
+              color var(--theme-transition-duration) var(--theme-transition-timing),
+              border-color var(--theme-transition-duration) var(--theme-transition-timing);
+}
+
+/* Specific UI elements that change with theme */
+.project-card,
+.tech-tag,
+.navigation-link,
+.social-icon,
+button,
+.project-title,
+.project-description,
+.project-date,
+.project-footer {
+  transition: background-color var(--theme-transition-duration) var(--theme-transition-timing),
+              color var(--theme-transition-duration) var(--theme-transition-timing),
+              border-color var(--theme-transition-duration) var(--theme-transition-timing),
+              box-shadow var(--theme-transition-duration) var(--theme-transition-timing);
+}
+
+/* For text elements, only transition color */
+h1, h2, h3, h4, h5, h6, p, span, a {
+  transition: color var(--theme-transition-duration) var(--theme-transition-timing);
 }

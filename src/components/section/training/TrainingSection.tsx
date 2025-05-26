@@ -1,10 +1,11 @@
 "use client";
 import React from "react";
 import Section from "../Section";
-import styles from "./TrainingSection.module.css";
 import { useTranslation } from "../../../context/TranslationContext";
-import Image from 'next/image';
 import { Training } from "../../../models/Training";
+import CardItem from "../../common/CardItem";
+import CardList from "../../common/CardList";
+import styles from "./TrainingSection.module.css";
 
 const TrainingSection: React.FC = () => {
   const { t } = useTranslation();
@@ -54,57 +55,24 @@ const TrainingSection: React.FC = () => {
     <Section
       id="training"
       title={t("training.title")}
-      titleAlign="center"
-      maxWidth="1200px" // Match projects section width
     >
-      <div className={styles.trainingList}>
+      <CardList>
         {trainings.map((training) => (
-          <div key={training.id} className={styles.trainingItem}>
-            <div className={styles.trainingHeader}>
-              {training.imageUrl && (
-                <Image
-                  src={training.imageUrl}
-                  alt={`${training.institution} logo`}
-                  width={60}
-                  height={60}
-                  className={styles.companyLogo}
-                />
-              )}
-              <div style={{ textAlign: 'left', width: '100%' }}>
-                <h3 className={styles.company}>
-                  {training.institutionUrl ? (
-                    <a
-                      href={training.institutionUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {training.institution}
-                    </a>
-                  ) : (
-                    training.institution
-                  )}
-                </h3>
-                <h4 className={styles.position}>{training.course}</h4>
-              </div>
-            </div>
-            <div className={styles.metaInfo}>
-              <p className={styles.period}>{training.period}</p>
-              <p className={styles.location}>{training.location}</p>
-            </div>
-            <div className={styles.description}>
-              {training.description}
-            </div>
-            
-            <div className={styles.technologies}>
-              {training.technologies.map((tech, index) => (
-                <span key={index} className={styles.tech}>
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </div>
+          <CardItem
+            key={training.id}
+            id={training.id}
+            title={training.institution}
+            subtitle={training.course}
+            period={training.period}
+            location={training.location}
+            description={training.description}
+            technologies={training.technologies}
+            imageUrl={training.imageUrl}
+            linkUrl={training.institutionUrl}
+            className={styles.trainingItem}
+          />
         ))}
-      </div>
+      </CardList>
     </Section>
   );
 };

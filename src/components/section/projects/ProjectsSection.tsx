@@ -3,6 +3,7 @@ import LazyProjectCard from "./card/LazyProjectCard";
 import { useTranslation } from "../../../context/TranslationContext";
 import { Project } from "../../../models/Project";
 import styles from './ProjectsSection.module.css';
+import Section from "../Section";
 
 export default function ProjectsSection() {
   const { t } = useTranslation();
@@ -61,15 +62,19 @@ export default function ProjectsSection() {
   ];
 
   return (
-    <section id="projects" className={styles.projectsSection}>
-      <h2 className={styles.sectionTitle}>{t("projects.title")}</h2>
-      <div className={styles.masonryGrid}>
-        {projects.map((project) => (
-          <div key={project.id} className={styles.masonryItem}>
-            <LazyProjectCard project={project} />
-          </div>
-        ))}
+    <Section
+      id="projects"
+      title={t("projects.title")}
+    >
+      <div style={{ width: '100%' }}>
+        <div className={styles.masonryGrid}>
+          {projects.map((project) => (
+            <div key={project.id} className={styles.masonryItem}>
+              <LazyProjectCard project={project} />
+            </div>
+          ))}
+        </div>
       </div>
-    </section>
+    </Section>
   );
 }

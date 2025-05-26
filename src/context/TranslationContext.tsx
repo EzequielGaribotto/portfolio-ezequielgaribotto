@@ -47,6 +47,16 @@ export const TranslationProvider = ({
     setPageLoadTime(Math.round(loadTime));
   }, [initialLocale]);
 
+  // Apply theme transition class after initial load - increased delay for better initial rendering
+  useEffect(() => {
+    // Wait longer to ensure initial content is fully rendered before starting transitions
+    const timer = setTimeout(() => {
+      document.documentElement.classList.add('transition-theme');
+    }, 500);
+    
+    return () => clearTimeout(timer);
+  }, []);
+
   const changeTheme = (newTheme: string) => {
     setTheme(newTheme);
     localStorage.setItem("theme", newTheme);

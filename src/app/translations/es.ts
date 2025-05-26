@@ -44,7 +44,8 @@ export const es: Translations = {
     english: "CV en Inglés",
     preview: "Visualizar CV",
     unableToDisplay: "No se puede mostrar el archivo PDF.",
-    downloadInstead: "Descargar en su lugar"
+    downloadInstead: "Descargar en su lugar",
+    lastUpdated: "Última actualización" // Add this new key
   },
   projects: {
     title: "Proyectos",
@@ -115,7 +116,7 @@ export const es: Translations = {
     upf: {
       institution: "Universitat Pompeu Fabra (UPF)",
       course: "Ingeniería en Sistemas Audiovisuales",
-      period: "2021 - 2022 (estudios abandonados)",
+      period: "2021 - 2022 (formación académica interrumpida)",
       location: "Barcelona, España",
       description: "Grado en ingeniería en sistemas audiovisuales con enfoque en fundamentos teóricos y prácticos de la informática, incluyendo programación, algoritmos y estructuras de datos.",
     },

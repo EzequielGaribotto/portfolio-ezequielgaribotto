@@ -44,7 +44,8 @@ export const en: Translations = {
     english: "English CV",
     preview: "Preview CV",
     unableToDisplay: "Unable to display PDF file.",
-    downloadInstead: "Download Instead"
+    downloadInstead: "Download Instead",
+    lastUpdated: "Last updated" // Add this new key
   },
   projects: {
     title: "Projects",
@@ -115,7 +116,7 @@ export const en: Translations = {
     upf: {
       institution: "Universitat Pompeu Fabra (UPF)",
       course: "Engineering in Audiovisual Systems",
-      period: "2021 - 2022 (abandoned studies)",
+      period: "2021 - 2022 (academic program discontinued)",
       location: "Barcelona, Spain",
       description: "Degree in engineering in audiovisual systems with a focus on theoretical and practical foundations of computer science, including programming, algorithms, and data structures.",
     },

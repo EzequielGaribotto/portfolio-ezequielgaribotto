@@ -44,7 +44,8 @@ export const baseTranslations = {
         english: "",
         preview: "",
         unableToDisplay: "", // New translation key
-        downloadInstead: ""  // New translation key
+        downloadInstead: "", // New translation key
+        lastUpdated: "" // Add missing lastUpdated key to fix TypeScript error
     },
     // Projects section translations
     projects: {

@@ -7,13 +7,12 @@ const Section: React.FC<SectionProps> = ({
   title,
   subtitle,
   children,
-  className = '',
+  className = 'px-0 sm:px-0 md:px-0', 
   fullWidth = false,
   backgroundColor,
-  titleAlign = 'left',
-  maxWidth = "1200px" // Default width value
+  titleAlign = 'center',
+  maxWidth = "1200px"
 }) => {
-  // Only apply custom style if explicitly provided, otherwise use CSS variables
   const style = backgroundColor ? { 
     backgroundColor,
     transition: 'none',
@@ -21,8 +20,10 @@ const Section: React.FC<SectionProps> = ({
   
   const containerStyle = {
     maxWidth: maxWidth,
-    width: '100%', // Ensure width is always 100% of the parent
-    margin: '0 auto', // Center the container
+    width: '100%', 
+    margin: '0 auto',
+    paddingLeft: 0,
+    paddingRight: 0,
   };
   
   return (

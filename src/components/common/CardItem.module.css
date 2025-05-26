@@ -1,71 +1,56 @@
-.trainingList {
-  display: flex;
-  flex-direction: column;
-  gap: 2.5rem;
+.cardItem {
+  padding: 2rem;
+  border-radius: 12px;
+  background-color: var(--secondary);
+  opacity: 0.9;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: none;
 }
 
-.trainingItem {
-  /* Any training-specific styles can go here */
+.cardItem:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  opacity: 1;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
 }
 
-.trainingHeader {
+.cardHeader {
   display: flex;
   align-items: flex-start;
   gap: 1rem;
   margin-bottom: 1rem;
 }
 
-.companyLogo {
+.logo {
   width: 60px;
   height: 60px;
   border-radius: 8px;
   object-fit: cover;
 }
 
-.company {
+.title {
   font-size: 1.5rem;
   font-weight: 600;
   margin: 0 0 0.25rem 0;
   text-align: left;
 }
 
-.company a {
+.title a {
   color: var(--link);
   text-decoration: none;
   transition: none;
 }
 
-.company a:hover {
+.title a:hover {
   color: var(--link-hover);
   text-decoration: underline;
 }
 
-.position {
+.subtitle {
   font-size: 1.2rem;
   font-weight: 500;
   margin: 0;
   color: var(--color-text-secondary);
-  text-align: left;
-}
-
-.metaInfo {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-.period, .location {
-  font-size: 0.9rem;
-  opacity: 0.8;
-  margin: 0;
-  color: var(--primary);
-}
-
-.description {
-  margin-bottom: 1.5rem;
-  line-height: 1.6;
-  white-space: pre-line;
   text-align: left;
 }
 
@@ -93,20 +78,20 @@
 }
 
 @media (max-width: 768px) {
-  .trainingItem {
+  .cardItem {
     padding: 1rem;
     width: 100%;
     margin: 0 auto;
   }
 
-  .trainingHeader {
+  .cardHeader {
     flex-direction: column;
     align-items: flex-start;
   }
 }
 
 @media (max-width: 480px) {
-  .trainingItem {
+  .cardItem {
     padding: 0.75rem;
     border-radius: 8px;
   }

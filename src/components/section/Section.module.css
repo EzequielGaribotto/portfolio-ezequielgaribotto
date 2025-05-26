@@ -9,13 +9,13 @@
 
 .container {
   width: 100%;
-  padding: 0 2rem;
+  padding: 0;  /* Remove default padding, controlled by inline style now */
   box-sizing: border-box;
 }
 
 .fullWidthContainer {
   width: 100%;
-  padding: 0 2rem;
+  padding: 0;  /* Remove default padding, controlled by inline style now */
   box-sizing: border-box;
 }
 
@@ -59,7 +59,7 @@
   }
   
   .container, .fullWidthContainer {
-    padding: 0 0.75rem; /* Reduced from 1rem */
+    padding: 0; /* Remove padding, now controlled by inline style */
     width: 100%;
   }
   
@@ -75,7 +75,8 @@
 /* Extra small screens */
 @media (max-width: 480px) {
   .section {
-    padding: 2rem 0;
+    padding-left: var(--section-padding-horizontal-mobile);
+    padding-right: var(--section-padding-horizontal-mobile);
     width: 95%; /* Ensure consistent width */
   }
   

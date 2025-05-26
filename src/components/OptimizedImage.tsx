@@ -16,6 +16,9 @@ export default function OptimizedImage({
   lowQualitySrc,
   className = "",
   sizes = "(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw",
+  width,
+  height,
+  style,
   ...props
 }: OptimizedImageProps) {
   const [isLoading, setIsLoading] = useState(true);
@@ -25,6 +28,12 @@ export default function OptimizedImage({
     if (imgSrc !== fallbackSrc) {
       setImgSrc(fallbackSrc);
     }
+  };
+
+  // Add default style to maintain aspect ratio
+  const combinedStyle = {
+    height: "auto", // This ensures aspect ratio is maintained
+    ...style
   };
 
   return (
@@ -49,6 +58,9 @@ export default function OptimizedImage({
         } ${className}`}
         onLoad={() => setIsLoading(false)}
         onError={handleError}
+        width={width}
+        height={height}
+        style={combinedStyle}
       />
     </div>
   );

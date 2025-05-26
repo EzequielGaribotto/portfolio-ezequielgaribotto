@@ -2,9 +2,10 @@ import "./globals.css";
 import { TranslationProvider } from "../context/TranslationContext";
 import Header from "../components/header/Header";
 import Footer from "../components/section/footer/Footer";
-import { Metadata } from 'next';
+import { Metadata, Viewport } from 'next';
 import translations from '../app/translations';
 import Script from 'next/script';
+import ScrollRestorationWrapper from '../components/ScrollRestorationWrapper';
 
 // Generate metadata with translations
 export function generateMetadata(): Metadata {
@@ -17,12 +18,6 @@ export function generateMetadata(): Metadata {
     title: meta.title,
     description: meta.description,
     manifest: `${root}/site.webmanifest`,
-    viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no',
-    // Add theme-color for Android navigation bar
-    themeColor: [
-      { media: '(prefers-color-scheme: light)', color: '#f3f4f8' },
-      { media: '(prefers-color-scheme: dark)', color: '#13151a' }
-    ],
     icons: {
       icon: [
         { url: `${root}/favicon.ico` },
@@ -53,13 +48,32 @@ export function generateMetadata(): Metadata {
   };
 }
 
+// Add a new generateViewport function
+export function generateViewport(): Viewport {
+  return {
+    width: 'device-width',
+    initialScale: 1,
+    minimumScale: 1,
+    maximumScale: 5,
+    userScalable: true,
+    // Move themeColor here
+    themeColor: [
+      { media: '(prefers-color-scheme: light)', color: '#f3f4f8' },
+      { media: '(prefers-color-scheme: dark)', color: '#13151a' }
+    ],
+  }
+}
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const initialLocale = "es"; // Default language
 
   return (
     <html lang={initialLocale} suppressHydrationWarning={true}>
       <head>
-        {/* Replace dangerouslySetInnerHTML with Next.js Script component */}
+        {/* Add color-scheme meta tag to help browsers */}
+        <meta name="color-scheme" content="dark light" />
+        
+        {/* Single theme detection script with Next.js Script - much safer */}
         <Script id="theme-script" strategy="beforeInteractive">
           {`
             (function() {
@@ -67,13 +81,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 const savedTheme = localStorage.getItem('theme');
                 if (savedTheme) {
                   document.documentElement.dataset.theme = savedTheme;
-                  document.querySelector('meta[name="color-scheme"]')?.setAttribute(
-                    'content', 
-                    savedTheme === 'dark' ? 'dark' : 'light'
-                  );
                 } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
                   document.documentElement.dataset.theme = 'dark';
-                  document.querySelector('meta[name="color-scheme"]')?.setAttribute('content', 'dark');
                 }
               } catch (e) {
                 console.error('Failed to apply theme:', e);
@@ -84,13 +93,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="antialiased flex flex-col min-h-screen">
         <TranslationProvider initialLocale={initialLocale}>
-          <Header />
-          <main style={{ 
-            paddingTop: "100px",
-            width: "100%",
-            flex: "1 0 auto" // Make main content take available space
-          }}>{children}</main>
-          <Footer />
+          <ScrollRestorationWrapper>
+            <Header />
+            <main style={{ 
+              paddingTop: "100px",
+              width: "100%",
+              flex: "1 0 auto" // Make main content take available space
+            }}>{children}</main>
+            <Footer />
+          </ScrollRestorationWrapper>
         </TranslationProvider>
       </body>
     </html>

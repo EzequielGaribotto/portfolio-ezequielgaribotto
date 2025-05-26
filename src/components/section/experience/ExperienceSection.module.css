@@ -137,11 +137,18 @@
   text-align: left; /* Explicitly set to left alignment */
 }
 
-.metaInfo {
+/* New inline meta info styles */
+.metaInfoInline {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.separator {
+  font-size: 0.8rem;
+  opacity: 0.6;
+  color: var(--primary);
 }
 
 .period, .location {
@@ -216,6 +223,15 @@
   .experienceHeader {
     flex-direction: column;
     align-items: flex-start;
+  }
+  
+  .metaInfoInline {
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+  
+  .separator {
+    display: none; /* Hide separator on small screens */
   }
 }
 

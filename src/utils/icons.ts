@@ -10,7 +10,11 @@ import {
   FaExternalLinkAlt,
   FaCode,
   FaSun,
-  FaMoon
+  FaMoon,
+  FaEnvelope,
+  FaNewspaper,
+  FaFilm,
+  FaListAlt
 } from "react-icons/fa";
 
 // Export all icons for use throughout the application
@@ -30,9 +34,15 @@ export {
   // Social media icons
   FaGithub,
   FaLinkedin,
+  FaEnvelope,
   
   // Development icons
   FaCode,
   FaSun,
-  FaMoon
+  FaMoon,
+  
+  // Content categories
+  FaNewspaper,
+  FaFilm,
+  FaListAlt
 };
