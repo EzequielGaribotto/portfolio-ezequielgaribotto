@@ -147,8 +147,6 @@ body {
 button {
   cursor: pointer;
   font-family: inherit;
-  /* Restore essential button transitions */
-  transition: all 0.2s ease;
 }
 
 /* Header button styles */
@@ -159,8 +157,6 @@ button {
   border-radius: 50%;
   cursor: pointer;
   border: none;
-  /* Force the use of CSS variables with higher specificity */
-  transition: opacity 0.2s ease, background-color 0.2s ease, color 0.2s ease;
 }
 
 .headerbutton:hover {
@@ -244,13 +240,8 @@ footer a:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-.social-icon svg,
-.social-icon > * {
-  transition: color 0.2s ease, transform 0.2s ease;
-}
 
 .social-icon:hover svg,
 .social-icon:hover > * {
@@ -270,7 +261,6 @@ footer a:hover {
 
 .social-icon:hover {
   transform: scale(1.1);
-  transition: transform 0.2s ease;
 }
 
 /* Remove all project card related styles - they're now in ProjectCard.module.css */
@@ -305,55 +295,6 @@ footer a:hover {
   background-color: var(--secondary-lighter);
 }
 
-/* Remove the broad wildcard transition and replace with targeted transitions */
-html.transition-theme body {
-  transition: background-color var(--theme-transition-duration) var(--theme-transition-timing),
-              color var(--theme-transition-duration) var(--theme-transition-timing);
-}
-
-/* Specifically target header and its children for theme transitions */
-html.transition-theme header,
-html.transition-theme header *,
-html.transition-theme .headerbutton,
-html.transition-theme button,
-html.transition-theme [class*="Card"],
-html.transition-theme [class*="Button"],
-html.transition-theme [class*="Section"] {
-  transition: background-color 300ms ease,
-              color 300ms ease,
-              border-color 300ms ease,
-              box-shadow 200ms ease;
-}
-
-html.transition-theme .techTag {
-  transition: background-color 250ms ease,
-              border-color 250ms ease,
-              color 250ms ease;
-}
-
-/* Prevent flash during initialization - keep this but make it more specific */
-html:not(.transition-theme) body,
-html:not(.transition-theme) header,
-html:not(.transition-theme) header *,
-html:not(.transition-theme) button,
-html:not(.transition-theme) [class*="Card"],
-html:not(.transition-theme) [class*="Button"] {
-  transition: none !important;
-}
-
-/* Force immediate theme application for critical elements */
-header,
-.headerbutton {
-  color: var(--foreground) !important;
-}
-
-/* Loading animation */
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 .animate-spin {
   animation: spin 1s linear infinite;
 }
@@ -378,37 +319,10 @@ body {
   background-blend-mode: overlay;
 }
 
-/* Add these new styles at the end of the file */
-
-/* Initial state - prevent any transitions */
-html.initializing * {
-  transition: none !important;
-  animation: none !important;
-}
-
-/* Only enable transitions after hydration is complete */
-body:not(.client-mounted) * {
-  transition: none !important;
-  animation: none !important;
-}
 
 /* Once hydration is complete, enable smooth transitions */
 body.hydration-complete * {
-  /* Now transitions can occur */
-}
-
-/* Prevent any theme-related flicker by ensuring the body background applies immediately */
-[data-theme="dark"] {
-  background-color: var(--gradient-primary) !important;
-}
-
-[data-theme="light"] {
-  background-color: var(--gradient-primary) !important;
-}
-
-/* Improve fade-in after hydration */
-html.transition-theme {
-  transition: background-color 300ms ease;
+  transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
 }
 
 body.hydration-complete {
@@ -416,6 +330,6 @@ body.hydration-complete {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0.98; }
+  from { opacity: 0.0; }
   to { opacity: 1; }
 }
