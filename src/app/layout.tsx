@@ -117,6 +117,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             })();
           `}
         </Script>
+        {/* Cloudflare Web Analytics */}
+        <Script 
+          id="cloudflare-analytics"
+          strategy="afterInteractive"
+          defer
+          src='https://static.cloudflareinsights.com/beacon.min.js' 
+          data-cf-beacon={`{"token": "${process.env.NEXT_PUBLIC_CLOUDFLARE_TOKEN}"}`}
+        />
       </head>
       <body className="antialiased flex flex-col min-h-screen">
         <TranslationProvider initialLocale={initialLocale}>
