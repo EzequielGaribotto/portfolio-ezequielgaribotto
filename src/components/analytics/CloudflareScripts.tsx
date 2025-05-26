@@ -12,21 +12,60 @@ export default function CloudflareScripts() {
       // Convert input to string if it's a Request object
       const url = typeof input === 'string' ? input : input instanceof Request ? input.url : String(input);
       
-      // Only intercept Cloudflare script requests
-      if (url.includes('cloudflare') && url.includes('.js')) {
+      // For development environment, handle CORS issues with Cloudflare endpoints
+      if (window.location.hostname === 'localhost' && 
+          (url.includes('cloudflare') || url.includes('/cdn-cgi/'))) {
+        // In development, just silently "succeed" with empty response to avoid console errors
+        return new Response('', {
+          status: 200,
+          headers: { 'Content-Type': 'application/javascript' }
+        });
+      }
+      
+      // In production, allow normal fetch but catch errors
+      if ((url.includes('cloudflare') && url.includes('.js')) || 
+          url.includes('/cdn-cgi/speculation')) {
         try {
-              return await originalFetch(input, init);
-          } catch {
-              return new Response('', {
-                  status: 200,
-                  headers: { 'Content-Type': 'application/javascript' }
-              });
-          }
+          return await originalFetch(input, init);
+        } catch {
+          // Return empty response to avoid console errors
+          return new Response('', {
+            status: 200,
+            headers: { 'Content-Type': 'application/javascript' }
+          });
+        }
       }
       
       // Pass through all other requests
       return originalFetch(input, init);
     };
+    
+    // For development only - Check if analytics is likely blocked
+    if (process.env.NODE_ENV === 'development') {
+      // Create a test element to detect if images from Cloudflare domains are blocked
+      const testImg = document.createElement('img');
+      testImg.style.display = 'none';
+      testImg.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='; // 1x1 transparent gif
+      testImg.setAttribute('data-cf-test', 'true');
+      document.body.appendChild(testImg);
+      
+      setTimeout(() => {
+        // Check if our Cloudflare analytics is likely blocked
+        const cfScript = document.querySelector('script[src*="cloudflareinsights"]');
+        const hasAdBlocker = !cfScript || typeof window.__cfBeacon === 'undefined';
+        
+        if (hasAdBlocker) {
+          console.log('ℹ️ Analytics may be blocked by an ad blocker - this is normal and won\'t affect site functionality');
+        } else {
+          console.log('✅ Analytics working properly');
+        }
+        
+        // Clean up test element
+        if (testImg.parentNode) {
+          document.body.removeChild(testImg);
+        }
+      }, 2000);
+    }
     
     return () => {
       // Restore original fetch when component unmounts
@@ -34,15 +73,30 @@ export default function CloudflareScripts() {
     };
   }, []);
 
+  // Use different configuration for dev vs production
+  const beaconConfig = {
+    token: "e2f56442b3874b58b8a4d8355050dc2c",
+    spa: true,
+    // Disable RUM in development to avoid CORS errors
+    ...(window.location.hostname === 'localhost' ? { disableRUM: true } : {})
+  };
+
   return (
     <>
-      {/* Cloudflare Web Analytics - Direct token implementation */}
+      {/* Cloudflare Web Analytics with environment-specific settings */}
       <Script 
         id="cloudflare-analytics"
         strategy="afterInteractive"
         src='https://static.cloudflareinsights.com/beacon.min.js' 
-        data-cf-beacon='{"token": "e2f56442b3874b58b8a4d8355050dc2c", "spa": true}'
+        data-cf-beacon={JSON.stringify(beaconConfig)}
       />
     </>
   );
+}
+
+// Add TypeScript declaration for Cloudflare beacon
+declare global {
+  interface Window {
+    __cfBeacon?: unknown;
+  }
 }
