@@ -64,7 +64,7 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Handle escape key to close preview
+  // Handle escape key to close preview and ensure header stays hidden during modal scrolling
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && isPreviewOpen) {
@@ -72,27 +72,86 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
       }
     };
     
-    if (isPreviewOpen) {
-      document.body.style.overflow = 'hidden'; // Prevent scrolling when expanded
-      // Hide header when CV preview is open
-      const header = document.querySelector('header');
+    // Keep header hidden even when scrolling inside the modal
+    const keepHeaderHidden = () => {
+      const header = document.querySelector('header') as HTMLElement;
       if (header) header.style.display = 'none';
+    };
+    
+    // Prevent any scroll outside the PDF viewer
+    const preventScroll = (e: WheelEvent | TouchEvent) => {
+      // Allow scrolling inside the PDF object element
+      const pdfObject = document.querySelector('.cv-pdf-object');
+      if (pdfObject && pdfObject.contains(e.target as Node)) {
+        // Let the PDF viewer handle its own scrolling
+        return;
+      }
       
+      // Prevent all other scrolling
+      e.preventDefault();
+      return false;
+    };
+    
+    if (isPreviewOpen) {
+      // More aggressive scroll locking
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
+      document.body.style.top = `-${window.scrollY}px`;
+      
+      // Hide header when CV preview is open
+      const header = document.querySelector('header') as HTMLElement;
+      if (header) {
+        header.style.display = 'none';
+        header.classList.add('hidden-by-cv-modal');
+      }
+      
+      // Attach event listeners
+      document.addEventListener('scroll', keepHeaderHidden, true);
+      document.addEventListener('wheel', preventScroll as EventListener, { passive: false });
+      document.addEventListener('touchmove', preventScroll as EventListener, { passive: false });
       window.addEventListener('keydown', handleEscape);
     } else {
+      // Restore normal scrolling
+      const scrollY = document.body.style.top;
       document.body.style.overflow = '';
-      // Show header when CV preview is closed
-      const header = document.querySelector('header');
-      if (header) header.style.display = '';
+      document.documentElement.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+      document.body.style.top = '';
       
+      // Restore scroll position
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      }
+      
+      // Only show header if it was hidden by this modal
+      const header = document.querySelector('header.hidden-by-cv-modal') as HTMLElement;
+      if (header) {
+        header.style.display = '';
+        header.classList.remove('hidden-by-cv-modal');
+      }
     }
     
     return () => {
+      // Clean up all event listeners and restore normal scrolling
       document.body.style.overflow = '';
-      // Ensure header is visible when component unmounts
-      const header = document.querySelector('header');
-      if (header) header.style.display = '';
+      document.documentElement.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+      document.body.style.top = '';
       
+      // Ensure header is visible when component unmounts
+      const header = document.querySelector('header.hidden-by-cv-modal') as HTMLElement;
+      if (header) {
+        header.style.display = '';
+        header.classList.remove('hidden-by-cv-modal');
+      }
+      
+      document.removeEventListener('scroll', keepHeaderHidden, true);
+      document.removeEventListener('wheel', preventScroll as EventListener);
+      document.removeEventListener('touchmove', preventScroll as EventListener);
       window.removeEventListener('keydown', handleEscape);
     };
   }, [isPreviewOpen]);
@@ -236,13 +295,28 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
       {/* CV Preview Modal */}
       {isPreviewOpen && metadata && (
         <>
-          {/* Fixed backdrop with blur effect */}
+          {/* Fixed backdrop with balanced diagonal blur effect - not too dark or bright */}
           <div 
-            className="fixed inset-0 backdrop-blur-[10px] z-50 cursor-pointer"
+            className="fixed inset-0 z-50 cursor-pointer"
             style={{
-              backgroundColor: 'transparent',
-              backdropFilter: 'blur(10px)',
-              WebkitBackdropFilter: 'blur(10px)'
+              background: 'rgba(0, 0, 0, 0.5)',  // Reduced opacity for less darkness
+              backgroundImage: `
+                linear-gradient(125deg, 
+                  rgba(0, 0, 0, 0.8) 0%, 
+                  rgba(0, 0, 0, 0.4) 30%,
+                  rgba(0, 0, 0, 0.3) 50%,
+                  rgba(0, 0, 0, 0.4) 70%,
+                  rgba(0, 0, 0, 0.8) 100%),
+                repeating-linear-gradient(125deg, 
+                  rgba(0, 0, 0, 0.2) 0px, 
+                  rgba(0, 0, 0, 0.2) 2px, 
+                  rgba(0, 0, 0, 0.05) 2px, 
+                  rgba(0, 0, 0, 0.05) 6px)
+              `,
+              backdropFilter: 'blur(12px) brightness(85%)',  // Increased brightness
+              WebkitBackdropFilter: 'blur(12px) brightness(85%)',
+              transform: 'translateZ(0)',
+              boxShadow: 'inset 0 0 150px rgba(0,0,0,0.5)'  // Less intense shadow
             }}
             onClick={() => setIsPreviewOpen(false)}
           ></div>
@@ -277,7 +351,7 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
                 <object
                   data={previewLang === 'es' ? CV_FILES.ES : CV_FILES.EN}
                   type="application/pdf"
-                  className="w-full h-full"
+                  className="w-full h-full cv-pdf-object"
                   style={{ border: 'none', margin: 0, padding: 0 }}
                 >
                   <div className="flex flex-col items-center justify-center h-full text-white">
