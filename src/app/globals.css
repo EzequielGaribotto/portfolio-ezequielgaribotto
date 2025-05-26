@@ -9,10 +9,6 @@
   
   --background: linear-gradient(135deg, var(--gradient-primary) 0%, var(--gradient-secondary) 50%, var(--gradient-accent) 100%);
   
-  /* RGB versions for transparency - updated to match new colors */
-  --background-start-rgb: 243, 244, 248;
-  --background-end-rgb: 230, 238, 255;
-  
   --foreground: #1a1a1a;
   --primary: #1f62a0;
   --black: #000000;
@@ -23,7 +19,6 @@
   --button-text: #ffffff;
   --link: #1f62a0;
   --link-hover: #0056b3;
-
   --name: #1f62a0;
   --project-title: #1f62a0;
   --navigation-current: #1f62a0;
@@ -45,22 +40,18 @@
   --tech-hover-bg: #d1e2f5;
   --tech-hover-border: #0070f3;
   
-  /* Section padding variables - NEW */
+  /* Section padding variables */
   --section-padding-horizontal: 2rem;
   --section-padding-horizontal-mobile: 0;
   
-  /* Theme transition variables - increased duration for smoother transition */
-  --theme-transition-duration: 500ms;
-  --theme-transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* System preference detection as CSS fallback - applies immediately before JS loads */
+/* System preference detection */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
-    /* Copy all dark mode variables here */
-    --gradient-primary: #13151a;
-    --gradient-secondary: #2b2f3a;
-    --gradient-accent: #000000;
+    --gradient-primary: #0f1115;
+    --gradient-secondary: #2a2e39;
+    --gradient-accent: #1c1f26;
     --background: linear-gradient(135deg, var(--gradient-primary) 0%, var(--gradient-secondary) 50%, var(--gradient-accent) 100%);
     --foreground: #f5f5f5;
     --primary: #caa550;
@@ -71,21 +62,20 @@
     --project-title: #caa550;
     --navigation-current: #caa550;
     --foreground-rgb: 245, 245, 245;
-    --background-start-rgb: 19, 21, 26;
-    --background-end-rgb: 26, 31, 46;
+    --background-start-rgb: 15, 17, 21;
+    --background-end-rgb: 42, 46, 57;
     --secondary-rgb: 45, 55, 72;
     --mode-text: #ffffff;
     --mode-desc: #e5e7eb;
     --link: #caa550;
     --link-hover: #ddb968;
-    --tech-bg: rgba(76, 152, 175, 0.15);
-    --tech-border: rgba(76, 152, 175, 0.6);
+    --tech-bg: rgba(202, 165, 80, 0.1);
+    --tech-border: rgba(202, 165, 80, 0.5);
     --tech-text: #f5f5f5;
-    --tech-hover-bg: rgba(76, 152, 175, 0.3);
-    --tech-hover-border: rgba(129, 191, 199, 0.8);
+    --tech-hover-bg: rgba(202, 165, 80, 0.25);
+    --tech-hover-border: rgba(221, 185, 104, 0.8);
   }
   
-  /* This immediately applies dark styling before any JS runs */
   html:not([data-theme]) {
     color-scheme: dark;
   }
@@ -93,45 +83,32 @@
 
 /* Dark Mode Variables */
 [data-theme="dark"] {
-  /* Gradient background: deep navy to subtle charcoal with golden accent */
-  --gradient-primary: #0f1115;       /* Very dark bluish gray */
-  --gradient-secondary: #2a2e39;     /* Muted charcoal */
-  --gradient-accent: #1c1f26;        /* Richer dark gray with blue undertones */
-
-  /* Main background now uses a modern, smooth gradient */
+  --gradient-primary: #0f1115;
+  --gradient-secondary: #2a2e39;
+  --gradient-accent: #1c1f26;
   --background: linear-gradient(135deg, var(--gradient-primary) 0%, var(--gradient-secondary) 50%, var(--gradient-accent) 100%);
-
   --foreground: #f5f5f5;
   --primary: #caa550;
   --primary-hover: #ddb968;
-
   --secondary: #2d3748;
   --secondary-hover: #4a5568;
-
   --name: #caa550;
   --project-title: #caa550;
   --navigation-current: #caa550;
-
-  /* RGB for transparency and effects */
   --foreground-rgb: 245, 245, 245;
   --background-start-rgb: 15, 17, 21;
   --background-end-rgb: 42, 46, 57;
   --secondary-rgb: 45, 55, 72;
-
-  /* Typography and links */
   --mode-text: #ffffff;
   --mode-desc: #e5e7eb;
   --link: #caa550;
   --link-hover: #ddb968;
-
-  /* Tech tags */
-  --tech-bg: rgba(202, 165, 80, 0.1);           /* Subtle gold glow */
-  --tech-border: rgba(202, 165, 80, 0.5);       /* Semi-transparent gold */
+  --tech-bg: rgba(202, 165, 80, 0.1);
+  --tech-border: rgba(202, 165, 80, 0.5);
   --tech-text: #f5f5f5;
   --tech-hover-bg: rgba(202, 165, 80, 0.25);
   --tech-hover-border: rgba(221, 185, 104, 0.8);
 }
-
 
 [data-theme="light"] {
   color-scheme: light;
@@ -150,7 +127,7 @@ html {
 
 body {
   background: var(--background);
-  background-attachment: fixed; /* Keep the gradient fixed while scrolling */
+  background-attachment: fixed;
   color: var(--foreground);
   font-family: "Inter", Arial, Helvetica, sans-serif;
   margin: 0;
@@ -158,39 +135,52 @@ body {
   line-height: 1.6;
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Ensure body covers full viewport height */
+  min-height: 100vh;
   width: 100%;
-  /* Fix for mobile overflow scrolling */
   overscroll-behavior: none;
   overflow-x: hidden;
-  /* Add subtle noise texture for depth */
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"),
     var(--background);
   background-blend-mode: overlay;
 }
 
-/* Remove default button styling to allow Tailwind to control buttons */
 button {
   cursor: pointer;
   font-family: inherit;
+  /* Restore essential button transitions */
+  transition: all 0.2s ease;
 }
-
-/* IMPORTANT: Do not style buttons globally to allow Tailwind classes to work */
 
 /* Header button styles */
 .headerbutton {
-  background: transparent;
-  color: var(--foreground);
+  background: transparent !important;
+  color: var(--foreground) !important;
   padding: 0.5rem;
   border-radius: 50%;
   cursor: pointer;
-  transition: none;
+  border: none;
+  /* Force the use of CSS variables with higher specificity */
+  transition: opacity 0.2s ease, background-color 0.2s ease, color 0.2s ease;
 }
 
 .headerbutton:hover {
-  background: transparent;
-  color: var(--foreground);
+  background: transparent !important;
+  color: var(--foreground) !important;
   border-color: var(--background);
+}
+
+/* Ensure header and header buttons inherit theme colors immediately */
+header {
+  color: var(--foreground) !important;
+}
+
+header * {
+  color: inherit;
+}
+
+header .headerbutton {
+  color: var(--foreground) !important;
+  background: transparent !important;
 }
 
 .headerbutton:disabled {
@@ -212,38 +202,18 @@ button {
   opacity: 0.8;
 }
 
-/* Header Styles */
-header {
+/* Header and Footer */
+header, footer {
   color: var(--foreground);
   padding: 1rem;
-  transition: none;
 }
 
-header ul {
-  list-style: none;
-  display: flex;
-  justify-content: space-around;
-  padding: 0;
-  margin: 0;
-}
-
-header a {
-  color: var(--foreground);
-  font-family: var(--font-sans);
-  text-decoration: none;
-  font-weight: bold;
-}
-
-/* Footer Styles */
 footer {
-  flex-shrink: 0; /* Prevent footer from shrinking */
-  margin-top: auto; /* Push footer to bottom */
-  background: transparent; /* Remove solid background */
-  color: var(--foreground);
+  flex-shrink: 0;
+  margin-top: auto;
+  background: transparent;
   text-align: center;
-  padding: 1rem;
   font-family: var(--font-sans);
-  transition: none;
   z-index: 10;
 }
 
@@ -252,92 +222,34 @@ footer a:hover {
   text-underline-offset: 4px;
 }
 
-/* Utility Classes */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.mt-4 {
-  margin-top: 1rem;
-}
-
-.mb-4 {
-  margin-bottom: 1rem;
-}
-
-/* Profile Section */
-.profile-section {
+/* Main layout */
+.centered-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: var(--secondary);
-  color: var(--foreground);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 0.5rem;
+  justify-content: flex-start;
+  text-align: center;
+  min-height: 100vh;
   padding: 2rem;
-  margin-bottom: 3rem;
-  width: 80%;
-  max-width: 1000px;
-  transition: none;
-  /* Increased min-height to prevent layout shifts */
-  min-height: 450px; /* Increased from 400px */
-}
-
-@media (min-width: 768px) {
-  .profile-section {
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: flex-start;
-    gap: 2rem;
-  }
-}
-
-.profile-image {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  overflow: hidden;
-  margin-bottom: 1.5rem;
-}
-
-.profile-name {
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: var(--foreground);
-  margin-bottom: 1rem;
-}
-
-.profile-description {
-  font-size: 1.125rem;
-  max-width: 60%;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
   margin: 0 auto;
-  color: var(--foreground);
 }
 
-.social-links {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1.5rem;
-}
-
+/* Social icons styling - keep for general use */
 .social-icon {
   width: 40px;
   height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.4s ease;
+  transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
 .social-icon svg,
 .social-icon > * {
-  transition: color 0.4s ease, transform 0.4s ease;
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .social-icon:hover svg,
@@ -358,67 +270,10 @@ footer a:hover {
 
 .social-icon:hover {
   transform: scale(1.1);
-  transition: transform 0.2s ease; /* Only transition on hover */
+  transition: transform 0.2s ease;
 }
 
-/* Centered Container for Sections */
-.centered-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start; /* Changed from center to flex-start */
-  text-align: center;
-  min-height: 100vh;
-  padding: 2rem;
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
-  margin: 0 auto;
-}
-
-/* Section Styling */
-.section {
-  max-width: 800px;
-  width: 100%;
-  background: var(--background);
-  color: var(--foreground);
-  transition: none;
-  margin-bottom: 3rem;
-  padding: 2rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Projects Section */
-.projects-section {
-  width: 100%;
-  background: var(--background);
-  color: var(--foreground);
-  transition: none;
-}
-
-.section-title {
-  font-size: 3rem;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 2rem;
-  color: var(--foreground);
-}
-
-/* Modal Styles */
-body.modal-open {
-  overflow: hidden;
-}
-
-/* Ensure modals are always on top */
-[role="dialog"] {
-  z-index: 1000;
-}
-
-/* Prevent flickering by isolating stacking contexts */
-.fixed {
-  will-change: transform;
-}
+/* Remove all project card related styles - they're now in ProjectCard.module.css */
 
 /* Image optimization styles */
 @keyframes pulse {
@@ -435,7 +290,6 @@ body.modal-open {
   background-color: var(--secondary);
 }
 
-/* For low quality image placeholders */
 .blur-up {
   filter: blur(5px);
   transition: filter 0.3s ease-in-out;
@@ -445,236 +299,81 @@ body.modal-open {
   filter: blur(0);
 }
 
-/* Prevent layout shift during image loading */
 .image-container {
   position: relative;
   overflow: hidden;
   background-color: var(--secondary-lighter);
 }
 
-/* Experience Section */
-.experience-section {
-  max-width: 800px;
-  width: 85%;
-  background: var(--background);
-  color: var(--foreground);
-}
-
-/* Project card specific styles */
-.project-card {
-  background: var(--secondary);
-  color: var(--foreground);
-  border: 1px solid var(--secondary-hover);
-  display: flex;
-  flex-direction: column;
-  height: auto;
-  position: relative;
-  overflow: visible;
-  transition: opacity 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease; /* Removed transform from transition */
-}
-
-.project-title {
-  font-size: 1.3rem;
-  font-weight: bold;
-  margin-top: 0.5rem !important;
-  margin-bottom: 0.25rem;
-  color: var(--foreground);
-  text-align: left !important; /* Changed from center to left */
-  display: flex;
-  align-items: center;
-}
-
-.project-description {
-  font-size: 0.9rem; /* Increased from text-sm (0.875rem) to match footer */
-  margin-top: 0.5rem;
-  color: var(--foreground);
-  text-align: left !important; /* Description left-aligned */
-}
-
-.project-date {
-  display: block;
-  letter-spacing: 0.05em;
-  margin-top: 0.25rem;
-  font-size: 0.9rem; /* Increased from 0.85rem to match others */
-  text-align: end; /* Keep date left-aligned */
-  color: var(--primary); /* Changed from var(--foreground-muted, #666666) to match experience/training sections */
-  line-height: 1.5;
-  width: 100%;
-  background-color: transparent;
-  font-weight: normal; /* Explicitly set to normal weight */
-}
-
-/* Add styling for the project footer */
-.project-footer {
-  display: block;
-  font-size: 0.9rem;
-  text-align: left;
-  color: var(--primary); /* Already using primary color */
-  margin-top: 0.5rem;
-  font-style: italic;
-  background-color: transparent;
-  font-weight: normal;
-}
-
-/* Ensure dark mode also uses primary color */
-[data-theme="dark"] .project-footer {
-  color: var(--primary);
-}
-
-.project-links {
-  display: flex;
-  justify-content: flex-start !important; /* Ensure left alignment for footer */
-  margin-top: 1rem;
-  gap: 0.5rem;
-}
-
-.project-card:hover {
-  border-color: var(--primary);
-  /* Removed transform: scale(1.02); */
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25); /* Enhanced shadow */
-}
-
-/* Project card image expansion styles */
-.project-image-container {
-  position: relative;
-  overflow: visible;
-}
-
-.project-image-wrapper {
-  position: relative;
-  overflow: hidden;
-  border-radius: 0.5rem;
-  height: auto;
-  max-height: 350px;
-  transition: none;
-}
-
-.project-image-wrapper img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top;
-  transition: none;
-}
-
-/* Expanded image overlay */
-.expanded-image-overlay {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: auto;
-  max-width: min(1200px, 90vw);
-  height: auto;
-  max-height: 85vh; 
-  background-color: transparent;
-  border-radius: 2.5rem;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-  z-index: 100;
-  overflow: hidden;
-  display: none;
-  box-sizing: border-box;
-}
-
-.expanded-image-overlay.active {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  animation: fadeIn 0.3s ease-in-out;
-}
-
-.expanded-image-overlay img {
-  max-width: 100%;
-  max-height: 75vh;
-  object-fit: contain;
-  margin: auto;
-  border-radius: 0.25rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Backdrop for expanded image */
-.expanded-backdrop {
-  backdrop-filter: blur(5px);
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.8);
-  z-index: 99;
-  display: none;
-  cursor: pointer;
-}
-
-.expanded-backdrop.active {
-  display: block;
-  animation: fadeIn 0.3s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* Controls for expanded image */
-.expand-control {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: rgba(0, 0, 0, 0.6);
-  color: white;
-  border-radius: 50%;
-  padding: 5px;
-  cursor: pointer;
-  z-index: 10;
-}
-
-.expand-control:hover {
-  background-color: rgba(0, 0, 0, 0.8);
-  transform: scale(1.1);
-  transition: transform 0.2s ease, background-color 0.2s ease; /* Only transition on hover */
-}
-
-/* Remove the expensive universal transition */
-.transition-theme * {
-  /* Replace with empty ruleset to maintain compatibility with existing code */
-}
-
-/* Apply targeted transitions with smoother parameters */
-
-/* Main container elements */
-body,
-main,
-.section,
-.profile-section,
-.experience-section,
-.projects-section,
-header,
-footer {
-  transition: background var(--theme-transition-duration) var(--theme-transition-timing),
-              background-color var(--theme-transition-duration) var(--theme-transition-timing),
-              color var(--theme-transition-duration) var(--theme-transition-timing),
-              border-color var(--theme-transition-duration) var(--theme-transition-timing);
-}
-
-/* Specific UI elements that change with theme */
-.project-card,
-.tech-tag,
-.navigation-link,
-.social-icon,
-button,
-.project-title,
-.project-description,
-.project-date,
-.project-footer {
+/* Remove the broad wildcard transition and replace with targeted transitions */
+html.transition-theme body {
   transition: background-color var(--theme-transition-duration) var(--theme-transition-timing),
-              color var(--theme-transition-duration) var(--theme-transition-timing),
-              border-color var(--theme-transition-duration) var(--theme-transition-timing),
-              box-shadow var(--theme-transition-duration) var(--theme-transition-timing);
+              color var(--theme-transition-duration) var(--theme-transition-timing);
 }
 
-/* For text elements, only transition color */
-h1, h2, h3, h4, h5, h6, p, span, a {
-  transition: color var(--theme-transition-duration) var(--theme-transition-timing);
+/* Specifically target header and its children for theme transitions */
+html.transition-theme header,
+html.transition-theme header *,
+html.transition-theme .headerbutton,
+html.transition-theme button,
+html.transition-theme [class*="Card"],
+html.transition-theme [class*="Button"],
+html.transition-theme [class*="Section"] {
+  transition: background-color 300ms ease,
+              color 300ms ease,
+              border-color 300ms ease,
+              box-shadow 200ms ease;
+}
+
+html.transition-theme .techTag {
+  transition: background-color 250ms ease,
+              border-color 250ms ease,
+              color 250ms ease;
+}
+
+/* Prevent flash during initialization - keep this but make it more specific */
+html:not(.transition-theme) body,
+html:not(.transition-theme) header,
+html:not(.transition-theme) header *,
+html:not(.transition-theme) button,
+html:not(.transition-theme) [class*="Card"],
+html:not(.transition-theme) [class*="Button"] {
+  transition: none !important;
+}
+
+/* Force immediate theme application for critical elements */
+header,
+.headerbutton {
+  color: var(--foreground) !important;
+}
+
+/* Loading animation */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Ensure body background is applied immediately */
+body {
+  background: var(--background);
+  background-attachment: fixed;
+  color: var(--foreground);
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  overscroll-behavior: none;
+  overflow-x: hidden;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"),
+    var(--background);
+  background-blend-mode: overlay;
 }

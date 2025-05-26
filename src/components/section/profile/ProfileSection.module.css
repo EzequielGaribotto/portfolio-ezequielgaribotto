@@ -12,6 +12,13 @@
   margin: 0 auto;
 }
 
+/* Add hidden class for initialization period */
+.hidden {
+  opacity: 0 !important;
+  visibility: hidden;
+  pointer-events: none;
+}
+
 .profileImageContainer {
   width: 200px;
   height: 200px;
@@ -24,12 +31,15 @@
   /* Remove absolute positioning */
   position: relative;
   align-self: center;
+  /* Add smooth transition for visibility changes */
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
 }
 
 .profileImage {
   object-fit: cover;
   width: 100%;
   height: 100%;
+  /* Remove individual transition as it's handled by parent container */
 }
 
 .contentContainer {
@@ -45,6 +55,8 @@
   min-width: 300px; /* Ensure minimum width */
   min-height: 300px;
   position: relative;
+  /* Add smooth transition for visibility changes */
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
 }
 
 .name {

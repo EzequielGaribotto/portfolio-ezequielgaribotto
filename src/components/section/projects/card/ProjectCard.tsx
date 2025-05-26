@@ -6,6 +6,7 @@ import { useTranslation } from "../../../../context/TranslationContext";
 import { Project } from "../../../../models/Project";
 import ClickableButton from "../../../button/ClickableButton";
 import OptimizedImage from '../../../OptimizedImage';
+import styles from './ProjectCard.module.css';
 
 interface ProjectCardProps {
   project: Project;
@@ -53,15 +54,13 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   // Handle clicks outside the expanded image to close it
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (overlayRef.current && !overlayRef.current.contains(e.target as Node) && isExpanded) {
+      if (isExpanded && overlayRef.current && !overlayRef.current.contains(e.target as Node)) {
+        console.log('Clicking outside overlay, closing...'); // Debug log
         setIsExpanded(false);
       }
     };
     
-    if (isExpanded) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-    
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
@@ -70,6 +69,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   const toggleExpand = (e: React.MouseEvent) => {
     e.stopPropagation();
     e.preventDefault();
+    console.log('Toggle expand clicked, current state:', isExpanded); // Debug log
     setIsExpanded(!isExpanded);
   };
 
@@ -99,7 +99,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     <>
       <div 
         ref={cardRef} 
-        className="project-card bg-secondary text-foreground border border-secondary-hover rounded-lg shadow-md p-4 hover:shadow-lg"
+        className={styles.projectCard}
         style={{ 
           opacity: 0.9, 
           // Use CSS variables for consistent transition timing
@@ -119,21 +119,16 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         }}
       >
         <div onClick={handleTextClick}>
-          <h3 className="project-title text-lg font-bold flex items-center" 
-              style={{ 
-                color: 'var(--project-title)', 
-                textAlign: 'left',
-                justifyContent: 'flex-start'
-              }}>
+          <h3 className={styles.projectTitle}>
             {getProjectIcon()}
             {project.title}
           </h3>
-          <p className="project-description text-sm mt-2 text-foreground">
+          <p className={styles.projectDescription}>
             {project.description}
           </p>
 
           {project.startDate && (
-            <div className="project-date text-xs text-foreground/70 mb-2">
+            <div className={styles.projectDate}>
               {project.startDate} {project.endDate ? 
                 `- ${project.endDate}` : 
                 `- ${t("projects.current")}`}
@@ -141,10 +136,10 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           )}
         </div>
         
-        <div className="project-image-container mt-3">
-          <div className="project-image-wrapper">
+        <div className={styles.projectImageContainer}>
+          <div className={styles.projectImageWrapper}>
             <button 
-              className="expand-control" 
+              className={styles.expandControl} 
               onClick={toggleExpand} 
               aria-label={t("tooltips.expandImage")}
             >
@@ -165,7 +160,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           
           {/* Project footer - added below image */}
           {project.footer && (
-            <div className="project-footer text-xs mt-2 text-foreground/80 italic">
+            <div className={styles.projectFooter}>
               {project.footer}
             </div>
           )}
@@ -173,20 +168,20 @@ export default function ProjectCard({ project }: ProjectCardProps) {
 
         {/* Technologies */}
         {project.technologies && project.technologies.length > 0 && (
-          <div className="technologies mt-3 flex flex-wrap gap-1">
+          <div className={styles.technologies}>
             {project.technologies.map((tech, index) => (
-              <span key={index} className="tech bg-tech-bg border border-tech-border text-tech-text text-xs px-2 py-1 rounded-full">
+              <span key={index} className={styles.techTag}>
                 {tech}
               </span>
             ))}
           </div>
         )}
 
-        <div className="project-links flex mt-4 space-x-2">
+        <div className={styles.projectLinks}>
           {project.programameLink && (
             <ClickableButton
               href={project.programameLink}
-              className={`social-icon ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : 'bg-blue-400 hover:bg-blue-300'} rounded-full transition-all duration-400`}
+              className={`${styles.socialIcon} ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : 'bg-blue-400 hover:bg-blue-300'} rounded-full`}
               tooltipKey="tooltips.competition"
             >
               <FaTrophy 
@@ -198,7 +193,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           {project.playStoreLink && (
             <ClickableButton
               href={project.playStoreLink}
-              className={`social-icon ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : 'bg-blue-400 hover:bg-blue-300'} rounded-full transition-all duration-400`}
+              className={`${styles.socialIcon} ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : 'bg-blue-400 hover:bg-blue-300'} rounded-full`}
               tooltipKey="tooltips.playStore"
             >
               <FaGooglePlay 
@@ -210,7 +205,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           {project.repoLink && (
             <ClickableButton
               href={project.repoLink}
-              className={`social-icon ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : 'bg-blue-400 hover:bg-blue-300'} rounded-full flex items-center justify-center transition-all duration-400`}
+              className={`${styles.socialIcon} ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : 'bg-blue-400 hover:bg-blue-300'} rounded-full flex items-center justify-center`}
               tooltipKey={project.id === "competitive-programming" ? "tooltips.solvedProblems" : "tooltips.sourceCode"}
             >
               <svg
@@ -227,46 +222,50 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       </div>
       
       {/* Modal-like expanded image overlay */}
-      <div className={`expanded-backdrop ${isExpanded ? 'active' : ''}`} onClick={() => setIsExpanded(false)}></div>
+      <div 
+        className={`${styles.expandedBackdrop} ${isExpanded ? styles.active : ''}`} 
+        onClick={() => {
+          console.log('Backdrop clicked, closing...'); // Debug log
+          setIsExpanded(false);
+        }}
+      ></div>
       <div 
         ref={overlayRef}
-        className={`expanded-image-overlay ${isExpanded ? 'active' : ''}`}
-        style={{ 
-          overflow: 'hidden',
-          boxSizing: 'border-box'
-        }}
+        className={`${styles.expandedImageOverlay} ${isExpanded ? styles.active : ''}`}
+        onClick={(e) => e.stopPropagation()}
       >
         <button 
-          className="expand-control" 
-          onClick={() => setIsExpanded(false)} 
+          className={styles.expandControl} 
+          onClick={() => {
+            console.log('Close button clicked'); // Debug log
+            setIsExpanded(false);
+          }} 
           aria-label={t("tooltips.closeImage")}
           style={{ position: 'absolute', top: '10px', right: '10px', zIndex: 101 }}
         >
           <FaCompress size={16} />
         </button>
-        {isExpanded && (
-          <div className="w-full flex justify-center items-center">
-            <OptimizedImage
-              src={project.image || fallbackImage}
-              alt={project.title || "Project image"}
-              width={1920}
-              height={1080}
-              className="rounded-lg object-contain"
-              style={{ 
-                maxWidth: '100%', 
-                width: 'auto', 
-                maxHeight: '75vh', 
-                height: 'auto',
-                margin: '0 auto',
-                display: 'block'
-              }}
-              loading="eager"
-              sizes="(max-width: 1200px) 90vw, 1080px"
-              quality={100}
-              priority
-            />
-          </div>
-        )}
+        <div className="w-full flex justify-center items-center">
+          <OptimizedImage
+            src={project.image || fallbackImage}
+            alt={project.title || "Project image"}
+            width={1920}
+            height={1080}
+            className="rounded-lg object-contain"
+            style={{ 
+              maxWidth: '100%', 
+              width: 'auto', 
+              maxHeight: '75vh', 
+              height: 'auto',
+              margin: '0 auto',
+              display: 'block'
+            }}
+            loading="eager"
+            sizes="(max-width: 1200px) 90vw, 1080px"
+            quality={100}
+            priority
+          />
+        </div>
       </div>
     </>
   );

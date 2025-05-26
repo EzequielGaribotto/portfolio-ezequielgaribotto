@@ -10,10 +10,6 @@ import styles from "./ExperienceSection.module.css";
 const ExperienceSection: React.FC = () => {
   const { t } = useTranslation();
 
-  // Define the technologies as constants
-  const telusTech = ["English", "JSON", "Data Analysis", "Data Classification", "Digital Competence"];
-  const eulixTech = ["Android", "XML", "API Integration", "Gradle", "AI/ML Integration", "Front-End", "Data Binding", "Android Jetpack", "Retrofit", "Kotlin DSL", "LiveData", "Android SDK", "Git", "Agile", "Scrum", "UI/UX Design"];
-
   const experiences: Experience[] = [
     {
       id: "eulix",
@@ -22,7 +18,24 @@ const ExperienceSection: React.FC = () => {
       period: t("experiences.eulix.period"),
       location: t("experiences.eulix.location"),
       description: t("experiences.eulix.description"),
-      technologies: eulixTech,
+      technologies: [
+        "Android",
+        "XML",
+        "API Integration",
+        "Gradle",
+        "AI/ML Integration",
+        "Front-End",
+        "Data Binding",
+        "Android Jetpack",
+        "Retrofit",
+        "Kotlin DSL",
+        "LiveData",
+        "Android SDK",
+        "Git",
+        "Agile",
+        "Scrum",
+        "UI/UX Design",
+      ],
       imageUrl: "/images/companies/eulix_logo.webp",
       companyUrl:
         "https://play.google.com/store/apps/details?id=com.eulix.mobile.app&hl=en_US",
@@ -34,7 +47,13 @@ const ExperienceSection: React.FC = () => {
       period: t("experiences.telus.period"),
       location: t("experiences.telus.location"),
       description: t("experiences.telus.description"),
-      technologies: telusTech,
+      technologies: [
+        "English",
+        "JSON",
+        "Data Analysis",
+        "Data Classification",
+        "Digital Competence",
+      ],
       imageUrl: "/images/companies/telus_logo.webp",
       companyUrl: "https://www.telus.com/en/digital",
     },

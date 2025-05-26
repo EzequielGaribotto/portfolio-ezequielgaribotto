@@ -78,7 +78,7 @@ export const es: Translations = {
     }
   },
   experiences: {
-    title: "Experiencia Profesional",
+    title: "Experiencia profesional",
     eulix: {
       company: "Eulix",
       position: "Desarrollador Junior de Android",
