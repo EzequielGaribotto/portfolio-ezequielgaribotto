@@ -46,13 +46,19 @@ export const TranslationProvider = ({
     return THEME.LIGHT;
   };
 
+  // IMPORTANT: Always start with initialLocale during SSR to avoid hydration mismatch
   const getInitialLocale = (): string => {
-    if (typeof document !== 'undefined') {
-      const dataLocale = document.documentElement.dataset.locale;
-      if (dataLocale) {
-        return dataLocale;
-      }
+    // During SSR, return initialLocale
+    if (typeof document === 'undefined') {
+      return initialLocale;
     }
+    
+    // On client, we can use stored value
+    const dataLocale = document.documentElement.dataset.locale;
+    if (dataLocale && (dataLocale === LOCALE.EN || dataLocale === LOCALE.ES)) {
+      return dataLocale;
+    }
+    
     return initialLocale;
   };
 

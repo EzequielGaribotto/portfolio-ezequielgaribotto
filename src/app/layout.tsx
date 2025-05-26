@@ -97,9 +97,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 // Apply theme to document
                 document.documentElement.dataset.theme = resolvedTheme;
                 
-                // Handle locale
+                // Handle locale - IMPORTANT: Don't change the default here to match server rendering
+                // We only apply saved locale if explicitly present
+                let resolvedLocale = 'es'; // Default - MUST match initialLocale above
                 const savedLocale = localStorage.getItem('locale');
-                let resolvedLocale = 'es'; // Default
                 
                 if (savedLocale && (savedLocale.includes('es') || savedLocale.includes('en'))) {
                   resolvedLocale = JSON.parse(savedLocale);
@@ -117,13 +118,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             })();
           `}
         </Script>
-        {/* Cloudflare Web Analytics */}
+        {/* Cloudflare Web Analytics - Direct token implementation */}
         <Script 
           id="cloudflare-analytics"
           strategy="afterInteractive"
-          defer
           src='https://static.cloudflareinsights.com/beacon.min.js' 
-          data-cf-beacon={`{"token": "${process.env.NEXT_PUBLIC_CLOUDFLARE_TOKEN || 'e2f56442b3874b58b8a4d8355050dc2c'}", "spa": true, "version": "2024.3.0"}`}
+          data-cf-beacon='{"token": "e2f56442b3874b58b8a4d8355050dc2c"}'
         />
       </head>
       <body className="antialiased flex flex-col min-h-screen">
