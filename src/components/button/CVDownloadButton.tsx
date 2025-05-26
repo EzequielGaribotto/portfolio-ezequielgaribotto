@@ -72,48 +72,39 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
       }
     };
     
-    // Keep header hidden even when scrolling inside the modal
     const keepHeaderHidden = () => {
       const header = document.querySelector('header') as HTMLElement;
       if (header) header.style.display = 'none';
     };
     
-    // Prevent any scroll outside the PDF viewer
     const preventScroll = (e: WheelEvent | TouchEvent) => {
-      // Allow scrolling inside the PDF object element
       const pdfObject = document.querySelector('.cv-pdf-object');
       if (pdfObject && pdfObject.contains(e.target as Node)) {
-        // Let the PDF viewer handle its own scrolling
         return;
       }
       
-      // Prevent all other scrolling
       e.preventDefault();
       return false;
     };
     
     if (isPreviewOpen) {
-      // More aggressive scroll locking
       document.body.style.overflow = 'hidden';
       document.documentElement.style.overflow = 'hidden';
       document.body.style.position = 'fixed';
       document.body.style.width = '100%';
       document.body.style.top = `-${window.scrollY}px`;
       
-      // Hide header when CV preview is open
       const header = document.querySelector('header') as HTMLElement;
       if (header) {
         header.style.display = 'none';
         header.classList.add('hidden-by-cv-modal');
       }
       
-      // Attach event listeners
       document.addEventListener('scroll', keepHeaderHidden, true);
       document.addEventListener('wheel', preventScroll as EventListener, { passive: false });
       document.addEventListener('touchmove', preventScroll as EventListener, { passive: false });
       window.addEventListener('keydown', handleEscape);
     } else {
-      // Restore normal scrolling
       const scrollY = document.body.style.top;
       document.body.style.overflow = '';
       document.documentElement.style.overflow = '';
@@ -121,12 +112,10 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
       document.body.style.width = '';
       document.body.style.top = '';
       
-      // Restore scroll position
       if (scrollY) {
         window.scrollTo(0, parseInt(scrollY || '0') * -1);
       }
       
-      // Only show header if it was hidden by this modal
       const header = document.querySelector('header.hidden-by-cv-modal') as HTMLElement;
       if (header) {
         header.style.display = '';
@@ -135,14 +124,12 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
     }
     
     return () => {
-      // Clean up all event listeners and restore normal scrolling
       document.body.style.overflow = '';
       document.documentElement.style.overflow = '';
       document.body.style.position = '';
       document.body.style.width = '';
       document.body.style.top = '';
       
-      // Ensure header is visible when component unmounts
       const header = document.querySelector('header.hidden-by-cv-modal') as HTMLElement;
       if (header) {
         header.style.display = '';
@@ -156,7 +143,6 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
     };
   }, [isPreviewOpen]);
 
-  // Define styles that will be shared between button and dropdown
   const buttonStyle = {
     color: "var(--foreground)",
     backgroundColor: 'rgba(255, 255, 255, 0.2)',
@@ -165,7 +151,7 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
     border: '2px solid var(--foreground)',
     borderRadius: '9999px',
     transition: 'border-color 0.2s ease, color 0.2s ease',
-    position: 'relative' as const, // Fix TypeScript error by explicitly typing
+    position: 'relative' as const,
   };
 
   const buttonHoverStyle = {
@@ -175,9 +161,9 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
 
   const dropdownStyle = {
     color: "var(--foreground)",
-    backgroundColor: 'rgba(255, 255, 255, 0.25)', // Increased from 0.1 to 0.25
-    backdropFilter: 'blur(15px)', // Increased from 5px to 15px
-    WebkitBackdropFilter: 'blur(15px)', // Increased from 5px to 15px
+    backgroundColor: 'rgba(255, 255, 255, 0.25)',
+    backdropFilter: 'blur(15px)',
+    WebkitBackdropFilter: 'blur(15px)',
     border: '2px solid var(--foreground)',
     maxWidth: 'max-content',
     minWidth: 'fit-content',
