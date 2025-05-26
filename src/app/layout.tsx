@@ -35,11 +35,11 @@ export function generateMetadata(): Metadata {
     other: {
       'Content-Security-Policy': 
         "default-src 'self'; " +
-        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.cloudflareinsights.com; " +
+        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.cloudflareinsights.com https://static.cloudflareinsights.com; " +
         "style-src 'self' 'unsafe-inline'; " +
         "img-src 'self' data: blob: https:; " +
         "font-src 'self'; " +
-        "connect-src 'self' https://*.cloudflareinsights.com https://cloudflareinsights.com/cdn-cgi/* https://*.cloudflare.com; " +
+        "connect-src 'self' https://*.cloudflareinsights.com https://cloudflareinsights.com https://cloudflareinsights.com/cdn-cgi/* https://*.cloudflare.com; " +
         "frame-src 'self' blob: data:; " +
         "object-src 'self'; " +
         "base-uri 'self'; " +
@@ -123,7 +123,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           strategy="afterInteractive"
           defer
           src='https://static.cloudflareinsights.com/beacon.min.js' 
-          data-cf-beacon={`{"token": "${process.env.NEXT_PUBLIC_CLOUDFLARE_TOKEN}"}`}
+          data-cf-beacon={`{"token": "${process.env.NEXT_PUBLIC_CLOUDFLARE_TOKEN || 'e2f56442b3874b58b8a4d8355050dc2c'}", "spa": true, "version": "2024.3.0"}`}
         />
       </head>
       <body className="antialiased flex flex-col min-h-screen">
