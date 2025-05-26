@@ -248,7 +248,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           <div className="w-full flex justify-center items-center">
             <OptimizedImage
               src={project.image || fallbackImage}
-              alt={t(project.title) || "Project image"}
+              alt={project.title || "Project image"}
               width={1920}
               height={1080}
               className="rounded-lg object-contain"

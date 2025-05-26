@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image, { ImageProps } from 'next/image';
 
 interface OptimizedImageProps extends Omit<ImageProps, 'onLoadingComplete'> {
@@ -23,6 +23,12 @@ export default function OptimizedImage({
 }: OptimizedImageProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [imgSrc, setImgSrc] = useState(src);
+  
+  // Update imgSrc when src prop changes
+  useEffect(() => {
+    setImgSrc(src);
+    setIsLoading(true);
+  }, [src]);
   
   const handleError = () => {
     if (imgSrc !== fallbackSrc) {

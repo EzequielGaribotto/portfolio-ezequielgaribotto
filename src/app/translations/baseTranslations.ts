@@ -121,8 +121,7 @@ export const baseTranslations = {
             location: "",
             description: "",
         }
-    },
-    dates: {} as Record<string, string>,
+    }
 };
 
 export type Translations = typeof baseTranslations;

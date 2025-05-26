@@ -11,7 +11,7 @@ const TrainingSection: React.FC = () => {
   const { t } = useTranslation();
 
   // Define the technologies directly from the translations file
-  const itbTech = ["Java", "Kotlin", "Python", "Android", "React", "Node.js", "AWS", "Cloud", "SQL", "NoSQL", "Git", "Docker", "CI/CD", "Agile", "Scrum"];
+  const itbTech = ["Java", "Kotlin", "Python", "Android", "AWS", "Cloud", "SQL", "NoSQL", "Git", "Docker", "CI/CD", "Agile", "Scrum", "Retrofit", "Ktor", "Machine Learning", "Web Scraping", "scikit-learn", "Pandas", "Numpy", "Scipy", "Keras", "TensorFlow", "PostgreSQL", "MongoDB", "Firebase", "React", "Node.js"];
   const upfTech = ["Python", "C++", "MatLab", "Processing", "Collab", "OOP", "Cisco Packet Tracer", "Assembly"];
   const rb4Tech = ["Excel", "Python", "Scratch"];
 

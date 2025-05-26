@@ -12,7 +12,7 @@ const ExperienceSection: React.FC = () => {
 
   // Define the technologies as constants
   const telusTech = ["English", "JSON", "Data Analysis", "Data Classification", "Digital Competence"];
-  const eulixTech = ["Android", "XML", "API Integration", "Gradle", "AI/ML Integration", "Front-End", "Data Binding", "Android Jetpack", "Retrofit", "Kotlin DSL", "LiveData", "Android SDK", "Git"];
+  const eulixTech = ["Android", "XML", "API Integration", "Gradle", "AI/ML Integration", "Front-End", "Data Binding", "Android Jetpack", "Retrofit", "Kotlin DSL", "LiveData", "Android SDK", "Git", "Agile", "Scrum", "UI/UX Design"];
 
   const experiences: Experience[] = [
     {

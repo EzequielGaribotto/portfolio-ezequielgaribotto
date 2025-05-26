@@ -3,34 +3,26 @@
 
 /* Root Variables */
 :root {
-  /* Base gradient colors for light mode - more distinct pastels */
-  --gradient-primary: #f3f4f8;
-  --gradient-secondary: #e6eeff;
-  --gradient-accent: #efe9f4;
+  --gradient-primary: #a3a6b4;
+  --gradient-secondary: #c6dcdd;
+  --gradient-accent: #667279;
   
-  /* Main background now uses a gradient with more noticeable colors */
   --background: linear-gradient(135deg, var(--gradient-primary) 0%, var(--gradient-secondary) 50%, var(--gradient-accent) 100%);
-  
-  /* Alternative gradient with more visual interest */
-  /* --background: radial-gradient(circle at 20% 20%, #e6eeff 0%, transparent 60%),
-                radial-gradient(circle at 80% 40%, #f0e7fa 0%, transparent 60%),
-                radial-gradient(circle at 40% 80%, #e9f5f9 0%, transparent 60%),
-                #f3f4f8; */
   
   /* RGB versions for transparency - updated to match new colors */
   --background-start-rgb: 243, 244, 248;
   --background-end-rgb: 230, 238, 255;
   
   --foreground: #1a1a1a;
-  --primary: #1f62a0; /* Changed from #0070f3 to #caa550 */
+  --primary: #1f62a0;
   --black: #000000;
-  --primary-hover: #1f62a0; /* Darker variant of #caa550 */
+  --primary-hover: #1f62a0;
   --secondary: #e2e8f0;
   --secondary-hover: #cbd5e1;
   --button-bg: var(--black);
   --button-text: #ffffff;
-  --link: #1f62a0; /* Changed from #0070f3 to #caa550 */
-  --link-hover: #0056b3; /* Changed from #0056b3 to #b89040 */
+  --link: #1f62a0;
+  --link-hover: #0056b3;
 
   --name: #1f62a0;
   --project-title: #1f62a0;
@@ -68,8 +60,8 @@
     /* Copy all dark mode variables here */
     --gradient-primary: #13151a;
     --gradient-secondary: #1a1f2e;
-    --gradient-accent: #202938;
-    --background: linear-gradient(135deg, var(--gradient-primary) 0%, var(--gradient-secondary) 100%);
+    --gradient-accent: #000000;
+    --background: linear-gradient(135deg, var(--gradient-primary) 0%, var(--gradient-secondary) 50%, var(--gradient-accent) 100%);
     --foreground: #f5f5f5;
     --primary: #caa550;
     --primary-hover: #ddb968;
@@ -103,11 +95,11 @@
 [data-theme="dark"] {
   /* Base gradient colors for dark mode */
   --gradient-primary: #13151a;
-  --gradient-secondary: #1a1f2e;
-  --gradient-accent: #202938;
+  --gradient-secondary: #3b3b3d;
+  --gradient-accent: #000000;
   
   /* Main background now uses a gradient */
-  --background: linear-gradient(135deg, var(--gradient-primary) 0%, var(--gradient-secondary) 100%);
+  --background: linear-gradient(135deg, var(--gradient-primary) 0%, var(--gradient-secondary) 50%, var(--gradient-accent) 100%);
   --foreground: #f5f5f5;
   --primary: #caa550; /* Changed from #a5a9ad to #caa550 */
   --primary-hover: #ddb968; /* Lighter variant of #caa550 for dark mode */

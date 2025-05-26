@@ -36,15 +36,22 @@ export const TranslationProvider = ({
   const [pageLoadTime, setPageLoadTime] = useState<number | null>(null);
 
   useEffect(() => {
-    const savedLocale = localStorage.getItem("locale") || initialLocale;
-    const savedTheme = localStorage.getItem("theme") || "light";
-    setLocale(savedLocale);
-    setTheme(savedTheme);
-    document.documentElement.setAttribute("data-theme", savedTheme);
-    
-    // Measure page load time
-    const loadTime = performance.now();
-    setPageLoadTime(Math.round(loadTime));
+    try {
+      const savedLocale = localStorage.getItem("locale") || initialLocale;
+      const savedTheme = localStorage.getItem("theme") || "light";
+      setLocale(savedLocale);
+      setTheme(savedTheme);
+      document.documentElement.setAttribute("data-theme", savedTheme);
+      
+      // Measure page load time
+      const loadTime = performance.now();
+      setPageLoadTime(Math.round(loadTime));
+    } catch (error) {
+      // Fallback if localStorage is not available
+      console.warn('Failed to load saved preferences:', error);
+      setLocale(initialLocale);
+      setTheme("light");
+    }
   }, [initialLocale]);
 
   // Apply theme transition class after initial load - increased delay for better initial rendering
@@ -58,9 +65,15 @@ export const TranslationProvider = ({
   }, []);
 
   const changeTheme = (newTheme: string) => {
-    setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
-    document.documentElement.setAttribute("data-theme", newTheme);
+    try {
+      setTheme(newTheme);
+      localStorage.setItem("theme", newTheme);
+      document.documentElement.setAttribute("data-theme", newTheme);
+    } catch (error) {
+      console.warn('Failed to save theme preference:', error);
+      setTheme(newTheme);
+      document.documentElement.setAttribute("data-theme", newTheme);
+    }
   };
 
   if (!locale) {
@@ -68,36 +81,46 @@ export const TranslationProvider = ({
   }
 
   const t = (key: string) => {
-    const keys = key.split(".");
-    // Adjust type assertion to match the updated NestedTranslation type
-    let value: NestedTranslation = (translations as TranslationsType)[locale];
+    try {
+      const keys = key.split(".");
+      // Adjust type assertion to match the updated NestedTranslation type
+      let value: NestedTranslation = (translations as TranslationsType)[locale];
 
-    // Navigate through the nested properties
-    for (const k of keys) {
-      if (value === undefined || value === null) {
-        console.warn(`Missing translation for key: ${key}`);
-        return key;
-      }
-      const nextValue = value[k];
+      // Navigate through the nested properties
+      for (const k of keys) {
+        if (value === undefined || value === null) {
+          console.warn(`Missing translation for key: ${key}`);
+          return key;
+        }
+        const nextValue = value[k];
 
-      if (typeof nextValue === "string") {
-        return nextValue;
+        if (typeof nextValue === "string") {
+          return nextValue;
+        }
+
+        if (nextValue && typeof nextValue === "object") {
+          value = nextValue as NestedTranslation;
+        } else {
+          console.warn(`Invalid translation for key: ${key}`);
+          return key;
+        }
       }
 
-      if (nextValue && typeof nextValue === "object") {
-        value = nextValue as NestedTranslation;
-      } else {
-        console.warn(`Invalid translation for key: ${key}`);
-        return key;
-      }
+      return key;
+    } catch (error) {
+      console.warn(`Error accessing translation for key: ${key}`, error);
+      return key;
     }
-
-    return key;
   };
 
   const changeLocale = (newLocale: string) => {
-    setLocale(newLocale);
-    localStorage.setItem("locale", newLocale);
+    try {
+      setLocale(newLocale);
+      localStorage.setItem("locale", newLocale);
+    } catch (error) {
+      console.warn('Failed to save locale preference:', error);
+      setLocale(newLocale);
+    }
   };
 
   return (

@@ -20,9 +20,9 @@ export function generateMetadata(): Metadata {
     manifest: `${root}/site.webmanifest`,
     icons: {
       icon: [
-        { url: `${root}/favicon.ico` },
-        { url: `${root}/favicon-16x16.png`, sizes: '16x16', type: 'image/png' },
         { url: `${root}/favicon-32x32.png`, sizes: '32x32', type: 'image/png' },
+        { url: `${root}/favicon-16x16.png`, sizes: '16x16', type: 'image/png' },
+        { url: `/favicon.ico` },
       ],
       apple: `${root}/apple-touch-icon.png`,
       other: [
