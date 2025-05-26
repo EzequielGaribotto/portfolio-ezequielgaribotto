@@ -7,6 +7,7 @@ import translations from '../app/translations';
 import Script from 'next/script';
 import ScrollRestorationWrapper from '../components/ScrollRestorationWrapper';
 import HydrationGuard from '../components/HydrationGuard';
+import CloudflareScripts from '../components/analytics/CloudflareScripts';
 
 // Generate metadata with translations
 export function generateMetadata(): Metadata {
@@ -35,7 +36,7 @@ export function generateMetadata(): Metadata {
     other: {
       'Content-Security-Policy': 
         "default-src 'self'; " +
-        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.cloudflareinsights.com https://static.cloudflareinsights.com; " +
+        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.cloudflareinsights.com https://static.cloudflareinsights.com https://*.cloudflare.com; " +
         "style-src 'self' 'unsafe-inline'; " +
         "img-src 'self' data: blob: https:; " +
         "font-src 'self'; " +
@@ -118,13 +119,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             })();
           `}
         </Script>
-        {/* Cloudflare Web Analytics - Direct token implementation */}
-        <Script 
-          id="cloudflare-analytics"
-          strategy="afterInteractive"
-          src='https://static.cloudflareinsights.com/beacon.min.js' 
-          data-cf-beacon='{"token": "e2f56442b3874b58b8a4d8355050dc2c"}'
-        />
+        
+        {/* Replace direct Cloudflare script with CloudflareScripts component */}
+        <CloudflareScripts />
       </head>
       <body className="antialiased flex flex-col min-h-screen">
         <TranslationProvider initialLocale={initialLocale}>
