@@ -1,48 +1,20 @@
-// Import all Font Awesome icons used across the project
-import { 
-  FaGooglePlay, 
-  FaGamepad,
+// Re-export commonly used icons for easier imports
+export { 
+  FaSun, 
+  FaMoon, 
+  FaGithub, 
+  FaLinkedin, 
+  FaEnvelope,
+  FaFileDownload,
+  FaEye,
+  FaTimes,
+  FaCalendarAlt,
   FaExpand,
   FaCompress,
   FaTrophy,
-  FaGithub,
-  FaLinkedin,
-  FaExternalLinkAlt,
-  FaCode,
-  FaSun,
-  FaMoon,
-  FaEnvelope,
+  FaGooglePlay,
   FaNewspaper,
   FaFilm,
+  FaCode,
   FaListAlt
 } from "react-icons/fa";
-
-// Export all icons for use throughout the application
-export {
-  // Media and platform icons
-  FaGooglePlay, 
-  FaGamepad,
-  
-  // UI control icons
-  FaExpand,
-  FaCompress,
-  FaExternalLinkAlt,
-  
-  // Achievement icons
-  FaTrophy,
-  
-  // Social media icons
-  FaGithub,
-  FaLinkedin,
-  FaEnvelope,
-  
-  // Development icons
-  FaCode,
-  FaSun,
-  FaMoon,
-  
-  // Content categories
-  FaNewspaper,
-  FaFilm,
-  FaListAlt
-};

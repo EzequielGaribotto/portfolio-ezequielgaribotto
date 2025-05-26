@@ -1,21 +1,21 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
-import translations from "../app/translations"; // Updated import path
+import translations from "../app/translations";
+import { useLocalStorage } from "../hooks/useLocalStorage";
+import { STORAGE_KEYS, LOCALE, THEME, ThemeType } from "../constants";
 
-// Define proper interfaces for translation context
 interface TranslationContextType {
   t: (key: string) => string;
   locale: string;
   changeLocale: (newLocale: string) => void;
-  theme: string;
-  changeTheme: (newTheme: string) => void;
+  theme: ThemeType;
+  changeTheme: (newTheme: ThemeType) => void;
   pageLoadTime: number | null;
 }
 
-// Define recursive type for translations
 interface NestedTranslation {
-  [key: string]: string | NestedTranslation | Record<string, unknown>[] | string[]; // Allow arrays of strings
+  [key: string]: string | NestedTranslation | Record<string, unknown>[] | string[];
 }
 
 type TranslationsType = {
@@ -26,33 +26,19 @@ const TranslationContext = createContext<TranslationContextType | null>(null);
 
 export const TranslationProvider = ({
   children,
-  initialLocale = "es",
+  initialLocale = LOCALE.ES,
 }: {
   children: React.ReactNode;
   initialLocale?: string;
 }) => {
-  const [locale, setLocale] = useState<string | null>(null);
-  const [theme, setTheme] = useState<string>("light");
+  const [locale, setLocale] = useLocalStorage(STORAGE_KEYS.LOCALE, initialLocale);
+  const [theme, setTheme] = useLocalStorage<ThemeType>(STORAGE_KEYS.THEME, THEME.LIGHT);
   const [pageLoadTime, setPageLoadTime] = useState<number | null>(null);
 
   useEffect(() => {
-    try {
-      const savedLocale = localStorage.getItem("locale") || initialLocale;
-      const savedTheme = localStorage.getItem("theme") || "light";
-      setLocale(savedLocale);
-      setTheme(savedTheme);
-      document.documentElement.setAttribute("data-theme", savedTheme);
-      
-      // Measure page load time
-      const loadTime = performance.now();
-      setPageLoadTime(Math.round(loadTime));
-    } catch (error) {
-      // Fallback if localStorage is not available
-      console.warn('Failed to load saved preferences:', error);
-      setLocale(initialLocale);
-      setTheme("light");
-    }
-  }, [initialLocale]);
+    document.documentElement.setAttribute("data-theme", theme);
+    setPageLoadTime(Math.round(performance.now()));
+  }, [theme]);
 
   // Apply theme transition class after initial load - increased delay for better initial rendering
   useEffect(() => {
@@ -64,29 +50,16 @@ export const TranslationProvider = ({
     return () => clearTimeout(timer);
   }, []);
 
-  const changeTheme = (newTheme: string) => {
-    try {
-      setTheme(newTheme);
-      localStorage.setItem("theme", newTheme);
-      document.documentElement.setAttribute("data-theme", newTheme);
-    } catch (error) {
-      console.warn('Failed to save theme preference:', error);
-      setTheme(newTheme);
-      document.documentElement.setAttribute("data-theme", newTheme);
-    }
+  const changeTheme = (newTheme: ThemeType) => {
+    setTheme(newTheme);
+    document.documentElement.setAttribute("data-theme", newTheme);
   };
-
-  if (!locale) {
-    return null; // Prevent rendering until locale is determined
-  }
 
   const t = (key: string) => {
     try {
       const keys = key.split(".");
-      // Adjust type assertion to match the updated NestedTranslation type
       let value: NestedTranslation = (translations as TranslationsType)[locale];
 
-      // Navigate through the nested properties
       for (const k of keys) {
         if (value === undefined || value === null) {
           console.warn(`Missing translation for key: ${key}`);
@@ -113,18 +86,8 @@ export const TranslationProvider = ({
     }
   };
 
-  const changeLocale = (newLocale: string) => {
-    try {
-      setLocale(newLocale);
-      localStorage.setItem("locale", newLocale);
-    } catch (error) {
-      console.warn('Failed to save locale preference:', error);
-      setLocale(newLocale);
-    }
-  };
-
   return (
-    <TranslationContext.Provider value={{ t, locale, changeLocale, theme, changeTheme, pageLoadTime }}>
+    <TranslationContext.Provider value={{ t, locale, changeLocale: setLocale, theme, changeTheme, pageLoadTime }}>
       {children}
     </TranslationContext.Provider>
   );

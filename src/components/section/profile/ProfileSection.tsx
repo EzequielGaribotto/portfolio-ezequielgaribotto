@@ -12,6 +12,13 @@ export default function ProfileSection() {
   const { t } = useTranslation();
   const profileImage = "/images/profile/ezequiel-garibotto.webp";
 
+  const handleImageError = () => {
+    // Only log in development mode to reduce noise
+    if (process.env.NODE_ENV === 'development') {
+      console.warn("Profile image failed to load - this is normal if offline");
+    }
+  };
+
   return (
     <div id="profile" className={styles.profileSection}>
       {/* Profile Image - Always on the left */}
@@ -24,9 +31,7 @@ export default function ProfileSection() {
           height={275}
           priority
           sizes="(max-width: 640px) 200px, (max-width: 768px) 250px, 300px"
-          onError={() => {
-            console.error("Failed to load profile image");
-          }}
+          onError={handleImageError}
         />
       </div>
 

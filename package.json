@@ -5,13 +5,18 @@
   "homepage": "https://ezequielgaribotto.com",
   "scripts": {
     "dev": "next dev --turbopack",
+    "dev:watch": "concurrently \"npm run cv:watch\" \"next dev --turbopack\"",
     "build": "next build",
     "predeploy": "next build && (IF NOT EXIST out\\.nojekyll (echo.> out\\.nojekyll))",
     "deploy": "gh-pages -d out --dotfiles",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "update-cv": "node update-cv-metadata.mjs",
+    "cv:watch": "node scripts/watch-cv-changes.mjs",
+    "cv:init": "node scripts/init-cv-metadata.mjs"
   },
   "dependencies": {
+    "chokidar": "^3.6.0",
     "i18next": "^25.0.0",
     "lightningcss": "^1.29.3",
     "next": "15.3.0",
@@ -27,6 +32,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "concurrently": "^9.0.1",
     "eslint": "^9",
     "eslint-config-next": "15.3.0",
     "gh-pages": "^6.3.0",

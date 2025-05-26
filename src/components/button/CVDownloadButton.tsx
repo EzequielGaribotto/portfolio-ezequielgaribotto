@@ -4,114 +4,31 @@ import { useState, useRef, useEffect } from "react";
 import { FaFileDownload, FaEye, FaTimes, FaCalendarAlt } from "react-icons/fa";
 import { useTranslation } from "../../context/TranslationContext";
 import { CVDownloadButtonProps } from "../../models/interfaces";
+import { useCVMetadata } from "../../hooks/useCVMetadata";
+import { formatDate } from "../../utils/dateHelpers";
+import { detectPdfSupport } from "../../utils/browserHelpers";
+import { CV_FILES } from "../../constants";
 
 export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
   const { t, theme, locale } = useTranslation();
+  const { metadata } = useCVMetadata();
   const [isOpen, setIsOpen] = useState(false);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const [previewLang, setPreviewLang] = useState('es');
   const [supportsPdfViewer, setSupportsPdfViewer] = useState(true);
   const [showDateInfo, setShowDateInfo] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
-  const [lastModifiedDates, setLastModifiedDates] = useState({
-    es: null as Date | null,
-    en: null as Date | null
-  });
   const dropdownRef = useRef<HTMLDivElement>(null);
-  
-  // Updated fallback dates - these should be updated when you modify the CVs
-  const fallbackDates = {
-    es: new Date("2024-12-15T10:30:00Z"), // Update this when you modify the Spanish CV
-    en: new Date("2024-12-15T10:30:00Z")  // Update this when you modify the English CV
-  };
-  
-  // Format date to display in a more readable format
-  const formatDate = (date: Date | string | null, includeTime: boolean = false) => {
-    if (!date) return "Unknown";
-    
-    const dateObj = typeof date === 'string' ? new Date(date) : date;
-    const localeString = locale === 'es' ? 'es-ES' : 'en-US';
-    
-    if (includeTime) {
-      return dateObj.toLocaleDateString(localeString, { 
-        year: 'numeric', 
-        month: 'long', 
-        day: 'numeric',
-      }) + ' ' + dateObj.toLocaleTimeString(localeString, {
-        hour: '2-digit',
-        minute: '2-digit'
-      });
-    }
-    
-    return dateObj.toLocaleDateString(localeString, { 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric' 
-    });
-  };
 
-  // Enhanced fetch method that works in both development and production
   useEffect(() => {
-    const fetchLastModifiedDate = async (url: string): Promise<Date | null> => {
-      try {
-        // First try to get the file metadata via HEAD request
-        const response = await fetch(url, { 
-          method: 'HEAD',
-          cache: 'no-cache' // Ensure we get fresh metadata
-        });
-        
-        if (response.ok) {
-          const lastModified = response.headers.get('Last-Modified');
-          if (lastModified) {
-            const date = new Date(lastModified);
-            // Validate the date - sometimes servers return invalid dates
-            if (!isNaN(date.getTime()) && date.getFullYear() > 2020) {
-              return date;
-            }
-          }
-        }
-        
-        // Fallback: try to get file info via a different approach
-        try {
-          const fullResponse = await fetch(url, { 
-            method: 'GET',
-            cache: 'no-cache'
-          });
-          
-          if (fullResponse.ok) {
-            const lastModified = fullResponse.headers.get('Last-Modified');
-            if (lastModified) {
-              const date = new Date(lastModified);
-              if (!isNaN(date.getTime()) && date.getFullYear() > 2020) {
-                return date;
-              }
-            }
-          }
-        } catch (fallbackError) {
-          console.warn(`Fallback fetch failed for ${url}:`, fallbackError);
-        }
-        
-        return null;
-      } catch (error) {
-        console.warn(`Error fetching last modified date for ${url}:`, error);
-        return null;
-      }
-    };
-
-    const getModifiedDates = async () => {
-      const [esDate, enDate] = await Promise.all([
-        fetchLastModifiedDate('/cv/CV_ES_EzequielGaribotto.pdf'),
-        fetchLastModifiedDate('/cv/CV_EN_EzequielGaribotto.pdf')
-      ]);
-      
-      setLastModifiedDates({
-        es: esDate || fallbackDates.es,
-        en: enDate || fallbackDates.en
-      });
-    };
-
-    getModifiedDates();
+    setSupportsPdfViewer(detectPdfSupport());
   }, []);
+
+  const getCurrentDate = () => {
+    if (!metadata) return new Date("2024-12-15T10:30:00Z");
+    const dateString = metadata.lastUpdated[locale as keyof typeof metadata.lastUpdated] || metadata.lastUpdated.es;
+    return new Date(dateString);
+  };
 
   // Handle opening and closing of dropdown
   useEffect(() => {
@@ -134,27 +51,6 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
       if (fadeTimeout) clearTimeout(fadeTimeout);
     };
   }, [isOpen, showDateInfo]);
-
-  // Check if browser supports PDF viewing
-  useEffect(() => {
-    // Simple detection based on user agent
-    const userAgent = navigator.userAgent.toLowerCase();
-    const isMobile = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent);
-    
-    // Most mobile browsers don't support inline PDF viewing well
-    if (isMobile) {
-      setSupportsPdfViewer(false);
-    } else {
-      // For desktop, try to detect PDF support
-      // This is not perfect but gives a reasonable guess
-      const isChrome = userAgent.indexOf('chrome') > -1;
-      const isFirefox = userAgent.indexOf('firefox') > -1;
-      const isSafari = userAgent.indexOf('safari') > -1 && !isChrome;
-      
-      // Chrome, Firefox and modern browsers generally support PDF
-      setSupportsPdfViewer(isChrome || isFirefox || !isSafari);
-    }
-  }, []);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -202,16 +98,12 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
   }, [isPreviewOpen]);
 
   // Define styles that will be shared between button and dropdown
-  const buttonTextColor = "var(--foreground)";
-  const buttonBorderColor = "var(--foreground)";
-  
   const buttonStyle = {
-    color: buttonTextColor,
+    color: "var(--foreground)",
     backgroundColor: 'rgba(255, 255, 255, 0.2)',
     backdropFilter: 'blur(15px)',
     WebkitBackdropFilter: 'blur(15px)',
-    border: '2px solid',
-    borderColor: buttonBorderColor,
+    border: '2px solid var(--foreground)',
     borderRadius: '9999px',
     transition: 'border-color 0.2s ease, color 0.2s ease',
     position: 'relative' as const, // Fix TypeScript error by explicitly typing
@@ -223,12 +115,11 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
   };
 
   const dropdownStyle = {
-    color: buttonTextColor,
+    color: "var(--foreground)",
     backgroundColor: 'rgba(255, 255, 255, 0.25)', // Increased from 0.1 to 0.25
     backdropFilter: 'blur(15px)', // Increased from 5px to 15px
     WebkitBackdropFilter: 'blur(15px)', // Increased from 5px to 15px
-    border: '2px solid',
-    borderColor: buttonBorderColor,
+    border: '2px solid var(--foreground)',
     maxWidth: 'max-content',
     minWidth: 'fit-content',
     transform: 'translateX(-50%)',
@@ -243,8 +134,8 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
 
   return (
     <div className={`relative ${className}`} ref={dropdownRef}>
-      {/* Improved date display with better fallback */}
-      {showDateInfo && (
+      {/* Date display without version */}
+      {showDateInfo && metadata && (
         <div 
           className={`absolute text-center text-xs -top-6 left-1/2 transform -translate-x-1/2 transition-opacity duration-1000 ${fadeOut ? 'opacity-0' : 'opacity-80'}`}
           aria-hidden={fadeOut}
@@ -255,7 +146,7 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
             borderRadius: '4px'
           }}
         >
-          {t("cv.lastUpdated")}: {formatDate(lastModifiedDates.es || fallbackDates.es)}
+          {t("cv.lastUpdated")}: {formatDate(getCurrentDate(), locale)}
         </div>
       )}
       
@@ -267,8 +158,8 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
           Object.assign(e.currentTarget.style, buttonHoverStyle);
         }}
         onMouseOut={(e) => {
-          e.currentTarget.style.color = buttonTextColor;
-          e.currentTarget.style.borderColor = buttonBorderColor;
+          e.currentTarget.style.color = "var(--foreground)";
+          e.currentTarget.style.borderColor = "var(--foreground)";
         }}
       >
         <FaFileDownload className="mr-2" />
@@ -289,10 +180,10 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
                   : 'group-hover:bg-gray-200 group-hover:bg-opacity-50'
               }`}>
                 <a 
-                  href="/cv/CV_ES_EzequielGaribotto.pdf" 
+                  href={CV_FILES.ES}
                   download
                   className="block px-4 py-3 text-sm text-center hover:opacity-80 flex-grow text-center"
-                  style={{ color: buttonTextColor }}
+                  style={{ color: "var(--foreground)" }}
                   onClick={() => setIsOpen(false)}
                 >
                   {t("cv.spanish")}
@@ -309,7 +200,7 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
               </div>
             </div>
             
-            <div style={{ borderTop: `1px solid ${buttonBorderColor}` }}></div>
+            <div style={{ borderTop: `1px solid var(--foreground)` }}></div>
             
             {/* English CV option */}
             <div className="group rounded-b-xl overflow-hidden">
@@ -319,10 +210,10 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
                   : 'group-hover:bg-gray-200 group-hover:bg-opacity-50'
               }`}>
                 <a 
-                  href="/cv/CV_EN_EzequielGaribotto.pdf" 
+                  href={CV_FILES.EN}
                   download
                   className="block px-4 py-3 text-sm text-center hover:opacity-80 flex-grow text-center"
-                  style={{ color: buttonTextColor }}
+                  style={{ color: "var(--foreground)" }}
                   onClick={() => setIsOpen(false)}
                 >
                   {t("cv.english")}
@@ -343,7 +234,7 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
       )}
       
       {/* CV Preview Modal */}
-      {isPreviewOpen && (
+      {isPreviewOpen && metadata && (
         <>
           {/* Fixed backdrop with blur effect */}
           <div 
@@ -360,16 +251,11 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
             <div className="w-full max-w-4xl h-full max-h-[90vh] rounded-lg overflow-hidden flex flex-col pointer-events-auto shadow-2xl">
               <div className="flex items-center justify-between p-2 border-b-0 bg-[#3c3c3c] relative">
-                {/* Left side - Date info with timestamp */}
-                <div className="flex items-center text-white text-xs px-2 opacity-80 min-w-[180px] z-10">
+                {/* Left side - Date info without version */}
+                <div className="flex items-center text-white text-xs px-2 opacity-80 min-w-[200px] z-10">
                   <FaCalendarAlt className="mr-1" />
                   <span>
-                    {formatDate(
-                      previewLang === 'es' 
-                        ? (lastModifiedDates.es || fallbackDates.es)
-                        : (lastModifiedDates.en || fallbackDates.en),
-                      true // Include time
-                    )}
+                    {formatDate(getCurrentDate(), locale, true)}
                   </span>
                 </div>
                 
@@ -389,9 +275,7 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
               
               <div className="flex-1 overflow-auto bg-[#3c3c3c]">
                 <object
-                  data={previewLang === 'es' 
-                    ? '/cv/CV_ES_EzequielGaribotto.pdf' 
-                    : '/cv/CV_EN_EzequielGaribotto.pdf'}
+                  data={previewLang === 'es' ? CV_FILES.ES : CV_FILES.EN}
                   type="application/pdf"
                   className="w-full h-full"
                   style={{ border: 'none', margin: 0, padding: 0 }}
@@ -399,9 +283,7 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
                   <div className="flex flex-col items-center justify-center h-full text-white">
                     <p className="mb-4">{t("cv.unableToDisplay")}</p>
                     <a 
-                      href={previewLang === 'es' 
-                        ? '/cv/CV_ES_EzequielGaribotto.pdf' 
-                        : '/cv/CV_EN_EzequielGaribotto.pdf'} 
+                      href={previewLang === 'es' ? CV_FILES.ES : CV_FILES.EN}
                       download
                       className="px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded-md"
                     >
