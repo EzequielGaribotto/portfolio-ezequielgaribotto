@@ -2,19 +2,28 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 2rem;
+  gap: 3rem; /* Reduced from 2rem to bring elements closer */
   padding: 3rem 1rem;
   justify-content: center;
+  min-height: 420px;
+  position: relative;
+  width: 100%;
+  max-width: 900px; /* Reduced from 1000px to bring elements closer */
+  margin: 0 auto;
 }
 
 .profileImageContainer {
   width: 200px;
   height: 200px;
-  flex-shrink: 0;
+  flex-shrink: 0; /* Prevent shrinking */
+  flex-grow: 0; /* Prevent growing */
   border-radius: 50%;
   overflow: hidden;
   border: 4px solid rgba(0, 112, 243, 0.2);
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  /* Remove absolute positioning */
+  position: relative;
+  align-self: center;
 }
 
 .profileImage {
@@ -30,7 +39,12 @@
   justify-content: center;
   text-align: center;
   padding: 1rem 0;
-  max-width: 32rem;
+  /* Fixed flex properties to prevent shifting */
+  flex: 1;
+  max-width: 400px; /* Constrain width */
+  min-width: 300px; /* Ensure minimum width */
+  min-height: 300px;
+  position: relative;
 }
 
 .name {
@@ -45,10 +59,20 @@
   margin-bottom: 1.5rem;
   text-align: center;
   color: var(--mode-desc, #4b5563);
-  max-width: min(100%, 32ch); /* Increased from 30ch to accommodate the text */
   margin-left: auto;
   margin-right: auto;
   line-height: 1.6;
+  /* Fixed container dimensions to prevent layout shifts */
+  min-height: 5.4rem;
+  width: 100%;
+  max-width: 100%; /* Use full available width */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  box-sizing: border-box;
 }
 
 .buttonSection {
@@ -57,6 +81,8 @@
   gap: 1.5rem;
   align-items: center;
   width: 100%;
+  /* Add fixed height to prevent button section from moving */
+  min-height: 120px;
 }
 
 .socialLinks {
@@ -127,12 +153,15 @@
     flex-direction: column;
     padding: 2rem 1rem;
     margin-top: 2rem;
+    min-height: 500px;
+    gap: 1.5rem; /* Reduced gap on mobile */
   }
 
   .profileImageContainer {
     width: 180px;
     height: 180px;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
+    align-self: center;
   }
   
   .name {
@@ -143,6 +172,21 @@
   .description {
     font-size: 1rem;
     margin-bottom: 1.25rem;
+    /* Adjust for mobile but keep stable */
+    min-height: 5rem;
+    max-width: min(100%, 28ch);
+  }
+
+  .contentContainer {
+    width: 100%;
+    max-width: none;
+    min-width: auto;
+    min-height: 280px;
+  }
+
+  .buttonSection {
+    /* Adjust button section height for mobile */
+    min-height: 100px;
   }
 }
 
@@ -151,12 +195,27 @@
     flex-direction: column;
     padding: 2.5rem 1.5rem;
     margin-top: 1rem;
+    min-height: 480px;
+    gap: 2rem; /* Moderate gap on tablet */
   }
   
   .profileImageContainer {
     width: 225px;
     height: 225px;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
+    align-self: center;
+  }
+  
+  .contentContainer {
+    width: 100%;
+    max-width: none;
+    min-width: auto;
+    min-height: 290px;
+  }
+
+  .description {
+    min-height: 4.8rem;
+    max-width: min(100%, 30ch);
   }
 }
 
@@ -164,6 +223,17 @@
   .profileImageContainer {
     width: 275px;
     height: 275px;
+  }
+
+  .profileSection {
+    min-height: 450px;
+    max-width: 1000px; /* Slightly larger for desktop */
+    gap: 4rem; /* Comfortable spacing for desktop */
+  }
+
+  .contentContainer {
+    max-width: 450px; /* Larger max width for desktop */
+    min-height: 320px;
   }
 }
 

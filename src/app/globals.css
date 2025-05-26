@@ -59,7 +59,7 @@
   :root:not([data-theme]) {
     /* Copy all dark mode variables here */
     --gradient-primary: #13151a;
-    --gradient-secondary: #1a1f2e;
+    --gradient-secondary: #2b2f3a;
     --gradient-accent: #000000;
     --background: linear-gradient(135deg, var(--gradient-primary) 0%, var(--gradient-secondary) 50%, var(--gradient-accent) 100%);
     --foreground: #f5f5f5;
@@ -93,39 +93,45 @@
 
 /* Dark Mode Variables */
 [data-theme="dark"] {
-  /* Base gradient colors for dark mode */
-  --gradient-primary: #13151a;
-  --gradient-secondary: #3b3b3d;
-  --gradient-accent: #000000;
-  
-  /* Main background now uses a gradient */
+  /* Gradient background: deep navy to subtle charcoal with golden accent */
+  --gradient-primary: #0f1115;       /* Very dark bluish gray */
+  --gradient-secondary: #2a2e39;     /* Muted charcoal */
+  --gradient-accent: #1c1f26;        /* Richer dark gray with blue undertones */
+
+  /* Main background now uses a modern, smooth gradient */
   --background: linear-gradient(135deg, var(--gradient-primary) 0%, var(--gradient-secondary) 50%, var(--gradient-accent) 100%);
+
   --foreground: #f5f5f5;
-  --primary: #caa550; /* Changed from #a5a9ad to #caa550 */
-  --primary-hover: #ddb968; /* Lighter variant of #caa550 for dark mode */
+  --primary: #caa550;
+  --primary-hover: #ddb968;
+
   --secondary: #2d3748;
   --secondary-hover: #4a5568;
+
   --name: #caa550;
   --project-title: #caa550;
   --navigation-current: #caa550;
-  /* RGB versions for transparency */
+
+  /* RGB for transparency and effects */
   --foreground-rgb: 245, 245, 245;
-  --background-start-rgb: 19, 21, 26;
-  --background-end-rgb: 26, 31, 46;
+  --background-start-rgb: 15, 17, 21;
+  --background-end-rgb: 42, 46, 57;
   --secondary-rgb: 45, 55, 72;
-  
-  /* Text colors for dark mode */
+
+  /* Typography and links */
   --mode-text: #ffffff;
   --mode-desc: #e5e7eb;
-  --link: #caa550; /* Changed from #81bfc7 to #caa550 */
-  --link-hover: #ddb968; /* Changed from #a0aec0 to #ddb968 */
-  /* Tech tag specific variables for dark mode */
-  --tech-bg: rgba(76, 152, 175, 0.15);
-  --tech-border: rgba(76, 152, 175, 0.6);
+  --link: #caa550;
+  --link-hover: #ddb968;
+
+  /* Tech tags */
+  --tech-bg: rgba(202, 165, 80, 0.1);           /* Subtle gold glow */
+  --tech-border: rgba(202, 165, 80, 0.5);       /* Semi-transparent gold */
   --tech-text: #f5f5f5;
-  --tech-hover-bg: rgba(76, 152, 175, 0.3);
-  --tech-hover-border: rgba(129, 191, 199, 0.8);
+  --tech-hover-bg: rgba(202, 165, 80, 0.25);
+  --tech-hover-border: rgba(221, 185, 104, 0.8);
 }
+
 
 [data-theme="light"] {
   color-scheme: light;
@@ -279,6 +285,8 @@ footer a:hover {
   width: 80%;
   max-width: 1000px;
   transition: none;
+  /* Increased min-height to prevent layout shifts */
+  min-height: 450px; /* Increased from 400px */
 }
 
 @media (min-width: 768px) {
@@ -358,9 +366,9 @@ footer a:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start; /* Changed from center to flex-start */
   text-align: center;
-  min-height: 100vh; /* Ensures full viewport height */
+  min-height: 100vh;
   padding: 2rem;
   width: 100%;
   max-width: 100%;

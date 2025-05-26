@@ -19,13 +19,13 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
   });
   const dropdownRef = useRef<HTMLDivElement>(null);
   
-  // Define fallback dates in case we can't get the metadata
+  // Updated fallback dates - these should be updated when you modify the CVs
   const fallbackDates = {
-    es: "2024-06-15",
-    en: "2024-06-15"
+    es: new Date("2024-12-15T10:30:00Z"), // Update this when you modify the Spanish CV
+    en: new Date("2024-12-15T10:30:00Z")  // Update this when you modify the English CV
   };
   
-  // Format date to display in a more readable format - updated to include time and locale
+  // Format date to display in a more readable format
   const formatDate = (date: Date | string | null, includeTime: boolean = false) => {
     if (!date) return "Unknown";
     
@@ -50,29 +50,63 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
     });
   };
 
-  // Fetch the last modified dates for the PDF files
+  // Enhanced fetch method that works in both development and production
   useEffect(() => {
     const fetchLastModifiedDate = async (url: string): Promise<Date | null> => {
       try {
-        const response = await fetch(url, { method: 'HEAD' });
+        // First try to get the file metadata via HEAD request
+        const response = await fetch(url, { 
+          method: 'HEAD',
+          cache: 'no-cache' // Ensure we get fresh metadata
+        });
+        
         if (response.ok) {
           const lastModified = response.headers.get('Last-Modified');
-          return lastModified ? new Date(lastModified) : null;
+          if (lastModified) {
+            const date = new Date(lastModified);
+            // Validate the date - sometimes servers return invalid dates
+            if (!isNaN(date.getTime()) && date.getFullYear() > 2020) {
+              return date;
+            }
+          }
         }
+        
+        // Fallback: try to get file info via a different approach
+        try {
+          const fullResponse = await fetch(url, { 
+            method: 'GET',
+            cache: 'no-cache'
+          });
+          
+          if (fullResponse.ok) {
+            const lastModified = fullResponse.headers.get('Last-Modified');
+            if (lastModified) {
+              const date = new Date(lastModified);
+              if (!isNaN(date.getTime()) && date.getFullYear() > 2020) {
+                return date;
+              }
+            }
+          }
+        } catch (fallbackError) {
+          console.warn(`Fallback fetch failed for ${url}:`, fallbackError);
+        }
+        
         return null;
       } catch (error) {
-        console.error(`Error fetching last modified date for ${url}:`, error);
+        console.warn(`Error fetching last modified date for ${url}:`, error);
         return null;
       }
     };
 
     const getModifiedDates = async () => {
-      const esDate = await fetchLastModifiedDate('/cv/CV_ES_EzequielGaribotto.pdf');
-      const enDate = await fetchLastModifiedDate('/cv/CV_EN_EzequielGaribotto.pdf');
+      const [esDate, enDate] = await Promise.all([
+        fetchLastModifiedDate('/cv/CV_ES_EzequielGaribotto.pdf'),
+        fetchLastModifiedDate('/cv/CV_EN_EzequielGaribotto.pdf')
+      ]);
       
       setLastModifiedDates({
-        es: esDate,
-        en: enDate
+        es: esDate || fallbackDates.es,
+        en: enDate || fallbackDates.en
       });
     };
 
@@ -209,7 +243,7 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
 
   return (
     <div className={`relative ${className}`} ref={dropdownRef}>
-      {/* Improved date display - single line with nowrap */}
+      {/* Improved date display with better fallback */}
       {showDateInfo && (
         <div 
           className={`absolute text-center text-xs -top-6 left-1/2 transform -translate-x-1/2 transition-opacity duration-1000 ${fadeOut ? 'opacity-0' : 'opacity-80'}`}
