@@ -35,11 +35,11 @@ export function generateMetadata(): Metadata {
     other: {
       'Content-Security-Policy': 
         "default-src 'self'; " +
-        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://static.cloudflareinsights.com; " +
+        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.cloudflareinsights.com; " +
         "style-src 'self' 'unsafe-inline'; " +
         "img-src 'self' data: blob: https:; " +
         "font-src 'self'; " +
-        "connect-src 'self' https://cloudflareinsights.com; " + // Add cloudflareinsights.com to connect-src
+        "connect-src 'self' https://*.cloudflareinsights.com https://cloudflareinsights.com/cdn-cgi/* https://*.cloudflare.com; " +
         "frame-src 'self' blob: data:; " +
         "object-src 'self'; " +
         "base-uri 'self'; " +
