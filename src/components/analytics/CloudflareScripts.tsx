@@ -73,12 +73,22 @@ export default function CloudflareScripts() {
     };
   }, []);
 
-  // Use different configuration for dev vs production
-  const beaconConfig = {
-    token: "e2f56442b3874b58b8a4d8355050dc2c",
-    spa: true,
-    // Disable RUM in development to avoid CORS errors
-    ...(window.location.hostname === 'localhost' ? { disableRUM: true } : {})
+  // Use different configuration for dev vs production - with SSR safety
+  const getBeaconConfig = () => {
+    const baseConfig = {
+      token: "e2f56442b3874b58b8a4d8355050dc2c",
+      spa: true,
+    };
+
+    // Only add development-specific config on client side
+    if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+      return {
+        ...baseConfig,
+        disableRUM: true
+      };
+    }
+
+    return baseConfig;
   };
 
   return (
@@ -88,7 +98,7 @@ export default function CloudflareScripts() {
         id="cloudflare-analytics"
         strategy="afterInteractive"
         src='https://static.cloudflareinsights.com/beacon.min.js' 
-        data-cf-beacon={JSON.stringify(beaconConfig)}
+        data-cf-beacon={JSON.stringify(getBeaconConfig())}
       />
     </>
   );
