@@ -27,7 +27,8 @@ export const es: Translations = {
     sourceCode: "Ver código fuente",
     logo: "Visita mi perfil de GitHub",
     expandImage: "Ampliar imagen",
-    closeImage: "Cerrar imagen"
+    closeImage: "Cerrar imagen",
+    playArcadeGame: "Jugar Juego Arcade"
   },
   footer: {
     disclaimer: "© 2025 Ezequiel Garibotto.",
@@ -47,6 +48,18 @@ export const es: Translations = {
     unableToDisplay: "No se puede mostrar el archivo PDF.",
     downloadInstead: "Descargar en su lugar",
     lastUpdated: "Última actualización"
+  },
+  search: {
+    placeholder: "Buscar proyectos por título, descripción o tecnología...",
+    clearFilters: "Limpiar filtros",
+    noResults: "No se encontraron proyectos que coincidan con tus criterios",
+    showingAll: "Mostrando todos los {count} proyectos",
+    showingLimited: "Mostrando {count} proyectos de {total}",
+    showingFiltered: "Mostrando {filtered} de {total} proyectos",
+    filtered: "(filtrado)",
+    tryAdjusting: "Intenta ajustar tus criterios de búsqueda o eliminar algunos filtros.",
+    showAllLink: "Ver todos los proyectos",
+    showLessLink: "Ver menos"
   },
   projects: {
     title: "Proyectos",
@@ -76,7 +89,30 @@ export const es: Translations = {
       footer: "Entrevista técnica",
       startDate: "abril 2025",
       endDate: "abril 2025"
-    }
+    },
+    zomb: {
+      title: "Zomb - Juego Retro",
+      description: "Juego retro de desplazamiento horizontal infinito desarrollado con Makecode Arcade. Incluye sistema de colisiones, enemigos que siguen al jugador, y mecánicas de supervivencia en un entorno zombie.",
+      footer: "Proyecto Personal",
+      startDate: "noviembre 2024",
+      endDate: "diciembre 2024"
+    },
+    cronScheduleEditor: {
+      title: "Editor de Programación CRON",
+      description: "Editor visual e intuitivo para crear y gestionar expresiones cron. Herramienta web que permite construir programaciones cron sin necesidad de memorizar la sintaxis, desarrollada para mejorar mi comprensión de useEffect.",
+      footer: "Proyecto de Aprendizaje",
+      startDate: "enero 2025",
+      endDate: "enero 2025"
+    },
+    mapsApp: {
+      title: "Aplicación CRUD de Mapas",
+      description: "Aplicación Android completa con operaciones CRUD para marcadores de mapas. Incluye sistema de registro, login y almacenamiento de datos de usuario (nombre, foto de perfil, fotos capturadas) en Firebase Database.",
+      footer: "Proyecto Académico",
+      startDate: "marzo 2024",
+      endDate: "junio 2024"
+    },
+    showAllProjects: "Mostrar Todos los Proyectos",
+    showLess: "Mostrar Menos"
   },
   experiences: {
     title: "Experiencia profesional",

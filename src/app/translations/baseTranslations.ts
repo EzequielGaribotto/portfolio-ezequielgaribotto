@@ -25,7 +25,8 @@ export const baseTranslations = {
         logo: "",
         expandImage: "",
         closeImage: "",
-        solvedProblems: ""
+        solvedProblems: "",
+        playArcadeGame: ""
     },
     // Footer translations
     footer: {
@@ -47,6 +48,19 @@ export const baseTranslations = {
         unableToDisplay: "", // New translation key
         downloadInstead: "", // New translation key
         lastUpdated: "" // Add missing lastUpdated key to fix TypeScript error
+    },
+    // Search functionality translations
+    search: {
+        placeholder: "",
+        clearFilters: "",
+        noResults: "",
+        showingAll: "",
+        showingLimited: "",
+        showingFiltered: "",
+        filtered: "",
+        tryAdjusting: "",
+        showAllLink: "",
+        showLessLink: ""
     },
     // Projects section translations
     projects: {
@@ -80,7 +94,30 @@ export const baseTranslations = {
             footer: string,
             startDate: string,
             endDate?: string | null
-        }
+        },
+        zomb: {} as {
+            title: string,
+            description: string,
+            footer: string,
+            startDate: string,
+            endDate?: string | null
+        },
+        cronScheduleEditor: {} as {
+            title: string,
+            description: string,
+            footer: string,
+            startDate: string,
+            endDate?: string | null
+        },
+        mapsApp: {} as {
+            title: string,
+            description: string,
+            footer: string,
+            startDate: string,
+            endDate?: string | null
+        },
+        showAllProjects: "", // New translation key for "show all projects" button
+        showLess: "" // New translation key for "show less" button
     },
     experiences: {
         title: "",

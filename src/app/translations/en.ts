@@ -27,7 +27,8 @@ export const en: Translations = {
     sourceCode: "View source code",
     logo: "Visit my GitHub profile",
     expandImage: "Expand image",
-    closeImage: "Close image"
+    closeImage: "Close image",
+    playArcadeGame: "Play Arcade Game"
   },
   footer: {
     disclaimer: "© 2025 Ezequiel Garibotto.",
@@ -47,6 +48,18 @@ export const en: Translations = {
     unableToDisplay: "Unable to display PDF file.",
     downloadInstead: "Download Instead",
     lastUpdated: "Last updated"
+  },
+  search: {
+    placeholder: "Search projects by title, description, or technology...",
+    clearFilters: "Clear filters",
+    noResults: "No projects found matching your criteria",
+    showingAll: "Showing all {count} projects",
+    showingLimited: "Showing {count} projects out of {total}",
+    showingFiltered: "Showing {filtered} of {total} projects",
+    filtered: "(filtered)",
+    tryAdjusting: "Try adjusting your search criteria or removing some filters.",
+    showAllLink: "Show all projects",
+    showLessLink: "Show less"
   },
   projects: {
     title: "Projects",
@@ -76,7 +89,30 @@ export const en: Translations = {
       footer: "Technical Interview",
       startDate: "April 2025",
       endDate: "April 2025"
-    }
+    },
+    zomb: {
+      title: "Zomb - Retro Game",
+      description: "Infinite horizontal scroller retro game made with Makecode Arcade, featuring collision systems, enemies that follow the player, and survival mechanics in a zombie environment.",
+      footer: "Personal Project",
+      startDate: "November 2024",
+      endDate: "December 2024"
+    },
+    cronScheduleEditor: {
+      title: "CRON Schedule Editor",
+      description: "User-friendly visual editor for creating and managing cron expressions. Web tool that helps build cron schedules without memorizing the syntax, developed to improve my understanding of useEffect.",
+      footer: "Learning Project",
+      startDate: "January 2025",
+      endDate: "January 2025"
+    },
+    mapsApp: {
+      title: "Maps CRUD Application",
+      description: "Complete Android CRUD app for map markers with user registration, login, and Firebase Database storage for user data (name, profile picture, captured photos).",
+      footer: "Academic Project",
+      startDate: "March 2024",
+      endDate: "June 2024"
+    },
+    showAllProjects: "Show All Projects",
+    showLess: "Show Less"
   },
   experiences: {
     title: "Work experience",

@@ -56,3 +56,15 @@
     padding: 0;
   }
 }
+
+.noResultsMessage {
+  text-align: center;
+  padding: 2rem;
+  color: var(--foreground-muted);
+  font-style: italic;
+}
+
+.noResultsMessage p {
+  margin: 0;
+  font-size: 1rem;
+}

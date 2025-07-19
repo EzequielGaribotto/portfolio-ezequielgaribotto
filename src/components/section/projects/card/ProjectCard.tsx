@@ -1,11 +1,13 @@
 "use client";
 
 import { FaExpand, FaCompress, FaTrophy, FaGooglePlay, FaNewspaper, FaFilm, FaCode, FaListAlt } from "../../../../utils/icons";
-import { useState, useRef, useEffect } from "react";
+import { FaGamepad, FaClock, FaMap, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { useTranslation } from "../../../../context/TranslationContext";
 import { Project } from "../../../../models/Project";
 import ClickableButton from "../../../button/ClickableButton";
 import OptimizedImage from '../../../OptimizedImage';
+import ImageCarousel from './ImageCarousel';
 import styles from './ProjectCard.module.css';
 
 interface ProjectCardProps {
@@ -16,14 +18,41 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   const { t, theme } = useTranslation();
   const fallbackImage = "/images/projects/fallback.webp";
   const [isExpanded, setIsExpanded] = useState(false);
+  const [expandedImageIndex, setExpandedImageIndex] = useState(0);
+  const [isDraggingExpanded, setIsDraggingExpanded] = useState(false);
+  const [startXExpanded, setStartXExpanded] = useState(0);
+  const [dragOffsetExpanded, setDragOffsetExpanded] = useState(0);
+  const [hasDraggedExpanded, setHasDraggedExpanded] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
+  const expandedContainerRef = useRef<HTMLDivElement>(null);
   
-  // Handle escape key to close expanded image
+  // Expanded view navigation functions
+  const nextExpandedImage = useCallback(() => {
+    if (project.images && project.images.length > 1) {
+      setExpandedImageIndex((prev) => (prev + 1) % project.images!.length);
+    }
+  }, [project.images]);
+
+  const prevExpandedImage = useCallback(() => {
+    if (project.images && project.images.length > 1) {
+      setExpandedImageIndex((prev) => (prev - 1 + project.images!.length) % project.images!.length);
+    }
+  }, [project.images]);
+  
+  // Handle escape key to close expanded image and arrow keys for navigation
   useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isExpanded) {
+    const handleKeyboard = (e: KeyboardEvent) => {
+      if (!isExpanded) return;
+      
+      if (e.key === 'Escape') {
         setIsExpanded(false);
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        prevExpandedImage();
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        nextExpandedImage();
       }
     };
     
@@ -33,7 +62,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       const header = document.querySelector('header');
       if (header) header.style.display = 'none';
       
-      window.addEventListener('keydown', handleEscape);
+      window.addEventListener('keydown', handleKeyboard);
     } else {
       document.body.style.overflow = '';
       // Show header when image is closed
@@ -47,9 +76,9 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       const header = document.querySelector('header');
       if (header) header.style.display = '';
       
-      window.removeEventListener('keydown', handleEscape);
+      window.removeEventListener('keydown', handleKeyboard);
     };
-  }, [isExpanded]);
+  }, [isExpanded, nextExpandedImage, prevExpandedImage]);
   
   // Handle clicks outside the expanded image to close it
   useEffect(() => {
@@ -79,6 +108,89 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     e.stopPropagation();
   };
 
+  // Expanded view drag handlers
+  const handleExpandedMouseDown = (e: React.MouseEvent) => {
+    if (!project.images || project.images.length <= 1) return;
+    setIsDraggingExpanded(true);
+    setHasDraggedExpanded(false);
+    setStartXExpanded(e.clientX);
+    setDragOffsetExpanded(0);
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  const handleExpandedMouseMove = (e: React.MouseEvent) => {
+    if (!isDraggingExpanded) return;
+    const currentX = e.clientX;
+    const offset = currentX - startXExpanded;
+    setDragOffsetExpanded(offset);
+    
+    // If we've moved more than 10px, consider it a drag
+    if (Math.abs(offset) > 10) {
+      setHasDraggedExpanded(true);
+    }
+  };
+
+  const handleExpandedMouseUp = () => {
+    if (!isDraggingExpanded) return;
+    setIsDraggingExpanded(false);
+    
+    // Threshold for slide change (100px)
+    const threshold = 100;
+    
+    if (hasDraggedExpanded) {
+      if (dragOffsetExpanded > threshold) {
+        prevExpandedImage();
+      } else if (dragOffsetExpanded < -threshold) {
+        nextExpandedImage();
+      }
+    }
+    
+    setDragOffsetExpanded(0);
+    
+    // Reset drag state after a short delay
+    setTimeout(() => setHasDraggedExpanded(false), 100);
+  };
+
+  // Expanded view touch handlers
+  const handleExpandedTouchStart = (e: React.TouchEvent) => {
+    if (!project.images || project.images.length <= 1) return;
+    setIsDraggingExpanded(true);
+    setHasDraggedExpanded(false);
+    setStartXExpanded(e.touches[0].clientX);
+    setDragOffsetExpanded(0);
+    e.stopPropagation();
+  };
+
+  const handleExpandedTouchMove = (e: React.TouchEvent) => {
+    if (!isDraggingExpanded) return;
+    const currentX = e.touches[0].clientX;
+    const offset = currentX - startXExpanded;
+    setDragOffsetExpanded(offset);
+    
+    if (Math.abs(offset) > 10) {
+      setHasDraggedExpanded(true);
+    }
+  };
+
+  const handleExpandedTouchEnd = () => {
+    if (!isDraggingExpanded) return;
+    setIsDraggingExpanded(false);
+    
+    const threshold = 100;
+    
+    if (hasDraggedExpanded) {
+      if (dragOffsetExpanded > threshold) {
+        prevExpandedImage();
+      } else if (dragOffsetExpanded < -threshold) {
+        nextExpandedImage();
+      }
+    }
+    
+    setDragOffsetExpanded(0);
+    setTimeout(() => setHasDraggedExpanded(false), 100);
+  };
+
   // Function to get the appropriate icon based on project ID
   const getProjectIcon = () => {
     switch (project.id) {
@@ -87,11 +199,17 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       case 'eulix':
         return <FaFilm className="mr-2 text-primary" />;
       case 'competitive-programming':
-        return <FaCode className="mr-2 text-primary" />;
+        return <FaTrophy className="mr-2 text-primary" />;
       case 'rick-and-morty-api-list':
         return <FaListAlt className="mr-2 text-primary" />;
+      case 'zomb':
+        return <FaGamepad className="mr-2 text-primary" />;
+      case 'cron-schedule-editor':
+        return <FaClock className="mr-2 text-primary" />;
+      case 'maps-app':
+        return <FaMap className="mr-2 text-primary" />;
       default:
-        return null;
+        return <FaCode className="mr-2 text-primary" />;
     }
   };
 
@@ -138,24 +256,37 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         
         <div className={styles.projectImageContainer}>
           <div className={styles.projectImageWrapper}>
-            <button 
-              className={styles.expandControl} 
-              onClick={toggleExpand} 
-              aria-label={t("tooltips.expandImage")}
-            >
-              <FaExpand size={16} />
-            </button>
-            <OptimizedImage
-              src={project.image || fallbackImage}
-              alt={project.title || "Project image"}
-              width={600}
-              height={400}
-              className="rounded-lg cursor-pointer"
-              loading="lazy"
-              sizes="(max-width: 640px) 95vw, (max-width: 768px) 45vw, 600px"
-              quality={75}
-              onClick={toggleExpand}
-            />
+            {project.images && project.images.length > 0 ? (
+              <ImageCarousel
+                images={project.images}
+                projectTitle={project.title}
+                onExpand={(imageIndex) => {
+                  setExpandedImageIndex(imageIndex);
+                  setIsExpanded(true);
+                }}
+              />
+            ) : (
+              <>
+                <button 
+                  className={styles.expandControl} 
+                  onClick={toggleExpand} 
+                  aria-label={t("tooltips.expandImage")}
+                >
+                  <FaExpand size={16} />
+                </button>
+                <OptimizedImage
+                  src={project.image || fallbackImage}
+                  alt={project.title || "Project image"}
+                  width={600}
+                  height={400}
+                  className="rounded-lg cursor-pointer"
+                  loading="lazy"
+                  sizes="(max-width: 640px) 95vw, (max-width: 768px) 45vw, 600px"
+                  quality={75}
+                  onClick={toggleExpand}
+                />
+              </>
+            )}
           </div>
           
           {/* Project footer - added below image */}
@@ -178,6 +309,22 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         )}
 
         <div className={styles.projectLinks}>
+          {project.arcadeLink && (
+            <ClickableButton
+              href={project.arcadeLink}
+              className={`${styles.socialIcon} ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : 'bg-blue-400 hover:bg-blue-300'} rounded-full`}
+              tooltipKey="tooltips.playArcadeGame"
+            >
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                viewBox="0 0 24 24" 
+                fill="currentColor" 
+                className="w-5 h-5 text-white hover:text-primary transition-colors duration-400"
+              >
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </ClickableButton>
+          )}
           {project.programameLink && (
             <ClickableButton
               href={project.programameLink}
@@ -221,7 +368,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         </div>
       </div>
       
-      {/* Modal-like expanded image overlay */}
+      {/* Modal-like expanded image overlay with carousel */}
       <div 
         className={`${styles.expandedBackdrop} ${isExpanded ? styles.active : ''}`} 
         onClick={() => {
@@ -234,6 +381,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         className={`${styles.expandedImageOverlay} ${isExpanded ? styles.active : ''}`}
         onClick={(e) => e.stopPropagation()}
       >
+        {/* Close button */}
         <button 
           className={styles.expandControl} 
           onClick={() => {
@@ -241,30 +389,116 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             setIsExpanded(false);
           }} 
           aria-label={t("tooltips.closeImage")}
-          style={{ position: 'absolute', top: '10px', right: '10px', zIndex: 101 }}
+          style={{ position: 'absolute', top: '30px', right: '30px', zIndex: 105 }}
         >
-          <FaCompress size={16} />
+          <FaCompress size={20} />
         </button>
-        <div className="w-full flex justify-center items-center">
-          <OptimizedImage
-            src={project.image || fallbackImage}
-            alt={project.title || "Project image"}
-            width={1920}
-            height={1080}
-            className="rounded-lg object-contain"
-            style={{ 
-              maxWidth: '100%', 
-              width: 'auto', 
-              maxHeight: '75vh', 
-              height: 'auto',
-              margin: '0 auto',
-              display: 'block'
+
+        {/* Carousel container */}
+        <div 
+          ref={expandedContainerRef}
+          className={styles.expandedCarouselContainer}
+          onMouseDown={handleExpandedMouseDown}
+          onMouseMove={handleExpandedMouseMove}
+          onMouseUp={handleExpandedMouseUp}
+          onTouchStart={handleExpandedTouchStart}
+          onTouchMove={handleExpandedTouchMove}
+          onTouchEnd={handleExpandedTouchEnd}
+          style={{
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            position: 'relative',
+            cursor: isDraggingExpanded ? 'grabbing' : 'grab'
+          }}
+        >
+          {/* Main image display */}
+          <div 
+            style={{
+              width: '100%',
+              height: '100%',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              transform: `translateX(${dragOffsetExpanded}px)`,
+              transition: isDraggingExpanded ? 'none' : 'transform 0.3s ease'
             }}
-            loading="eager"
-            sizes="(max-width: 1200px) 90vw, 1080px"
-            quality={100}
-            priority
-          />
+          >
+            <OptimizedImage
+              src={project.images && project.images.length > 0 ? 
+                project.images[expandedImageIndex] : 
+                (project.image || fallbackImage)}
+              alt={`${project.title || "Project image"} ${expandedImageIndex + 1}`}
+              width={1920}
+              height={1080}
+              className="rounded-lg object-contain"
+              style={{ 
+                maxWidth: '90%', 
+                width: 'auto', 
+                maxHeight: '80vh', 
+                height: 'auto',
+                margin: '0 auto',
+                display: 'block',
+                userSelect: 'none',
+                pointerEvents: isDraggingExpanded ? 'none' : 'auto'
+              }}
+              loading="eager"
+              sizes="90vw"
+              quality={100}
+              priority
+            />
+          </div>
+
+          {/* Navigation arrows - only show if multiple images */}
+          {project.images && project.images.length > 1 && (
+            <>
+              <button
+                className={styles.expandedNavButton}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  prevExpandedImage();
+                }}
+                style={{ left: '30px' }}
+                aria-label="Previous image"
+              >
+                <FaChevronLeft size={24} />
+              </button>
+              
+              <button
+                className={styles.expandedNavButton}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  nextExpandedImage();
+                }}
+                style={{ right: '30px' }}
+                aria-label="Next image"
+              >
+                <FaChevronRight size={24} />
+              </button>
+            </>
+          )}
+
+          {/* Dots indicator - only show if multiple images */}
+          {project.images && project.images.length > 1 && (
+            <div className={styles.expandedDotsContainer}>
+              {project.images.map((_, index) => (
+                <button
+                  key={index}
+                  className={`${styles.expandedDot} ${index === expandedImageIndex ? styles.expandedDotActive : ''}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setExpandedImageIndex(index);
+                  }}
+                  aria-label={`Go to image ${index + 1}`}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </>
