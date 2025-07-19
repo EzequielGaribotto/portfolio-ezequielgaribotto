@@ -9,7 +9,7 @@ export function useProjectSearch(projects: Project[]) {
 
   const filteredProjects = useMemo(() => {
     // Default projects to show when no filters are applied
-    const defaultProjects = ["neutral-news", "eulix", "competitive-programming", "rick-and-morty-api-list"];
+    const defaultProjects = ["neutral-news", "eulix", "competitive-programming", "barcelona-inequality"];
     
     let filtered = projects;
 

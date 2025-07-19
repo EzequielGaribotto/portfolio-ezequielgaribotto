@@ -14,16 +14,16 @@ export default function ProjectsSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   const eulixTech = ["Android", "Kotlin", "UI", "UX", "Retrofit", "DataBinding", "MVVM", "XML", "Kotlin DSL", "LiveData", "Git", "Agile", "RESTful API", "International Team"];
-  const neutralNewsTech = ["Android", "Kotlin", "Back-end", "Firebase", "Google Cloud Platform", "Python", "AI", "Machine Learning", "ETL", "Scraping", "Crawling", "Parsing", "Docker", "Pandas", "NoSQL", "BeautifulSoup", "Clustering", "Generative AI", "NumPy", "NLP", "Google Colab", "Jupyter Notebooks", "Dagger", "Hilt", "DAO", "Room", "Datastore", "UI", "UX"];
+  const neutralNewsTech = ["Back-end", "Python", "Android", "Kotlin", "UI", "UX", "Firebase", "Google Cloud Platform", "AI", "Machine Learning", "ETL", "Scraping", "Crawling", "Parsing", "Docker", "Pandas", "NoSQL", "BeautifulSoup", "Clustering", "Generative AI", "NumPy", "NLP", "Google Colab", "Jupyter Notebooks", "Dagger", "Hilt", "DAO", "Room", "Datastore"];
   const compTech = ["Java", "Algorithms", "Data Structures", "Problem Solving"];
-  const apiListTech = ["Android", "Java", "Caching", "Coroutines", "Android SDK", "UX"];
-  const zombTech = ["Game Development", "Python", "MakeCode Arcade", "Collision Detection", "Retro Gaming"];
-  const cronTech = ["Front-end", "React", "TypeScript", "Vite", "CSS", "JavaScript", "HTML", "Web", "useEffect"];
-  const mapsTech = ["Android", "Kotlin", "Firebase", "Google Maps API", "CRUD", "Authentication", "Firebase", "Database"];
-  const portfolioTech = ["Front-end", "React", "Next.js", "TypeScript", "TailwindCSS", "Portfolio", "Node.js", "Web Development", "Responsive Design", "Theme Switching", "Multi-language"];
-  const peleaDeGallosTech = ["Back-end", "Front-end", "Ktor", "Client-server Communication", "Kotlin", "File processing", "Data access", "NoSQL", "MongoDB"];
-  const hackerNewsAPITech = ["Python", "FastAPI", "Web Scraping", "API", "Docker", "TDD", "Caching", "Back-end", "Data Processing"];
-  const barcelonaInequalityTech = ["Python", "Machine Learning", "Data Processing", "Classification", "Statistical Analysis", "Data Visualization", "Pandas", "NumPy", "Google Colab", "Jupyter Notebooks", "AI", "Socioeconomic Analysis"];
+  const apiListTech = ["Android", "Java", "UX", "Caching", "Coroutines", "Android SDK"];
+  const zombTech = ["Game Development", "UX", "Python", "MakeCode Arcade", "Collision Detection", "Retro Gaming"];
+  const cronTech = ["Front-end", "UX", "React", "TypeScript", "Vite", "CSS", "JavaScript", "HTML", "Web", "useEffect"];
+  const mapsTech = ["Android", "UI", "UX", "Kotlin", "Firebase", "Google Maps API", "CRUD", "Authentication", "Database"];
+  const portfolioTech = ["Front-end", "UI", "UX", "React", "Next.js", "TypeScript", "TailwindCSS", "Portfolio", "Node.js", "Web Development", "Responsive Design", "Theme Switching", "Multi-language"];
+  const peleaDeGallosTech = ["Back-end", "Front-end", "Kotlin", "Ktor", "UI", "UX", "Client-server Communication", "File processing", "Data access", "NoSQL", "MongoDB"];
+  const hackerNewsAPITech = ["Back-end", "Python", "FastAPI", "Web Scraping", "API", "Docker", "TDD", "Caching", "Data Processing"];
+  const barcelonaInequalityTech = ["Back-end", "Python", "Machine Learning", "Data Processing", "Classification", "Statistical Analysis", "Data Visualization", "Pandas", "NumPy", "Google Colab", "Jupyter Notebooks", "AI", "Socioeconomic Analysis"];
 
   const projects: Project[] = [
     {
@@ -96,6 +96,7 @@ export default function ProjectsSection() {
       footer: t("projects.hackerNewsAPI.footer"),
       startDate: t("projects.hackerNewsAPI.startDate"),
       endDate: t("projects.hackerNewsAPI.endDate"),
+      image: "/images/projects/hackernews.webp",
       technologies: hackerNewsAPITech,
       repoLink: "https://github.com/EzequielGaribotto/HackerNews-Scraper-API"
     },
