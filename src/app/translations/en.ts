@@ -42,10 +42,11 @@ export const en: Translations = {
     download: "Download CV",
     spanish: "Spanish CV",
     english: "English CV",
+    english_ats: "English CV (ATS)",
     preview: "Preview CV",
     unableToDisplay: "Unable to display PDF file.",
     downloadInstead: "Download Instead",
-    lastUpdated: "Last updated" // Add this new key
+    lastUpdated: "Last updated"
   },
   projects: {
     title: "Projects",

@@ -177,6 +177,27 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
     setIsOpen(false);
   };
 
+  const cvOptions = [
+    {
+      key: 'es',
+      label: t("cv.spanish"),
+      file: CV_FILES.ES,
+      previewLang: 'es'
+    },
+    {
+      key: 'en',
+      label: t("cv.english"),
+      file: CV_FILES.EN,
+      previewLang: 'en'
+    },
+    {
+      key: 'en_ats',
+      label: t("cv.english_ats"),
+      file: CV_FILES.EN_ATS,
+      previewLang: 'en_ats'
+    }
+  ];
+
   return (
     <div className={`relative ${className}`} ref={dropdownRef}>
       {/* Date display without version */}
@@ -217,63 +238,45 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
           style={dropdownStyle}
         >
           <div className="flex flex-col w-full">
-            {/* Spanish CV option */}
-            <div className="group rounded-t-xl overflow-hidden">
-              <div className={`flex items-center justify-center w-full ${
-                theme === 'dark' 
-                  ? 'group-hover:bg-gray-700 group-hover:bg-opacity-50' 
-                  : 'group-hover:bg-gray-200 group-hover:bg-opacity-50'
-              }`}>
-                <a 
-                  href={CV_FILES.ES}
-                  download
-                  className="block px-4 py-3 text-sm text-center hover:opacity-80 flex-grow text-center"
-                  style={{ color: "var(--foreground)" }}
-                  onClick={() => setIsOpen(false)}
-                >
-                  {t("cv.spanish")}
-                </a>
-                {supportsPdfViewer && (
-                  <button 
-                    onClick={() => handlePreview('es')}
-                    className="px-3 py-3 text-sm opacity-70 hover:opacity-100 transition-all duration-300"
-                    aria-label={`${t("cv.preview")} ${t("cv.spanish")}`}
-                  >
-                    <FaEye size={20} className="transform hover:scale-110 transition-transform duration-300" />
-                  </button>
+            {cvOptions.map((option, index) => (
+              <div key={option.key}>
+                {/* CV option */}
+                <div className={`group overflow-hidden ${
+                  index === 0 ? 'rounded-t-xl' : 
+                  index === cvOptions.length - 1 ? 'rounded-b-xl' : ''
+                }`}>
+                  <div className={`flex items-center justify-center w-full ${
+                    theme === 'dark' 
+                      ? 'group-hover:bg-gray-700 group-hover:bg-opacity-50' 
+                      : 'group-hover:bg-gray-200 group-hover:bg-opacity-50'
+                  }`}>
+                    <a 
+                      href={option.file}
+                      download
+                      className="block px-4 py-3 text-sm text-center hover:opacity-80 flex-grow"
+                      style={{ color: "var(--foreground)" }}
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {option.label}
+                    </a>
+                    {supportsPdfViewer && (
+                      <button 
+                        onClick={() => handlePreview(option.previewLang)}
+                        className="px-3 py-3 text-sm opacity-70 hover:opacity-100 transition-all duration-300"
+                        aria-label={`${t("cv.preview")} ${option.label}`}
+                      >
+                        <FaEye size={20} className="transform hover:scale-110 transition-transform duration-300" />
+                      </button>
+                    )}
+                  </div>
+                </div>
+                
+                {/* Separator line - only show between items, not after the last one */}
+                {index < cvOptions.length - 1 && (
+                  <div style={{ borderTop: `1px solid var(--foreground)` }}></div>
                 )}
               </div>
-            </div>
-            
-            <div style={{ borderTop: `1px solid var(--foreground)` }}></div>
-            
-            {/* English CV option */}
-            <div className="group rounded-b-xl overflow-hidden">
-              <div className={`flex items-center justify-center w-full ${
-                theme === 'dark' 
-                  ? 'group-hover:bg-gray-700 group-hover:bg-opacity-50' 
-                  : 'group-hover:bg-gray-200 group-hover:bg-opacity-50'
-              }`}>
-                <a 
-                  href={CV_FILES.EN}
-                  download
-                  className="block px-4 py-3 text-sm text-center hover:opacity-80 flex-grow text-center"
-                  style={{ color: "var(--foreground)" }}
-                  onClick={() => setIsOpen(false)}
-                >
-                  {t("cv.english")}
-                </a>
-                {supportsPdfViewer && (
-                  <button 
-                    onClick={() => handlePreview('en')}
-                    className="px-3 py-3 text-sm opacity-70 hover:opacity-100 transition-all duration-300"
-                    aria-label={`${t("cv.preview")} ${t("cv.english")}`}
-                  >
-                    <FaEye size={20} className="transform hover:scale-110 transition-transform duration-300" />
-                  </button>
-                )}
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       )}
@@ -321,7 +324,7 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
                 
                 {/* Absolutely centered title */}
                 <h3 className="font-medium text-white absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full text-center">
-                  {previewLang === 'es' ? t("cv.spanish") : t("cv.english")}
+                  {previewLang === 'es' ? t("cv.spanish") : previewLang === 'en_ats' ? t("cv.english_ats") : t("cv.english")}
                 </h3>
                 
                 {/* Right side - Close button */}
@@ -335,7 +338,7 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
               
               <div className="flex-1 overflow-auto bg-[#3c3c3c]">
                 <object
-                  data={previewLang === 'es' ? CV_FILES.ES : CV_FILES.EN}
+                  data={previewLang === 'es' ? CV_FILES.ES : previewLang === 'en_ats' ? CV_FILES.EN_ATS : CV_FILES.EN}
                   type="application/pdf"
                   className="w-full h-full cv-pdf-object"
                   style={{ border: 'none', margin: 0, padding: 0 }}
@@ -343,7 +346,7 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
                   <div className="flex flex-col items-center justify-center h-full text-white">
                     <p className="mb-4">{t("cv.unableToDisplay")}</p>
                     <a 
-                      href={previewLang === 'es' ? CV_FILES.ES : CV_FILES.EN}
+                      href={previewLang === 'es' ? CV_FILES.ES : previewLang === 'en_ats' ? CV_FILES.EN_ATS : CV_FILES.EN}
                       download
                       className="px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded-md"
                     >
