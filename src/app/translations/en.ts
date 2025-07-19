@@ -29,7 +29,8 @@ export const en: Translations = {
     expandImage: "Expand image",
     closeImage: "Close image",
     playArcadeGame: "Play Arcade Game",
-    viewPresentation: "View presentation"
+    viewPresentation: "View presentation",
+    viewWebsite: "Visit website"
   },
   footer: {
     disclaimer: "© 2025 Ezequiel Garibotto.",
@@ -67,12 +68,15 @@ export const en: Translations = {
     current: "present",
     neutralNews: {
       title: "Neutral News",
-      description: "Application under development that collects news from multiple Spanish media, groups them by topic and generates a neutral version of the events, with the aim of combating media bias through the combination of algorithms and advanced artificial intelligence techniques.",
+      description: "Application with ETL flow that generates neutral news, combining diverse powerful technologies for the backend: Scraping, XML parsing, ML algorithms for embedding and clustering, use of text generation APIs, among others.\n" +
+        "• Implemented periodic semantic clustering of news articles sourced from the RSS feeds of more than 10 Spanish media outlets.\n" +
+        "• Built a robust system to ensure the generation of neutral versions for clusters of semantically grouped news.\n" +
+        "• Developed both a solid and complex backend and a user-friendly Android application.",
       footer: "Academic project continuation",
       startDate: "December 2024"
     },
     eulix: {
-      title: "Eulix App",
+      title: "Eulix",
       description: "Android development of an app designed to recommend content (movies, series) based on user personality, mood, and preferences.",
       footer: "Internship",
       startDate: "October 2024",
@@ -150,18 +154,18 @@ export const en: Translations = {
       position: "Junior Android Developer",
       period: "October 2024 - April 2025 (7 months)",
       description: "Development of an application with the objective of recommending content (movies, series), based on the user's personality, mood and preferences.\n" +
-        "— Chatbot development (Virtual Assistant), Onboarding, How It Works section.\n" +
-        "— UI and UX design and enhancements, with LiveData, DataBinding and XML layout. Idea generation and search for constant improvement.\n" +
-        "— RESTful API integration with Retrofit in collaboration with the back-end.\n" +
-        "— Coordination with an international team in India.",
-
+        "• Developed a chatbot (Virtual Assistant) for onboarding and 'How It Works' section, enhancing user engagement and support.\n" +
+        "• Designed and enhanced the UI across all app screens, driving continuous UX improvements through iterative design ideas.\n" +
+        "• Integrated RESTful API with Retrofit in collaboration with the back-end team, ensuring seamless data exchange and application functionality.\n" +
+        "• Coordinated with an international team in India, facilitating effective communication and project alignment across different time zones.",
       location: "Spain · Hybrid",
     },
     telus: {
       company: "TELUS Digital",
-      position: "Online Data/Maps Analyst",
+      position: "Data Annotator",
       period: "July 2023 - January 2025 (1 year 7 months)",
-      description: "Classified, evaluated, and organized searches (queries), audio, video, images, and data of all kinds using professional English, general culture, and digital competence.",
+      description: "• Classified, evaluated, and described queries, audio, video, images, and other data types to ensure relevance and quality.\n" +
+        "• Applied professional English, general knowledge, and digital literacy to enhance the accuracy and contextual understanding of content.",
       location: "Spain · Fully Remote",
     },
   },
@@ -174,12 +178,12 @@ export const en: Translations = {
       location: "Nou Barris, Barcelona, Spain",
 
       description: "Higher vocational degree in cross-platform mobile and web application development, focusing on modern technologies and agile practices.\n\n" +
-        "— Kotlin, Jetpack Compose / XML, Retrofit for Android development\n" +
-        "— Machine Learning, Web Scraping, Sentiment Analysis, Classification, Decision and Prediction Algorithms\n" +
-        "— SQL and NoSQL database management including PostgreSQL, MongoDB and Firebase\n" +
-        "— Client-server communications with Ktor, file processing, data access\n" +
-        "— Participation in competitive programming contests using Java and Kotlin\n\n" +
-        "Grade: 9.01",
+        "• Kotlin, Jetpack Compose / XML, Retrofit for Android development\n" +
+        "• Machine Learning, Web Scraping, Sentiment Analysis, Classification, Decision and Prediction Algorithms\n" +
+        "• SQL and NoSQL database management including PostgreSQL, MongoDB and Firebase\n" +
+        "• Client-server communications with Ktor, file processing, data access\n" +
+        "• Participation in competitive programming contests using Java and Kotlin\n\n" +
+        "Grade: 9.08",
     },
     upf: {
       institution: "Universitat Pompeu Fabra (UPF)",

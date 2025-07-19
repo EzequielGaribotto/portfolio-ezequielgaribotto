@@ -41,7 +41,8 @@ export default function ProjectsSection() {
         "/images/projects/neutral-news-source.webp",
       ],
       technologies: neutralNewsTech,
-      repoLink: "https://github.com/EzequielGaribotto/neutral-news-android"
+      repoLink: "https://github.com/EzequielGaribotto/neutral-news-android",
+      websiteLink: "https://itram.dev/neutral-news"
     },
     {
       id: "eulix",

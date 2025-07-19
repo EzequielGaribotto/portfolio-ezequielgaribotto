@@ -1,6 +1,6 @@
 "use client";
 
-import { FaExpand, FaCompress, FaTrophy, FaGooglePlay, FaNewspaper, FaFilm, FaCode, FaListAlt } from "../../../../utils/icons";
+import { FaExpand, FaCompress, FaTrophy, FaGooglePlay, FaNewspaper, FaFilm, FaCode, FaListAlt, FaGlobe } from "../../../../utils/icons";
 import { FaGamepad, FaClock, FaMap, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { useTranslation } from "../../../../context/TranslationContext";
@@ -404,6 +404,18 @@ export default function ProjectCard({ project }: ProjectCardProps) {
               >
                 <path d="M8 5v14l11-7z"/>
               </svg>
+            </ClickableButton>
+          )}
+          {project.websiteLink && (
+            <ClickableButton
+              href={project.websiteLink}
+              className={`${styles.socialIcon} ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : 'bg-blue-400 hover:bg-blue-300'} rounded-full flex items-center justify-center`}
+              tooltipKey="tooltips.viewWebsite"
+            >
+              <FaGlobe 
+                size={20} 
+                className="text-white hover:text-primary transition-colors duration-400" 
+              />
             </ClickableButton>
           )}
         </div>

@@ -13,4 +13,5 @@ export interface Project {
   arcadeLink?: string;
   playStoreLink?: string;
   presentationLink?: string;
+  websiteLink?: string;
 }

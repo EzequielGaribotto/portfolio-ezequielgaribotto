@@ -27,7 +27,8 @@ export const baseTranslations = {
         closeImage: "",
         solvedProblems: "",
         playArcadeGame: "",
-        viewPresentation: ""
+        viewPresentation: "",
+        viewWebsite: ""
     },
     // Footer translations
     footer: {

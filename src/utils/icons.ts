@@ -16,5 +16,6 @@ export {
   FaNewspaper,
   FaFilm,
   FaCode,
-  FaListAlt
+  FaListAlt,
+  FaGlobe
 } from "react-icons/fa";

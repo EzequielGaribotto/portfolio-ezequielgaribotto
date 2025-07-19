@@ -29,7 +29,8 @@ export const es: Translations = {
     expandImage: "Ampliar imagen",
     closeImage: "Cerrar imagen",
     playArcadeGame: "Jugar Juego Arcade",
-    viewPresentation: "Ver presentación"
+    viewPresentation: "Ver presentación",
+    viewWebsite: "Visitar sitio web"
   },
   footer: {
     disclaimer: "© 2025 Ezequiel Garibotto.",
@@ -67,7 +68,10 @@ export const es: Translations = {
     current: "presente",
     neutralNews: {
       title: "Neutral News",
-      description: "Aplicación en desarrollo que recopila noticias de múltiples medios de comunicación españoles, las agrupa por temática y genera una versión neutral de los acontecimientos. El objetivo es combatir el sesgo mediático mediante la combinación de algoritmos y técnicas avanzadas de inteligencia artificial.",
+      description: "Aplicación con flujo ETL que genera noticias neutrales, combinando diversas tecnologías potentes para el backend: Scraping, parsing XML, algoritmos ML para embedding y clustering, uso de APIs de generación de texto, entre otros.\n" +
+        "• Implementé clustering semántico periódico de artículos de noticias obtenidos de feeds RSS de más de 10 medios españoles.\n" +
+        "• Construí un sistema robusto para asegurar la generación de versiones neutrales para clusters de noticias agrupadas semánticamente.\n" +
+        "• Desarrollé tanto un backend sólido y complejo como una aplicación Android amigable para el usuario.",
       footer: "Académico en continuidad",
       startDate: "diciembre 2024"
     },
@@ -149,18 +153,19 @@ export const es: Translations = {
       company: "Eulix",
       position: "Desarrollador Junior de Android",
       period: "octubre 2024 - abril 2025 (7 meses)",
-      description: "Desarrollo de una aplicación con el objetivo de recomendar contenidos (pelis, series), basándose en la personalidad, estado de ánimo y preferencias del usuario.\n"+
-                  "— Desarrollo del Chatbot (Asistente Virtual), Onboarding, sección How It Works.\n"+
-                  "— Diseño y mejoras en la UI y UX, con LiveData, DataBinding y layout XML. Generación de ideas y búsqueda de una constante mejora.\n"+
-                  "— Consumo de API RESTful con Retrofit en colaboración con el back-end.\n"+
-                  "— Coordinación con un equipo internacional en India.",
+      description: "Desarrollo de una aplicación con el objetivo de recomendar contenidos (películas, series) basándose en la personalidad, estado de ánimo y preferencias del usuario.\n" +
+        "• Desarrollé un chatbot (Asistente Virtual) para onboarding y sección 'Cómo Funciona', mejorando el engagement y soporte al usuario.\n" +
+        "• Diseñé y mejoré la UI en todas las pantallas de la app, impulsando mejoras continuas de UX a través de ideas de diseño iterativo.\n" +
+        "• Integré API RESTful con Retrofit en colaboración con el equipo de back-end, asegurando intercambio de datos fluido y funcionalidad de la aplicación.\n" +
+        "• Coordiné con un equipo internacional en India, facilitando comunicación efectiva y alineación del proyecto a través de diferentes zonas horarias.",
       location: "España · Híbrido",
     },
     telus: {
       company: "TELUS Digital",
-      position: "Analista de Datos/Mapas en línea",
+      position: "Anotador de Datos",
       period: "julio 2023 - enero 2025 (1 año 7 meses)",
-      description: "Clasificar, evaluar, describir y ordenar búsquedas (queries), audio, video, imágenes y datos de todo tipo, usando un inglés profesional, cultura general y competencia digital.",
+      description: "• Clasifiqué, evalué y describí consultas, audio, video, imágenes y otros tipos de datos para asegurar relevancia y calidad.\n" +
+        "• Apliqué inglés profesional, conocimiento general y alfabetización digital para mejorar la precisión y comprensión contextual del contenido.",
       location: "España · Totalmente Remoto",
     },
   },
@@ -172,12 +177,12 @@ export const es: Translations = {
       period: "2023 - 2025",
       location: "Nou Barris, Barcelona, España",
       description: "Grado superior de desarrollo de aplicaciones móviles y web, con énfasis en tecnologías modernas y metodología Agile y Scrum.\n\n" +
-        "— Kotlin, Jetpack Compose / XML, Retrofit, para desarrollo Android\n" +
-        "— Machine Learning, Web Scraping, Sentiment Analysis, Algoritmos de Clasificación, Decisión y Predicción\n" +
-        "— Gestión de bases de datos SQL y NoSQL como PostgreSQL, MongoDB y Firebase\n" +
-        "— Comunicaciones cliente-servidor con Ktor, lectura de ficheros, acceso a datos\n" +
-        "— Participación en concursos de programación competitiva, usando Java y Kotlin\n\n" +
-        "Nota: 9.01",
+        "• Kotlin, Jetpack Compose / XML, Retrofit, para desarrollo Android\n" +
+        "• Machine Learning, Web Scraping, Sentiment Analysis, Algoritmos de Clasificación, Decisión y Predicción\n" +
+        "• Gestión de bases de datos SQL y NoSQL como PostgreSQL, MongoDB y Firebase\n" +
+        "• Comunicaciones cliente-servidor con Ktor, lectura de ficheros, acceso a datos\n" +
+        "• Participación en concursos de programación competitiva, usando Java y Kotlin\n\n" +
+        "Nota: 9.08",
     },
     upf: {
       institution: "Universitat Pompeu Fabra (UPF)",
