@@ -390,6 +390,22 @@ export default function ProjectCard({ project }: ProjectCardProps) {
               </svg>
             </ClickableButton>
           )}
+          {project.presentationLink && (
+            <ClickableButton
+              href={project.presentationLink}
+              className={`${styles.socialIcon} ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : 'bg-blue-400 hover:bg-blue-300'} rounded-full flex items-center justify-center`}
+              tooltipKey="tooltips.viewPresentation"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="w-5 h-5 text-white hover:text-primary transition-colors duration-400"
+              >
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </ClickableButton>
+          )}
         </div>
       </div>
       

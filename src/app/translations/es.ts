@@ -28,7 +28,8 @@ export const es: Translations = {
     logo: "Visita mi perfil de GitHub",
     expandImage: "Ampliar imagen",
     closeImage: "Cerrar imagen",
-    playArcadeGame: "Jugar Juego Arcade"
+    playArcadeGame: "Jugar Juego Arcade",
+    viewPresentation: "Ver presentación"
   },
   footer: {
     disclaimer: "© 2025 Ezequiel Garibotto.",
@@ -84,16 +85,16 @@ export const es: Translations = {
       startDate: "septiembre 2023"
     },
     rickAndMorty: {
-      title: "API list eficiente",
+      title: "Lista API Eficiente",
       description: "La típica API list, pero hecha en Android con Java8, DataBinding, Caché, Paginación, arquitectura tipo SDK, tiempos de respuesta rápidos y un seguimiento de eficiencia simple.",
-      footer: "Entrevista técnica",
+      footer: "Proyecto de Aprendizaje",
       startDate: "abril 2025",
       endDate: "abril 2025"
     },
     zomb: {
       title: "Zomb - Juego Retro",
       description: "Juego retro de desplazamiento horizontal infinito desarrollado con Makecode Arcade. Incluye sistema de colisiones, enemigos que siguen al jugador, y mecánicas de supervivencia en un entorno zombie.",
-      footer: "Proyecto Personal",
+      footer: "Proyecto de Aprendizaje",
       startDate: "noviembre 2024",
       endDate: "diciembre 2024"
     },
@@ -107,9 +108,9 @@ export const es: Translations = {
     portfolioWebsite: {
       title: "Sitio Web Portfolio",
       description: "Sitio web portfolio personal moderno construido con React, Next.js y TypeScript. Incluye diseño responsivo, cambio de tema, soporte multi-idioma y muestra proyectos y experiencia profesional.",
-      footer: "Proyecto Personal",
-      startDate: "2025",
-      endDate: "2025"
+      footer: "Proyecto de Aprendizaje",
+      startDate: "abril 2025",
+      endDate: "julio 2025"
     },
     mapsApp: {
       title: "Aplicación CRUD de Mapas",
@@ -122,17 +123,25 @@ export const es: Translations = {
       title: "Pelea De Gallos",
       description: "Comunicación cliente-servidor con Ktor, procesamiento de archivos, acceso a datos.",
       footer: "Proyecto Académico",
-      startDate: "2024",
-      endDate: "2024"
+      startDate: "mayo 2024",
+      endDate: "mayo 2024"
     },
     hackerNewsAPI: {
       title: "API Scraper HackerNews",
       description: "Web scraper Python FastAPI que obtiene artículos de noticias de Hacker News con estrategia de caché inteligente. Incluye containerización Docker, desarrollo dirigido por pruebas y procesamiento eficiente de datos.",
-      footer: "Proyecto Personal",
-      startDate: "2024"
+      footer: "Proyecto de Aprendizaje",
+      startDate: "junio 2025",
+      endDate: "junio 2025"
     },
-    showAllProjects: "Mostrar Todos los Proyectos",
-    showLess: "Mostrar Menos"
+    barcelonaInequality: {
+      title: "Análisis de Desigualdad en Barrios de Barcelona",
+      description: "Proyecto de Machine Learning analizando patrones de desigualdad en los barrios de Barcelona usando Python. Procesamiento de datos, algoritmos de clasificación y análisis estadístico para identificar disparidades socioeconómicas. Proyecto final del curso de Python Machine Learning cubriendo preprocesamiento de datos, técnicas de IA y visualización.",
+      footer: "Proyecto Académico",
+      startDate: "marzo 2025",
+      endDate: "marzo 2025"
+    },
+    showAllProjects: "Mostrar todos los proyectos",
+    showLess: "Mostrar menos"
   },
   experiences: {
     title: "Experiencia profesional",

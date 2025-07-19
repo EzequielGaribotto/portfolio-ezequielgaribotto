@@ -26,7 +26,8 @@ export const baseTranslations = {
         expandImage: "",
         closeImage: "",
         solvedProblems: "",
-        playArcadeGame: ""
+        playArcadeGame: "",
+        viewPresentation: ""
     },
     // Footer translations
     footer: {
@@ -131,6 +132,13 @@ export const baseTranslations = {
             endDate?: string | null
         },
         hackerNewsAPI: {} as {
+            title: string,
+            description: string,
+            footer: string,
+            startDate: string,
+            endDate?: string | null
+        },
+        barcelonaInequality: {} as {
             title: string,
             description: string,
             footer: string,

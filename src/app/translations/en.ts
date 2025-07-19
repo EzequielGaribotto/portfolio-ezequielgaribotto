@@ -28,7 +28,8 @@ export const en: Translations = {
     logo: "Visit my GitHub profile",
     expandImage: "Expand image",
     closeImage: "Close image",
-    playArcadeGame: "Play Arcade Game"
+    playArcadeGame: "Play Arcade Game",
+    viewPresentation: "View presentation"
   },
   footer: {
     disclaimer: "© 2025 Ezequiel Garibotto.",
@@ -86,14 +87,14 @@ export const en: Translations = {
     rickAndMorty: {
       title: "Efficient API List",
       description: "Typical API List App, but made in Android with Java8, DataBinding, Caché, Pagination, SDK-Like architecture, Quick response times and simple efficiency tracking",
-      footer: "Technical Interview",
+      footer: "Learning Project",
       startDate: "April 2025",
       endDate: "April 2025"
     },
     zomb: {
       title: "Zomb - Retro Game",
       description: "Infinite horizontal scroller retro game made with Makecode Arcade, featuring collision systems, enemies that follow the player, and survival mechanics in a zombie environment.",
-      footer: "Personal Project",
+      footer: "Learning Project",
       startDate: "November 2024",
       endDate: "December 2024"
     },
@@ -107,9 +108,9 @@ export const en: Translations = {
     portfolioWebsite: {
       title: "Portfolio Website",
       description: "Modern personal portfolio website built with React, Next.js, and TypeScript. Features responsive design, theme switching, multiple language support, and showcases projects and professional experience.",
-      footer: "Personal Project",
-      startDate: "2025",
-      endDate: "2025"
+      footer: "Learning Project",
+      startDate: "April 2025",
+      endDate: "July 2025"
     },
     mapsApp: {
       title: "Maps CRUD Application",
@@ -122,18 +123,25 @@ export const en: Translations = {
       title: "Pelea De Gallos",
       description: "Client-server communication with Ktor, file processing, data access.",
       footer: "Academic Project",
-      startDate: "2024",
-      endDate: "2024"
+      startDate: "May 2024",
+      endDate: "May 2024"
     },
     hackerNewsAPI: {
       title: "HackerNews Scraper API",
       description: "Python FastAPI web scraper that fetches news articles from Hacker News with intelligent caching strategy. Features Docker containerization, test-driven development, and efficient data processing.",
-      footer: "Personal Project",
-      startDate: "2025",
-      endDate: "2025"
+      footer: "Learning Project",
+      startDate: "June 2025",
+      endDate: "June 2025"
     },
-    showAllProjects: "Show All Projects",
-    showLess: "Show Less"
+    barcelonaInequality: {
+      title: "Barcelona Neighborhoods Inequality Analysis",
+      description: "Machine Learning project analyzing inequality patterns across Barcelona neighborhoods using Python. Data processing, classification algorithms, and statistical analysis to identify socioeconomic disparities. Final project for Python Machine Learning course covering data preprocessing, AI techniques, and visualization.",
+      footer: "Academic Project",
+      startDate: "March 2025",
+      endDate: "March 2025"
+    },
+    showAllProjects: "Show all projects",
+    showLess: "Show less"
   },
   experiences: {
     title: "Work experience",

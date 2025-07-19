@@ -23,6 +23,7 @@ export default function ProjectsSection() {
   const portfolioTech = ["Front-end", "React", "Next.js", "TypeScript", "TailwindCSS", "Portfolio", "Node.js", "Web Development", "Responsive Design", "Theme Switching", "Multi-language"];
   const peleaDeGallosTech = ["Back-end", "Front-end", "Ktor", "Client-server Communication", "Kotlin", "File processing", "Data access", "NoSQL", "MongoDB"];
   const hackerNewsAPITech = ["Python", "FastAPI", "Web Scraping", "API", "Docker", "TDD", "Caching", "Back-end", "Data Processing"];
+  const barcelonaInequalityTech = ["Python", "Machine Learning", "Data Processing", "Classification", "Statistical Analysis", "Data Visualization", "Pandas", "NumPy", "Google Colab", "Jupyter Notebooks", "AI", "Socioeconomic Analysis"];
 
   const projects: Project[] = [
     {
@@ -66,6 +67,18 @@ export default function ProjectsSection() {
       programameLink: "https://programame.com/2024/nac/",
     },
     {
+      id: "barcelona-inequality",
+      title: t("projects.barcelonaInequality.title"),
+      description: t("projects.barcelonaInequality.description"),
+      footer: t("projects.barcelonaInequality.footer"),
+      startDate: t("projects.barcelonaInequality.startDate"),
+      endDate: t("projects.barcelonaInequality.endDate"),
+      image: "/images/projects/desigualtat-als-barris-de-bcn.webp",
+      technologies: barcelonaInequalityTech,
+      repoLink: "https://colab.research.google.com/drive/1MZDA4yxF1LFktC1E7QE6cR4v8mQLxLiN",
+      presentationLink: "https://view.genially.com/67e0341f1bb26cf1dc8eba42/presentation-ezequiel-garibotto-anastasiia-levkina-desigualtat-als-barris-de-bcn"
+    },
+    {
       id: "rick-and-morty-api-list",
       title: t("projects.rickAndMorty.title"),
       description: t("projects.rickAndMorty.description"),
@@ -75,7 +88,18 @@ export default function ProjectsSection() {
       image: "/images/projects/api-list.webp",
       technologies: apiListTech,
       repoLink: "https://github.com/EzequielGaribotto/Ricky-and-Morty-API",
-    }, {
+    },
+    {
+      id: "hackernews-api",
+      title: t("projects.hackerNewsAPI.title"),
+      description: t("projects.hackerNewsAPI.description"),
+      footer: t("projects.hackerNewsAPI.footer"),
+      startDate: t("projects.hackerNewsAPI.startDate"),
+      endDate: t("projects.hackerNewsAPI.endDate"),
+      technologies: hackerNewsAPITech,
+      repoLink: "https://github.com/EzequielGaribotto/HackerNews-Scraper-API"
+    },
+    {
       id: "zomb",
       title: t("projects.zomb.title"),
       description: t("projects.zomb.description"),
@@ -128,16 +152,6 @@ export default function ProjectsSection() {
       endDate: t("projects.peleaDeGallos.endDate"),
       technologies: peleaDeGallosTech,
       repoLink: "https://github.com/EzequielGaribotto/PeleaDeGallos"
-    },
-    {
-      id: "hackernews-api",
-      title: t("projects.hackerNewsAPI.title"),
-      description: t("projects.hackerNewsAPI.description"),
-      footer: t("projects.hackerNewsAPI.footer"),
-      startDate: t("projects.hackerNewsAPI.startDate"),
-      endDate: t("projects.hackerNewsAPI.endDate"),
-      technologies: hackerNewsAPITech,
-      repoLink: "https://github.com/EzequielGaribotto/HackerNews-Scraper-API"
     }
   ];
 
