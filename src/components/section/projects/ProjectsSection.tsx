@@ -14,12 +14,15 @@ export default function ProjectsSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   const eulixTech = ["Android", "Kotlin", "UI", "UX", "Retrofit", "DataBinding", "MVVM", "XML", "Kotlin DSL", "LiveData", "Git", "Agile", "RESTful API", "International Team"];
-  const neutralNewsTech = ["Android", "Kotlin", "Back-end", "Python", "AI", "Machine Learning", "ETL", "Scraping", "Crawling", "Parsing", "Cloud", "Docker", "Pandas", "NoSQL", "BeautifulSoup", "Clustering", "Generative AI", "NumPy", "NLP", "Google Colab", "Jupyter Notebooks", "Dagger", "Hilt", "DAO", "Room", "Datastore", "UI", "UX"];
+  const neutralNewsTech = ["Android", "Kotlin", "Back-end", "Firebase", "Google Cloud Platform", "Python", "AI", "Machine Learning", "ETL", "Scraping", "Crawling", "Parsing", "Docker", "Pandas", "NoSQL", "BeautifulSoup", "Clustering", "Generative AI", "NumPy", "NLP", "Google Colab", "Jupyter Notebooks", "Dagger", "Hilt", "DAO", "Room", "Datastore", "UI", "UX"];
   const compTech = ["Java", "Algorithms", "Data Structures", "Problem Solving"];
-  const apiListTech = ["Android", "Java", "Caching", "Coroutines", "Android SDK"];
+  const apiListTech = ["Android", "Java", "Caching", "Coroutines", "Android SDK", "UX"];
   const zombTech = ["Game Development", "Python", "MakeCode Arcade", "Collision Detection", "Retro Gaming"];
   const cronTech = ["Front-end", "React", "TypeScript", "Vite", "CSS", "JavaScript", "HTML", "Web", "useEffect"];
-  const mapsTech = ["Android", "Kotlin", "Firebase", "Google Maps API", "CRUD", "Authentication", "Database"];
+  const mapsTech = ["Android", "Kotlin", "Firebase", "Google Maps API", "CRUD", "Authentication", "Firebase", "Database"];
+  const portfolioTech = ["Front-end", "React", "Next.js", "TypeScript", "TailwindCSS", "Portfolio", "Node.js", "Web Development", "Responsive Design", "Theme Switching", "Multi-language"];
+  const peleaDeGallosTech = ["Back-end", "Front-end", "Ktor", "Client-server Communication", "Kotlin", "File processing", "Data access", "NoSQL", "MongoDB"];
+  const hackerNewsAPITech = ["Python", "FastAPI", "Web Scraping", "API", "Docker", "TDD", "Caching", "Back-end", "Data Processing"];
 
   const projects: Project[] = [
     {
@@ -96,15 +99,45 @@ export default function ProjectsSection() {
       repoLink: "https://github.com/EzequielGaribotto/cron-schedule-editor"
     },
     {
+      id: "portfolio-website",
+      title: t("projects.portfolioWebsite.title"),
+      description: t("projects.portfolioWebsite.description"),
+      footer: t("projects.portfolioWebsite.footer"),
+      startDate: t("projects.portfolioWebsite.startDate"),
+      endDate: t("projects.portfolioWebsite.endDate"),
+      image: "/images/projects/portfolio.webp",
+      technologies: portfolioTech,
+      repoLink: "https://github.com/EzequielGaribotto/portfolio-ezequielgaribotto"
+    },
+    {
       id: "maps-app",
       title: t("projects.mapsApp.title"),
       description: t("projects.mapsApp.description"),
       footer: t("projects.mapsApp.footer"),
       startDate: t("projects.mapsApp.startDate"),
       endDate: t("projects.mapsApp.endDate"),
-      image: "/images/projects/maps-app.webp",
       technologies: mapsTech,
       repoLink: "https://github.com/EzequielGaribotto/M08-P4-MapsApp"
+    },
+    {
+      id: "pelea-de-gallos",
+      title: t("projects.peleaDeGallos.title"),
+      description: t("projects.peleaDeGallos.description"),
+      footer: t("projects.peleaDeGallos.footer"),
+      startDate: t("projects.peleaDeGallos.startDate"),
+      endDate: t("projects.peleaDeGallos.endDate"),
+      technologies: peleaDeGallosTech,
+      repoLink: "https://github.com/EzequielGaribotto/PeleaDeGallos"
+    },
+    {
+      id: "hackernews-api",
+      title: t("projects.hackerNewsAPI.title"),
+      description: t("projects.hackerNewsAPI.description"),
+      footer: t("projects.hackerNewsAPI.footer"),
+      startDate: t("projects.hackerNewsAPI.startDate"),
+      endDate: t("projects.hackerNewsAPI.endDate"),
+      technologies: hackerNewsAPITech,
+      repoLink: "https://github.com/EzequielGaribotto/HackerNews-Scraper-API"
     }
   ];
 
@@ -153,7 +186,6 @@ export default function ProjectsSection() {
         {/* No Results Message */}
         {filteredProjects.length === 0 && hasActiveFilters && (
           <div className={styles.noResultsMessage}>
-            <p>{t("search.noResults")}</p>
             <p>{t("search.tryAdjusting")}</p>
           </div>
         )}

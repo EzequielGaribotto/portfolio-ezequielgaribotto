@@ -14,16 +14,12 @@ interface ImageCarouselProps {
 export default function ImageCarousel({ images, projectTitle, onExpand }: ImageCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [dragOffset, setDragOffset] = useState(0);
-  const [hasDragged, setHasDragged] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Auto-slide functionality
   useEffect(() => {
-    if (images.length <= 1 || isPaused || isDragging) return;
+    if (images.length <= 1 || isPaused) return;
 
     intervalRef.current = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % images.length);
@@ -32,7 +28,7 @@ export default function ImageCarousel({ images, projectTitle, onExpand }: ImageC
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [images.length, isPaused, isDragging]);
+  }, [images.length, isPaused]);
 
   const nextImage = () => {
     setCurrentIndex((prev) => (prev + 1) % images.length);
@@ -43,93 +39,12 @@ export default function ImageCarousel({ images, projectTitle, onExpand }: ImageC
   };
 
   const handleImageClick = (e: React.MouseEvent) => {
-    // Only expand if we haven't dragged
-    if (onExpand && !hasDragged) {
+    // Expand the current image
+    if (onExpand) {
       e.preventDefault();
       e.stopPropagation();
       onExpand(currentIndex);
     }
-  };
-
-  // Mouse drag handlers
-  const handleMouseDown = (e: React.MouseEvent) => {
-    if (images.length <= 1) return;
-    setIsDragging(true);
-    setHasDragged(false);
-    setStartX(e.clientX);
-    setDragOffset(0);
-    e.preventDefault();
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging) return;
-    const currentX = e.clientX;
-    const offset = currentX - startX;
-    setDragOffset(offset);
-    
-    // If we've moved more than 5px, consider it a drag
-    if (Math.abs(offset) > 5) {
-      setHasDragged(true);
-    }
-  };
-
-  const handleMouseUp = () => {
-    if (!isDragging) return;
-    setIsDragging(false);
-    
-    // Threshold for slide change (25% of container width)
-    const threshold = containerRef.current ? containerRef.current.offsetWidth * 0.25 : 100;
-    
-    if (hasDragged) {
-      if (dragOffset > threshold) {
-        prevImage();
-      } else if (dragOffset < -threshold) {
-        nextImage();
-      }
-    }
-    
-    setDragOffset(0);
-    
-    // Reset drag state after a short delay
-    setTimeout(() => setHasDragged(false), 100);
-  };
-
-  // Touch handlers for mobile
-  const handleTouchStart = (e: React.TouchEvent) => {
-    if (images.length <= 1) return;
-    setIsDragging(true);
-    setHasDragged(false);
-    setStartX(e.touches[0].clientX);
-    setDragOffset(0);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (!isDragging) return;
-    const currentX = e.touches[0].clientX;
-    const offset = currentX - startX;
-    setDragOffset(offset);
-    
-    if (Math.abs(offset) > 5) {
-      setHasDragged(true);
-    }
-  };
-
-  const handleTouchEnd = () => {
-    if (!isDragging) return;
-    setIsDragging(false);
-    
-    const threshold = containerRef.current ? containerRef.current.offsetWidth * 0.25 : 100;
-    
-    if (hasDragged) {
-      if (dragOffset > threshold) {
-        prevImage();
-      } else if (dragOffset < -threshold) {
-        nextImage();
-      }
-    }
-    
-    setDragOffset(0);
-    setTimeout(() => setHasDragged(false), 100);
   };
 
   const handleMouseEnter = () => {
@@ -175,19 +90,13 @@ export default function ImageCarousel({ images, projectTitle, onExpand }: ImageC
       className={`${styles.carouselContainer} ${isPaused ? styles.paused : ''}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
     >
       <button 
         className={styles.expandControl} 
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
-          if (onExpand && !hasDragged) {
+          if (onExpand) {
             onExpand(currentIndex);
           }
         }}
@@ -200,8 +109,8 @@ export default function ImageCarousel({ images, projectTitle, onExpand }: ImageC
         <div 
           className={styles.imagesTrack}
           style={{
-            transform: `translateX(calc(-${currentIndex * 100}% + ${dragOffset}px))`,
-            transition: isDragging ? 'none' : 'transform 0.5s ease-in-out'
+            transform: `translateX(-${currentIndex * 100}%)`,
+            transition: 'transform 0.5s ease-in-out'
           }}
         >
           {images.map((image, index) => (
@@ -216,7 +125,7 @@ export default function ImageCarousel({ images, projectTitle, onExpand }: ImageC
                 sizes="(max-width: 640px) 95vw, (max-width: 768px) 45vw, 600px"
                 quality={75}
                 onClick={handleImageClick}
-                style={{ userSelect: 'none', pointerEvents: isDragging ? 'none' : 'auto' }}
+                style={{ userSelect: 'none' }}
               />
             </div>
           ))}

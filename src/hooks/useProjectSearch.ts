@@ -30,16 +30,39 @@ export function useProjectSearch(projects: Project[]) {
     // Filter by selected keywords (AND logic)
     if (selectedKeywords.length > 0) {
       filtered = filtered.filter((project) => {
-        // Check if ALL selected keywords are found in the project's technologies
+        // Check if ALL selected keywords are found in the project
         return selectedKeywords.every(keyword => {
-          const keywordLower = keyword.toLowerCase();
+          // Helper function to check if keyword matches in text considering word boundaries and case
+          const smartMatch = (text: string, keyword: string): boolean => {
+            const escapedKeyword = keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            
+            // Pattern 1: Exact word matches with word boundaries (case insensitive)
+            const wordBoundaryRegex = new RegExp(`\\b${escapedKeyword}\\b`, 'i');
+            
+            // Pattern 2: For acronyms/uppercase - match only as complete segments
+            // This matches "API" in "FastAPI", "RESTful API", "Web-API" but NOT in "Scraping"
+            const acronymRegex = new RegExp(`(?:^|\\b|[A-Z])${escapedKeyword}(?=\\b|[A-Z]|$)`, 'i');
+            
+            // For very short keywords (1-2 chars), be more strict - only word boundaries
+            if (keyword.length <= 2) {
+              return wordBoundaryRegex.test(text);
+            }
+            
+            return wordBoundaryRegex.test(text) || acronymRegex.test(text);
+          };
           
-          // Only check in technologies array for exact matches (case-insensitive)
+          // Check in title
+          const titleMatch = smartMatch(project.title, keyword);
+          
+          // Check in description  
+          const descriptionMatch = smartMatch(project.description, keyword);
+          
+          // Check in technologies array with smart matching
           const techMatch = project.technologies?.some((tech: string) => 
-            tech.toLowerCase() === keywordLower
+            smartMatch(tech, keyword)
           ) || false;
           
-          return techMatch;
+          return titleMatch || descriptionMatch || techMatch;
         });
       });
     }

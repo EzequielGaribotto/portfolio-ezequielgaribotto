@@ -104,12 +104,32 @@ export const es: Translations = {
       startDate: "enero 2025",
       endDate: "enero 2025"
     },
+    portfolioWebsite: {
+      title: "Sitio Web Portfolio",
+      description: "Sitio web portfolio personal moderno construido con React, Next.js y TypeScript. Incluye diseño responsivo, cambio de tema, soporte multi-idioma y muestra proyectos y experiencia profesional.",
+      footer: "Proyecto Personal",
+      startDate: "2025",
+      endDate: "2025"
+    },
     mapsApp: {
       title: "Aplicación CRUD de Mapas",
       description: "Aplicación Android completa con operaciones CRUD para marcadores de mapas. Incluye sistema de registro, login y almacenamiento de datos de usuario (nombre, foto de perfil, fotos capturadas) en Firebase Database.",
       footer: "Proyecto Académico",
       startDate: "marzo 2024",
       endDate: "junio 2024"
+    },
+    peleaDeGallos: {
+      title: "Pelea De Gallos",
+      description: "Comunicación cliente-servidor con Ktor, procesamiento de archivos, acceso a datos.",
+      footer: "Proyecto Académico",
+      startDate: "2024",
+      endDate: "2024"
+    },
+    hackerNewsAPI: {
+      title: "API Scraper HackerNews",
+      description: "Web scraper Python FastAPI que obtiene artículos de noticias de Hacker News con estrategia de caché inteligente. Incluye containerización Docker, desarrollo dirigido por pruebas y procesamiento eficiente de datos.",
+      footer: "Proyecto Personal",
+      startDate: "2024"
     },
     showAllProjects: "Mostrar Todos los Proyectos",
     showLess: "Mostrar Menos"

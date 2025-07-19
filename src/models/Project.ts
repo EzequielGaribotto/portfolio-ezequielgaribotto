@@ -5,7 +5,7 @@ export interface Project {
   footer: string;
   startDate: string;
   endDate: string | null;
-  image: string;
+  image?: string; // Made optional
   images?: string[]; // Optional array for carousel
   technologies?: string[];
   repoLink?: string;

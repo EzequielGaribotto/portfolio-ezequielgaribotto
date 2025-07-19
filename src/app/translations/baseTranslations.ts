@@ -116,6 +116,27 @@ export const baseTranslations = {
             startDate: string,
             endDate?: string | null
         },
+        portfolioWebsite: {} as {
+            title: string,
+            description: string,
+            footer: string,
+            startDate: string,
+            endDate?: string | null
+        },
+        peleaDeGallos: {} as {
+            title: string,
+            description: string,
+            footer: string,
+            startDate: string,
+            endDate?: string | null
+        },
+        hackerNewsAPI: {} as {
+            title: string,
+            description: string,
+            footer: string,
+            startDate: string,
+            endDate?: string | null
+        },
         showAllProjects: "", // New translation key for "show all projects" button
         showLess: "" // New translation key for "show less" button
     },

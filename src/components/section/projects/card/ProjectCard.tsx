@@ -23,9 +23,24 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   const [startXExpanded, setStartXExpanded] = useState(0);
   const [dragOffsetExpanded, setDragOffsetExpanded] = useState(0);
   const [hasDraggedExpanded, setHasDraggedExpanded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   const expandedContainerRef = useRef<HTMLDivElement>(null);
+
+  // Check for mobile screen size
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 640);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
   
   // Expanded view navigation functions
   const nextExpandedImage = useCallback(() => {
@@ -254,48 +269,58 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           )}
         </div>
         
-        <div className={styles.projectImageContainer}>
-          <div className={styles.projectImageWrapper}>
-            {project.images && project.images.length > 0 ? (
-              <ImageCarousel
-                images={project.images}
-                projectTitle={project.title}
-                onExpand={(imageIndex) => {
-                  setExpandedImageIndex(imageIndex);
-                  setIsExpanded(true);
-                }}
-              />
-            ) : (
-              <>
-                <button 
-                  className={styles.expandControl} 
-                  onClick={toggleExpand} 
-                  aria-label={t("tooltips.expandImage")}
-                >
-                  <FaExpand size={16} />
-                </button>
-                <OptimizedImage
-                  src={project.image || fallbackImage}
-                  alt={project.title || "Project image"}
-                  width={600}
-                  height={400}
-                  className="rounded-lg cursor-pointer"
-                  loading="lazy"
-                  sizes="(max-width: 640px) 95vw, (max-width: 768px) 45vw, 600px"
-                  quality={75}
-                  onClick={toggleExpand}
+        {/* Only render image container if project has an image or images */}
+        {(project.image || (project.images && project.images.length > 0)) && (
+          <div className={styles.projectImageContainer}>
+            <div className={styles.projectImageWrapper}>
+              {project.images && project.images.length > 0 ? (
+                <ImageCarousel
+                  images={project.images}
+                  projectTitle={project.title}
+                  onExpand={(imageIndex) => {
+                    setExpandedImageIndex(imageIndex);
+                    setIsExpanded(true);
+                  }}
                 />
-              </>
+              ) : (
+                <>
+                  <button 
+                    className={styles.expandControl} 
+                    onClick={toggleExpand} 
+                    aria-label={t("tooltips.expandImage")}
+                  >
+                    <FaExpand size={16} />
+                  </button>
+                  <OptimizedImage
+                    src={project.image || fallbackImage}
+                    alt={project.title || "Project image"}
+                    width={600}
+                    height={400}
+                    className="rounded-lg cursor-pointer"
+                    loading="lazy"
+                    sizes="(max-width: 640px) 95vw, (max-width: 768px) 45vw, 600px"
+                    quality={75}
+                    onClick={toggleExpand}
+                  />
+                </>
+              )}
+            </div>
+            
+            {/* Project footer - added below image */}
+            {project.footer && (
+              <div className={styles.projectFooter}>
+                {project.footer}
+              </div>
             )}
           </div>
-          
-          {/* Project footer - added below image */}
-          {project.footer && (
-            <div className={styles.projectFooter}>
-              {project.footer}
-            </div>
-          )}
-        </div>
+        )}
+
+        {/* Project footer - show outside image container if no image */}
+        {!(project.image || (project.images && project.images.length > 0)) && project.footer && (
+          <div className={styles.projectFooter}>
+            {project.footer}
+          </div>
+        )}
 
         {/* Technologies */}
         {project.technologies && project.technologies.length > 0 && (
@@ -435,17 +460,17 @@ export default function ProjectCard({ project }: ProjectCardProps) {
               height={1080}
               className="rounded-lg object-contain"
               style={{ 
-                maxWidth: '90%', 
-                width: 'auto', 
-                maxHeight: '80vh', 
-                height: 'auto',
+                maxWidth: isMobile ? '100vw' : '90%', 
+                width: isMobile ? '100vw' : 'auto', 
+                maxHeight: isMobile ? '100vh' : '80vh', 
+                height: isMobile ? '100vh' : 'auto',
                 margin: '0 auto',
                 display: 'block',
                 userSelect: 'none',
                 pointerEvents: isDraggingExpanded ? 'none' : 'auto'
               }}
               loading="eager"
-              sizes="90vw"
+              sizes={isMobile ? "100vw" : "90vw"}
               quality={100}
               priority
             />

@@ -25,18 +25,18 @@
 .toggleLink {
   background: none;
   border: none;
-  color: #ddb968; /* Using the project's orange color */
+  color: var(--project-title);
   font-size: inherit;
   font-weight: 500;
   cursor: pointer;
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, text-decoration 0.2s ease;
   padding: 0;
   margin: 0;
 }
 
 .toggleLink:hover {
-  color: #ddb968; /* Keep same orange on hover */
+  color: var(--project-title);
   text-decoration: underline;
 }
 
