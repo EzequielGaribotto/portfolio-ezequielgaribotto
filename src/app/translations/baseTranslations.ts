@@ -10,7 +10,8 @@ export const baseTranslations = {
         profile: "",
         projects: "",
         experience: "",
-        training: ""
+        training: "",
+        gaming: ""
     },
     // Tooltip translations
     tooltips: {
@@ -189,6 +190,15 @@ export const baseTranslations = {
             location: "",
             description: "",
         }
+    },
+    aboutMeSection: {
+        title: "",
+        personalInfo: "",
+        lifestyleInfo: "",
+        musicInfo: "",
+        hobbiesInfo: "",
+        heavyProfile: "",
+        spotifyPlaylist: ""
     }
 };
 

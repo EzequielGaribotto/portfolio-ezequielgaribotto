@@ -13,7 +13,8 @@ export const en: Translations = {
     profile: "Profile",
     projects: "Projects",
     experience: "Experience",
-    training: "Training"
+    training: "Training",
+    gaming: "About Me"
   },
   tooltips: {
     github: "Visit my GitHub profile",
@@ -199,5 +200,14 @@ export const en: Translations = {
       location: "Santa Coloma de Gramenet, Spain",
       description: "Baccalaureate with a focus on science and technology, preparing for higher studies in engineering and software development.",
     }
+  },
+  aboutMeSection: {
+    title: "About Me",
+    personalInfo: "Starting to program has been the best decision of my life, and it has become my vocation. I'm passionate about creating software that solves real problems and continuously improving my technical skills.",
+    lifestyleInfo: "And the second best decision was starting to train. I enjoy staying active and healthy, maintaining a balanced lifestyle.",
+    musicInfo: "I mostly listen to metal, rock, Spanish rap, national rock (Argentinean). I used to listen to electronic music a lot, now that music gives me nostalgia.",
+    hobbiesInfo: "As for other hobbies, I used to play Minecraft a lot, but not building or making redstone mechanisms like many programmers I know. I enjoyed the competitive PvP of version 1.7.10. But I'm a normal person, I swear, I also enjoy immersive single-player experiences that offer rich narratives and open-world exploration like The Elder Scrolls saga, Red Dead Redemption, Spore, Atomic Heart, to mention a few.",
+    heavyProfile: "You can add me on Hevy, if you're into lifting",
+    spotifyPlaylist: "I gift you my playlist"
   },
 };

@@ -45,7 +45,7 @@ const Header: React.FC = () => {
   // Update active section based on scroll position only
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['profile', 'projects', 'experience', 'training'];
+      const sections = ['profile', 'projects', 'experience', 'training', 'gaming'];
       const scrollPosition = window.scrollY + 200; // Add offset for header
       
       for (const section of sections) {
@@ -136,6 +136,15 @@ const Header: React.FC = () => {
                 className={activeSection === 'training' ? styles.active : ''}
               >
                 {t("navigation.training")}
+              </a>
+            </li>
+            <li className={styles.navItem}>
+              <a 
+                href="#aboutme" // Replace javascript:void(0) with actual anchor
+                onClick={scrollToSection('gaming')}
+                className={activeSection === 'gaming' ? styles.active : ''}
+              >
+                {t("navigation.gaming")}
               </a>
             </li>
           </ul>

@@ -147,6 +147,56 @@
   font-size: 1.375rem;
 }
 
+/* Personal Information Section */
+.personalInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  padding: 1.5rem;
+  background-color: var(--card-bg, #f8fafc);
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: 12px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.personalText {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-color, #4b5563);
+  text-align: center;
+  margin: 0;
+  white-space: pre-line;
+}
+
+.personalButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.personalButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, #5a67d8 0%, #6b5ca0 100%);
+}
+
+.buttonIcon {
+  font-size: 1rem;
+}
+
 .cvButtonContainer {
   display: flex;
   justify-content: center;
@@ -157,6 +207,15 @@
 /* Dark mode specific styles */
 :global([data-theme="dark"]) .profileImageContainer {
   border-color: rgba(76, 152, 175, 0.2);
+}
+
+:global([data-theme="dark"]) .personalInfo {
+  background-color: var(--card-bg-dark, #1f2937);
+  border-color: var(--border-color-dark, #374151);
+}
+
+:global([data-theme="dark"]) .personalText {
+  color: var(--text-color-dark, #d1d5db);
 }
 
 /* Responsive styles */

@@ -13,7 +13,8 @@ export const es: Translations = {
     profile: "Perfil",
     projects: "Proyectos",
     experience: "Experiencia",
-    training: "Formación"
+    training: "Formación",
+    gaming: "Sobre mí"
   },
   tooltips: {
     github: "Visita mi perfil de GitHub",
@@ -38,7 +39,7 @@ export const es: Translations = {
   },
   aboutMe: {
     title: "Ezequiel Garibotto",
-    description: "Desarrollador de aplicaciones multiplataforma | Desarrollador de software Junior",
+    description: "Desarrollador de aplicaciones multiplataforma | Desarrollador de software junior",
     photoAlt: "Foto de Ezequiel Garibotto"
   },
   cv: {
@@ -198,5 +199,14 @@ export const es: Translations = {
       location: "Santa Coloma de Gramenet, España",
       description: "Bachillerato con enfoque en ciencias y tecnología, preparando para estudios superiores en ingeniería y desarrollo de software.",
     }
+  },
+  aboutMeSection: {
+    title: "Sobre mí",
+    personalInfo: "Empezar a programar ha sido la mejor decisión de mi vida, y se ha vuelto mi vocación. Me apasiona crear software que resuelva problemas reales y mejorar continuamente mis habilidades técnicas.",
+    lifestyleInfo: "Y la segunda mejor decisión fue empezar a entrenar. Disfruto mantenerme activo y saludable, llevando un estilo de vida equilibrado.",
+    musicInfo: "Escucho principalmente metal, rock, rap español, rock nacional (argentino). Y solía escuchar mucha música electrónica, ahora esa música me da nostalgia.",
+    hobbiesInfo: "En cuanto a otros hobbies, solía jugar mucho Minecraft, pero no construir, ni hacer mecanismos de redstone, como muchos programadores que conozco, a mi me gustaba jugar el PvP competitivo de la 1.7.10. Pero soy una persona normal, lo juro, también disfruto de las experiencias inmersivas de un solo jugador que ofrecen narrativas ricas y exploración de mundo abierto como la saga de The Elder Scrolls, Red Dead Redemption, Spore, Atomic Heart, por mencionar algunos.",
+    heavyProfile: "Me puedes agregar en Hevy, si te van los hierros",
+    spotifyPlaylist: "Te regalo mi playlist"
   },
 };

@@ -17,5 +17,8 @@ export {
   FaFilm,
   FaCode,
   FaListAlt,
-  FaGlobe
+  FaGlobe,
+  FaYoutube,
+  FaGamepad,
+  FaSpotify
 } from "react-icons/fa";
