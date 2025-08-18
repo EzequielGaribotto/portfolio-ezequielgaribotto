@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "chokidar": "^3.6.0",
-    "i18next": "^25.0.0",
+    "i18next": "^25.3.6",
     "lightningcss": "^1.29.3",
     "next": "15.3.0",
     "next-i18next": "^15.4.2",
