@@ -6,7 +6,7 @@ import ThemeToggleButton from '../button/ThemeToggleButton';
 import styles from './Header.module.css';
 import Image from 'next/image';
 import Tooltip from '../tooltip/Tooltip';
-
+  
 const Header: React.FC = () => {
   const { t, theme, isHydrated } = useTranslation();
   const [activeSection, setActiveSection] = useState<string>('');

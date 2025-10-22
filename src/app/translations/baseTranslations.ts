@@ -75,7 +75,8 @@ export const baseTranslations = {
             description: string,
             footer: string,
             startDate: string,
-            endDate?: string | null
+            endDate?: string | null,
+            websiteLink: string
         },
         eulix: {} as {
             title: string,

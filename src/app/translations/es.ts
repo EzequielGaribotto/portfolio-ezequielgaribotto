@@ -74,7 +74,8 @@ export const es: Translations = {
         "• Construí un sistema robusto para asegurar la generación de versiones neutrales para clusters de noticias agrupadas semánticamente.\n" +
         "• Desarrollé tanto un backend sólido y complejo como una aplicación Android amigable para el usuario.",
       footer: "Académico en continuidad",
-      startDate: "diciembre 2024"
+      startDate: "diciembre 2024",
+      websiteLink: "https://getfacts.app/es"
     },
     eulix: {
       title: "Eulix",

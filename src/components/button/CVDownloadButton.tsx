@@ -179,6 +179,12 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
 
   const cvOptions = [
     {
+      key: 'en_ats',
+      label: t("cv.english_ats"),
+      file: CV_FILES.EN_ATS,
+      previewLang: 'en_ats'
+    },
+    {
       key: 'es',
       label: t("cv.spanish"),
       file: CV_FILES.ES,
@@ -189,12 +195,6 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
       label: t("cv.english"),
       file: CV_FILES.EN,
       previewLang: 'en'
-    },
-    {
-      key: 'en_ats',
-      label: t("cv.english_ats"),
-      file: CV_FILES.EN_ATS,
-      previewLang: 'en_ats'
     }
   ];
 

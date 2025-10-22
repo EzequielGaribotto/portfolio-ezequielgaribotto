@@ -42,7 +42,7 @@ export default function ProjectsSection() {
       ],
       technologies: neutralNewsTech,
       repoLink: "https://github.com/EzequielGaribotto/neutral-news-android",
-      websiteLink: "https://itram.dev/neutral-news"
+      websiteLink: t("projects.neutralNews.websiteLink"),
     },
     {
       id: "eulix",
