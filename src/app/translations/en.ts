@@ -160,7 +160,7 @@ export const en: Translations = {
         "• Designed and enhanced the UI across all app screens, driving continuous UX improvements through iterative design ideas.\n" +
         "• Integrated RESTful API with Retrofit in collaboration with the back-end team, ensuring seamless data exchange and application functionality.\n" +
         "• Coordinated with an international team in India, facilitating effective communication and project alignment across different time zones.",
-      location: "Spain · Hybrid",
+      location: "Spain, Barcelona · Hybrid",
     },
     telus: {
       company: "TELUS Digital",
@@ -169,6 +169,14 @@ export const en: Translations = {
       description: "• Classified, evaluated, and described queries, audio, video, images, and other data types to ensure relevance and quality.\n" +
         "• Applied professional English, general knowledge, and digital literacy to enhance the accuracy and contextual understanding of content.",
       location: "Spain · Fully Remote",
+    },
+    seidor: {
+      company: "SEIDOR NTS",
+      position: "Salesforce Technical Assistant",
+      period: "Aug 2025 - Oct 2025",
+      location: "Spain, Barcelona · Hybrid",
+      description:
+        "Service and API development (Apex), web development and interactive components (LWC), low-code solutions (Flow Builder), enterprise application architecture design (Sales/Service Cloud), asynchronous classes, unit testing, integration of external services using HTTP calls and Postman.",
     },
   },
   training: {

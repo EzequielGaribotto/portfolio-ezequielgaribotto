@@ -153,6 +153,13 @@ export const baseTranslations = {
     },
     experiences: {
         title: "",
+        seidor: {
+            company: "",
+            position: "",
+            period: "",
+            location: "",
+            description: "",
+        },
         eulix: {
             company: "",
             position: "",

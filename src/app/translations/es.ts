@@ -160,7 +160,7 @@ export const es: Translations = {
         "• Diseñé y mejoré la UI en todas las pantallas de la app, impulsando mejoras continuas de UX a través de ideas de diseño iterativo.\n" +
         "• Integré API RESTful con Retrofit en colaboración con el equipo de back-end, asegurando intercambio de datos fluido y funcionalidad de la aplicación.\n" +
         "• Coordiné con un equipo internacional en India, facilitando comunicación efectiva y alineación del proyecto a través de diferentes zonas horarias.",
-      location: "España · Híbrido",
+      location: "Barcelona, España · Híbrido",
     },
     telus: {
       company: "TELUS Digital",
@@ -169,6 +169,14 @@ export const es: Translations = {
       description: "• Clasifiqué, evalué y describí consultas, audio, video, imágenes y otros tipos de datos para asegurar relevancia y calidad.\n" +
         "• Apliqué inglés profesional, conocimiento general y alfabetización digital para mejorar la precisión y comprensión contextual del contenido.",
       location: "España · Totalmente Remoto",
+    },
+    seidor: {
+      company: "SEIDOR NTS",
+      position: "Asistente Técnico de Salesforce",
+      period: "Ago 2025 - Oct 2025",
+      location: "Barcelona, España · Híbrido",
+      description:
+        "Desarrollo de servicios y APIs (Apex), desarrollo web y componentes interactivos (LWC), soluciones low-code (Flow Builder), diseño de arquitectura de aplicaciones empresariales (Sales/Service Cloud), clases asíncronas, pruebas unitarias, integración de servicios externos usando llamadas HTTP y Postman.",
     },
   },
   training: {
