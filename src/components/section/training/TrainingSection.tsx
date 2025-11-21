@@ -12,6 +12,17 @@ const TrainingSection: React.FC = () => {
 
   const trainings: Training[] = [
     {
+      id: "linkia",
+      institution: t("training.linkia.institution"),
+      course: t("training.linkia.course"),
+      period: t("training.linkia.period"),
+      location: t("training.linkia.location"),
+      description: t("training.linkia.description"),
+      technologies: ["Python", "TensorFlow", "PyTorch", "Keras", "Deep Learning", "Neural Networks", "NLP", "Computer Vision", "Big Data", "Spark", "Hadoop", "Machine Learning", "Data Science", "AI", "Data Visualization"],
+      imageUrl: "/images/institutions/linkiafp_logo.webp",
+      institutionUrl: "https://www.linkiafp.es/",
+    },
+    {
       id: "itb",
       institution: t("training.itb.institution"),
       course: t("training.itb.course"),

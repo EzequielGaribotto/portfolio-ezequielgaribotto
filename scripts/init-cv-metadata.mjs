@@ -12,7 +12,8 @@ const metadataPath = path.join(cvDirectory, 'cv-metadata.json');
 // CV files to check
 const cvFiles = [
   path.join(cvDirectory, 'CV_ES_EzequielGaribotto.pdf'),
-  path.join(cvDirectory, 'CV_EN_EzequielGaribotto.pdf')
+  path.join(cvDirectory, 'CV_EN_EzequielGaribotto.pdf'),
+  path.join(cvDirectory, 'CV_EN_EzequielGaribotto_ATS.pdf')
 ];
 
 function initializeMetadata() {

@@ -1,6 +1,9 @@
 import { useState, useMemo } from "react";
 import { Project } from "../models/Project";
 import { useLocalStorage } from "./useLocalStorage";
+import { expandSearchTerm, matchesWithSynonyms } from "../constants/techSynonyms";
+
+export type SortBy = 'relevance' | 'date';
 
 interface ProjectMatch {
   project: Project;
@@ -14,10 +17,72 @@ interface ProjectMatch {
   };
 }
 
+/**
+ * Parse date string to Date object
+ * Handles formats like "diciembre 2024", "December 2024", "abril 2025", etc.
+ */
+function parseProjectDate(dateStr: string): Date {
+  // Month mappings for Spanish and English
+  const monthMap: Record<string, number> = {
+    'enero': 0, 'january': 0,
+    'febrero': 1, 'february': 1,
+    'marzo': 2, 'march': 2,
+    'abril': 3, 'april': 3,
+    'mayo': 4, 'may': 4,
+    'junio': 5, 'june': 5,
+    'julio': 6, 'july': 6,
+    'agosto': 7, 'august': 7,
+    'septiembre': 8, 'september': 8, 'sept': 8,
+    'octubre': 9, 'october': 9, 'oct': 9,
+    'noviembre': 10, 'november': 10, 'nov': 10,
+    'diciembre': 11, 'december': 11, 'dec': 11
+  };
+
+  const parts = dateStr.toLowerCase().trim().split(' ');
+  if (parts.length >= 2) {
+    const month = monthMap[parts[0]];
+    const year = parseInt(parts[1]);
+    if (month !== undefined && !isNaN(year)) {
+      return new Date(year, month);
+    }
+  }
+
+  // Fallback to parsing as standard date
+  return new Date(dateStr);
+}
+
+/**
+ * Compare two projects by date
+ * Returns: negative if a is more recent, positive if b is more recent, 0 if equal
+ * Ongoing projects (endDate === null) are always ranked higher than completed projects
+ */
+function compareDates(a: Project, b: Project): number {
+  // Ongoing projects (present) should always come first
+  const aIsOngoing = a.endDate === null;
+  const bIsOngoing = b.endDate === null;
+  
+  if (aIsOngoing && !bIsOngoing) {
+    return -1; // a is ongoing, b is not -> a comes first
+  }
+  if (!aIsOngoing && bIsOngoing) {
+    return 1; // b is ongoing, a is not -> b comes first
+  }
+  
+  // Both ongoing or both completed - compare by date
+  // For ongoing projects, use startDate
+  // For completed projects, use endDate
+  const aDate = aIsOngoing ? parseProjectDate(a.startDate) : parseProjectDate(a.endDate!);
+  const bDate = bIsOngoing ? parseProjectDate(b.startDate) : parseProjectDate(b.endDate!);
+  
+  // Sort descending (most recent first)
+  return bDate.getTime() - aDate.getTime();
+}
+
 export function useProjectSearch(projects: Project[]) {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedKeywords, setSelectedKeywords] = useLocalStorage<string[]>("project-search-keywords", []);
   const [showAllProjects, setShowAllProjects] = useLocalStorage<boolean>("show-all-projects", false);
+  const [sortBy, setSortBy] = useLocalStorage<SortBy>("project-sort-by", "relevance");
 
   const filteredProjects = useMemo(() => {
     // Default projects to show when no filters are applied
@@ -50,36 +115,47 @@ export function useProjectSearch(projects: Project[]) {
       // Search term filtering and scoring
       if (hasSearchTerm) {
         const searchLower = searchTerm.toLowerCase().trim();
+        const expandedTerms = expandSearchTerm(searchTerm);
         let searchMatches = false;
 
         // Title matching (highest priority)
-        const titleLower = project.title.toLowerCase();
-        if (titleLower === searchLower) {
-          matchDetails.titleExact = true;
-          matchScore += 1000; // Highest score for exact title match
-          searchMatches = true;
-        } else if (titleLower.includes(searchLower)) {
-          matchDetails.titlePartial = true;
-          // Score based on position and length ratio
-          const position = titleLower.indexOf(searchLower);
-          const lengthRatio = searchLower.length / titleLower.length;
-          matchScore += 500 + (50 - Math.min(position, 50)) + (lengthRatio * 100);
+        if (matchesWithSynonyms(project.title, searchTerm)) {
+          const titleLower = project.title.toLowerCase();
+          // Check for exact match with any expanded term
+          const exactMatch = expandedTerms.some(term => titleLower === term.toLowerCase());
+          
+          if (exactMatch) {
+            matchDetails.titleExact = true;
+            matchScore += 1000; // Highest score for exact title match
+          } else {
+            matchDetails.titlePartial = true;
+            // Score based on best matching term
+            const bestMatch = expandedTerms.find(term => titleLower.includes(term.toLowerCase()));
+            if (bestMatch) {
+              const position = titleLower.indexOf(bestMatch.toLowerCase());
+              const lengthRatio = bestMatch.length / titleLower.length;
+              matchScore += 500 + (50 - Math.min(position, 50)) + (lengthRatio * 100);
+            }
+          }
           searchMatches = true;
         }
 
         // Description matching (medium priority)
-        const descriptionLower = project.description.toLowerCase();
-        if (descriptionLower.includes(searchLower)) {
+        if (matchesWithSynonyms(project.description, searchTerm)) {
           matchDetails.descriptionMatch = true;
-          const position = descriptionLower.indexOf(searchLower);
-          const lengthRatio = searchLower.length / descriptionLower.length;
-          matchScore += 200 + (20 - Math.min(position / 10, 20)) + (lengthRatio * 50);
+          const descriptionLower = project.description.toLowerCase();
+          const bestMatch = expandedTerms.find(term => descriptionLower.includes(term.toLowerCase()));
+          if (bestMatch) {
+            const position = descriptionLower.indexOf(bestMatch.toLowerCase());
+            const lengthRatio = bestMatch.length / descriptionLower.length;
+            matchScore += 200 + (20 - Math.min(position / 10, 20)) + (lengthRatio * 50);
+          }
           searchMatches = true;
         }
 
         // Technology matching (lower priority but still important)
         const techMatches = project.technologies?.filter((tech: string) => 
-          tech.toLowerCase().includes(searchLower)
+          matchesWithSynonyms(tech, searchTerm)
         ) || [];
         
         if (techMatches.length > 0) {
@@ -169,12 +245,26 @@ export function useProjectSearch(projects: Project[]) {
 
     // Sort by score (descending), then by fallback criteria
     projectMatches.sort((a, b) => {
-      // Primary: Sort by match score
+      // If sorting by date, use date as primary sort
+      if (sortBy === 'date') {
+        const dateCompare = compareDates(a.project, b.project);
+        if (dateCompare !== 0) return dateCompare;
+      }
+      
+      // If sorting by relevance OR date comparison is equal, use weight as primary sort
+      // Lower weight = higher priority
+      const aWeight = a.project.weight ?? 999;
+      const bWeight = b.project.weight ?? 999;
+      if (aWeight !== bWeight) {
+        return aWeight - bWeight;
+      }
+
+      // Secondary: Sort by match score (only matters if there's a search/filter)
       if (b.score !== a.score) {
         return b.score - a.score;
       }
 
-      // Secondary: Prefer projects with more exact matches
+      // Tertiary: Prefer projects with more exact matches
       const aExactness = (a.matchDetails.titleExact ? 4 : 0) + 
                         (a.matchDetails.titlePartial ? 2 : 0) + 
                         (a.matchDetails.descriptionMatch ? 1 : 0);
@@ -186,7 +276,7 @@ export function useProjectSearch(projects: Project[]) {
         return bExactness - aExactness;
       }
 
-      // Tertiary: Prefer projects with higher tech match ratio
+      // Quaternary: Prefer projects with higher tech match ratio
       const aTechRatio = a.matchDetails.totalTechs > 0 ? 
         a.matchDetails.techMatches / a.matchDetails.totalTechs : 0;
       const bTechRatio = b.matchDetails.totalTechs > 0 ? 
@@ -196,7 +286,7 @@ export function useProjectSearch(projects: Project[]) {
         return bTechRatio - aTechRatio;
       }
 
-      // Quaternary: Prefer projects with more technologies (more comprehensive)
+      // Quinary: Prefer projects with more technologies (more comprehensive)
       if (b.matchDetails.totalTechs !== a.matchDetails.totalTechs) {
         return b.matchDetails.totalTechs - a.matchDetails.totalTechs;
       }
@@ -206,7 +296,7 @@ export function useProjectSearch(projects: Project[]) {
     });
 
     return projectMatches.map(match => match.project);
-  }, [projects, searchTerm, selectedKeywords, showAllProjects]);
+  }, [projects, searchTerm, selectedKeywords, showAllProjects, sortBy]);
 
   const hasActiveFilters = searchTerm.trim() !== "" || selectedKeywords.length > 0;
   const resultCount = filteredProjects.length;
@@ -222,6 +312,8 @@ export function useProjectSearch(projects: Project[]) {
     resultCount,
     totalCount,
     showAllProjects,
-    setShowAllProjects
+    setShowAllProjects,
+    sortBy,
+    setSortBy
   };
 }

@@ -6,12 +6,13 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "dev:watch": "concurrently \"npm run cv:watch\" \"next dev --turbopack\"",
-    "build": "next build",
+    "build": "npm run cv:update && next build",
     "predeploy": "next build && (IF NOT EXIST out\\.nojekyll (echo.> out\\.nojekyll))",
     "deploy": "gh-pages -d out --dotfiles",
     "start": "next start",
     "lint": "next lint",
     "update-cv": "node update-cv-metadata.mjs",
+    "cv:update": "node scripts/init-cv-metadata.mjs",
     "cv:watch": "node scripts/watch-cv-changes.mjs",
     "cv:init": "node scripts/init-cv-metadata.mjs"
   },

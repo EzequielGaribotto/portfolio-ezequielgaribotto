@@ -8,13 +8,15 @@ import { Project } from "../../../../models/Project";
 import ClickableButton from "../../../button/ClickableButton";
 import OptimizedImage from '../../../OptimizedImage';
 import ImageCarousel from './ImageCarousel';
+import { HighlightText } from '../../../../utils/highlightText';
 import styles from './ProjectCard.module.css';
 
 interface ProjectCardProps {
   project: Project;
+  searchTerm?: string;
 }
 
-export default function ProjectCard({ project }: ProjectCardProps) {
+export default function ProjectCard({ project, searchTerm = '' }: ProjectCardProps) {
   const { t, theme } = useTranslation();
   const fallbackImage = "/images/projects/fallback.webp";
   const [isExpanded, setIsExpanded] = useState(false);
@@ -254,10 +256,10 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         <div onClick={handleTextClick}>
           <h3 className={styles.projectTitle}>
             {getProjectIcon()}
-            {project.title}
+            <HighlightText text={project.title} searchTerm={searchTerm} />
           </h3>
           <p className={styles.projectDescription}>
-            {project.description}
+            <HighlightText text={project.description} searchTerm={searchTerm} />
           </p>
 
           {project.startDate && (
@@ -284,13 +286,27 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                 />
               ) : (
                 <>
-                  <button 
-                    className={styles.expandControl} 
-                    onClick={toggleExpand} 
-                    aria-label={t("tooltips.expandImage")}
-                  >
-                    <FaExpand size={16} />
-                  </button>
+                  {/* For website projects (CTS, Portfolio), show website button instead of expand */}
+                  {project.websiteLink && (project.id === 'ctennisstudio' || project.id === 'portfolio-website') ? (
+                    <a
+                      href={project.websiteLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.expandControl}
+                      aria-label={t("tooltips.viewWebsite")}
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <FaGlobe size={16} />
+                    </a>
+                  ) : (
+                    <button 
+                      className={styles.expandControl} 
+                      onClick={toggleExpand} 
+                      aria-label={t("tooltips.expandImage")}
+                    >
+                      <FaExpand size={16} />
+                    </button>
+                  )}
                   <OptimizedImage
                     src={project.image || fallbackImage}
                     alt={project.title || "Project image"}
@@ -300,7 +316,13 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                     loading="lazy"
                     sizes="(max-width: 640px) 95vw, (max-width: 768px) 45vw, 600px"
                     quality={75}
-                    onClick={toggleExpand}
+                    onClick={project.websiteLink && (project.id === 'ctennisstudio' || project.id === 'portfolio-website') 
+                      ? (e) => {
+                          e.stopPropagation();
+                          window.open(project.websiteLink, '_blank');
+                        }
+                      : toggleExpand
+                    }
                   />
                 </>
               )}
@@ -327,7 +349,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           <div className={styles.technologies}>
             {project.technologies.map((tech, index) => (
               <span key={index} className={styles.techTag}>
-                {tech}
+                <HighlightText text={tech} searchTerm={searchTerm} />
               </span>
             ))}
           </div>
@@ -372,6 +394,22 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                 size={20} 
                 className="text-white hover:text-primary transition-colors duration-400" 
               />
+            </ClickableButton>
+          )}
+          {project.appStoreLink && (
+            <ClickableButton
+              href={project.appStoreLink}
+              className={`${styles.socialIcon} ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : 'bg-blue-400 hover:bg-blue-300'} rounded-full`}
+              tooltipKey="tooltips.appStore"
+            >
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                viewBox="0 0 24 24" 
+                fill="currentColor"
+                className="w-5 h-5 text-white hover:text-primary transition-colors duration-400"
+              >
+                <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+              </svg>
             </ClickableButton>
           )}
           {project.repoLink && (

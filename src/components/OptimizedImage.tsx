@@ -21,14 +21,12 @@ export default function OptimizedImage({
   style,
   ...props
 }: OptimizedImageProps) {
-  const [isLoading, setIsLoading] = useState(true);
   const [imgSrc, setImgSrc] = useState(src);
   const [hasError, setHasError] = useState(false);
   
   // Update imgSrc when src prop changes
   useEffect(() => {
     setImgSrc(src);
-    setIsLoading(true);
     setHasError(false);
   }, [src]);
   
@@ -39,16 +37,7 @@ export default function OptimizedImage({
     // Only try fallback if we haven't already used it
     if (imgSrc !== fallbackSrc && fallbackSrc) {
       setImgSrc(fallbackSrc);
-      setIsLoading(true);
-    } else {
-      // If fallback also fails, show placeholder
-      setIsLoading(false);
     }
-  };
-
-  const handleLoad = () => {
-    setIsLoading(false);
-    setHasError(false);
   };
 
   // Add default style to maintain aspect ratio
@@ -79,7 +68,7 @@ export default function OptimizedImage({
 
   return (
     <div className="relative overflow-hidden w-full h-full">
-      {isLoading && lowQualitySrc && (
+      {lowQualitySrc && (
         <Image
           src={lowQualitySrc}
           alt={`Low quality placeholder for ${alt}`}
@@ -95,14 +84,12 @@ export default function OptimizedImage({
         src={imgSrc}
         alt={alt}
         sizes={sizes}
-        className={`transition-opacity duration-500 ${
-          isLoading ? "opacity-0" : "opacity-100"
-        } ${className}`}
-        onLoad={handleLoad}
+        className={className}
         onError={handleError}
         width={width}
         height={height}
         style={combinedStyle}
+        unoptimized={false}
       />
     </div>
   );

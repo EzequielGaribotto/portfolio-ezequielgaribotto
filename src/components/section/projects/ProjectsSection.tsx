@@ -14,7 +14,7 @@ export default function ProjectsSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   const eulixTech = ["Android", "Kotlin", "UI", "UX", "Retrofit", "DataBinding", "MVVM", "XML", "Kotlin DSL", "LiveData", "Git", "Agile", "RESTful API", "International Team"];
-  const neutralNewsTech = ["Back-end", "Python", "Android", "Kotlin", "UI", "UX", "Firebase", "Google Cloud Platform", "AI", "Machine Learning", "ETL", "Scraping", "Crawling", "Parsing", "Docker", "Pandas", "NoSQL", "BeautifulSoup", "Clustering", "Generative AI", "NumPy", "NLP", "Google Colab", "Jupyter Notebooks", "Dagger", "Hilt", "DAO", "Room", "Datastore"];
+  const neutralNewsTech = ["Front-end", "Back-end", "Python", "Android", "Kotlin", "UI", "UX", "Firebase", "Google Cloud Platform", "AI", "Machine Learning", "ETL", "Scraping", "Crawling", "Parsing", "Docker", "Pandas", "NoSQL", "BeautifulSoup", "Clustering", "Generative AI", "NumPy", "NLP", "Google Colab", "Jupyter Notebooks", "Dagger", "Hilt", "DAO", "Room", "Datastore"];
   const compTech = ["Java", "Algorithms", "Data Structures", "Problem Solving"];
   const apiListTech = ["Android", "Java", "UX", "Caching", "Coroutines", "Android SDK"];
   const zombTech = ["Game Development", "UX", "Python", "MakeCode Arcade", "Collision Detection", "Retro Gaming"];
@@ -24,6 +24,7 @@ export default function ProjectsSection() {
   const peleaDeGallosTech = ["Back-end", "Front-end", "Kotlin", "Ktor", "UI", "UX", "Client-server Communication", "File processing", "Data access", "NoSQL", "MongoDB"];
   const hackerNewsAPITech = ["Back-end", "Python", "FastAPI", "Web Scraping", "API", "Docker", "TDD", "Caching", "Data Processing"];
   const barcelonaInequalityTech = ["Back-end", "Python", "Machine Learning", "Data Processing", "Classification", "Statistical Analysis", "Data Visualization", "Pandas", "NumPy", "Google Colab", "Jupyter Notebooks", "AI", "Socioeconomic Analysis"];
+  const ctennisstudioTech = ["Front-end", "React", "Next.js", "TypeScript", "TailwindCSS", "Vercel", "UI", "UX", "Responsive Design", "SEO", "Web Development", "Professional Services"];
 
   const projects: Project[] = [
     {
@@ -43,6 +44,21 @@ export default function ProjectsSection() {
       technologies: neutralNewsTech,
       repoLink: "https://github.com/EzequielGaribotto/neutral-news-android",
       websiteLink: t("projects.neutralNews.websiteLink"),
+      appStoreLink: "https://apps.apple.com/us/app/facts-news-summary/id6748583935",
+      weight: 1
+    },
+    {
+      id: "ctennisstudio",
+      title: t("projects.ctennisstudio.title"),
+      description: t("projects.ctennisstudio.description"),
+      footer: t("projects.ctennisstudio.footer"),
+      startDate: t("projects.ctennisstudio.startDate"),
+      endDate: null,
+      image: "/images/projects/ctennisstudio.webp",
+      technologies: ctennisstudioTech,
+      repoLink: "https://github.com/EzequielGaribotto/ctennisstudio",
+      websiteLink: "https://ctenisstudio.com/",
+      weight: 5
     },
     {
       id: "eulix",
@@ -54,6 +70,7 @@ export default function ProjectsSection() {
       image: "/images/projects/eulix.webp",
       technologies: eulixTech,
       playStoreLink: "https://play.google.com/store/apps/details?id=com.eulix.mobile.app&hl=en_US",
+      weight: 2
     },
     {
       id: "competitive-programming",
@@ -66,6 +83,7 @@ export default function ProjectsSection() {
       technologies: compTech,
       repoLink: "https://github.com/EzequielGaribotto/CompetitiveProgramming",
       programameLink: "https://programame.com/2024/nac/",
+      weight: 3
     },
     {
       id: "barcelona-inequality",
@@ -77,7 +95,8 @@ export default function ProjectsSection() {
       image: "/images/projects/desigualtat-als-barris-de-bcn.webp",
       technologies: barcelonaInequalityTech,
       repoLink: "https://colab.research.google.com/drive/1MZDA4yxF1LFktC1E7QE6cR4v8mQLxLiN",
-      presentationLink: "https://view.genially.com/67e0341f1bb26cf1dc8eba42/presentation-ezequiel-garibotto-anastasiia-levkina-desigualtat-als-barris-de-bcn"
+      presentationLink: "https://view.genially.com/67e0341f1bb26cf1dc8eba42/presentation-ezequiel-garibotto-anastasiia-levkina-desigualtat-als-barris-de-bcn",
+      weight: 4
     },
     {
       id: "rick-and-morty-api-list",
@@ -89,6 +108,7 @@ export default function ProjectsSection() {
       image: "/images/projects/api-list.webp",
       technologies: apiListTech,
       repoLink: "https://github.com/EzequielGaribotto/Ricky-and-Morty-API",
+      weight: 9
     },
     {
       id: "hackernews-api",
@@ -99,7 +119,8 @@ export default function ProjectsSection() {
       endDate: t("projects.hackerNewsAPI.endDate"),
       image: "/images/projects/hackernews.webp",
       technologies: hackerNewsAPITech,
-      repoLink: "https://github.com/EzequielGaribotto/HackerNews-Scraper-API"
+      repoLink: "https://github.com/EzequielGaribotto/HackerNews-Scraper-API",
+      weight: 10
     },
     {
       id: "zomb",
@@ -111,7 +132,8 @@ export default function ProjectsSection() {
       image: "/images/projects/zomb.webp",
       technologies: zombTech,
       repoLink: "https://github.com/EzequielGaribotto/zomb",
-      arcadeLink: "https://ezequielgaribotto.github.io/zomb/"
+      arcadeLink: "https://ezequielgaribotto.github.io/zomb/",
+      weight: 8
     },
     {
       id: "cron-schedule-editor",
@@ -122,7 +144,8 @@ export default function ProjectsSection() {
       endDate: t("projects.cronScheduleEditor.endDate"),
       image: "/images/projects/cron-schedule-editor.webp",
       technologies: cronTech,
-      repoLink: "https://github.com/EzequielGaribotto/cron-schedule-editor"
+      repoLink: "https://github.com/EzequielGaribotto/cron-schedule-editor",
+      weight: 11
     },
     {
       id: "portfolio-website",
@@ -133,7 +156,9 @@ export default function ProjectsSection() {
       endDate: t("projects.portfolioWebsite.endDate"),
       image: "/images/projects/portfolio.webp",
       technologies: portfolioTech,
-      repoLink: "https://github.com/EzequielGaribotto/portfolio-ezequielgaribotto"
+      repoLink: "https://github.com/EzequielGaribotto/portfolio-ezequielgaribotto",
+      websiteLink: "https://ezequielgaribotto.com",
+      weight: 12
     },
     {
       id: "maps-app",
@@ -143,7 +168,8 @@ export default function ProjectsSection() {
       startDate: t("projects.mapsApp.startDate"),
       endDate: t("projects.mapsApp.endDate"),
       technologies: mapsTech,
-      repoLink: "https://github.com/EzequielGaribotto/M08-P4-MapsApp"
+      repoLink: "https://github.com/EzequielGaribotto/M08-P4-MapsApp",
+      weight: 7
     },
     {
       id: "pelea-de-gallos",
@@ -153,11 +179,13 @@ export default function ProjectsSection() {
       startDate: t("projects.peleaDeGallos.startDate"),
       endDate: t("projects.peleaDeGallos.endDate"),
       technologies: peleaDeGallosTech,
-      repoLink: "https://github.com/EzequielGaribotto/PeleaDeGallos"
+      repoLink: "https://github.com/EzequielGaribotto/PeleaDeGallos",
+      weight: 6
     }
   ];
 
   const {
+    searchTerm,
     setSearchTerm,
     selectedKeywords,
     setSelectedKeywords,
@@ -166,7 +194,9 @@ export default function ProjectsSection() {
     resultCount,
     totalCount,
     showAllProjects,
-    setShowAllProjects
+    setShowAllProjects,
+    sortBy,
+    setSortBy
   } = useProjectSearch(projects);
 
   return (
@@ -190,11 +220,13 @@ export default function ProjectsSection() {
           hasActiveFilters={hasActiveFilters}
           showAllProjects={showAllProjects}
           onToggleShowAll={() => setShowAllProjects(!showAllProjects)}
+          sortBy={sortBy}
+          onSortChange={setSortBy}
         />        {/* Projects Grid */}
         <div className={styles.masonryGrid}>
           {filteredProjects.map((project) => (
             <div key={project.id} className={styles.masonryItem}>
-              <LazyProjectCard project={project} />
+              <LazyProjectCard project={project} searchTerm={searchTerm} />
             </div>
           ))}
         </div>

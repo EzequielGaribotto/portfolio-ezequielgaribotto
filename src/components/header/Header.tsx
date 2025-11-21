@@ -5,12 +5,12 @@ import LanguageSwitcher from '../language/LanguageSwitcher';
 import ThemeToggleButton from '../button/ThemeToggleButton';
 import styles from './Header.module.css';
 import Image from 'next/image';
-import Tooltip from '../tooltip/Tooltip';
   
 const Header: React.FC = () => {
   const { t, theme, isHydrated } = useTranslation();
   const [activeSection, setActiveSection] = useState<string>('');
   const [isClient, setIsClient] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   
   // Set isClient to true when component mounts on client side
   useEffect(() => {
@@ -39,13 +39,15 @@ const Header: React.FC = () => {
         top: element.offsetTop - 100, // Offset for header height
         behavior: 'smooth'
       });
+      // Close mobile menu if open
+      setMobileMenuOpen(false);
     }
   };
   
   // Update active section based on scroll position only
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['profile', 'projects', 'experience', 'training', 'gaming'];
+      const sections = ['profile', 'projects', 'experience', 'training'/*, 'gaming'*/];
       const scrollPosition = window.scrollY + 200; // Add offset for header
       
       for (const section of sections) {
@@ -73,19 +75,14 @@ const Header: React.FC = () => {
   }
   
   return (
-    <header className={styles.header}>
-      <div className={styles.headerContent} style={headerContentStyle}>
-        <Tooltip 
-          text={t("tooltips.logo")} 
-          position="bottom" 
-          forcePosition={true}
-        >
+    <>
+      <header className={styles.header}>
+        <div className={styles.headerContent} style={headerContentStyle}>
           <a 
-            href="https://github.com/EzequielGaribotto" 
-            target="_blank" 
-            rel="noopener noreferrer"
+            href="#profile"
+            onClick={scrollToSection('profile')}
             className={styles.logoLink}
-            aria-label={t("tooltips.logo")}
+            aria-label="Logo"
           >
             <div className={styles.logo}>
               <Image 
@@ -98,7 +95,6 @@ const Header: React.FC = () => {
               />
             </div>
           </a>
-        </Tooltip>
         
         <nav className={styles.navigation}>
           <ul className={styles.navList}>
@@ -138,7 +134,7 @@ const Header: React.FC = () => {
                 {t("navigation.training")}
               </a>
             </li>
-            <li className={styles.navItem}>
+            {/* <li className={styles.navItem}>
               <a 
                 href="#aboutme" // Replace javascript:void(0) with actual anchor
                 onClick={scrollToSection('gaming')}
@@ -146,16 +142,85 @@ const Header: React.FC = () => {
               >
                 {t("navigation.gaming")}
               </a>
-            </li>
+            </li> */}
           </ul>
         </nav>
         
         <div className={styles.controls}>
           <LanguageSwitcher />
           <ThemeToggleButton />
+          <button 
+            className={`${styles.mobileMenuButton} ${mobileMenuOpen ? styles.open : ''}`}
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Menu"
+          >
+            <span className={styles.hamburgerLine}></span>
+            <span className={styles.hamburgerLine}></span>
+            <span className={styles.hamburgerLine}></span>
+          </button>
         </div>
       </div>
     </header>
+    
+    {/* Mobile Menu Overlay */}
+    <div 
+      className={`${styles.mobileMenuOverlay} ${mobileMenuOpen ? styles.open : ''}`}
+      onClick={() => setMobileMenuOpen(false)}
+    >
+      <div 
+        className={styles.mobileMenuContent} 
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button 
+          className={styles.mobileMenuClose}
+          onClick={() => setMobileMenuOpen(false)}
+          aria-label="Close menu"
+        >
+          ×
+        </button>
+        <nav>
+          <ul className={styles.mobileNavList}>
+            <li className={styles.mobileNavItem}>
+              <a 
+                href="#profile"
+                onClick={scrollToSection('profile')}
+                className={activeSection === 'profile' ? styles.active : ''}
+              >
+                {t("navigation.profile")}
+              </a>
+            </li>
+            <li className={styles.mobileNavItem}>
+              <a 
+                href="#projects"
+                onClick={scrollToSection('projects')}
+                className={activeSection === 'projects' ? styles.active : ''}
+              >
+                {t("navigation.projects")}
+              </a>
+            </li>
+            <li className={styles.mobileNavItem}>
+              <a 
+                href="#experience"
+                onClick={scrollToSection('experience')}
+                className={activeSection === 'experience' ? styles.active : ''}
+              >
+                {t("navigation.experience")}
+              </a>
+            </li>
+            <li className={styles.mobileNavItem}>
+              <a 
+                href="#training"
+                onClick={scrollToSection('training')}
+                className={activeSection === 'training' ? styles.active : ''}
+              >
+                {t("navigation.training")}
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    </>
   );
 };
 

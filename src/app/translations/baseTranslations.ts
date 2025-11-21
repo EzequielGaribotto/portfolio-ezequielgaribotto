@@ -22,6 +22,7 @@ export const baseTranslations = {
         competition: "",
         playGame: "",
         playStore: "",
+        appStore: "",
         sourceCode: "",
         logo: "",
         expandImage: "",
@@ -29,7 +30,8 @@ export const baseTranslations = {
         solvedProblems: "",
         playArcadeGame: "",
         viewPresentation: "",
-        viewWebsite: ""
+        viewWebsite: "",
+        viewImage: ""
     },
     // Footer translations
     footer: {
@@ -63,7 +65,10 @@ export const baseTranslations = {
         filtered: "",
         tryAdjusting: "",
         showAllLink: "",
-        showLessLink: ""
+        showLessLink: "",
+        sortBy: "",
+        sortByRelevance: "",
+        sortByDate: ""
     },
     // Projects section translations
     projects: {
@@ -77,6 +82,13 @@ export const baseTranslations = {
             startDate: string,
             endDate?: string | null,
             websiteLink: string
+        },
+        ctennisstudio: {} as {
+            title: string,
+            description: string,
+            footer: string,
+            startDate: string,
+            endDate?: string | null
         },
         eulix: {} as {
             title: string,
@@ -178,6 +190,13 @@ export const baseTranslations = {
     training: {
         title: "",
         itb: {
+            institution: "",
+            course: "",
+            period: "",
+            location: "",
+            description: "",
+        },
+        linkia: {
             institution: "",
             course: "",
             period: "",

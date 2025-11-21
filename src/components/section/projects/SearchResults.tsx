@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslation } from "../../../context/TranslationContext";
+import { SortBy } from "../../../hooks/useProjectSearch";
 import styles from "./SearchResults.module.css";
 
 interface SearchResultsProps {
@@ -9,6 +10,8 @@ interface SearchResultsProps {
   hasActiveFilters: boolean;
   showAllProjects?: boolean;
   onToggleShowAll?: () => void;
+  sortBy: SortBy;
+  onSortChange: (sortBy: SortBy) => void;
 }
 
 export default function SearchResults({ 
@@ -16,7 +19,9 @@ export default function SearchResults({
   totalCount, 
   hasActiveFilters,
   showAllProjects = false,
-  onToggleShowAll
+  onToggleShowAll,
+  sortBy,
+  onSortChange
 }: SearchResultsProps) {
   const { t } = useTranslation();
 
@@ -42,6 +47,23 @@ export default function SearchResults({
             </>
           )}
         </p>
+        
+        {/* Sort toggle */}
+        <div className={styles.sortContainer}>
+          <span className={styles.sortLabel}>{t("search.sortBy")}:</span>
+          <button
+            onClick={() => onSortChange('relevance')}
+            className={`${styles.sortButton} ${sortBy === 'relevance' ? styles.sortButtonActive : ''}`}
+          >
+            {t("search.sortByRelevance")}
+          </button>
+          <button
+            onClick={() => onSortChange('date')}
+            className={`${styles.sortButton} ${sortBy === 'date' ? styles.sortButtonActive : ''}`}
+          >
+            {t("search.sortByDate")}
+          </button>
+        </div>
       </div>
     );
   }
@@ -66,6 +88,25 @@ export default function SearchResults({
           </>
         )}
       </p>
+      
+      {/* Sort toggle - also show when filtering */}
+      {resultCount > 0 && (
+        <div className={styles.sortContainer}>
+          <span className={styles.sortLabel}>{t("search.sortBy")}:</span>
+          <button
+            onClick={() => onSortChange('relevance')}
+            className={`${styles.sortButton} ${sortBy === 'relevance' ? styles.sortButtonActive : ''}`}
+          >
+            {t("search.sortByRelevance")}
+          </button>
+          <button
+            onClick={() => onSortChange('date')}
+            className={`${styles.sortButton} ${sortBy === 'date' ? styles.sortButtonActive : ''}`}
+          >
+            {t("search.sortByDate")}
+          </button>
+        </div>
+      )}
     </div>
   );
 }

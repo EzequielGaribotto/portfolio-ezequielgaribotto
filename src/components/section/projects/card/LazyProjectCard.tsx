@@ -7,9 +7,10 @@ import styles from "./LazyProjectCard.module.css";
 
 interface LazyProjectCardProps {
   project: Project;
+  searchTerm?: string;
 }
 
-export default function LazyProjectCard({ project }: LazyProjectCardProps) {
+export default function LazyProjectCard({ project, searchTerm }: LazyProjectCardProps) {
   const [isVisible, setIsVisible] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -18,7 +19,7 @@ export default function LazyProjectCard({ project }: LazyProjectCardProps) {
       (entries) => {
         if (entries[0].isIntersecting) {
           setIsVisible(true);
-          observer.disconnect();
+          // Don't disconnect so we can track visibility
         }
       },
       { threshold: 0.1 } // Trigger when 10% of the card is visible
@@ -31,7 +32,7 @@ export default function LazyProjectCard({ project }: LazyProjectCardProps) {
     return () => {
       observer.disconnect();
     };
-  }, []);
+  }, [project.id]);
 
   return (
     <div
@@ -41,7 +42,7 @@ export default function LazyProjectCard({ project }: LazyProjectCardProps) {
       style={{ minHeight: "500px" }}
     >
       {isVisible ? (
-        <ProjectCard project={project} />
+        <ProjectCard project={project} searchTerm={searchTerm} />
       ) : (
         <div className={styles.placeholder}>
           <div className={styles.placeholderTitle}></div>

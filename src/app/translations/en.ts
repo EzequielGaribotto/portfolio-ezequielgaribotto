@@ -25,13 +25,15 @@ export const en: Translations = {
     solvedProblems: "View solved problems",
     playGame: "Play the game",
     playStore: "Download from Play Store",
+    appStore: "Download from App Store",
     sourceCode: "View source code",
     logo: "Visit my GitHub profile",
     expandImage: "Expand image",
     closeImage: "Close image",
     playArcadeGame: "Play Arcade Game",
-    viewPresentation: "View presentation",
-    viewWebsite: "Visit website"
+    viewPresentation: "View Presentation",
+    viewWebsite: "Visit website",
+    viewImage: "View image"
   },
   footer: {
     disclaimer: "© 2025 Ezequiel Garibotto.",
@@ -60,22 +62,35 @@ export const en: Translations = {
     showingLimited: "Showing {count} projects out of {total}",
     showingFiltered: "Showing {filtered} of {total} projects",
     filtered: "(filtered)",
-    tryAdjusting: "Try adjusting your search criteria or removing some filters.",
+    tryAdjusting: "Try adjusting your search criteria or remove some filters.",
     showAllLink: "Show all projects",
-    showLessLink: "Show less"
+    showLessLink: "Show less",
+    sortBy: "Sort by",
+    sortByRelevance: "Relevance",
+    sortByDate: "Date"
   },
   projects: {
     title: "Projects",
     current: "present",
     neutralNews: {
-      title: "Neutral News",
-      description: "Application with ETL flow that generates neutral news, combining diverse powerful technologies for the backend: Scraping, XML parsing, ML algorithms for embedding and clustering, use of text generation APIs, among others.\n" +
+      title: "Neutral News / Facts",
+      description: "Application with ETL flow that generates neutral news, combining various powerful backend technologies: Scraping, XML parsing, ML algorithms for embedding and clustering, use of text generation APIs, among others.\n" +
         "• Implemented periodic semantic clustering of news articles sourced from the RSS feeds of more than 10 Spanish media outlets.\n" +
         "• Built a robust system to ensure the generation of neutral versions for clusters of semantically grouped news.\n" +
         "• Developed both a solid and complex backend and a user-friendly Android application.",
       footer: "Academic project continuation",
       startDate: "December 2024",
       websiteLink: "https://getfacts.app/en"
+    },
+    ctennisstudio: {
+      title: "Custom Tennis Studio",
+      description: "Development of a tennis services sales website encompassing professional stringing, racquet repair, and specialized practical training. The platform showcases over 15 years of experience in the professional ATP/WTA circuit, highlighting services at tournaments such as Monte-Carlo Masters, Miami Open, and Mutua Madrid Open.\n\n" +
+        "• Implemented a modern and responsive landing page using React, Next.js, and TailwindCSS\n" +
+        "• Designed an intuitive interface to showcase professional services, tournament experience, and training programs\n" +
+        "• Developed an integrated contact system with WhatsApp to facilitate client communication\n" +
+        "• Optimized web performance and SEO to maximize the business's online visibility",
+      footer: "Freelance Project",
+      startDate: "November 2025"
     },
     eulix: {
       title: "Eulix",
@@ -176,7 +191,12 @@ export const en: Translations = {
       period: "Aug 2025 - Oct 2025",
       location: "Spain, Barcelona · Hybrid",
       description:
-        "Service and API development (Apex), web development and interactive components (LWC), low-code solutions (Flow Builder), enterprise application architecture design (Sales/Service Cloud), asynchronous classes, unit testing, integration of external services using HTTP calls and Postman.",
+        "• Service and API development (Apex)\n" +
+        "• Web development and interactive components (LWC)\n" +
+        "• Low-code solutions (Flow Builder)\n" +
+        "• Enterprise application architecture design (Sales/Service Cloud)\n" +
+        "• Asynchronous classes and unit testing\n" +
+        "• Integration of external services using HTTP calls and Postman",
     },
   },
   training: {
@@ -194,6 +214,18 @@ export const en: Translations = {
         "• Client-server communications with Ktor, file processing, data access\n" +
         "• Participation in competitive programming contests using Java and Kotlin\n\n" +
         "Grade: 9.08",
+    },
+    linkia: {
+      institution: "Linkia FP",
+      course: "Master's in Artificial Intelligence and Big Data",
+      period: "2025 - 2026",
+      location: "Remote",
+      description: "Specialized master's degree in artificial intelligence, machine learning, and big data analysis, focused on practical applications and emerging technologies.\n\n" +
+        "• Deep learning and neural networks\n" +
+        "• Natural Language Processing (NLP)\n" +
+        "• Large-scale data analysis and visualization\n" +
+        "• Big Data architectures and distributed systems\n" +
+        "• Machine Learning and predictive models",
     },
     upf: {
       institution: "Universitat Pompeu Fabra (UPF)",

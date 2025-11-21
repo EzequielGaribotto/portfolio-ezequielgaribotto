@@ -25,13 +25,15 @@ export const es: Translations = {
     solvedProblems: "Ver problemas resueltos", // For competitive programming source code
     playGame: "Jugar al juego",
     playStore: "Descargar en la Play Store",
+    appStore: "Descargar en la App Store",
     sourceCode: "Ver código fuente",
     logo: "Visita mi perfil de GitHub",
     expandImage: "Ampliar imagen",
     closeImage: "Cerrar imagen",
     playArcadeGame: "Jugar Juego Arcade",
     viewPresentation: "Ver presentación",
-    viewWebsite: "Visitar sitio web"
+    viewWebsite: "Visitar sitio web",
+    viewImage: "Ver imagen"
   },
   footer: {
     disclaimer: "© 2025 Ezequiel Garibotto.",
@@ -62,13 +64,16 @@ export const es: Translations = {
     filtered: "(filtrado)",
     tryAdjusting: "Intenta ajustar tus criterios de búsqueda o eliminar algunos filtros.",
     showAllLink: "Ver todos los proyectos",
-    showLessLink: "Ver menos"
+    showLessLink: "Ver menos",
+    sortBy: "Ordenar por",
+    sortByRelevance: "Relevancia",
+    sortByDate: "Fecha"
   },
   projects: {
     title: "Proyectos",
     current: "presente",
     neutralNews: {
-      title: "Neutral News",
+      title: "Neutral News / Facts",
       description: "Aplicación con flujo ETL que genera noticias neutrales, combinando diversas tecnologías potentes para el backend: Scraping, parsing XML, algoritmos ML para embedding y clustering, uso de APIs de generación de texto, entre otros.\n" +
         "• Implementé clustering semántico periódico de artículos de noticias obtenidos de feeds RSS de más de 10 medios españoles.\n" +
         "• Construí un sistema robusto para asegurar la generación de versiones neutrales para clusters de noticias agrupadas semánticamente.\n" +
@@ -76,6 +81,16 @@ export const es: Translations = {
       footer: "Académico en continuidad",
       startDate: "diciembre 2024",
       websiteLink: "https://getfacts.app/es"
+    },
+    ctennisstudio: {
+      title: "Custom Tennis Studio",
+      description: "Desarrollo de una página web de venta de servicios de tenis que engloba encordado profesional, reparación de raquetas y formaciones prácticas especializadas. La plataforma presenta la experiencia de más de 15 años en el circuito profesional ATP/WTA, destacando servicios en torneos como Monte-Carlo Masters, Miami Open y Mutua Madrid Open.\n\n" +
+        "• Implementé una landing page moderna y responsive usando React, Next.js y TailwindCSS\n" +
+        "• Diseñé una interfaz intuitiva para mostrar servicios profesionales, experiencia en torneos y programas de formación\n" +
+        "• Desarrollé un sistema de contacto integrado con WhatsApp para facilitar la comunicación con clientes\n" +
+        "• Optimicé el rendimiento web y SEO para maximizar la visibilidad online del negocio",
+      footer: "Proyecto Freelance",
+      startDate: "noviembre 2025"
     },
     eulix: {
       title: "Eulix",
@@ -176,7 +191,12 @@ export const es: Translations = {
       period: "Ago 2025 - Oct 2025",
       location: "Barcelona, España · Híbrido",
       description:
-        "Desarrollo de servicios y APIs (Apex), desarrollo web y componentes interactivos (LWC), soluciones low-code (Flow Builder), diseño de arquitectura de aplicaciones empresariales (Sales/Service Cloud), clases asíncronas, pruebas unitarias, integración de servicios externos usando llamadas HTTP y Postman.",
+        "• Desarrollo de servicios y APIs (Apex)\n" +
+        "• Desarrollo web y componentes interactivos (LWC)\n" +
+        "• Soluciones low-code (Flow Builder)\n" +
+        "• Diseño de arquitectura de aplicaciones empresariales (Sales/Service Cloud)\n" +
+        "• Clases asíncronas y pruebas unitarias\n" +
+        "• Integración de servicios externos usando llamadas HTTP y Postman",
     },
   },
   training: {
@@ -193,6 +213,18 @@ export const es: Translations = {
         "• Comunicaciones cliente-servidor con Ktor, lectura de ficheros, acceso a datos\n" +
         "• Participación en concursos de programación competitiva, usando Java y Kotlin\n\n" +
         "Nota: 9.08",
+    },
+    linkia: {
+      institution: "Linkia FP",
+      course: "Máster en Inteligencia Artificial y Big Data",
+      period: "2025 - 2026",
+      location: "Remoto",
+      description: "Máster especializado en inteligencia artificial, aprendizaje automático y análisis de big data, enfocado en aplicaciones prácticas y tecnologías emergentes.\n\n" +
+        "• Aprendizaje profundo y redes neuronales\n" +
+        "• Procesamiento de lenguaje natural (NLP)\n" +
+        "• Análisis y visualización de datos a gran escala\n" +
+        "• Arquitecturas de Big Data y sistemas distribuidos\n" +
+        "• Machine Learning y modelos predictivos",
     },
     upf: {
       institution: "Universitat Pompeu Fabra (UPF)",
