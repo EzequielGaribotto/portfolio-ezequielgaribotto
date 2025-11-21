@@ -7,7 +7,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Define CV files to check
-const cvDirectory = path.join(__dirname, 'public', 'cv');
+const projectRoot = path.join(__dirname, '..', '..');
+const cvDirectory = path.join(projectRoot, 'public', 'cv');
 const cvFiles = {
   es: path.join(cvDirectory, 'CV_ES_EzequielGaribotto.pdf'),
   en: path.join(cvDirectory, 'CV_EN_EzequielGaribotto.pdf'),
@@ -39,7 +40,7 @@ const metadata = {
 };
 
 // Write to public directory for static access
-const metadataPath = path.join(__dirname, 'public', 'cv', 'cv-metadata.json');
+const metadataPath = path.join(projectRoot, 'public', 'cv', 'cv-metadata.json');
 
 // Ensure the directory exists
 const dir = path.dirname(metadataPath);

@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Paths
-const projectRoot = path.join(__dirname, '..');
+const projectRoot = path.join(__dirname, '..', '..');
 const cvDirectory = path.join(projectRoot, 'public', 'cv');
 const metadataPath = path.join(cvDirectory, 'cv-metadata.json');
 
@@ -19,7 +19,7 @@ const cvFiles = {
 };
 
 // Function to update metadata
-function updateMetadata(changedFile = null) {
+function updateMetadata() {
   // Read existing metadata or create new
   let metadata = {
     lastUpdated: {},
@@ -36,7 +36,7 @@ function updateMetadata(changedFile = null) {
       const existing = JSON.parse(fs.readFileSync(metadataPath, 'utf8'));
       metadata.lastUpdated = existing.lastUpdated || {};
     } catch (error) {
-      console.warn('⚠️  Could not read existing metadata, creating new');
+      console.warn('⚠️  Could not read existing metadata, creating new' + error);
     }
   }
 
@@ -73,7 +73,7 @@ function checkCVFiles() {
   const stats = {};
   let allExist = true;
 
-  for (const [key, filePath] of Object.entries(cvFiles)) {
+  for (const filePath of Object.values(cvFiles)) {
     if (fs.existsSync(filePath)) {
       const stat = fs.statSync(filePath);
       stats[path.basename(filePath)] = {

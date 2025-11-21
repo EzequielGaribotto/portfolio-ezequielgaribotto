@@ -11,10 +11,11 @@
     "deploy": "gh-pages -d out --dotfiles",
     "start": "next start",
     "lint": "next lint",
-    "update-cv": "node update-cv-metadata.mjs",
-    "cv:update": "node scripts/init-cv-metadata.mjs",
-    "cv:watch": "node scripts/watch-cv-changes.mjs",
-    "cv:init": "node scripts/init-cv-metadata.mjs"
+    "update-cv": "node scripts/cv/update-cv-metadata.mjs",
+    "cv:update": "node scripts/cv/init-cv-metadata.mjs",
+    "cv:watch": "node scripts/cv/watch-cv-changes.mjs",
+    "cv:init": "node scripts/cv/init-cv-metadata.mjs",
+    "optimize:images": "python scripts/build/optimize_images.py"
   },
   "dependencies": {
     "chokidar": "^3.6.0",
