@@ -17,17 +17,51 @@ const cvFiles = {
 };
 
 function initializeMetadata() {
+  // Check if metadata already exists
+  let existingMetadata = null;
+  if (fs.existsSync(metadataPath)) {
+    try {
+      existingMetadata = JSON.parse(fs.readFileSync(metadataPath, 'utf8'));
+      console.log('📋 Existing CV metadata found');
+    } catch {
+      console.warn('⚠️  Could not read existing metadata, will create new');
+    }
+  }
+
   // Get modification times for each CV file
   const lastUpdated = {};
   let latestModified = new Date(0);
   let existingCount = 0;
+  let hasChanges = false;
   
   for (const [key, filePath] of Object.entries(cvFiles)) {
     if (fs.existsSync(filePath)) {
       const stat = fs.statSync(filePath);
-      lastUpdated[key] = stat.mtime.toISOString();
-      if (stat.mtime > latestModified) {
-        latestModified = stat.mtime;
+      const fileModTime = stat.mtime.toISOString();
+      
+      // If we have existing metadata, check if the file is actually newer
+      if (existingMetadata && existingMetadata.lastUpdated && existingMetadata.lastUpdated[key]) {
+        const existingTime = new Date(existingMetadata.lastUpdated[key]);
+        const currentTime = new Date(fileModTime);
+        
+        // Only update if file is actually newer (with 1 second tolerance for filesystem differences)
+        if (currentTime - existingTime > 1000) {
+          lastUpdated[key] = fileModTime;
+          hasChanges = true;
+          console.log(`   ✓ ${key} has been updated`);
+        } else {
+          // Keep existing timestamp
+          lastUpdated[key] = existingMetadata.lastUpdated[key];
+        }
+      } else {
+        // No existing metadata for this file, use current modification time
+        lastUpdated[key] = fileModTime;
+        hasChanges = true;
+      }
+      
+      const modTime = new Date(lastUpdated[key]);
+      if (modTime > latestModified) {
+        latestModified = modTime;
       }
       existingCount++;
     }
@@ -38,6 +72,16 @@ function initializeMetadata() {
     console.log('   - CV_ES_EzequielGaribotto.pdf');
     console.log('   - CV_EN_EzequielGaribotto.pdf');
     console.log('   - CV_EN_EzequielGaribotto_ATS.pdf');
+    return;
+  }
+
+  // If we have existing metadata and no changes detected, keep it as is
+  if (existingMetadata && !hasChanges) {
+    console.log('✅ CV metadata is up to date, no changes needed');
+    console.log(`   Version: ${existingMetadata.version}`);
+    for (const [key, timestamp] of Object.entries(existingMetadata.lastUpdated)) {
+      console.log(`   ${key}: ${new Date(timestamp).toLocaleString()}`);
+    }
     return;
   }
 
