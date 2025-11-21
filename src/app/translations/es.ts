@@ -66,8 +66,8 @@ export const es: Translations = {
     showAllLink: "Ver todos los proyectos",
     showLessLink: "Ver menos",
     sortBy: "Ordenar por",
-    sortByRelevance: "Relevancia",
-    sortByDate: "Fecha"
+    sortByDate: "Fecha",
+    sortByRelevance: "Relevancia"
   },
   projects: {
     title: "Proyectos",
@@ -84,10 +84,10 @@ export const es: Translations = {
     },
     ctennisstudio: {
       title: "Custom Tennis Studio",
-      description: "Desarrollo de una página web de venta de servicios de tenis que engloba encordado profesional, reparación de raquetas y formaciones prácticas especializadas. La plataforma presenta la experiencia de más de 15 años en el circuito profesional ATP/WTA, destacando servicios en torneos como Monte-Carlo Masters, Miami Open y Mutua Madrid Open.\n\n" +
-        "• Implementé una landing page moderna y responsive usando React, Next.js y TailwindCSS\n" +
-        "• Diseñé una interfaz intuitiva para mostrar servicios profesionales, experiencia en torneos y programas de formación\n" +
-        "• Desarrollé un sistema de contacto integrado con WhatsApp para facilitar la comunicación con clientes\n" +
+      description: "Desarrollo de una página web de venta de servicios de tenis\n\n" +
+        "• Landing page moderna y responsive usando React, Next.js y TailwindCSS\n" +
+        "• Interfaz intuitiva para mostrar servicios profesionales, experiencia en torneos y programas de formación\n" +
+        "• Sistema de contacto integrado via Email para facilitar la comunicación con clientes\n" +
         "• Optimicé el rendimiento web y SEO para maximizar la visibilidad online del negocio",
       footer: "Proyecto Freelance",
       startDate: "noviembre 2025"
@@ -103,7 +103,8 @@ export const es: Translations = {
       title: "Programación Competitiva",
       description: "Participación en concursos de programación competitiva en equipos, representando al instituto, quedando cuartos en el cuncurso nacional. Problemas resueltos en JO-EL y AceptaElReto para el concurso ProgramaMe 2024.",
       footer: "Optativo Académico",
-      startDate: "septiembre 2023"
+      startDate: "septiembre 2023",
+      endDate: "junio 2025"
     },
     rickAndMorty: {
       title: "Lista API Eficiente",

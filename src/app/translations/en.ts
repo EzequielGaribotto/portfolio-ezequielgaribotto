@@ -84,10 +84,10 @@ export const en: Translations = {
     },
     ctennisstudio: {
       title: "Custom Tennis Studio",
-      description: "Development of a tennis services sales website encompassing professional stringing, racquet repair, and specialized practical training. The platform showcases over 15 years of experience in the professional ATP/WTA circuit, highlighting services at tournaments such as Monte-Carlo Masters, Miami Open, and Mutua Madrid Open.\n\n" +
-        "• Implemented a modern and responsive landing page using React, Next.js, and TailwindCSS\n" +
-        "• Designed an intuitive interface to showcase professional services, tournament experience, and training programs\n" +
-        "• Developed an integrated contact system with WhatsApp to facilitate client communication\n" +
+      description: "Development of a tennis services sales website.\n\n" +
+        "• Modern and responsive landing page using React, Next.js, and TailwindCSS\n" +
+        "• Intuitive interface to showcase professional services, tournament experience, and training programs\n" +
+        "• Integrated contact system with Email to facilitate client communication\n" +
         "• Optimized web performance and SEO to maximize the business's online visibility",
       footer: "Freelance Project",
       startDate: "November 2025"
@@ -103,7 +103,8 @@ export const en: Translations = {
       title: "Competitive Programming",
       description: "Participation in competitive programming contests in teams, representing the institute, finishing fourth in the national contest. Problems solved on JO-EL and AceptaElReto for the ProgramaMe 2024 contest.",
       footer: "Academic Elective",
-      startDate: "September 2023"
+      startDate: "September 2023",
+      endDate: "June 2025"
     },
     rickAndMorty: {
       title: "Efficient API List",

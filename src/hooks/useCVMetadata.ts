@@ -5,6 +5,7 @@ export interface CVMetadata {
   lastUpdated: {
     es: string;
     en: string;
+    en_ats: string;
   };
   version: string;
   notes: {
@@ -16,7 +17,8 @@ export interface CVMetadata {
 const FALLBACK_METADATA: CVMetadata = {
   lastUpdated: {
     es: "2024-12-15T10:30:00Z",
-    en: "2024-12-15T10:30:00Z"
+    en: "2024-12-15T10:30:00Z",
+    en_ats: "2024-12-15T10:30:00Z"
   },
   version: "2024.12.15",
   notes: {

@@ -10,41 +10,41 @@ const cvDirectory = path.join(projectRoot, 'public', 'cv');
 const metadataPath = path.join(cvDirectory, 'cv-metadata.json');
 
 // CV files to check
-const cvFiles = [
-  path.join(cvDirectory, 'CV_ES_EzequielGaribotto.pdf'),
-  path.join(cvDirectory, 'CV_EN_EzequielGaribotto.pdf'),
-  path.join(cvDirectory, 'CV_EN_EzequielGaribotto_ATS.pdf')
-];
+const cvFiles = {
+  es: path.join(cvDirectory, 'CV_ES_EzequielGaribotto.pdf'),
+  en: path.join(cvDirectory, 'CV_EN_EzequielGaribotto.pdf'),
+  en_ats: path.join(cvDirectory, 'CV_EN_EzequielGaribotto_ATS.pdf')
+};
 
 function initializeMetadata() {
-  // Check if CV files exist
-  const existingFiles = cvFiles.filter(file => fs.existsSync(file));
+  // Get modification times for each CV file
+  const lastUpdated = {};
+  let latestModified = new Date(0);
+  let existingCount = 0;
   
-  if (existingFiles.length === 0) {
+  for (const [key, filePath] of Object.entries(cvFiles)) {
+    if (fs.existsSync(filePath)) {
+      const stat = fs.statSync(filePath);
+      lastUpdated[key] = stat.mtime.toISOString();
+      if (stat.mtime > latestModified) {
+        latestModified = stat.mtime;
+      }
+      existingCount++;
+    }
+  }
+  
+  if (existingCount === 0) {
     console.log('⚠️  No CV files found. Please add your CV files to the public/cv directory:');
     console.log('   - CV_ES_EzequielGaribotto.pdf');
     console.log('   - CV_EN_EzequielGaribotto.pdf');
+    console.log('   - CV_EN_EzequielGaribotto_ATS.pdf');
     return;
   }
 
-  // Get the latest modification time from existing CV files
-  let latestModified = new Date(0);
-  for (const file of existingFiles) {
-    const stat = fs.statSync(file);
-    if (stat.mtime > latestModified) {
-      latestModified = stat.mtime;
-    }
-  }
-
-  // Use the latest modification time or current time
-  const updateTime = latestModified > new Date(0) ? latestModified.toISOString() : new Date().toISOString();
-  const version = new Date(updateTime).toISOString().split('T')[0].replace(/-/g, '.');
+  const version = latestModified.toISOString().split('T')[0].replace(/-/g, '.');
 
   const metadata = {
-    lastUpdated: {
-      es: updateTime,
-      en: updateTime
-    },
+    lastUpdated,
     version: version,
     notes: {
       es: `Inicialización automática basada en archivos CV existentes`,
@@ -60,9 +60,11 @@ function initializeMetadata() {
   try {
     fs.writeFileSync(metadataPath, JSON.stringify(metadata, null, 2));
     console.log('✅ CV metadata initialized successfully!');
-    console.log(`   Found ${existingFiles.length} CV file(s)`);
+    console.log(`   Found ${existingCount} CV file(s)`);
     console.log(`   Version: ${version}`);
-    console.log(`   Last updated: ${new Date(updateTime).toLocaleString()}`);
+    for (const [key, timestamp] of Object.entries(lastUpdated)) {
+      console.log(`   ${key}: ${new Date(timestamp).toLocaleString()}`);
+    }
   } catch (error) {
     console.error('❌ Error initializing CV metadata:', error);
   }

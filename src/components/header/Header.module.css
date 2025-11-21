@@ -281,13 +281,21 @@
   .headerContent {
     padding: 10px 20px;
     border-radius: 25px;
-    width: 95%;
+    width: auto;
+    max-width: fit-content;
+    margin-left: auto;
+    margin-right: 20px;
+    /* Simple layout for controls only */
+    justify-content: flex-end;
+  }
+  
+  /* Hide logo on mobile */
+  .logoLink {
+    display: none;
   }
   
   .logo {
-    margin-right: 0;
-    width: 45px;
-    height: 45px;
+    display: none;
   }
   
   /* Hide desktop navigation on mobile */
@@ -295,14 +303,15 @@
     display: none;
   }
   
-  /* Show hamburger menu button on mobile */
-  .mobileMenuButton {
-    display: flex;
-  }
-  
   .controls {
     width: auto;
     gap: 12px;
+    justify-content: flex-end;
+  }
+  
+  /* Show hamburger menu button on mobile */
+  .mobileMenuButton {
+    display: flex;
   }
 }
 
@@ -315,10 +324,12 @@
   
   .headerContent {
     padding: 8px 15px;
+    width: auto;
+    max-width: fit-content;
+    margin-right: 10px;
   }
   
-  .logo {
-    width: 40px;
-    height: 40px;
+  .controls {
+    gap: 10px;
   }
 }

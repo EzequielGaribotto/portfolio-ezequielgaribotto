@@ -6,16 +6,32 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Get current timestamp
-const now = new Date().toISOString();
+// Define CV files to check
+const cvDirectory = path.join(__dirname, 'public', 'cv');
+const cvFiles = {
+  es: path.join(cvDirectory, 'CV_ES_EzequielGaribotto.pdf'),
+  en: path.join(cvDirectory, 'CV_EN_EzequielGaribotto.pdf'),
+  en_ats: path.join(cvDirectory, 'CV_EN_EzequielGaribotto_ATS.pdf')
+};
 
-// Create new metadata
+// Get modification times for each CV file
+const lastUpdated = {};
+let latestDate = new Date(0);
+
+for (const [key, filePath] of Object.entries(cvFiles)) {
+  if (fs.existsSync(filePath)) {
+    const stat = fs.statSync(filePath);
+    lastUpdated[key] = stat.mtime.toISOString();
+    if (stat.mtime > latestDate) {
+      latestDate = stat.mtime;
+    }
+  }
+}
+
+// Create new metadata with individual timestamps
 const metadata = {
-  lastUpdated: {
-    es: now,
-    en: now
-  },
-  version: new Date().toISOString().split('T')[0].replace(/-/g, '.'),
+  lastUpdated,
+  version: latestDate.toISOString().split('T')[0].replace(/-/g, '.'),
   notes: {
     es: "Actualización manual - " + new Date().toLocaleDateString('es-ES'),
     en: "Manual update - " + new Date().toLocaleDateString('en-US')
@@ -35,5 +51,8 @@ fs.writeFileSync(metadataPath, JSON.stringify(metadata, null, 2));
 
 console.log('CV metadata updated successfully!');
 console.log('New version:', metadata.version);
-console.log('Updated at:', now);
+console.log('Individual CV update times:');
+for (const [key, timestamp] of Object.entries(lastUpdated)) {
+  console.log(`  ${key}: ${new Date(timestamp).toLocaleString()}`);
+}
 console.log('File saved to:', metadataPath);

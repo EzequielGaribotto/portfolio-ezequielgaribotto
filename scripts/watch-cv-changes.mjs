@@ -12,28 +12,47 @@ const cvDirectory = path.join(projectRoot, 'public', 'cv');
 const metadataPath = path.join(cvDirectory, 'cv-metadata.json');
 
 // CV files to watch
-const cvFiles = [
-  path.join(cvDirectory, 'CV_ES_EzequielGaribotto.pdf'),
-  path.join(cvDirectory, 'CV_EN_EzequielGaribotto.pdf'),
-  path.join(cvDirectory, 'CV_EN_EzequielGaribotto_ATS.pdf')
-];
+const cvFiles = {
+  es: path.join(cvDirectory, 'CV_ES_EzequielGaribotto.pdf'),
+  en: path.join(cvDirectory, 'CV_EN_EzequielGaribotto.pdf'),
+  en_ats: path.join(cvDirectory, 'CV_EN_EzequielGaribotto_ATS.pdf')
+};
 
 // Function to update metadata
-function updateMetadata() {
-  const now = new Date().toISOString();
-  const version = new Date().toISOString().split('T')[0].replace(/-/g, '.');
-  
-  const metadata = {
-    lastUpdated: {
-      es: now,
-      en: now
-    },
-    version: version,
+function updateMetadata(changedFile = null) {
+  // Read existing metadata or create new
+  let metadata = {
+    lastUpdated: {},
+    version: '',
     notes: {
       es: `Actualización automática - ${new Date().toLocaleDateString('es-ES')}`,
       en: `Automatic update - ${new Date().toLocaleDateString('en-US')}`
     }
   };
+
+  // Try to read existing metadata to preserve timestamps of unchanged files
+  if (fs.existsSync(metadataPath)) {
+    try {
+      const existing = JSON.parse(fs.readFileSync(metadataPath, 'utf8'));
+      metadata.lastUpdated = existing.lastUpdated || {};
+    } catch (error) {
+      console.warn('⚠️  Could not read existing metadata, creating new');
+    }
+  }
+
+  // Update timestamps based on actual file modification times
+  let latestModified = new Date(0);
+  for (const [key, filePath] of Object.entries(cvFiles)) {
+    if (fs.existsSync(filePath)) {
+      const stat = fs.statSync(filePath);
+      metadata.lastUpdated[key] = stat.mtime.toISOString();
+      if (stat.mtime > latestModified) {
+        latestModified = stat.mtime;
+      }
+    }
+  }
+  
+  metadata.version = latestModified.toISOString().split('T')[0].replace(/-/g, '.');
 
   // Ensure directory exists
   if (!fs.existsSync(cvDirectory)) {
@@ -54,7 +73,7 @@ function checkCVFiles() {
   const stats = {};
   let allExist = true;
 
-  for (const filePath of cvFiles) {
+  for (const [key, filePath] of Object.entries(cvFiles)) {
     if (fs.existsSync(filePath)) {
       const stat = fs.statSync(filePath);
       stats[path.basename(filePath)] = {
@@ -94,7 +113,7 @@ function startWatching() {
   initializeMetadata();
   
   // Watch for changes to CV files
-  const watcher = watch(cvFiles, {
+  const watcher = watch(Object.values(cvFiles), {
     ignored: /[\/\\]\./,
     persistent: true,
     awaitWriteFinish: {
@@ -106,11 +125,11 @@ function startWatching() {
   watcher
     .on('change', (filePath) => {
       console.log(`📄 CV file changed: ${path.basename(filePath)}`);
-      updateMetadata();
+      updateMetadata(filePath);
     })
     .on('add', (filePath) => {
       console.log(`📄 CV file added: ${path.basename(filePath)}`);
-      updateMetadata();
+      updateMetadata(filePath);
     })
     .on('error', (error) => {
       console.error('❌ Watcher error:', error);

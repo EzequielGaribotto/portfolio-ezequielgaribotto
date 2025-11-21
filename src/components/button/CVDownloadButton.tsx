@@ -24,10 +24,30 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
     setSupportsPdfViewer(detectPdfSupport());
   }, []);
 
-  const getCurrentDate = () => {
+  const getCurrentDate = (cvKey?: string) => {
     if (!metadata) return new Date("2024-12-15T10:30:00Z");
-    const dateString = metadata.lastUpdated[locale as keyof typeof metadata.lastUpdated] || metadata.lastUpdated.es;
+    
+    // Use specific CV key if provided, otherwise fall back to locale-based lookup
+    const key = cvKey || (locale as keyof typeof metadata.lastUpdated);
+    const dateString = metadata.lastUpdated[key as keyof typeof metadata.lastUpdated] || metadata.lastUpdated.es;
     return new Date(dateString);
+  };
+
+  const getMostRecentCV = () => {
+    if (!metadata) return { date: new Date("2024-12-15T10:30:00Z"), label: '' };
+    
+    const cvDates = [
+      { key: 'en_ats', date: new Date(metadata.lastUpdated.en_ats), label: t("cv.english_ats") },
+      { key: 'es', date: new Date(metadata.lastUpdated.es), label: t("cv.spanish") },
+      { key: 'en', date: new Date(metadata.lastUpdated.en), label: t("cv.english") }
+    ];
+    
+    // Find the most recent CV
+    const mostRecent = cvDates.reduce((latest, current) => 
+      current.date > latest.date ? current : latest
+    );
+    
+    return { date: mostRecent.date, label: mostRecent.label };
   };
 
   // Handle opening and closing of dropdown
@@ -200,7 +220,7 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
 
   return (
     <div className={`relative ${className}`} ref={dropdownRef}>
-      {/* Date display without version */}
+      {/* Date display with most recent CV version */}
       {showDateInfo && metadata && (
         <div 
           className={`absolute text-center text-xs -top-6 left-1/2 transform -translate-x-1/2 transition-opacity duration-1000 ${fadeOut ? 'opacity-0' : 'opacity-80'}`}
@@ -212,7 +232,10 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
             borderRadius: '4px'
           }}
         >
-          {t("cv.lastUpdated")}: {formatDate(getCurrentDate(), locale)}
+          {(() => {
+            const mostRecent = getMostRecentCV();
+            return `${formatDate(mostRecent.date, locale)} - ${mostRecent.label}`;
+          })()}
         </div>
       )}
       
@@ -318,7 +341,7 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
                 <div className="flex items-center text-white text-xs px-2 opacity-80 min-w-[200px] z-10">
                   <FaCalendarAlt className="mr-1" />
                   <span>
-                    {formatDate(getCurrentDate(), locale, true)}
+                    {formatDate(getCurrentDate(previewLang), locale, true)}
                   </span>
                 </div>
                 

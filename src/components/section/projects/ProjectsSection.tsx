@@ -78,7 +78,7 @@ export default function ProjectsSection() {
       description: t("projects.competitiveProgramming.description"),
       footer: t("projects.competitiveProgramming.footer"),
       startDate: t("projects.competitiveProgramming.startDate"),
-      endDate: null,
+      endDate: t("projects.competitiveProgramming.endDate"),
       image: "/images/projects/competitive.webp",
       technologies: compTech,
       repoLink: "https://github.com/EzequielGaribotto/CompetitiveProgramming",
