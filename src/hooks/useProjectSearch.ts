@@ -114,7 +114,6 @@ export function useProjectSearch(projects: Project[]) {
 
       // Search term filtering and scoring
       if (hasSearchTerm) {
-        const searchLower = searchTerm.toLowerCase().trim();
         const expandedTerms = expandSearchTerm(searchTerm);
         let searchMatches = false;
 
