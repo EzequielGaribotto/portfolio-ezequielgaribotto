@@ -1,9 +1,10 @@
 {
   "lastUpdated": {
-    "es": "2025-05-25T14:09:13.411Z",
-    "en": "2025-05-25T14:09:13.411Z"
+    "es": "2025-11-21T14:46:41.748Z",
+    "en": "2025-11-21T14:46:41.746Z",
+    "en_ats": "2025-11-21T14:46:41.746Z"
   },
-  "version": "2025.05.25",
+  "version": "2025.11.21",
   "notes": {
     "es": "Inicialización automática basada en archivos CV existentes",
     "en": "Automatic initialization based on existing CV files"
