@@ -94,7 +94,7 @@ export default function ProjectsSection() {
       endDate: t("projects.barcelonaInequality.endDate"),
       image: "/images/projects/desigualtat-als-barris-de-bcn.webp",
       technologies: barcelonaInequalityTech,
-      repoLink: "https://colab.research.google.com/drive/1MZDA4yxF1LFktC1E7QE6cR4v8mQLxLiN",
+      repoLink: "https://colab.research.google.com/drive/17Ibyj89o9AToz5l6mjQa0O3dmmpx3JNx",
       presentationLink: "https://view.genially.com/67e0341f1bb26cf1dc8eba42/presentation-ezequiel-garibotto-anastasiia-levkina-desigualtat-als-barris-de-bcn",
       weight: 4
     },
