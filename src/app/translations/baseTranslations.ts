@@ -185,6 +185,13 @@ export const baseTranslations = {
             period: "",
             location: "",
             description: "",
+        },
+        automaticaintelligence: {
+            company: "",
+            position: "", 
+            period: "",
+            location: "",
+            description: "",
         }
     },
     training: {

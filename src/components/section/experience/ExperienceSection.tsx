@@ -12,6 +12,22 @@ const ExperienceSection: React.FC = () => {
 
   const experiences: Experience[] = [
     {
+      id: "automaticaintelligence",
+      company: t("experiences.automaticaintelligence.company"),
+      position: t("experiences.automaticaintelligence.position"),
+      period: t("experiences.automaticaintelligence.period"),
+      location: t("experiences.automaticaintelligence.location"),
+      description: t("experiences.automaticaintelligence.description"),
+      technologies: [
+        "Python",
+        "AI/ML",
+        "Data Analysis",
+        "Google Cloud Platform",
+      ],
+      imageUrl: "/images/companies/automaticaintelligence_logo.webp",
+      companyUrl: "https://www.automaticaintelligence.com/",
+    },
+    {
       id: "seidor",
       company: t("experiences.seidor.company"),
       position: t("experiences.seidor.position"),

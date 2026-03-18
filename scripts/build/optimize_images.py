@@ -25,7 +25,7 @@ logging.basicConfig(
 )
 
 # Constants
-IMAGES_DIR = Path("public/images")
+IMAGES_DIR = Path("../../public/images")
 EXCLUDED_DIRS = ["logo"]
 INCLUDED_FROM_EXCLUDED = ["e332logo.png"]  # Just the filename without directory
 SUPPORTED_FORMATS = [".jpg", ".jpeg", ".png"]

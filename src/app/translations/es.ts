@@ -170,7 +170,7 @@ export const es: Translations = {
     eulix: {
       company: "Eulix",
       position: "Desarrollador Junior de Android",
-      period: "octubre 2024 - abril 2025 (7 meses)",
+      period: "09/2024 - 04/2025 (7 meses)",
       description: "Desarrollo de una aplicación con el objetivo de recomendar contenidos (películas, series) basándose en la personalidad, estado de ánimo y preferencias del usuario.\n" +
         "• Desarrollé un chatbot (Asistente Virtual) para onboarding y sección 'Cómo Funciona', mejorando el engagement y soporte al usuario.\n" +
         "• Diseñé y mejoré la UI en todas las pantallas de la app, impulsando mejoras continuas de UX a través de ideas de diseño iterativo.\n" +
@@ -181,7 +181,7 @@ export const es: Translations = {
     telus: {
       company: "TELUS Digital",
       position: "Anotador de Datos",
-      period: "julio 2023 - enero 2025 (1 año 7 meses)",
+      period: "07/2023 - 01/2025 (1 año 7 meses)",
       description: "• Clasifiqué, evalué y describí consultas, audio, video, imágenes y otros tipos de datos para asegurar relevancia y calidad.\n" +
         "• Apliqué inglés profesional, conocimiento general y alfabetización digital para mejorar la precisión y comprensión contextual del contenido.",
       location: "España · Totalmente Remoto",
@@ -189,7 +189,7 @@ export const es: Translations = {
     seidor: {
       company: "SEIDOR NTS",
       position: "Asistente Técnico de Salesforce",
-      period: "Ago 2025 - Oct 2025",
+      period: "08/2025 - 10/2025 (2 meses)",
       location: "Barcelona, España · Híbrido",
       description:
         "• Desarrollo de servicios y APIs (Apex)\n" +
@@ -199,6 +199,17 @@ export const es: Translations = {
         "• Clases asíncronas y pruebas unitarias\n" +
         "• Integración de servicios externos usando llamadas HTTP y Postman",
     },
+    automaticaintelligence: {
+      company: "Automatica Intelligence",
+      position: "Desarrollador de Software Junior",
+      period: "02/2026 - 03/2026 (2 meses)",
+      location: "Remoto",
+      description:
+        "• Desarrollo con Python de un servicio SaaS alojado en Google Cloud con uso de Inteligencia Artificial\n"+
+        "• Analicé y optimicé el algoritmo de enlace entre noticias, mejorando su precisión y reduciendo errores de matching.\n"+
+        "• Migración del procesamiento de archivos ZIP a backend en GCP, reduciendo fallos por limites de carga/timeout/CORS y mejorando la estabilidad del sistema.\n"+
+        "• Ampliación, limpieza y etiquetado de datasets para mejorar el rendimiento en los entrenamientos.\n",
+    }
   },
   training: {
     title: "Formación académica",

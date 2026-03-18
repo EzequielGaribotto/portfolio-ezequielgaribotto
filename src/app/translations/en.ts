@@ -199,6 +199,17 @@ export const en: Translations = {
         "• Asynchronous classes and unit testing\n" +
         "• Integration of external services using HTTP calls and Postman",
     },
+    automaticaintelligence: {
+      company: "Automatica Intelligence",
+      position: "Junior Software Developer",
+      period: "Feb 2026 - Present",
+      location: "Remote",
+      description:
+        "• Development with Python of a SaaS service hosted on Google Cloud with the use of Artificial Intelligence\n"+
+        "• Analyzed and optimized the algorithm for linking news articles, improving its accuracy and reducing matching errors.\n"+
+        "• Migration of file processing from frontend to backend in GCP, reducing failures due to load limits/timeout/CORS and improving system stability.\n"+
+        "• Expansion, cleaning and labeling of datasets to improve performance in training.\n",
+    }
   },
   training: {
     title: "Academic training",
