@@ -80,7 +80,7 @@ export const en: Translations = {
         "• Developed both a solid and complex backend and a user-friendly Android application.",
       footer: "Academic project continuation",
       startDate: "December 2024",
-      websiteLink: "https://getfacts.app/en"
+      websiteLink: "https://getfacts.app"
     },
     ctennisstudio: {
       title: "Custom Tennis Studio",
@@ -161,6 +161,20 @@ export const en: Translations = {
       footer: "Academic Project",
       startDate: "March 2025",
       endDate: "March 2025"
+    },
+    shoppingCartChatbot: {
+      title: "Shopping Cart Conversational Chatbot with LangGraph",
+      description: "An e-commerce chatbot based on LangGraph that implements a complete purchasing workflow through state management and the orchestration of large language models (LLMs). It includes intent recognition, entity extraction, validation and automated testing.",
+      footer: "Learning Project",
+      startDate: "January 2026",
+      endDate: "January 2026"
+    },
+    iaBigData: {
+      title: "AI & Big Data Master's Portfolio",
+      description: "Learning repository focused on practical implementations of artificial intelligence, machine learning, and huge volume data analysis. It covers advanced topics ranging from predictive modeling and natural language processing to the architecture of large-scale distributed systems.",
+      footer: "Learning Project",
+      startDate: "December 2025",
+      endDate: "December 2026",
     },
     showAllProjects: "Show all projects",
     showLess: "Show less"

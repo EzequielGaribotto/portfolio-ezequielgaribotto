@@ -86,7 +86,7 @@ export function useProjectSearch(projects: Project[]) {
 
   const filteredProjects = useMemo(() => {
     // Default projects to show when no filters are applied
-    const defaultProjects = ["barcelona-inequality", "neutral-news", "eulix", "competitive-programming"];
+    const defaultProjects = ["neutral-news", "ia-bigdata", "competitive-programming", "barcelona-inequality", "eulix", "shoppingcart-chatbot"];
     
     const hasSearchTerm = searchTerm.trim() !== "";
     const hasKeywords = selectedKeywords.length > 0;

@@ -25,6 +25,8 @@ export default function ProjectsSection() {
   const hackerNewsAPITech = ["Back-end", "Python", "FastAPI", "Web Scraping", "API", "Docker", "TDD", "Caching", "Data Processing"];
   const barcelonaInequalityTech = ["Back-end", "Python", "Machine Learning", "Data Processing", "Classification", "Statistical Analysis", "Data Visualization", "Pandas", "NumPy", "Google Colab", "Jupyter Notebooks", "AI", "Socioeconomic Analysis"];
   const ctennisstudioTech = ["Front-end", "React", "Next.js", "TypeScript", "TailwindCSS", "Vercel", "UI", "UX", "Responsive Design", "SEO", "Web Development", "Professional Services"];
+  const shoppingCartChatbotTech = ["Back-end", "Python", "LLM", "AI Integration", "Conversational AI", "NLP", "Chatbot", "LangGraph", "LangChain", "Pydantic", "Pytest"];
+  const iaBigDataTech = ["Data Science", "Python", "AI", "Machine Learning", "Big Data", "Data Processing", "Data Visualization", "Deep Learning", "NLP", "Computer Vision", "Distributed Systems", "Predictive Modeling", "Neural Networks", "TensorFlow", "PyTorch", "Keras", "Spark", "Hadoop", "Jupyter Notebooks"];
 
   const projects: Project[] = [
     {
@@ -70,7 +72,7 @@ export default function ProjectsSection() {
       image: "/images/projects/eulix.webp",
       technologies: eulixTech,
       playStoreLink: "https://play.google.com/store/apps/details?id=com.eulix.mobile.app&hl=en_US",
-      weight: 2
+      weight: 5
     },
     {
       id: "competitive-programming",
@@ -161,6 +163,30 @@ export default function ProjectsSection() {
       weight: 12
     },
     {
+      id: "shoppingcart-chatbot",
+      title: t("projects.shoppingCartChatbot.title"),
+      description: t("projects.shoppingCartChatbot.description"),
+      footer: t("projects.shoppingCartChatbot.footer"),
+      startDate: t("projects.shoppingCartChatbot.startDate"),
+      endDate: t("projects.shoppingCartChatbot.endDate"),
+      image: "/images/projects/shoppingcart-chatbot.webp",
+      technologies: shoppingCartChatbotTech,
+      repoLink: "https://github.com/EzequielGaribotto/LangGraph-ShoppingCart-Chatbot",
+      weight: 6
+    },
+    {
+      id: "ia-bigdata",
+      title: t("projects.iaBigData.title"),
+      description: t("projects.iaBigData.description"),
+      footer: t("projects.iaBigData.footer"),
+      startDate: t("projects.iaBigData.startDate"),
+      endDate: t("projects.iaBigData.endDate"),
+      image: "/images/projects/ia-bigdata.webp",
+      technologies: iaBigDataTech,
+      repoLink: "https://github.com/EzequielGaribotto/IA-BigData",
+      weight: 2
+    },
+    {
       id: "maps-app",
       title: t("projects.mapsApp.title"),
       description: t("projects.mapsApp.description"),
@@ -181,7 +207,8 @@ export default function ProjectsSection() {
       technologies: peleaDeGallosTech,
       repoLink: "https://github.com/EzequielGaribotto/PeleaDeGallos",
       weight: 6
-    }
+    },
+
   ];
 
   const {

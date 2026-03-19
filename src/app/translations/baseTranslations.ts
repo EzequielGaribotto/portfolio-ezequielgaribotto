@@ -160,6 +160,21 @@ export const baseTranslations = {
             startDate: string,
             endDate?: string | null
         },
+        shoppingCartChatbot: {} as {
+            title: string,
+            description: string,
+            footer: string,
+            startDate: string,
+            endDate?: string | null
+        },
+        iaBigData: {} as {
+            title: string,
+            description: string,
+            footer: string,
+            startDate: string,
+            endDate?: string | null
+        },
+
         showAllProjects: "", // New translation key for "show all projects" button
         showLess: "" // New translation key for "show less" button
     },
