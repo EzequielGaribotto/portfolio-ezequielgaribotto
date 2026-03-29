@@ -204,18 +204,18 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
       file: CV_FILES.EN_ATS,
       previewLang: 'en_ats'
     },
-    {
-      key: 'es',
-      label: t("cv.spanish"),
-      file: CV_FILES.ES,
-      previewLang: 'es'
-    },
-    {
-      key: 'en',
-      label: t("cv.english"),
-      file: CV_FILES.EN,
-      previewLang: 'en'
-    }
+    // {
+    //   key: 'es',
+    //   label: t("cv.spanish"),
+    //   file: CV_FILES.ES,
+    //   previewLang: 'es'
+    // },
+    // {
+    //   key: 'en',
+    //   label: t("cv.english"),
+    //   file: CV_FILES.EN,
+    //   previewLang: 'en'
+    // }
   ];
 
   return (
