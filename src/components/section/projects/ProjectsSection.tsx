@@ -27,6 +27,7 @@ export default function ProjectsSection() {
   const ctennisstudioTech = ["Front-end", "React", "Next.js", "TypeScript", "TailwindCSS", "Vercel", "UI", "UX", "Responsive Design", "SEO", "Web Development", "Professional Services"];
   const shoppingCartChatbotTech = ["Back-end", "Python", "LLM", "AI Integration", "Conversational AI", "NLP", "Chatbot", "LangGraph", "LangChain", "Pydantic", "Pytest"];
   const iaBigDataTech = ["Data Science", "Python", "AI", "Machine Learning", "Big Data", "Data Processing", "Data Visualization", "Deep Learning", "NLP", "Computer Vision", "Distributed Systems", "Predictive Modeling", "Neural Networks", "TensorFlow", "PyTorch", "Keras", "Spark", "Hadoop", "Jupyter Notebooks"];
+  const proStringTech = ["Front-end", "Back-end", "Vue 3", "TypeScript", "Vite", "PostgreSQL", "Supabase", "Edge Functions", "Serverless", "Pinia", "Row Level Security", "UI", "UX", "CSS", "SQL", "Data Processing", "Realtime", "Git", "CI/CD"];
 
   const projects: Project[] = [
     {
@@ -47,6 +48,31 @@ export default function ProjectsSection() {
       repoLink: "https://github.com/EzequielGaribotto/neutral-news-android",
       websiteLink: t("projects.neutralNews.websiteLink"),
       appStoreLink: "https://apps.apple.com/us/app/facts-news-summary/id6748583935",
+      weight: 3
+    },
+    {
+      id: "prostring",
+      title: t("projects.prostring.title"),
+      description: t("projects.prostring.description"),
+      footer: t("projects.prostring.footer"),
+      startDate: t("projects.prostring.startDate"),
+      endDate: null,
+      image: "/images/projects/prostring.webp",
+      technologies: proStringTech,
+      repoLink: "https://github.com/EzequielGaribotto/prostring-releases",
+      websiteLink: "https://stringjobs.prostringshop.es/",
+      weight: 2
+    },
+    {
+      id: "ia-bigdata",
+      title: t("projects.iaBigData.title"),
+      description: t("projects.iaBigData.description"),
+      footer: t("projects.iaBigData.footer"),
+      startDate: t("projects.iaBigData.startDate"),
+      endDate: t("projects.iaBigData.endDate"),
+      image: "/images/projects/ia-bigdata.webp",
+      technologies: iaBigDataTech,
+      repoLink: "https://github.com/EzequielGaribotto/IA-BigData",
       weight: 1
     },
     {
@@ -173,18 +199,6 @@ export default function ProjectsSection() {
       technologies: shoppingCartChatbotTech,
       repoLink: "https://github.com/EzequielGaribotto/LangGraph-ShoppingCart-Chatbot",
       weight: 6
-    },
-    {
-      id: "ia-bigdata",
-      title: t("projects.iaBigData.title"),
-      description: t("projects.iaBigData.description"),
-      footer: t("projects.iaBigData.footer"),
-      startDate: t("projects.iaBigData.startDate"),
-      endDate: t("projects.iaBigData.endDate"),
-      image: "/images/projects/ia-bigdata.webp",
-      technologies: iaBigDataTech,
-      repoLink: "https://github.com/EzequielGaribotto/IA-BigData",
-      weight: 2
     },
     {
       id: "maps-app",

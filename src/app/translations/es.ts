@@ -176,6 +176,19 @@ export const es: Translations = {
       startDate: "diciembre 2025",
       endDate: "diciembre 2026",
     },
+    prostring: {
+      title: "ProString - SaaS de Gestión de Tiendas y Torneos de Tenis",
+      description: "Desarrollo e implementación de una aplicación web SaaS para gestión de tiendas y torneos de tenis, combinando un sistema backend robusto serverless con lógica de negocio compleja en PostgreSQL y Vue3 + Vite para el frontend.\n\n" +
+        "• Arquitectura dual (Torneo / Tienda) con 20 Pinia stores, 25 vistas y +90 componentes en Vue 3 + TypeScript\n" +
+        "• Control de acceso mode & role based con 2 modos (torneo y tienda), 3 roles y +70 permisos individuales\n" +
+        "• Desarrollo y despliegue de 16 Edge Functions serverless cubriendo ciclo de vida de usuarios, flujos de autenticación, sincronización automática, envío de emails\n" +
+        "• Suscripciones Supabase Realtime con PostgreSQL para actualizaciones de datos en vivo\n" +
+        "• Integración con QZ Tray para impresión automática de recibos y etiquetas\n" +
+        "• Pipeline de importación de datos robusto con auto-detección de columnas y confidence scoring",
+      footer: "Proyecto Profesional Actual",
+      startDate: "mayo 2026",
+      endDate: null
+    },
     showAllProjects: "Mostrar todos los proyectos",
     showLess: "Mostrar menos"
   },
@@ -223,6 +236,22 @@ export const es: Translations = {
         "• Analicé y optimicé el algoritmo de enlace entre noticias, mejorando su precisión y reduciendo errores de matching.\n"+
         "• Migración del procesamiento de archivos ZIP a backend en GCP, reduciendo fallos por limites de carga/timeout/CORS y mejorando la estabilidad del sistema.\n"+
         "• Ampliación, limpieza y etiquetado de datasets para mejorar el rendimiento en los entrenamientos.\n",
+    },
+    prostring: {
+      company: "ProString",
+      position: "Desarrollador Junior Full Stack",
+      period: "05/2026 - actualidad (3 meses)",
+      location: "Remoto",
+      description:
+        "Desarrollo e implementación de una aplicación web SaaS para gestión de tiendas y torneos de tenis, combinando un sistema backend robusto serverless con lógica de negocio compleja en PostgreSQL y Vue3 + Vite para el frontend.\n\n" +
+        "• Arquitectura dual (Torneo / Tienda) con 20 Pinia stores, 25 vistas y +90 componentes en Vue 3 + TypeScript\n" +
+        "• Uso de políticas de Row Level Security, que limitan el acceso a contenidos al ámbito del tenant/rol, validan precios y aseguran la atomicidad de operaciones.\n" +
+        "• Control de acceso mode & role based con 2 modos (torneo y tienda), 3 roles y +70 permisos individuales\n" +
+        "• Desarrollo y despliegue de 16 Edge Functions serverless cubriendo ciclo de vida de usuarios, flujos de autenticación, sincronización automática, envío de emails y provisionamiento de tenants demo\n" +
+        "• Suscripciones Supabase Realtime con PostgreSQL para actualizaciones de datos en vivo en flujos de gestión de torneos y tienda\n" +
+        "• Integración con QZ Tray para impresión automática de recibos y etiquetas, saltando el diálogo de impresión del navegador, creación de editores de diseño personalizados para las impresiones.\n" +
+        "• Pipeline de importación de datos robusto con auto-detección de columnas, detección de splits, de-duplicación de catálogo y confidence scoring para matching de productos nuevos vs existentes\n" +
+        "• Caché a nivel de store con suscripciones Supabase Realtime con PostgreSQL los datos se obtienen una sola vez al cargar y se re-consultan únicamente ante cambios reales en la base de datos.",
     }
   },
   training: {

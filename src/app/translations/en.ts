@@ -176,6 +176,19 @@ export const en: Translations = {
       startDate: "December 2025",
       endDate: "December 2026",
     },
+    prostring: {
+      title: "ProString - SaaS for Tennis Store and Tournament Management",
+      description: "Development and implementation of a SaaS web application for tennis store and tournament management, combining a robust serverless backend system with complex business logic in PostgreSQL and Vue3 + Vite for the frontend.\n\n" +
+        "• Dual architecture (Tournament / Store) with 20 Pinia stores, 25 views and +90 components in Vue 3 + TypeScript\n" +
+        "• Mode & role-based access control with 2 modes (tournament and store), 3 roles and +70 individual permissions\n" +
+        "• Development and deployment of 16 serverless Edge Functions covering user lifecycle, authentication flows, automatic synchronization, email sending\n" +
+        "• Supabase Realtime subscriptions with PostgreSQL for real-time data updates\n" +
+        "• Integration with QZ Tray for automatic receipt and label printing\n" +
+        "• Robust data import pipeline with auto-column detection and confidence scoring",
+      footer: "Current Professional Project",
+      startDate: "May 2026",
+      endDate: null
+    },
     showAllProjects: "Show all projects",
     showLess: "Show less"
   },
@@ -223,6 +236,22 @@ export const en: Translations = {
         "• Analyzed and optimized the algorithm for linking news articles, improving its accuracy and reducing matching errors.\n"+
         "• Migration of file processing from frontend to backend in GCP, reducing failures due to load limits/timeout/CORS and improving system stability.\n"+
         "• Expansion, cleaning and labeling of datasets to improve performance in training.\n",
+    },
+    prostring: {
+      company: "ProString",
+      position: "Junior Full Stack Developer",
+      period: "May 2026 - Present (3 months)",
+      location: "Remote",
+      description:
+        "Development and implementation of a SaaS web application for tennis store and tournament management, combining a robust serverless backend system with complex business logic in PostgreSQL and Vue3 + Vite for the frontend.\n\n" +
+        "• Dual architecture (Tournament / Store) with 20 Pinia stores, 25 views and +90 components in Vue 3 + TypeScript\n" +
+        "• Use of Row Level Security policies that limit access to content within the tenant/role scope, validate prices and ensure operation atomicity.\n" +
+        "• Mode & role-based access control with 2 modes (tournament and store), 3 roles and +70 individual permissions\n" +
+        "• Development and deployment of 16 serverless Edge Functions covering user lifecycle, authentication flows, automatic synchronization, email sending and demo tenant provisioning\n" +
+        "• Supabase Realtime subscriptions with PostgreSQL for real-time data updates in tournament and store management workflows\n" +
+        "• Integration with QZ Tray for automatic receipt and label printing, bypassing browser print dialog, creation of custom design editors for prints.\n" +
+        "• Robust data import pipeline with auto-column detection, split detection, catalog de-duplication and confidence scoring for matching new vs existing products\n" +
+        "• Store-level caching with Supabase Realtime subscriptions with PostgreSQL, data is fetched only once on load and re-queried only on real database changes.",
     }
   },
   training: {
