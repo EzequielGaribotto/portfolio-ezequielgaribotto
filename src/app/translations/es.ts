@@ -226,17 +226,6 @@ export const es: Translations = {
         "• Clases asíncronas y pruebas unitarias\n" +
         "• Integración de servicios externos usando llamadas HTTP y Postman",
     },
-    automaticaintelligence: {
-      company: "Automatica Intelligence",
-      position: "Desarrollador de Software Junior",
-      period: "02/2026 - 03/2026 (2 meses)",
-      location: "Remoto",
-      description:
-        "• Desarrollo con Python de un servicio SaaS alojado en Google Cloud con uso de Inteligencia Artificial\n"+
-        "• Analicé y optimicé el algoritmo de enlace entre noticias, mejorando su precisión y reduciendo errores de matching.\n"+
-        "• Migración del procesamiento de archivos ZIP a backend en GCP, reduciendo fallos por limites de carga/timeout/CORS y mejorando la estabilidad del sistema.\n"+
-        "• Ampliación, limpieza y etiquetado de datasets para mejorar el rendimiento en los entrenamientos.\n",
-    },
     prostring: {
       company: "ProString",
       position: "Desarrollador Junior Full Stack",

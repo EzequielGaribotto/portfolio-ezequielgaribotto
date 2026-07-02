@@ -208,13 +208,6 @@ export const baseTranslations = {
       location: "",
       description: "",
     },
-    automaticaintelligence: {
-      company: "",
-      position: "",
-      period: "",
-      location: "",
-      description: "",
-    },
     prostring: {
       company: "",
       position: "",
