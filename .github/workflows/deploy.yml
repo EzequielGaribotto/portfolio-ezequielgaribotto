@@ -2,49 +2,66 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ master, main ]
+    branches: [master, main]
 
-# Add permissions needed for GitHub Pages
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
     if: contains(github.event.head_commit.message, 'deploy')
-    
+
     steps:
       - name: Checkout 🛎️
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node.js ⚙️
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
-          
-      - name: Clean install dependencies 📦
+          cache: npm
+
+      - name: Install dependencies 📦
         run: |
-          rm -rf node_modules
           npm ci
-          
+
       - name: Install Tailwind dependencies 🧩
         run: |
           npm install -D tailwindcss@latest postcss@latest autoprefixer@latest
-      
+
       - name: Fix Tailwind Oxide issue 🔧
         run: |
           npm install @tailwindcss/oxide-linux-x64-gnu --ignore-scripts
           npm rebuild @tailwindcss/oxide --platform=linux --arch=x64
-          
+
+      - name: Configure Pages 🔧
+        uses: actions/configure-pages@v5
+
       - name: Build 🔧
         run: |
           npm run build
           touch out/.nojekyll
-          
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4
+
+      - name: Upload Pages artifact 📦
+        uses: actions/upload-pages-artifact@v3
         with:
-          folder: out
-          branch: gh-pages
-          token: ${{ secrets.GITHUB_TOKEN }}
+          path: ./out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages 🚀
+        id: deployment
+        uses: actions/deploy-pages@v4
