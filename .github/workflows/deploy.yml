@@ -62,6 +62,10 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
+      - name: Wait for any in-progress Pages deployment ⏳
+        run: |
+          sleep 15
+
       - name: Deploy to GitHub Pages 🚀
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
