@@ -15,5 +15,6 @@ export interface Project {
   appStoreLink?: string;
   presentationLink?: string;
   websiteLink?: string;
-  weight?: number; // Priority/relevance weight for sorting (1-12, lower is higher priority)
+  weight?: number;
+  experienceId?: string;
 }

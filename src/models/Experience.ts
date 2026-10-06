@@ -2,7 +2,8 @@ export interface Experience {
   id: string;
   company: string;
   position: string;
-  period: string;
+  startDate: Date;
+  endDate: Date | null;
   location: string;
   description: string;
   technologies: string[];

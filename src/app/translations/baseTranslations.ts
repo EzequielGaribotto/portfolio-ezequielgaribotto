@@ -182,8 +182,9 @@ export const baseTranslations = {
       endDate?: string | null;
     },
 
-    showAllProjects: "", // New translation key for "show all projects" button
-    showLess: "", // New translation key for "show less" button
+    readMoreExperience: "",
+    showAllProjects: "",
+    showLess: "",
   },
   experiences: {
     title: "",

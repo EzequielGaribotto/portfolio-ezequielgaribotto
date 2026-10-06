@@ -3,19 +3,21 @@ import React from "react";
 import Section from "../Section";
 import { useTranslation } from "../../../context/TranslationContext";
 import { Experience } from "../../../models/Experience";
+import { formatExperiencePeriod } from "../../../utils/dateHelpers";
 import CardItem from "../../common/CardItem";
 import CardList from "../../common/CardList";
 import styles from "./ExperienceSection.module.css";
 
 const ExperienceSection: React.FC = () => {
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
 
   const experiences: Experience[] = [
     {
       id: "prostring",
       company: t("experiences.prostring.company"),
       position: t("experiences.prostring.position"),
-      period: t("experiences.prostring.period"),
+      startDate: new Date(2026, 4),
+      endDate: null,
       location: t("experiences.prostring.location"),
       description: t("experiences.prostring.description"),
       technologies: [
@@ -27,26 +29,32 @@ const ExperienceSection: React.FC = () => {
         "PostgreSQL",
         "Supabase",
         "Edge Functions",
+        "RPC",
         "Serverless",
         "Pinia",
         "Row Level Security",
+        "Stripe",
+        "ESC/POS",
         "UI",
         "UX",
         "CSS",
         "SQL",
         "Data Processing",
         "Realtime",
+        "i18n",
+        "SaaS",
         "Git",
         "CI/CD",
       ],
       imageUrl: "/images/companies/prostring_logo.webp",
-      companyUrl: "https://stringjobs.prostringshop.es/",
+      companyUrl: "https://prostringmanage.com/",
     },
     {
       id: "seidor",
       company: t("experiences.seidor.company"),
       position: t("experiences.seidor.position"),
-      period: t("experiences.seidor.period"),
+      startDate: new Date(2025, 7),
+      endDate: new Date(2025, 9),
       location: t("experiences.seidor.location"),
       description: t("experiences.seidor.description"),
       technologies: [
@@ -63,7 +71,8 @@ const ExperienceSection: React.FC = () => {
       id: "eulix",
       company: t("experiences.eulix.company"),
       position: t("experiences.eulix.position"),
-      period: t("experiences.eulix.period"),
+      startDate: new Date(2024, 9),
+      endDate: new Date(2025, 3),
       location: t("experiences.eulix.location"),
       description: t("experiences.eulix.description"),
       technologies: [
@@ -92,7 +101,8 @@ const ExperienceSection: React.FC = () => {
       id: "telus",
       company: t("experiences.telus.company"),
       position: t("experiences.telus.position"),
-      period: t("experiences.telus.period"),
+      startDate: new Date(2023, 6),
+      endDate: new Date(2025, 0),
       location: t("experiences.telus.location"),
       description: t("experiences.telus.description"),
       technologies: [
@@ -116,7 +126,7 @@ const ExperienceSection: React.FC = () => {
             id={exp.id}
             title={exp.company}
             subtitle={exp.position}
-            period={exp.period}
+            period={formatExperiencePeriod(exp.startDate, exp.endDate, locale)}
             location={exp.location}
             description={exp.description}
             technologies={exp.technologies}

@@ -35,35 +35,10 @@ export const TranslationProvider = ({
   // Add a state to track hydration completion
   const [isHydrated, setIsHydrated] = useState(false);
   
-  // Check if theme/locale was set by the script before React hydration
-  const getInitialTheme = (): ThemeType => {
-    if (typeof document !== 'undefined') {
-      const dataTheme = document.documentElement.dataset.theme as ThemeType;
-      if (dataTheme && (dataTheme === THEME.DARK || dataTheme === THEME.LIGHT)) {
-        return dataTheme;
-      }
-    }
-    return THEME.LIGHT;
-  };
-
-  // IMPORTANT: Always start with initialLocale during SSR to avoid hydration mismatch
-  const getInitialLocale = (): string => {
-    // During SSR, return initialLocale
-    if (typeof document === 'undefined') {
-      return initialLocale;
-    }
-    
-    // On client, we can use stored value
-    const dataLocale = document.documentElement.dataset.locale;
-    if (dataLocale && (dataLocale === LOCALE.EN || dataLocale === LOCALE.ES)) {
-      return dataLocale;
-    }
-    
-    return initialLocale;
-  };
-
-  const [locale, setLocale] = useLocalStorage(STORAGE_KEYS.LOCALE, getInitialLocale());
-  const [theme, setTheme] = useLocalStorage<ThemeType>(STORAGE_KEYS.THEME, getInitialTheme());
+  // Always start with server-safe defaults to avoid hydration mismatch.
+  // Client-side stored values are applied in useEffect below.
+  const [locale, setLocale] = useLocalStorage(STORAGE_KEYS.LOCALE, initialLocale);
+  const [theme, setTheme] = useLocalStorage<ThemeType>(STORAGE_KEYS.THEME, THEME.LIGHT);
   const [pageLoadTime, setPageLoadTime] = useState<number | null>(null);
 
   // Mark hydration as complete after the initial render with a delay to ensure stability

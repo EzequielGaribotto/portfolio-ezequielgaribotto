@@ -92,9 +92,14 @@ export function useProjectSearch(projects: Project[]) {
     const hasKeywords = selectedKeywords.length > 0;
     const hasActiveFilters = hasSearchTerm || hasKeywords;
 
-    // If no filters are applied and showAllProjects is false, show only default projects
     if (!hasActiveFilters && !showAllProjects) {
-      return projects.filter(project => defaultProjects.includes(project.id));
+      const filtered = projects.filter(project => defaultProjects.includes(project.id));
+      if (sortBy === 'date') {
+        filtered.sort(compareDates);
+      } else {
+        filtered.sort((a, b) => (a.weight ?? 999) - (b.weight ?? 999));
+      }
+      return filtered;
     }
 
     // Create scored matches for sorting

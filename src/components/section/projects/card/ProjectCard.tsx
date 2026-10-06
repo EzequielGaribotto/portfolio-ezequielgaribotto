@@ -262,6 +262,29 @@ export default function ProjectCard({ project, searchTerm = '' }: ProjectCardPro
             <HighlightText text={project.description} searchTerm={searchTerm} />
           </p>
 
+          {project.experienceId && (
+            <a
+              href={`#experience`}
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const el = document.getElementById(project.experienceId!);
+                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              }}
+              style={{
+                display: 'inline-block',
+                marginTop: '0.5rem',
+                color: 'var(--link)',
+                fontWeight: 500,
+                fontSize: '0.9rem',
+                cursor: 'pointer',
+                textDecoration: 'none',
+              }}
+            >
+              {t("projects.readMoreExperience")}
+            </a>
+          )}
+
           {project.startDate && (
             <div className={styles.projectDate}>
               {project.startDate} {project.endDate ? 

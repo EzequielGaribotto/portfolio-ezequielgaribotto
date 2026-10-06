@@ -41,7 +41,7 @@ export const es: Translations = {
   },
   aboutMe: {
     title: "Ezequiel Garibotto",
-    description: "Desarrollador de aplicaciones multiplataforma | Desarrollador de software junior",
+    description: "Desarrollador Junior Full Stack | Backend, IA & Big Data",
     photoAlt: "Foto de Ezequiel Garibotto"
   },
   cv: {
@@ -78,7 +78,7 @@ export const es: Translations = {
         "• Implementé clustering semántico periódico de artículos de noticias obtenidos de feeds RSS de más de 10 medios españoles.\n" +
         "• Construí un sistema robusto para asegurar la generación de versiones neutrales para clusters de noticias agrupadas semánticamente.\n" +
         "• Desarrollé tanto un backend sólido y complejo como una aplicación Android amigable para el usuario.",
-      footer: "Académico en continuidad",
+      footer: "En pausa",
       startDate: "diciembre 2024",
       websiteLink: "https://getfacts.app"
     },
@@ -177,18 +177,13 @@ export const es: Translations = {
       endDate: "diciembre 2026",
     },
     prostring: {
-      title: "ProString - SaaS de Gestión de Tiendas y Torneos de Tenis",
-      description: "Desarrollo e implementación de una aplicación web SaaS para gestión de tiendas y torneos de tenis, combinando un sistema backend robusto serverless con lógica de negocio compleja en PostgreSQL y Vue3 + Vite para el frontend.\n\n" +
-        "• Arquitectura dual (Torneo / Tienda) con 20 Pinia stores, 25 vistas y +90 componentes en Vue 3 + TypeScript\n" +
-        "• Control de acceso mode & role based con 2 modos (torneo y tienda), 3 roles y +70 permisos individuales\n" +
-        "• Desarrollo y despliegue de 16 Edge Functions serverless cubriendo ciclo de vida de usuarios, flujos de autenticación, sincronización automática, envío de emails\n" +
-        "• Suscripciones Supabase Realtime con PostgreSQL para actualizaciones de datos en vivo\n" +
-        "• Integración con QZ Tray para impresión automática de recibos y etiquetas\n" +
-        "• Pipeline de importación de datos robusto con auto-detección de columnas y confidence scoring",
+      title: "ProString Manage - SaaS de Gestión de Talleres de Encordado y Torneos",
+      description: "Plataforma SaaS profesional para talleres de encordado de raquetas, tiendas especializadas, clubes deportivos y equipos de torneo. Gestión de pedidos de encordado, historial de clientes y raquetas, inventario de productos, facturación y negocios multi-sede. Organización de torneos con asignación de máquinas y encordadores, estadísticas de carga y seguimiento de premios. Incluye planes de suscripción, impresión automática de recibos y etiquetas, escaneo de códigos de barras, importación de datos con matching inteligente e internacionalización completa en 6 idiomas.",
       footer: "Proyecto Profesional Actual",
       startDate: "mayo 2026",
       endDate: null
     },
+    readMoreExperience: "Leer más sobre mi experiencia →",
     showAllProjects: "Mostrar todos los proyectos",
     showLess: "Mostrar menos"
   },
@@ -227,20 +222,22 @@ export const es: Translations = {
         "• Integración de servicios externos usando llamadas HTTP y Postman",
     },
     prostring: {
-      company: "ProString",
+      company: "ProString Manage",
       position: "Desarrollador Junior Full Stack",
-      period: "05/2026 - actualidad (3 meses)",
+      period: "",
       location: "Remoto",
       description:
-        "Desarrollo e implementación de una aplicación web SaaS para gestión de tiendas y torneos de tenis, combinando un sistema backend robusto serverless con lógica de negocio compleja en PostgreSQL y Vue3 + Vite para el frontend.\n\n" +
-        "• Arquitectura dual (Torneo / Tienda) con 20 Pinia stores, 25 vistas y +90 componentes en Vue 3 + TypeScript\n" +
-        "• Uso de políticas de Row Level Security, que limitan el acceso a contenidos al ámbito del tenant/rol, validan precios y aseguran la atomicidad de operaciones.\n" +
-        "• Control de acceso mode & role based con 2 modos (torneo y tienda), 3 roles y +70 permisos individuales\n" +
-        "• Desarrollo y despliegue de 16 Edge Functions serverless cubriendo ciclo de vida de usuarios, flujos de autenticación, sincronización automática, envío de emails y provisionamiento de tenants demo\n" +
-        "• Suscripciones Supabase Realtime con PostgreSQL para actualizaciones de datos en vivo en flujos de gestión de torneos y tienda\n" +
-        "• Integración con QZ Tray para impresión automática de recibos y etiquetas, saltando el diálogo de impresión del navegador, creación de editores de diseño personalizados para las impresiones.\n" +
-        "• Pipeline de importación de datos robusto con auto-detección de columnas, detección de splits, de-duplicación de catálogo y confidence scoring para matching de productos nuevos vs existentes\n" +
-        "• Caché a nivel de store con suscripciones Supabase Realtime con PostgreSQL los datos se obtienen una sola vez al cargar y se re-consultan únicamente ante cambios reales en la base de datos.",
+        "Diseño, desarrollo e implementación de una aplicación web SaaS para talleres de encordado de raquetas y gestión de torneos, combinando un frontend Vue 3 + Vite con un backend serverless en Supabase.\n\n" +
+        "• Diseñé una arquitectura dual (Torneo / Tienda) con 23 Pinia stores, 45 vistas, +265 componentes y 67 composables en Vue 3 + TypeScript\n" +
+        "• Apliqué aislamiento de datos con políticas de Row-Level Security limitando acceso por tenant/rol, con validación de precios del lado del servidor y garantías de atomicidad\n" +
+        "• Implementé control de acceso mode & role based con 2 modos, 3 roles y 31 features con 134 permisos granulares\n" +
+        "• Desarrollé y desplegué ~60 funciones RPC en PostgreSQL y Edge Functions en Supabase cubriendo ciclo de vida de usuarios, autenticación, sincronización automática, envío de emails y provisionamiento de tenants demo\n" +
+        "• Aproveché suscripciones Supabase Realtime con PostgreSQL para actualizaciones de datos en vivo en flujos de gestión de torneos y tienda\n" +
+        "• Integré QZ Tray y ESC/POS para impresión automática de recibos y etiquetas, saltando el diálogo de impresión del navegador, con editores de diseño custom para layouts de impresión\n" +
+        "• Construí un pipeline robusto de importación de datos con auto-detección de columnas, detección de splits, de-duplicación de catálogo y confidence scoring para matching de productos nuevos vs existentes\n" +
+        "• Optimicé la eficiencia de lectura con caché a nivel de store con Supabase Realtime: datos obtenidos una sola vez y re-consultados únicamente ante eventos reales en la base de datos\n" +
+        "• Implementé facturación por suscripción con Stripe en 4 planes y descuentos para miembros GRSA\n" +
+        "• Entregué internacionalización completa en 6 idiomas con sistema de overrides de traducciones por tenant",
     }
   },
   training: {
@@ -287,7 +284,7 @@ export const es: Translations = {
   },
   aboutMeSection: {
     title: "Sobre mí",
-    personalInfo: "Empezar a programar ha sido la mejor decisión de mi vida, y se ha vuelto mi vocación. Me apasiona crear software que resuelva problemas reales y mejorar continuamente mis habilidades técnicas.",
+    personalInfo: "Desarrollador de software con mentalidad analítica y enfoque en ingeniería backend, inteligencia artificial y big data. Actualmente desarrollo ProString Manage, una plataforma SaaS para talleres de encordado y gestión de torneos con Vue 3, Supabase y PostgreSQL. Representé a mi instituto en las finales nacionales de ProgramaMe 2024 y 2025, logrando el 4º puesto. Cursando un Máster en IA y Big Data mientras desarrollo Facts: News AI Summary, una solución Android + Python con pipeline ETL completo para generación de noticias neutrales — actualmente en pausa pero con planes de continuarlo.",
     lifestyleInfo: "Y la segunda mejor decisión fue empezar a entrenar. Disfruto mantenerme activo y saludable, llevando un estilo de vida equilibrado.",
     musicInfo: "Escucho principalmente metal, rock, rap español, rock nacional (argentino). Y solía escuchar mucha música electrónica, ahora esa música me da nostalgia.",
     hobbiesInfo: "En cuanto a otros hobbies, solía jugar mucho Minecraft, pero no construir, ni hacer mecanismos de redstone, como muchos programadores que conozco, a mi me gustaba jugar el PvP competitivo de la 1.7.10. Pero soy una persona normal, lo juro, también disfruto de las experiencias inmersivas de un solo jugador que ofrecen narrativas ricas y exploración de mundo abierto como la saga de The Elder Scrolls, Red Dead Redemption, Spore, Atomic Heart, por mencionar algunos.",

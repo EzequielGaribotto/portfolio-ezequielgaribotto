@@ -41,7 +41,7 @@ export const en: Translations = {
   },
   aboutMe: {
     title: "Ezequiel Garibotto",
-    description: "Multiplatform app developer | Junior software developer",
+    description: "Junior Full Stack Developer | Backend, AI & Big Data",
     photoAlt: "Photo of Ezequiel Garibotto"
   },
   cv: {
@@ -78,7 +78,7 @@ export const en: Translations = {
         "• Implemented periodic semantic clustering of news articles sourced from the RSS feeds of more than 10 Spanish media outlets.\n" +
         "• Built a robust system to ensure the generation of neutral versions for clusters of semantically grouped news.\n" +
         "• Developed both a solid and complex backend and a user-friendly Android application.",
-      footer: "Academic project continuation",
+      footer: "Paused",
       startDate: "December 2024",
       websiteLink: "https://getfacts.app"
     },
@@ -177,18 +177,13 @@ export const en: Translations = {
       endDate: "December 2026",
     },
     prostring: {
-      title: "ProString - SaaS for Tennis Store and Tournament Management",
-      description: "Development and implementation of a SaaS web application for tennis store and tournament management, combining a robust serverless backend system with complex business logic in PostgreSQL and Vue3 + Vite for the frontend.\n\n" +
-        "• Dual architecture (Tournament / Store) with 20 Pinia stores, 25 views and +90 components in Vue 3 + TypeScript\n" +
-        "• Mode & role-based access control with 2 modes (tournament and store), 3 roles and +70 individual permissions\n" +
-        "• Development and deployment of 16 serverless Edge Functions covering user lifecycle, authentication flows, automatic synchronization, email sending\n" +
-        "• Supabase Realtime subscriptions with PostgreSQL for real-time data updates\n" +
-        "• Integration with QZ Tray for automatic receipt and label printing\n" +
-        "• Robust data import pipeline with auto-column detection and confidence scoring",
+      title: "ProString Manage - SaaS for Stringing Workshop & Tournament Management",
+      description: "Professional SaaS platform for racket stringing workshops, specialized shops, sports clubs and tournament teams. Manage stringing orders, client and racket history, product inventory, invoicing, and multi-location businesses. Organize tournaments with machine and stringer assignment, workload statistics, and prize money tracking. Features subscription plans, automated receipt and label printing, barcode scanning, data import with smart matching, and full internationalization in 6 languages.",
       footer: "Current Professional Project",
       startDate: "May 2026",
       endDate: null
     },
+    readMoreExperience: "Read more about my experience →",
     showAllProjects: "Show all projects",
     showLess: "Show less"
   },
@@ -227,20 +222,22 @@ export const en: Translations = {
         "• Integration of external services using HTTP calls and Postman",
     },
     prostring: {
-      company: "ProString",
+      company: "ProString Manage",
       position: "Junior Full Stack Developer",
-      period: "May 2026 - Present (3 months)",
+      period: "",
       location: "Remote",
       description:
-        "Development and implementation of a SaaS web application for tennis store and tournament management, combining a robust serverless backend system with complex business logic in PostgreSQL and Vue3 + Vite for the frontend.\n\n" +
-        "• Dual architecture (Tournament / Store) with 20 Pinia stores, 25 views and +90 components in Vue 3 + TypeScript\n" +
-        "• Use of Row Level Security policies that limit access to content within the tenant/role scope, validate prices and ensure operation atomicity.\n" +
-        "• Mode & role-based access control with 2 modes (tournament and store), 3 roles and +70 individual permissions\n" +
-        "• Development and deployment of 16 serverless Edge Functions covering user lifecycle, authentication flows, automatic synchronization, email sending and demo tenant provisioning\n" +
-        "• Supabase Realtime subscriptions with PostgreSQL for real-time data updates in tournament and store management workflows\n" +
-        "• Integration with QZ Tray for automatic receipt and label printing, bypassing browser print dialog, creation of custom design editors for prints.\n" +
-        "• Robust data import pipeline with auto-column detection, split detection, catalog de-duplication and confidence scoring for matching new vs existing products\n" +
-        "• Store-level caching with Supabase Realtime subscriptions with PostgreSQL, data is fetched only once on load and re-queried only on real database changes.",
+        "Design, development and implementation of a SaaS web application for racket stringing workshops and tournament management, combining a Vue 3 + Vite frontend with a serverless Supabase backend.\n\n" +
+        "• Engineered a dual-mode architecture (Tournament / Shop) with 23 Pinia stores, 45 views, 265+ components and 67 composables in Vue 3 + TypeScript\n" +
+        "• Enforced data isolation with Row-Level Security policies scoping access to tenant/role, with server-side price validation and atomic operation guarantees\n" +
+        "• Implemented mode & role-based access control across 2 modes, 3 roles, and 31 features with 134 granular permissions\n" +
+        "• Developed and deployed ~60 PostgreSQL RPC functions and Supabase Edge Functions covering user lifecycle, authentication flows, automated sync, email delivery, and demo tenant provisioning\n" +
+        "• Leveraged Supabase Realtime subscriptions with PostgreSQL for live data updates across tournament and shop management flows\n" +
+        "• Integrated QZ Tray and ESC/POS for automated receipt and label printing, bypassing the browser print dialog, with custom design editors for print layouts\n" +
+        "• Built a robust data import pipeline with column auto-detection, split detection, catalog deduplication, and confidence scoring for new vs existing product matching\n" +
+        "• Optimized read efficiency through store-level caching with Supabase Realtime — data fetched once on load and re-queried only on actual DB events\n" +
+        "• Implemented subscription billing with Stripe across 4 plans and GRSA member discounts\n" +
+        "• Delivered full internationalization in 6 languages with per-tenant translation override system",
     }
   },
   training: {
@@ -288,7 +285,7 @@ export const en: Translations = {
   },
   aboutMeSection: {
     title: "About Me",
-    personalInfo: "Starting to program has been the best decision of my life, and it has become my vocation. I'm passionate about creating software that solves real problems and continuously improving my technical skills.",
+    personalInfo: "Software developer with a strong analytical mindset and a clear focus on backend engineering, artificial intelligence, and big data. Currently building ProString Manage, a SaaS platform for racket stringing workshops and tournament management with Vue 3, Supabase, and PostgreSQL. I represented my institute in the national ProgramaMe 2024 and 2025 finals, achieving 4th place. Pursuing a Master's in AI and Big Data while also developing Facts: News AI Summary, an Android + Python solution with an end-to-end ETL pipeline for neutral news generation — currently paused but planned to continue.",
     lifestyleInfo: "And the second best decision was starting to train. I enjoy staying active and healthy, maintaining a balanced lifestyle.",
     musicInfo: "I mostly listen to metal, rock, Spanish rap, national rock (Argentinean). I used to listen to electronic music a lot, now that music gives me nostalgia.",
     hobbiesInfo: "As for other hobbies, I used to play Minecraft a lot, but not building or making redstone mechanisms like many programmers I know. I enjoyed the competitive PvP of version 1.7.10. But I'm a normal person, I swear, I also enjoy immersive single-player experiences that offer rich narratives and open-world exploration like The Elder Scrolls saga, Red Dead Redemption, Spore, Atomic Heart, to mention a few.",

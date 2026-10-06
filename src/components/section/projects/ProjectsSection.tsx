@@ -27,7 +27,7 @@ export default function ProjectsSection() {
   const ctennisstudioTech = ["Front-end", "React", "Next.js", "TypeScript", "TailwindCSS", "Vercel", "UI", "UX", "Responsive Design", "SEO", "Web Development", "Professional Services"];
   const shoppingCartChatbotTech = ["Back-end", "Python", "LLM", "AI Integration", "Conversational AI", "NLP", "Chatbot", "LangGraph", "LangChain", "Pydantic", "Pytest"];
   const iaBigDataTech = ["Data Science", "Python", "AI", "Machine Learning", "Big Data", "Data Processing", "Data Visualization", "Deep Learning", "NLP", "Computer Vision", "Distributed Systems", "Predictive Modeling", "Neural Networks", "TensorFlow", "PyTorch", "Keras", "Spark", "Hadoop", "Jupyter Notebooks"];
-  const proStringTech = ["Front-end", "Back-end", "Vue 3", "TypeScript", "Vite", "PostgreSQL", "Supabase", "Edge Functions", "Serverless", "Pinia", "Row Level Security", "UI", "UX", "CSS", "SQL", "Data Processing", "Realtime", "Git", "CI/CD"];
+  const proStringTech = ["Front-end", "Back-end", "Vue 3", "TypeScript", "Vite", "PostgreSQL", "Supabase", "Edge Functions", "RPC", "Serverless", "Pinia", "Row Level Security", "Stripe", "ESC/POS", "UI", "UX", "CSS", "SQL", "Data Processing", "Realtime", "i18n", "SaaS", "Git", "CI/CD"];
 
   const projects: Project[] = [
     {
@@ -60,8 +60,9 @@ export default function ProjectsSection() {
       image: "/images/projects/prostring.webp",
       technologies: proStringTech,
       repoLink: "https://github.com/EzequielGaribotto/prostring-releases",
-      websiteLink: "https://stringjobs.prostringshop.es/",
-      weight: 2
+      websiteLink: "https://prostringmanage.com/",
+      weight: 1,
+      experienceId: "prostring"
     },
     {
       id: "ia-bigdata",

@@ -29,7 +29,7 @@ const CardItem: React.FC<CardItemProps> = ({
   className = "",
 }) => {
   return (
-    <div key={id} className={`${styles.cardItem} ${className}`}>
+    <div key={id} id={id} className={`${styles.cardItem} ${className}`}>
       <div className={styles.cardHeader}>
         {imageUrl && (
           <Image
