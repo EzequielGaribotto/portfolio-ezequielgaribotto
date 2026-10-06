@@ -25,25 +25,10 @@ export default function ProjectCard({ project, searchTerm = '' }: ProjectCardPro
   const [startXExpanded, setStartXExpanded] = useState(0);
   const [dragOffsetExpanded, setDragOffsetExpanded] = useState(0);
   const [hasDraggedExpanded, setHasDraggedExpanded] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   const expandedContainerRef = useRef<HTMLDivElement>(null);
 
-  // Check for mobile screen size
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 640);
-    };
-    
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    
-    return () => {
-      window.removeEventListener('resize', checkMobile);
-    };
-  }, []);
-  
   // Expanded view navigation functions
   const nextExpandedImage = useCallback(() => {
     if (project.images && project.images.length > 1) {
@@ -101,7 +86,6 @@ export default function ProjectCard({ project, searchTerm = '' }: ProjectCardPro
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (isExpanded && overlayRef.current && !overlayRef.current.contains(e.target as Node)) {
-        console.log('Clicking outside overlay, closing...'); // Debug log
         setIsExpanded(false);
       }
     };
@@ -115,7 +99,6 @@ export default function ProjectCard({ project, searchTerm = '' }: ProjectCardPro
   const toggleExpand = (e: React.MouseEvent) => {
     e.stopPropagation();
     e.preventDefault();
-    console.log('Toggle expand clicked, current state:', isExpanded); // Debug log
     setIsExpanded(!isExpanded);
   };
 
@@ -232,26 +215,9 @@ export default function ProjectCard({ project, searchTerm = '' }: ProjectCardPro
 
   return (
     <>
-      <div 
-        ref={cardRef} 
+      <div
+        ref={cardRef}
         className={styles.projectCard}
-        style={{ 
-          opacity: 0.9, 
-          // Use CSS variables for consistent transition timing
-          transition: "opacity var(--theme-transition-duration) var(--theme-transition-timing), box-shadow var(--theme-transition-duration) var(--theme-transition-timing), border-color var(--theme-transition-duration) var(--theme-transition-timing)",
-        }}
-        onMouseOver={(e) => { 
-          e.currentTarget.style.opacity = "1";
-          // Removed transform scale
-          e.currentTarget.style.boxShadow = "0 10px 25px rgba(0, 0, 0, 0.25)"; // Enhanced shadow
-          e.currentTarget.style.borderColor = "var(--primary)";
-        }}
-        onMouseOut={(e) => { 
-          e.currentTarget.style.opacity = "0.9";
-          // Removed transform scale reset
-          e.currentTarget.style.boxShadow = "";
-          e.currentTarget.style.borderColor = "";
-        }}
       >
         <div onClick={handleTextClick}>
           <h3 className={styles.projectTitle}>
@@ -271,15 +237,7 @@ export default function ProjectCard({ project, searchTerm = '' }: ProjectCardPro
                 const el = document.getElementById(project.experienceId!);
                 if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
               }}
-              style={{
-                display: 'inline-block',
-                marginTop: '0.5rem',
-                color: 'var(--link)',
-                fontWeight: 500,
-                fontSize: '0.9rem',
-                cursor: 'pointer',
-                textDecoration: 'none',
-              }}
+              className={styles.readMoreLink}
             >
               {t("projects.readMoreExperience")}
             </a>
@@ -486,7 +444,6 @@ export default function ProjectCard({ project, searchTerm = '' }: ProjectCardPro
       <div 
         className={`${styles.expandedBackdrop} ${isExpanded ? styles.active : ''}`} 
         onClick={() => {
-          console.log('Backdrop clicked, closing...'); // Debug log
           setIsExpanded(false);
         }}
       ></div>
@@ -496,14 +453,12 @@ export default function ProjectCard({ project, searchTerm = '' }: ProjectCardPro
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close button */}
-        <button 
-          className={styles.expandControl} 
+        <button
+          className={`${styles.expandControl} ${styles.closeButton}`}
           onClick={() => {
-            console.log('Close button clicked'); // Debug log
             setIsExpanded(false);
-          }} 
+          }}
           aria-label={t("tooltips.closeImage")}
-          style={{ position: 'absolute', top: '30px', right: '30px', zIndex: 105 }}
         >
           <FaCompress size={20} />
         </button>
@@ -518,24 +473,12 @@ export default function ProjectCard({ project, searchTerm = '' }: ProjectCardPro
           onTouchStart={handleExpandedTouchStart}
           onTouchMove={handleExpandedTouchMove}
           onTouchEnd={handleExpandedTouchEnd}
-          style={{
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            position: 'relative',
-            cursor: isDraggingExpanded ? 'grabbing' : 'grab'
-          }}
+          style={{ cursor: isDraggingExpanded ? 'grabbing' : 'grab' }}
         >
           {/* Main image display */}
-          <div 
+          <div
+            className={styles.expandedImageSlider}
             style={{
-              width: '100%',
-              height: '100%',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
               transform: `translateX(${dragOffsetExpanded}px)`,
               transition: isDraggingExpanded ? 'none' : 'transform 0.3s ease'
             }}
@@ -547,19 +490,9 @@ export default function ProjectCard({ project, searchTerm = '' }: ProjectCardPro
               alt={`${project.title || "Project image"} ${expandedImageIndex + 1}`}
               width={1920}
               height={1080}
-              className="rounded-lg object-contain"
-              style={{ 
-                maxWidth: isMobile ? '100vw' : '90%', 
-                width: isMobile ? '100vw' : 'auto', 
-                maxHeight: isMobile ? '100vh' : '80vh', 
-                height: isMobile ? '100vh' : 'auto',
-                margin: '0 auto',
-                display: 'block',
-                userSelect: 'none',
-                pointerEvents: isDraggingExpanded ? 'none' : 'auto'
-              }}
+              className={`${styles.expandedImage} ${isDraggingExpanded ? styles.dragging : ''}`}
               loading="eager"
-              sizes={isMobile ? "100vw" : "90vw"}
+              sizes="(max-width: 640px) 100vw, 90vw"
               quality={100}
               priority
             />
@@ -569,26 +502,24 @@ export default function ProjectCard({ project, searchTerm = '' }: ProjectCardPro
           {project.images && project.images.length > 1 && (
             <>
               <button
-                className={styles.expandedNavButton}
+                className={`${styles.expandedNavButton} ${styles.expandedNavPrev}`}
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
                   prevExpandedImage();
                 }}
-                style={{ left: '30px' }}
                 aria-label="Previous image"
               >
                 <FaChevronLeft size={24} />
               </button>
-              
+
               <button
-                className={styles.expandedNavButton}
+                className={`${styles.expandedNavButton} ${styles.expandedNavNext}`}
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
                   nextExpandedImage();
                 }}
-                style={{ right: '30px' }}
                 aria-label="Next image"
               >
                 <FaChevronRight size={24} />

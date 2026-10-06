@@ -14,8 +14,8 @@ export default function EmailButton({ email, className = "" }: EmailButtonProps)
     e.preventDefault();
     navigator.clipboard.writeText(email).then(() => {
       setCopied(true);
-      setTimeout(() => setCopied(false), 2000); // Reset after 2 seconds
-    });
+      setTimeout(() => setCopied(false), 2000);
+    }).catch(() => {});
   };
   
   return (

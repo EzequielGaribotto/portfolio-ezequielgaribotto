@@ -15,9 +15,12 @@
   padding: 1rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   box-sizing: border-box;
+  opacity: 0.9;
+  transition: opacity 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .projectCard:hover {
+  opacity: 1;
   border-color: var(--primary);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
 }
@@ -227,12 +230,64 @@
   gap: 0.5rem;
 }
 
+.readMoreLink {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: var(--link);
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.closeButton {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  z-index: 105;
+}
+
 /* Expanded view carousel styles */
 .expandedCarouselContainer {
   position: relative;
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   user-select: none;
+}
+
+.expandedImageSlider {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.expandedImage {
+  max-width: 90%;
+  width: auto;
+  max-height: 80vh;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+  user-select: none;
+  border-radius: 0.5rem;
+  object-fit: contain;
+}
+
+.expandedImage.dragging {
+  pointer-events: none;
+}
+
+.expandedNavPrev {
+  left: 30px;
+}
+
+.expandedNavNext {
+  right: 30px;
 }
 
 .expandedNavButton {
@@ -314,13 +369,13 @@
     height: 100vh !important;
   }
   
-  /* Override inline styles for mobile full screen */
-  .expandedImageOverlay .expandedCarouselContainer img {
-    max-width: 100vw !important;
-    max-height: 100vh !important;
-    width: 100vw !important;
-    height: 100vh !important;
-    object-fit: contain !important;
+  .expandedImage {
+    max-width: 100vw;
+    width: 100vw;
+    max-height: 100vh;
+    height: 100vh;
+    object-fit: contain;
+    border-radius: 0;
   }
   
   .expandedNavButton {

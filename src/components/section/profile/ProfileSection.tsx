@@ -6,6 +6,7 @@ import EmailButton from "../../button/EmailButton";
 import { useTranslation } from "../../../context/TranslationContext";
 import ClickableButton from "../../button/ClickableButton";
 import CVDownloadButton from "../../button/CVDownloadButton";
+import { CONTACT } from "../../../constants";
 import styles from "./ProfileSection.module.css";
 
 export default function ProfileSection() {
@@ -64,7 +65,7 @@ export default function ProfileSection() {
             </ClickableButton>
             
             <EmailButton
-              email="ezequielgaribottovillanueva@gmail.com"
+              email={CONTACT.EMAIL}
               className={`${styles.socialButton} ${styles.emailButton}`}
             />
           </div>
