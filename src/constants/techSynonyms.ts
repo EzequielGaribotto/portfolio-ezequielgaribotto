@@ -145,12 +145,15 @@ export function expandSearchTerm(term: string): string[] {
  */
 export function matchesWithSynonyms(text: string, searchTerm: string): boolean {
   const expandedTerms = expandSearchTerm(searchTerm);
-  
+  const typed = searchTerm.trim().toLowerCase();
+
   return expandedTerms.some(term => {
     const escapedTerm = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    
-    // For short terms (1-3 chars), use strict word boundary
-    if (term.length <= 3) {
+
+    // Short terms (1-3 chars) must be a whole word, so "ai" or "ml" never match inside other words.
+    // The exception is what the visitor is typing at 3 characters: "pyt" is a start of "python", not an abbreviation.
+    const startOfWord = term.length === 3 && term.toLowerCase() === typed;
+    if (term.length <= 3 && !startOfWord) {
       const regex = new RegExp(`\\b${escapedTerm}\\b`, 'i');
       return regex.test(text);
     }

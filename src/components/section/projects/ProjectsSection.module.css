@@ -1,3 +1,9 @@
+/* A stacking context of its own, so the backdrop sits behind the cards but in front of the page */
+.sectionShell {
+  position: relative;
+  isolation: isolate;
+}
+
 /* Masonry: tiny rows, and each item spans the rows its card needs (see MasonryItem) */
 .masonryGrid {
   display: grid;
@@ -30,8 +36,12 @@
 }
 
 .noResultsMessage p {
-  margin: 0;
+  margin: 0 0 1rem;
   font-size: 1rem;
+}
+
+.noResultsMessage button {
+  font-style: normal;
 }
 
 .listFooter {

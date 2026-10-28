@@ -60,6 +60,7 @@ export const es: Translations = {
     githubRepo: "Repositorio de GitHub",
     projectImage: "Imagen del proyecto",
     language: "Idioma",
+    skipToContent: "Saltar al contenido",
   },
   footer: {
     disclaimer: "© 2026 Ezequiel Garibotto.",
@@ -67,7 +68,9 @@ export const es: Translations = {
   },
   aboutMe: {
     title: "Ezequiel Garibotto",
-    description: "Desarrollador Junior Full-Stack de IA Aplicada | AI Engineering, Backend & Datos",
+    proof: "Creé en solitario ProString Manage, un SaaS en producción",
+    proofLink: "ProString Manage",
+    description: "Desarrollador Junior Full-Stack de IA\u00a0Aplicada | AI\u00a0Engineering, Backend & Datos",
     photoAlt: "Foto de Ezequiel Garibotto"
   },
   cv: {
@@ -134,7 +137,7 @@ export const es: Translations = {
   search: {
     scopeLabel: "Ámbito",
     techLabel: "Tecnología",
-    placeholder: "Buscar proyectos por título, descripción o tecnología...",
+    placeholder: "Buscar proyectos o tecnologías...",
     clearFilters: "Limpiar filtros",
     noResults: "No se encontraron proyectos que coincidan con tus criterios",
     showingAll: "Mostrando todos los {count} proyectos",
@@ -151,6 +154,7 @@ export const es: Translations = {
   projects: {
     title: "Proyectos",
     current: "presente",
+    since: "desde",
     neutralNews: {
       title: "Neutral News / Facts",
       description: "Aplicación con flujo ETL que genera noticias neutrales, combinando diversas tecnologías potentes para el backend: Scraping, parsing XML, algoritmos ML para embedding y clustering, uso de APIs de generación de texto, entre otros.\n" +
@@ -180,7 +184,7 @@ export const es: Translations = {
     },
     competitiveProgramming: {
       title: "Programación Competitiva",
-      description: "Participación en concursos de programación competitiva en equipos, representando al instituto, quedando cuartos en el cuncurso nacional. Problemas resueltos en JO-EL y AceptaElReto para el concurso ProgramaMe 2024.",
+      description: "Participación en concursos de programación competitiva en equipos, representando al instituto, quedando cuartos en el concurso nacional. Problemas resueltos en JO-EL y AceptaElReto para el concurso ProgramaMe 2024.",
       footer: "Optativo Académico",
       startDate: "septiembre 2023",
       endDate: "junio 2025"

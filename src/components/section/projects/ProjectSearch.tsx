@@ -16,15 +16,18 @@ interface ProjectSearchProps {
   /** Titles and tags the search box can complete to. */
   suggestionPool?: string[];
   onChipHover?: (tag: string | null) => void;
+  /** Bump to clear the search box and every chip from outside (the empty-results state). */
+  clearSignal?: number;
 }
 
-export default function ProjectSearch({ 
-  onSearchChange, 
-  onKeywordsChange, 
+export default function ProjectSearch({
+  onSearchChange,
+  onKeywordsChange,
   selectedKeywords,
   projectTags,
   suggestionPool = [],
-  onChipHover
+  onChipHover,
+  clearSignal = 0
 }: ProjectSearchProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [techOpen, setTechOpen] = useState(false);
@@ -116,6 +119,14 @@ export default function ProjectSearch({
     setSearchTerm("");
     onKeywordsChange([]);
   };
+
+  useEffect(() => {
+    if (clearSignal > 0) {
+      setSearchTerm("");
+      onKeywordsChange([]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [clearSignal]);
 
   const hasActiveFilters = searchTerm.trim() !== "" || selectedKeywords.length > 0;
   // Scope is the primary filter; the longer technology list opens on demand, and stays open while one of its chips is active

@@ -8,6 +8,7 @@ import Script from 'next/script';
 import localFont from 'next/font/local';
 import ScrollRestorationWrapper from '../components/ScrollRestorationWrapper';
 import HydrationGuard from '../components/HydrationGuard';
+import SkipLink from '../components/SkipLink';
 import CloudflareScripts from '../components/analytics/CloudflareScripts';
 
 // The font files live in the repo (src/app/fonts), so a build never depends on reaching Google Fonts.
@@ -153,6 +154,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 
                 if (savedLocale && (savedLocale.includes('es') || savedLocale.includes('en'))) {
                   resolvedLocale = JSON.parse(savedLocale);
+                } else if (/^en/i.test(navigator.language || '')) {
+                  // First visit, nothing chosen yet: follow the browser language
+                  resolvedLocale = 'en';
                 }
                 
                 // Apply locale to document
@@ -177,8 +181,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <ScrollRestorationWrapper>
             {/* Apply HydrationGuard within ScrollRestorationWrapper */}
             <HydrationGuard>
+              <SkipLink />
               <Header />
-              <main style={{ 
+              <main id="main-content" tabIndex={-1} style={{
                 paddingTop: "100px",
                 width: "100%",
                 flex: "1 0 auto"

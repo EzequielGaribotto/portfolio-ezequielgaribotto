@@ -14,6 +14,8 @@ export interface Project {
   footer: string;
   startDate: string;
   endDate: string | null;
+  /** Open-ended but not being worked on: the date line reads "since X" instead of "X - present". */
+  paused?: boolean;
   image?: string; // Made optional
   images?: string[]; // Optional array for carousel
   technologies?: string[];

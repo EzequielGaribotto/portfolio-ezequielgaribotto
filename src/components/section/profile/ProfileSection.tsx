@@ -7,6 +7,7 @@ import { useTranslation } from "../../../context/TranslationContext";
 import ClickableButton from "../../button/ClickableButton";
 import CVDownloadButton from "../../button/CVDownloadButton";
 import { CONTACT } from "../../../constants";
+import { scrollBehavior } from "../../../hooks/usePrefersReducedMotion";
 import styles from "./ProfileSection.module.css";
 
 export default function ProfileSection() {
@@ -19,6 +20,17 @@ export default function ProfileSection() {
       console.warn("Profile image failed to load - this is normal if offline");
     }
   };
+
+  // The one claim that can be checked: jump to the ProString entry under Experience
+  const showProString = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const entry = document.getElementById("prostring");
+    if (!entry) return;
+    const navbar = document.querySelector("header > div");
+    const navbarBottom = navbar ? navbar.getBoundingClientRect().bottom : 0;
+    window.scrollTo({ top: entry.getBoundingClientRect().top + window.scrollY - navbarBottom - 16, behavior: scrollBehavior() });
+  };
+  const [proofBefore, proofAfter = ""] = t("aboutMe.proof").split(t("aboutMe.proofLink"));
 
   return (
     <div id="profile" className={styles.profileSection}>
@@ -43,6 +55,13 @@ export default function ProfileSection() {
 
         {/* Description */}
         <p className={styles.description}>{t("aboutMe.description")}</p>
+
+        {/* Proof */}
+        <p className={styles.proof}>
+          {proofBefore}
+          <a href="#prostring" onClick={showProString}>{t("aboutMe.proofLink")}</a>
+          {proofAfter}
+        </p>
 
         {/* Buttons Section */}
         <div className={styles.buttonSection}>

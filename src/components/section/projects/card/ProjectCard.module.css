@@ -269,6 +269,7 @@
 }
 
 .moreTags {
+  position: relative;
   background: transparent;
   border: 1px dashed var(--tech-border);
   color: var(--primary);
@@ -309,8 +310,12 @@
 }
 
 .readMoreLink {
-  display: inline-block;
+  display: block;
+  width: fit-content;
+  text-align: left;
   margin-top: 0.5rem;
+  padding-block: 0.4rem; /* a 40px-tall target without moving the line */
+  margin-block: 0;
   color: var(--link);
   font-weight: 500;
   font-size: 0.9rem;
@@ -496,4 +501,21 @@
 /* Logos are often transparent PNGs drawn for light backgrounds; give them a light mat in the dark theme */
 :global([data-theme="dark"]) .projectImageWrapper {
   background-color: var(--secondary-hover-light, #e2e8f0);
+}
+
+/* Hit area grows past the visible pill without moving the layout */
+.moreTags::after {
+  content: "";
+  position: absolute;
+  inset: -7px -4px;
+}
+
+/* Two tiers: scope tags (what the work covers) are the strong ones; the tools behind them step back */
+.techTag:not(.techScope):not(.techTagRelated):not(.techTagActive) {
+  border-color: color-mix(in srgb, var(--tech-border) 55%, transparent);
+}
+
+.techTag.techScope:not(.techTagRelated):not(.techTagActive) {
+  border-color: var(--primary);
+  font-weight: 600;
 }

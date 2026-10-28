@@ -54,6 +54,13 @@
   transform: scale(1.06);
 }
 
+/* The flags are 24-30px: the hit area grows upward and downward (sideways they already touch) */
+.option::after {
+  content: "";
+  position: absolute;
+  inset: -8px 0;
+}
+
 .option:focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 2px;

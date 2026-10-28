@@ -11,12 +11,19 @@ import ImageCarousel from './ImageCarousel';
 import { HighlightText } from '../../../../utils/highlightText';
 import TagHint from '../../../common/TagHint';
 import DocumentButton from '../../../button/DocumentButton';
-import { descendants, orderTags } from '../../../../constants/techTaxonomy';
+import { descendants, isScopeTag, orderTags } from '../../../../constants/techTaxonomy';
 import { useDialogFocus } from '../../../../hooks/useDialogFocus';
 import { scrollBehavior } from '../../../../hooks/usePrefersReducedMotion';
+import { useAnimatedHeight } from '../../../../hooks/useAnimatedHeight';
 
 const TAG_LIMIT = 12;
 const NO_TAGS: string[] = [];
+
+// "Dec 2024 - present", "since Dec 2024" for paused work, and a single month when it started and ended in the same one
+function dateLine(project: Project, since: string, current: string): string {
+  if (project.endDate) return project.endDate === project.startDate ? project.startDate : `${project.startDate} - ${project.endDate}`;
+  return project.paused ? `${since} ${project.startDate}` : `${project.startDate} - ${current}`;
+}
 import styles from './ProjectCard.module.css';
 
 interface ProjectCardProps {
@@ -33,6 +40,9 @@ export default function ProjectCard({ project, searchTerm = '', externalHighligh
   const [isExpanded, setIsExpanded] = useState(false);
   const [expandedImageIndex, setExpandedImageIndex] = useState(0);
   const [showAllTags, setShowAllTags] = useState(false);
+  const tagsRef = useRef<HTMLDivElement>(null);
+  const tagsOpen = showAllTags || !!searchTerm?.trim();
+  useAnimatedHeight(tagsRef, tagsOpen);
   const [hoveredTag, setHoveredTag] = useState<string | null>(null);
   const [hoveredDocTech, setHoveredDocTech] = useState<string[]>([]);
   const [isDraggingExpanded, setIsDraggingExpanded] = useState(false);
@@ -252,7 +262,7 @@ export default function ProjectCard({ project, searchTerm = '', externalHighligh
               {project.footer && <span className={styles.fileStatus}>{project.footer}</span>}
               {project.startDate && (
                 <span className={styles.fileDate}>
-                  {project.startDate} {project.endDate ? `- ${project.endDate}` : `- ${t("projects.current")}`}
+                  {dateLine(project, t("projects.since"), t("projects.current"))}
                 </span>
               )}
             </div>
@@ -338,7 +348,7 @@ export default function ProjectCard({ project, searchTerm = '', externalHighligh
 
         {/* Technologies */}
         {project.technologies && project.technologies.length > 0 && (
-          <div className={`${styles.technologies} ${focusingTags ? styles.techFocus : ""}`}>
+          <div ref={tagsRef} className={`${styles.technologies} ${focusingTags ? styles.techFocus : ""}`}>
             {(() => {
               const all = orderTags(project.technologies);
               const forceAll = !!searchTerm?.trim();
@@ -358,7 +368,7 @@ export default function ProjectCard({ project, searchTerm = '', externalHighligh
                   {shown.map((tech, index) => (
                     <span
                       key={index}
-                      className={`${styles.techTag} ${
+                      className={`${styles.techTag} ${isScopeTag(tech) ? styles.techScope : ""} ${
                         isRelated(tech) ? styles.techTagRelated : ""
                       } ${hoveredTag === tech ? styles.techTagActive : ""}`}
                     >

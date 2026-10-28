@@ -2,6 +2,7 @@
 import { useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import LazyProjectCard from "./card/LazyProjectCard";
+import ContourBackdrop from "./ContourBackdrop";
 import MasonryItem from "./MasonryItem";
 import ProjectSearch from "./ProjectSearch";
 import SearchResults from "./SearchResults";
@@ -17,6 +18,7 @@ export default function ProjectsSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
   const [chipHover, setChipHover] = useState<string | null>(null);
+  const [clearSignal, setClearSignal] = useState(0);
 
   const eulixTech = ["Android", "Kotlin", "UI", "UX", "Retrofit", "DataBinding", "MVVM", "XML", "Kotlin DSL", "LiveData", "Git", "Agile", "RESTful API", "International Team"];
   const neutralNewsTech = ["Applied AI", "AI Engineering", "Data Engineering", "Python", "Pandas", "NumPy", "BeautifulSoup", "LLM", "Generative AI", "Machine Learning", "Embeddings", "Clustering", "NLP", "ETL", "Scraping", "Crawling", "Parsing", "Back-end", "Google Cloud Platform", "Docker", "Firebase", "NoSQL", "Front-end", "UI", "UX", "Google Colab", "Jupyter Notebooks", "Android", "Kotlin", "Hilt", "Dagger", "Room", "DAO", "Datastore"];
@@ -42,6 +44,7 @@ export default function ProjectsSection() {
       footer: t("projects.neutralNews.footer"),
       startDate: t("projects.neutralNews.startDate"),
       endDate: null,
+      paused: true,
       image: "/images/projects/neutral-news-homeview.webp",
       images: [
         "/images/projects/neutral-news-homeview.webp",
@@ -279,7 +282,8 @@ export default function ProjectsSection() {
   };
 
   return (
-    <div ref={sectionRef}>
+    <div ref={sectionRef} className={styles.sectionShell}>
+      <ContourBackdrop />
       <Section
         id="projects"
         title={t("projects.title")}
@@ -293,6 +297,7 @@ export default function ProjectsSection() {
           projectTags={allTags}
           suggestionPool={[...allTags, ...projects.map((project) => project.title)]}
           onChipHover={setChipHover}
+          clearSignal={clearSignal}
         />
 
         {/* Results Counter */}
@@ -329,6 +334,9 @@ export default function ProjectsSection() {
         {filteredProjects.length === 0 && hasActiveFilters && (
           <div className={styles.noResultsMessage}>
             <p>{t("search.tryAdjusting")}</p>
+            <button type="button" className={styles.listToggle} onClick={() => setClearSignal((n) => n + 1)}>
+              {t("search.clearFilters")}
+            </button>
           </div>
         )}
       </div>

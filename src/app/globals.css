@@ -460,3 +460,31 @@ body.hydration-complete {
   position: absolute;
   inset: -4px;
 }
+
+/* Skip link: off-screen until it takes keyboard focus, then the first thing on the page */
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 1000;
+  padding: 0.6rem 1.1rem;
+  border-radius: 999px;
+  background: var(--primary);
+  color: var(--on-primary);
+  font-weight: 600;
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus-visible {
+  transform: none;
+}
+
+/* Wrapped text: headings split their lines evenly, paragraphs avoid a single word on the last line */
+h1, h2, h3, h4 {
+  text-wrap: balance;
+}
+
+p, li {
+  text-wrap: pretty;
+}

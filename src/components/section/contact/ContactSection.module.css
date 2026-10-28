@@ -70,6 +70,7 @@
 
 /* Small secondary pills next to the address: other ways to use it */
 .action {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
@@ -115,4 +116,11 @@
     grid-template-columns: minmax(0, 1fr);
     row-gap: 0.25rem;
   }
+}
+
+/* Hit area grows past the small pills without moving the layout */
+.action::after {
+  content: "";
+  position: absolute;
+  inset: -0.5rem -0.2rem;
 }

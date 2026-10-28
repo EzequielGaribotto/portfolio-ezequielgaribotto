@@ -79,6 +79,19 @@ export const TranslationProvider = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // First visit: the same script resolved the browser language into data-locale; adopt it as the stored choice.
+  // A language the visitor picked earlier is already in storage and wins.
+  useEffect(() => {
+    try {
+      if (localStorage.getItem(STORAGE_KEYS.LOCALE) === null && document.documentElement.dataset.locale === LOCALE.EN) {
+        setLocale(LOCALE.EN);
+      }
+    } catch {
+      // Storage unavailable: the page stays in the default language
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   useEffect(() => {
     if (typeof document === 'undefined') return;
     if (followOsTheme.current) {

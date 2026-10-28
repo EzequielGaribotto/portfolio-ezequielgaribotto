@@ -20,12 +20,21 @@
   margin-bottom: 1rem;
 }
 
+/* The logo is a square as tall as the three lines beside it (title, role, dates): 1.5rem + 1.2rem + meta line, with their line-heights */
 .logo {
-  width: 60px;
-  height: 60px;
+  flex-shrink: 0;
+  width: 6.25rem;
+  height: 6.25rem;
   border-radius: 8px;
   object-fit: contain;
-  padding: 4px;
+  padding: 2px;
+}
+
+@media (max-width: 600px) {
+  .logo {
+    width: 4.5rem;
+    height: 4.5rem;
+  }
 }
 
 .title {
@@ -139,6 +148,7 @@
 }
 
 .moreTags {
+  position: relative;
   background: transparent;
   border: 1px dashed var(--tech-border);
   color: var(--primary);
@@ -208,4 +218,21 @@
 /* Reduced motion: no movement; color, border and shadow changes stay */
 @media (prefers-reduced-motion: reduce) {
   .cardItem:hover { transform: none; }
+}
+
+/* Hit area grows past the visible pill without moving the layout */
+.moreTags::after {
+  content: "";
+  position: absolute;
+  inset: -7px -4px;
+}
+
+/* Two tiers: scope tags (what the work covers) are the strong ones; the tools behind them step back */
+.tech:not(.techScope):not(.techRelated):not(.techActive) {
+  border-color: color-mix(in srgb, var(--tech-border) 55%, transparent);
+}
+
+.tech.techScope:not(.techRelated):not(.techActive) {
+  border-color: var(--primary);
+  font-weight: 600;
 }

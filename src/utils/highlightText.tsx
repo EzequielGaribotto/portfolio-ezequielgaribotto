@@ -95,7 +95,7 @@ export function HighlightText({ text, searchTerm, className = '', highlightClass
             className={highlightClassName}
             style={{
               backgroundColor: 'var(--primary)',
-              color: 'var(--background)',
+              color: 'var(--on-primary)',
               padding: '2px 4px',
               borderRadius: '3px',
               fontWeight: '600'

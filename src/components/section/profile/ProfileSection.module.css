@@ -83,6 +83,27 @@
   box-sizing: border-box;
 }
 
+/* One line that can be checked, right under the role */
+.proof {
+  margin: -0.75rem 0 1.5rem;
+  font-size: 1rem;
+  text-align: center;
+  color: var(--mode-desc, #4b5563);
+  text-wrap: balance;
+}
+
+.proof a {
+  color: var(--link);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.proof a:hover {
+  color: var(--link-hover);
+}
+
 .buttonSection {
   display: flex;
   flex-direction: column;

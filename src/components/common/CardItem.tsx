@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Image from 'next/image';
 import styles from "./CardItem.module.css";
 import MetaInfoDisplay from './MetaInfoDisplay';
 import TagHint from './TagHint';
-import { descendants, orderTags } from "../../constants/techTaxonomy";
+import { descendants, isScopeTag, orderTags } from "../../constants/techTaxonomy";
 import { useTranslation } from "../../context/TranslationContext";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
+import { useAnimatedHeight } from "../../hooks/useAnimatedHeight";
 
 const TAG_LIMIT = 12;
 
@@ -47,6 +48,8 @@ const CardItem: React.FC<CardItemProps> = ({
   const columnFits = useMediaQuery("(min-width: 901px)");
   const showEverything = split && columnFits;
   const expanded = showAllTags || showEverything;
+  const tagsRef = useRef<HTMLDivElement>(null);
+  useAnimatedHeight(tagsRef, expanded);
 
   // Hovering a tag whose concrete technologies are folded away opens the list, and it stays open
   const handleTagHover = (tag: string | null) => {
@@ -65,8 +68,8 @@ const CardItem: React.FC<CardItemProps> = ({
           <Image
             src={imageUrl}
             alt={`${title} logo`}
-            width={60}
-            height={60}
+            width={120}
+            height={120}
             className={styles.logo}
           />
         )}
@@ -92,11 +95,11 @@ const CardItem: React.FC<CardItemProps> = ({
         {description}
       </div>
 
-      <div className={`${styles.technologies} ${hoveredTag ? styles.techFocus : ""}`}>
+      <div ref={tagsRef} className={`${styles.technologies} ${hoveredTag ? styles.techFocus : ""}`}>
         {(expanded ? technologies : technologies.slice(0, TAG_LIMIT)).map((tech, index) => (
           <span
             key={index}
-            className={`${styles.tech} ${
+            className={`${styles.tech} ${isScopeTag(tech) ? styles.techScope : ""} ${
               isRelated(tech) ? styles.techRelated : ""
             } ${hoveredTag === tech ? styles.techActive : ""}`}
           >

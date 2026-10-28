@@ -48,6 +48,11 @@ export const TAG_CHILDREN: Record<string, string[]> = {
   "Git": ["GitHub Actions", "CI/CD"],
 };
 
+/** Scope tags say what the work covers; the rest are the tools behind it. */
+export function isScopeTag(tag: string): boolean {
+  return !!TAG_HINT_KEYS[tag];
+}
+
 /** Every bean below `tag`: children, grandchildren, and so on (cycle-safe). */
 export function descendants(tag: string): Set<string> {
   const out = new Set<string>();

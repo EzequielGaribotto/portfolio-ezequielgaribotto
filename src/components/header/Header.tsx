@@ -51,7 +51,13 @@ const Header: React.FC = () => {
     const handleScroll = () => {
       const sections = ['profile', 'projects', 'experience', 'training', 'contact'/*, 'gaming'*/];
       const scrollPosition = window.scrollY + 200; // Add offset for header
-      
+
+      // The last section can be shorter than the viewport, so the page may end before its top ever reaches the offset
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
+        setActiveSection(sections[sections.length - 1]);
+        return;
+      }
+
       for (const section of sections) {
         const element = document.getElementById(section);
         if (element && 
@@ -183,6 +189,10 @@ const Header: React.FC = () => {
         className={styles.mobileMenuContent} 
         onClick={(e) => e.stopPropagation()}
       >
+        <a href="#profile" onClick={scrollToSection('profile')} className={styles.mobileMenuBrand} aria-label={t("a11y.home")}>
+          <Image src="/images/logo/e332logo.webp" alt="" width={44} height={44} className={styles.mobileMenuLogo} />
+          <span>{t("aboutMe.title")}</span>
+        </a>
         <button 
           className={styles.mobileMenuClose}
           onClick={() => setMobileMenuOpen(false)}

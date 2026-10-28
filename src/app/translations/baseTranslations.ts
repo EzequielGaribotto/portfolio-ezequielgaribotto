@@ -61,6 +61,7 @@ export const baseTranslations = {
     githubRepo: "",
     projectImage: "",
     language: "",
+    skipToContent: "",
   },
   footer: {
     disclaimer: "",
@@ -68,6 +69,8 @@ export const baseTranslations = {
   },
   // About Me section translations
   aboutMe: {
+    proof: "",
+    proofLink: "",
     title: "",
     description: "",
     photoAlt: "",
@@ -139,6 +142,7 @@ export const baseTranslations = {
   projects: {
     title: "",
     current: "",
+    since: "",
     // Add index signature to allow for project-specific properties
     neutralNews: {} as {
       title: string;

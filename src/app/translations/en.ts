@@ -60,6 +60,7 @@ export const en: Translations = {
     githubRepo: "GitHub repository",
     projectImage: "Project image",
     language: "Language",
+    skipToContent: "Skip to content",
   },
   footer: {
     disclaimer: "© 2026 Ezequiel Garibotto.",
@@ -67,7 +68,9 @@ export const en: Translations = {
   },
   aboutMe: {
     title: "Ezequiel Garibotto",
-    description: "Junior Full-Stack Applied AI Developer | AI Engineering, Backend & Data",
+    proof: "Built ProString Manage solo, a SaaS in production",
+    proofLink: "ProString Manage",
+    description: "Junior Full-Stack Applied\u00a0AI Developer | AI\u00a0Engineering, Backend & Data",
     photoAlt: "Photo of Ezequiel Garibotto"
   },
   cv: {
@@ -134,7 +137,7 @@ export const en: Translations = {
   search: {
     scopeLabel: "Scope",
     techLabel: "Tech",
-    placeholder: "Search projects by title, description, or technology...",
+    placeholder: "Search projects or technologies...",
     clearFilters: "Clear filters",
     noResults: "No projects found matching your criteria",
     showingAll: "Showing all {count} projects",
@@ -151,6 +154,7 @@ export const en: Translations = {
   projects: {
     title: "Projects",
     current: "present",
+    since: "since",
     neutralNews: {
       title: "Neutral News / Facts",
       description: "Application with ETL flow that generates neutral news, combining various powerful backend technologies: Scraping, XML parsing, ML algorithms for embedding and clustering, use of text generation APIs, among others.\n" +
