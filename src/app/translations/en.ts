@@ -233,7 +233,6 @@ export const en: Translations = {
         keras: "CNN with Keras/TensorFlow: exercise report (PDF, in Spanish)",
         pytorch: "CNN with PyTorch: exercise report (PDF, in Spanish)",
         sklearn: "Multilayer perceptron with scikit-learn: exercise report (PDF, in Spanish)",
-        bi: "BI system proposal for a small business (PDF, in Spanish)",
       },
     },
     prostring: {

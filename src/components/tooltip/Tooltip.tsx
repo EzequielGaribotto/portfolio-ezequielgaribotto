@@ -1,5 +1,6 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { placeTooltip } from '../../utils/tooltipPlacement';
 import { TooltipProps } from '../../models/interfaces';
 import styles from './Tooltip.module.css';
 
@@ -9,7 +10,8 @@ const Tooltip: React.FC<TooltipProps> = ({
   position = 'top',
   forcePosition = false,
   alternateText,
-  showAlternate = false
+  showAlternate = false,
+  tooltipClassName = ''
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [tooltipPosition, setTooltipPosition] = useState(position);
@@ -34,6 +36,11 @@ const Tooltip: React.FC<TooltipProps> = ({
     setIsVisible(false);
   };
   
+  const tipRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (isVisible) placeTooltip(tipRef.current);
+  }, [isVisible, tooltipPosition]);
+
   const displayText = showAlternate && alternateText ? alternateText : text;
   
   return (
@@ -45,7 +52,7 @@ const Tooltip: React.FC<TooltipProps> = ({
     >
       {children}
       {isVisible && (
-        <div className={`${styles.tooltip} ${styles[tooltipPosition]}`}>
+        <div ref={tipRef} className={`${styles.tooltip} ${styles[tooltipPosition]} ${tooltipClassName}`}>
           {displayText}
         </div>
       )}

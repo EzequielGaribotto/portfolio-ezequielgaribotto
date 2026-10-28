@@ -40,12 +40,12 @@
 .top {
   bottom: 125%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(calc(-50% + var(--shift, 0px)));
 }
 
 .top::after {
   top: 100%;
-  left: 50%;
+  left: calc(50% - var(--shift, 0px));
   transform: translateX(-50%);
   border-color: rgba(0, 0, 0, 0.8) transparent transparent transparent;
 }
@@ -53,12 +53,12 @@
 .bottom {
   top: 125%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(calc(-50% + var(--shift, 0px)));
 }
 
 .bottom::after {
   bottom: 100%;
-  left: 50%;
+  left: calc(50% - var(--shift, 0px));
   transform: translateX(-50%);
   border-color: transparent transparent rgba(0, 0, 0, 0.8) transparent;
 }

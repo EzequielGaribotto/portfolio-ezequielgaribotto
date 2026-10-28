@@ -36,8 +36,16 @@ const CardItem: React.FC<CardItemProps> = ({
   const { t } = useTranslation();
   const [showAllTags, setShowAllTags] = useState(false);
   const [hoveredTag, setHoveredTag] = useState<string | null>(null);
+  const isRelated = (x: string) => !!hoveredTag && !!TAG_CHILDREN[hoveredTag]?.includes(x);
+  // Hovering a tag whose concrete technologies are folded away opens the list while it stays hovered
+  const expanded = showAllTags || technologies.slice(TAG_LIMIT).some(isRelated);
   return (
-    <div key={id} id={id} className={`${styles.cardItem} ${className}`}>
+    <div
+      key={id}
+      id={id}
+      className={`${styles.cardItem} ${className}`}
+      onMouseLeave={() => setHoveredTag(null)}
+    >
       <div className={styles.cardHeader}>
         {imageUrl && (
           <Image
@@ -71,11 +79,11 @@ const CardItem: React.FC<CardItemProps> = ({
       </div>
       
       <div className={styles.technologies}>
-        {(showAllTags ? technologies : technologies.slice(0, TAG_LIMIT)).map((tech, index) => (
+        {(expanded ? technologies : technologies.slice(0, TAG_LIMIT)).map((tech, index) => (
           <span
             key={index}
             className={`${styles.tech} ${
-              hoveredTag && TAG_CHILDREN[hoveredTag]?.includes(tech) ? styles.techRelated : ""
+              isRelated(tech) ? styles.techRelated : ""
             } ${hoveredTag === tech ? styles.techActive : ""}`}
           >
             <TagHint tag={tech} projectId={id} pool={technologies} onHoverChange={setHoveredTag}>{tech}</TagHint>
@@ -83,12 +91,10 @@ const CardItem: React.FC<CardItemProps> = ({
         ))}
         {technologies.length > TAG_LIMIT && (
           <button type="button" className={`${styles.moreTags} ${
-              !showAllTags && hoveredTag && technologies.slice(TAG_LIMIT).some((x) => TAG_CHILDREN[hoveredTag]?.includes(x))
-                ? styles.moreTagsRelated
-                : ""
+              !expanded && technologies.slice(TAG_LIMIT).some(isRelated) ? styles.moreTagsRelated : ""
             }`}
             onClick={() => setShowAllTags((v) => !v)}>
-            {showAllTags
+            {expanded
               ? t("tags.showLess")
               : t("tags.showMore").replace("{count}", String(technologies.length - TAG_LIMIT))}
           </button>

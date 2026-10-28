@@ -8,7 +8,7 @@
   position: absolute;
   bottom: calc(100% + 0.5rem);
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(calc(-50% + var(--shift, 0px)));
   width: max-content;
   max-width: min(20rem, 80vw);
   padding: 0.6rem 0.8rem;
@@ -30,6 +30,22 @@
   z-index: 50;
   cursor: text;
   user-select: text;
+}
+
+.plain {
+  position: relative;
+  display: inline-block;
+  cursor: default;
+}
+
+.tip[data-below="1"] {
+  bottom: auto;
+  top: calc(100% + 0.5rem);
+}
+
+.tip[data-below="1"]::before {
+  top: auto;
+  bottom: 100%;
 }
 
 /* Invisible bridge over the gap between the tag and the tip: the pointer never leaves the hover area. */

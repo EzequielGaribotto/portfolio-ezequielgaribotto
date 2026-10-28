@@ -210,7 +210,7 @@ export const baseTranslations = {
       footer: string;
       startDate: string;
       endDate?: string | null;
-      docs?: { ames: string; keras: string; pytorch: string; sklearn: string; bi: string };
+      docs?: { ames: string; keras: string; pytorch: string; sklearn: string };
     },
     prostring: {} as {
       title: string;

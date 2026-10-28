@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "../../context/TranslationContext";
 import { TAG_HINT_KEYS, PROJECT_TAG_HINTS } from "../../constants/tagHints";
 import { usedChildren } from "../../constants/techTaxonomy";
+import { placeTooltip } from "../../utils/tooltipPlacement";
 import styles from "./TagHint.module.css";
 
 interface TagHintProps {
@@ -18,63 +19,78 @@ interface TagHintProps {
 }
 
 /**
- * Wraps a tag. Scope tags (Applied AI...) explain their scope; generic technology tags (Python,
- * Machine Learning...) list the concrete technologies used under them. Shown on hover, keyboard
- * focus, or a tap on touch screens.
+ * Wraps a tag.
+ * - Scope tags (Applied AI...) show a tooltip explaining their scope.
+ * - Generic technology tags (Python, Machine Learning...) show no tooltip: they only report the hover
+ *   (onHoverChange) so the card can highlight the concrete technologies under them.
+ * Triggers: mouse hover, keyboard focus (focus-visible only), or a tap on touch screens.
  */
 export default function TagHint({ tag, projectId, pool, onHoverChange, children }: TagHintProps) {
   const { t } = useTranslation();
   const hintKey = TAG_HINT_KEYS[tag];
-  const concrete = hintKey ? [] : usedChildren(tag, pool);
+  const hasChildren = !hintKey && usedChildren(tag, pool).length > 0;
+  const notify = hasChildren ? onHoverChange : undefined;
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLSpanElement>(null);
+  const tipRef = useRef<HTMLSpanElement>(null);
 
-  // Touch screens have no hover: a tap opens the hint, a tap elsewhere closes it.
+  // Touch screens have no hover: a tap opens the hint (or highlight), a tap elsewhere closes it.
   useEffect(() => {
     if (!open) return;
     const onPointerDown = (e: PointerEvent) => {
-      if (rootRef.current && !rootRef.current.contains(e.target as Node)) setOpen(false);
+      if (rootRef.current && !rootRef.current.contains(e.target as Node)) {
+        setOpen(false);
+        notify?.(null);
+      }
     };
     document.addEventListener("pointerdown", onPointerDown);
     return () => document.removeEventListener("pointerdown", onPointerDown);
-  }, [open]);
+  }, [open, notify]);
 
-  if (!hintKey && concrete.length === 0) return <>{children}</>;
+  if (!hintKey && !hasChildren) return <>{children}</>;
 
-  let text: string;
+  const place = () => {
+    if (hintKey) placeTooltip(tipRef.current, { flipBelowTop: 90 });
+  };
+
+  let text = "";
   if (hintKey) {
     const scoped = !!projectId && !!PROJECT_TAG_HINTS[projectId]?.includes(hintKey);
     text = `${t(`tagHints.${hintKey}`)}\n\n${
       scoped ? t(`projectTagHints.${projectId}.${hintKey}`) : t(`tagExamples.${hintKey}`)
     }`;
-  } else {
-    const header = !projectId
-      ? t("techHints.acrossProjects")
-      : projectId === "linkia"
-        ? t("techHints.inProgram")
-        : t("techHints.inProject");
-    text = `${header}\n${concrete.join(", ")}`;
   }
-
-  const notify = concrete.length > 0 && onHoverChange ? onHoverChange : undefined;
 
   return (
     <span
       ref={rootRef}
-      className={`${styles.hint} ${open ? styles.open : ""}`}
+      className={`${hintKey ? styles.hint : styles.plain} ${open ? styles.open : ""}`}
       tabIndex={0}
       onClick={() => {
-        if (window.matchMedia("(hover: none)").matches) setOpen((o) => !o);
+        if (!window.matchMedia("(hover: none)").matches) return;
+        const next = !open;
+        place();
+        setOpen(next);
+        notify?.(next ? tag : null);
       }}
-      onMouseEnter={() => notify?.(tag)}
+      onMouseEnter={() => {
+        place();
+        notify?.(tag);
+      }}
       onMouseLeave={() => notify?.(null)}
-      onFocus={() => notify?.(tag)}
+      onFocus={(e) => {
+        if (!e.currentTarget.matches(":focus-visible")) return;
+        place();
+        notify?.(tag);
+      }}
       onBlur={() => notify?.(null)}
     >
       {children}
-      <span role="tooltip" className={styles.tip}>
-        {text}
-      </span>
+      {hintKey && (
+        <span ref={tipRef} role="tooltip" className={styles.tip}>
+          {text}
+        </span>
+      )}
     </span>
   );
 }

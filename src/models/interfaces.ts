@@ -12,6 +12,7 @@ export interface TooltipProps {
   forcePosition?: boolean;
   alternateText?: string;
   showAlternate?: boolean;
+  tooltipClassName?: string;
 }
 
 export interface ClickableButtonProps {

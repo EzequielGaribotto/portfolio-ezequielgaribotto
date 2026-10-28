@@ -69,14 +69,15 @@
 }
 
 .techRelated {
-  background-color: color-mix(in srgb, var(--primary) 28%, transparent) !important;
-  border-color: var(--primary) !important;
-  box-shadow: 0 0 0 1px var(--primary);
+  background-color: var(--tag-hl-bg) !important;
+  border-color: var(--tag-hl-border) !important;
+  color: var(--tag-hl-text) !important;
+  box-shadow: 0 0 0 1px var(--tag-hl-border), 0 0 10px var(--tag-hl-glow);
 }
 
 .techActive {
-  border-color: var(--primary) !important;
-  box-shadow: 0 0 0 1px var(--primary);
+  border-color: var(--tag-hl-border) !important;
+  box-shadow: 0 0 0 1px var(--tag-hl-border);
 }
 
 .moreTags {
@@ -91,9 +92,10 @@
 }
 
 .moreTagsRelated {
-  background-color: color-mix(in srgb, var(--primary) 28%, transparent);
+  background-color: var(--tag-hl-bg);
   border-style: solid;
-  border-color: var(--primary);
+  border-color: var(--tag-hl-border);
+  color: var(--tag-hl-text);
 }
 
 .moreTags:hover {

@@ -62,10 +62,12 @@ export default function DocumentButton({ label, file, pages, className = "", onH
       ref={rootRef}
       onMouseEnter={() => onHoverChange?.(true)}
       onMouseLeave={() => onHoverChange?.(false)}
-      onFocus={() => onHoverChange?.(true)}
+      onFocus={(e) => {
+        if ((e.target as HTMLElement).matches(":focus-visible")) onHoverChange?.(true);
+      }}
       onBlur={() => onHoverChange?.(false)}
     >
-      <Tooltip text={label}>
+      <Tooltip text={label} tooltipClassName={styles.docTooltip}>
         <button
           type="button"
           className={`p-2 rounded-full transition-all duration-400 ${className} ${styles.docButton}`}
@@ -93,6 +95,7 @@ export default function DocumentButton({ label, file, pages, className = "", onH
               className={styles.menuItem}
               onClick={() => {
                 setMenuOpen(false);
+                onHoverChange?.(false);
                 setPreviewOpen(true);
               }}
             >

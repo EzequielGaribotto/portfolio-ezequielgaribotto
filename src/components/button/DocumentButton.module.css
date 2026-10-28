@@ -23,6 +23,15 @@
   white-space: nowrap;
 }
 
+.docTooltip {
+  font-family: "Times New Roman", Times, serif !important;
+  font-size: 0.9rem !important;
+  white-space: normal !important;
+  width: max-content;
+  max-width: min(22rem, 85vw);
+  text-align: center;
+}
+
 .menu {
   position: absolute;
   top: calc(100% + 0.5rem);

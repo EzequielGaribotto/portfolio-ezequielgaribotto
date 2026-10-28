@@ -233,7 +233,6 @@ export const es: Translations = {
         keras: "CNN con Keras/TensorFlow: informe del ejercicio (PDF)",
         pytorch: "CNN con PyTorch: informe del ejercicio (PDF)",
         sklearn: "Perceptrón multicapa con scikit-learn: informe del ejercicio (PDF)",
-        bi: "Propuesta de sistema de BI para una PyME (PDF)",
       },
     },
     prostring: {

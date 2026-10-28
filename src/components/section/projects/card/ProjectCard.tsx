@@ -14,14 +14,17 @@ import DocumentButton from '../../../button/DocumentButton';
 import { TAG_CHILDREN } from '../../../../constants/techTaxonomy';
 
 const TAG_LIMIT = 12;
+const NO_TAGS: string[] = [];
 import styles from './ProjectCard.module.css';
 
 interface ProjectCardProps {
   project: Project;
   searchTerm?: string;
+  /** Tags to highlight because a filter chip is hovered. */
+  externalHighlight?: string[];
 }
 
-export default function ProjectCard({ project, searchTerm = '' }: ProjectCardProps) {
+export default function ProjectCard({ project, searchTerm = '', externalHighlight = NO_TAGS }: ProjectCardProps) {
   const { t, theme } = useTranslation();
   const fallbackImage = "/images/projects/fallback.webp";
   const [isExpanded, setIsExpanded] = useState(false);
@@ -226,6 +229,11 @@ export default function ProjectCard({ project, searchTerm = '' }: ProjectCardPro
       <div
         ref={cardRef}
         className={styles.projectCard}
+        onMouseLeave={() => {
+          // Safety net: never leave a highlight stuck when the pointer leaves the card
+          setHoveredTag(null);
+          setHoveredDocTech([]);
+        }}
       >
         <div onClick={handleTextClick}>
           <h3 className={styles.projectTitle}>
@@ -339,7 +347,11 @@ export default function ProjectCard({ project, searchTerm = '' }: ProjectCardPro
             {(() => {
               const all = project.technologies;
               const forceAll = !!searchTerm?.trim();
-              const expanded = showAllTags || forceAll;
+              const relatedByTag = (x: string) => !!hoveredTag && !!TAG_CHILDREN[hoveredTag]?.includes(x);
+              const isRelated = (x: string) =>
+                relatedByTag(x) || hoveredDocTech.includes(x) || externalHighlight.includes(x);
+              // Hovering a tag whose concrete technologies are folded away opens the list while it stays hovered
+              const expanded = showAllTags || forceAll || all.slice(TAG_LIMIT).some(relatedByTag);
               const shown = expanded ? all : all.slice(0, TAG_LIMIT);
               return (
                 <>
@@ -347,7 +359,7 @@ export default function ProjectCard({ project, searchTerm = '' }: ProjectCardPro
                     <span
                       key={index}
                       className={`${styles.techTag} ${
-                        hoveredDocTech.includes(tech) || (hoveredTag && TAG_CHILDREN[hoveredTag]?.includes(tech)) ? styles.techTagRelated : ""
+                        isRelated(tech) ? styles.techTagRelated : ""
                       } ${hoveredTag === tech ? styles.techTagActive : ""}`}
                     >
                       <TagHint tag={tech} projectId={project.id} pool={all} onHoverChange={setHoveredTag}>
@@ -359,13 +371,13 @@ export default function ProjectCard({ project, searchTerm = '' }: ProjectCardPro
                     <button
                       type="button"
                       className={`${styles.moreTags} ${
-                        !expanded && all.slice(TAG_LIMIT).some((x) => hoveredDocTech.includes(x) || (hoveredTag && TAG_CHILDREN[hoveredTag]?.includes(x)))
+                        !expanded && all.slice(TAG_LIMIT).some(isRelated)
                           ? styles.moreTagsRelated
                           : ""
                       }`}
                       onClick={() => setShowAllTags((v) => !v)}
                     >
-                      {showAllTags
+                      {expanded
                         ? t("tags.showLess")
                         : t("tags.showMore").replace("{count}", String(all.length - TAG_LIMIT))}
                     </button>
