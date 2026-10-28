@@ -21,21 +21,23 @@ export default function ProjectSearch({
 
   // Hardcoded list of keywords - sorted by priority and categories
   const availableKeywords = [
-    "Android", 
-    "Back-end", 
-    "Front-end",
-    "Game Development",
-    "Kotlin",
-    "Python", 
-    "Java",
-    "AI", 
+    "Applied AI",
+    "AI Engineering",
     "Machine Learning",
-    "Firebase",
+    "Python",
+    "Back-end",
+    "Front-end",
+    "Vue",
     "API",
     "Cloud",
     "UI",
     "UX",
+    "Firebase",
+    "Java",
+    "Kotlin",
+    "Android",
     "React",
+    "Game Development",
   ];
 
   useEffect(() => {

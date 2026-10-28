@@ -210,12 +210,12 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
     //   file: CV_FILES.ES,
     //   previewLang: 'es'
     // },
-    // {
-    //   key: 'en',
-    //   label: t("cv.english"),
-    //   file: CV_FILES.EN,
-    //   previewLang: 'en'
-    // }
+    {
+      key: 'en',
+      label: t("cv.english"),
+      file: CV_FILES.EN,
+      previewLang: 'en'
+    }
   ];
 
   return (
@@ -341,7 +341,7 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
                 <div className="flex items-center text-white text-xs px-2 opacity-80 min-w-[200px] z-10">
                   <FaCalendarAlt className="mr-1" />
                   <span>
-                    {formatDate(getCurrentDate(previewLang), locale, true)}
+                    {formatDate(getCurrentDate(previewLang), locale)}
                   </span>
                 </div>
                 

@@ -47,8 +47,8 @@ export const en: Translations = {
   cv: {
     download: "Download CV",
     spanish: "Spanish CV",
-    english: "English CV",
-    english_ats: "English CV (ATS)",
+    english: "English CV (2 pages)",
+    english_ats: "English CV (1 page, ATS)",
     preview: "Preview CV",
     unableToDisplay: "Unable to display PDF file.",
     downloadInstead: "Download Instead",

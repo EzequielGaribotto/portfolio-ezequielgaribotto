@@ -18,7 +18,7 @@ const TrainingSection: React.FC = () => {
       period: t("training.linkia.period"),
       location: t("training.linkia.location"),
       description: t("training.linkia.description"),
-      technologies: ["Python", "TensorFlow", "PyTorch", "Keras", "Deep Learning", "Neural Networks", "NLP", "Computer Vision", "Big Data", "Spark", "Hadoop", "Machine Learning", "Data Science", "AI", "Data Visualization"],
+      technologies: ["Applied AI", "AI Engineering", "Python", "Machine Learning", "Deep Learning", "Neural Networks", "Computer Vision", "Keras", "TensorFlow", "PyTorch", "NLP", "Big Data", "Spark", "Hadoop", "Data Science", "Data Visualization"],
       imageUrl: "/images/institutions/linkiafp_logo.webp",
       institutionUrl: "https://www.linkiafp.es/",
     },
