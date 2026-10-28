@@ -3,7 +3,7 @@
 import { FaExpand, FaCompress, FaTrophy, FaGooglePlay, FaNewspaper, FaFilm, FaCode, FaListAlt, FaGlobe } from "../../../../utils/icons";
 import { FaGamepad, FaClock, FaMap, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useState, useRef, useEffect, useCallback } from "react";
-import { useTranslation } from "../../../../context/TranslationContext";
+import { useTranslation, useTheme } from "../../../../context/TranslationContext";
 import { Project } from "../../../../models/Project";
 import ClickableButton from "../../../button/ClickableButton";
 import OptimizedImage from '../../../OptimizedImage';
@@ -27,7 +27,8 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ project, searchTerm = '', externalHighlight = NO_TAGS }: ProjectCardProps) {
-  const { t, theme } = useTranslation();
+  const { t } = useTranslation();
+  const { theme } = useTheme();
   const fallbackImage = "/images/projects/fallback.webp";
   const [isExpanded, setIsExpanded] = useState(false);
   const [expandedImageIndex, setExpandedImageIndex] = useState(0);

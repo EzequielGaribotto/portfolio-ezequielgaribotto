@@ -48,3 +48,63 @@
   border: 1px solid var(--secondary-hover);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
 }
+
+.items {
+  margin: 0;
+  padding: 0.25rem;
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: 0.15rem 0.35rem 0.15rem 0.75rem;
+  border-radius: 0.75rem;
+  transition: background-color 0.15s ease;
+}
+
+.item:hover {
+  background-color: color-mix(in srgb, var(--primary) 12%, transparent);
+}
+
+.itemLink {
+  flex: 1;
+  padding: 0.5rem 0;
+  color: var(--foreground);
+  font-size: 0.9rem;
+  text-align: left;
+  text-decoration: none;
+}
+
+.itemLink:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Preview is the secondary action: a quiet pill with words, not an icon */
+.preview {
+  flex-shrink: 0;
+  padding: 0.2rem 0.7rem;
+  border: 1px solid var(--rule, color-mix(in srgb, var(--foreground) 28%, transparent));
+  border-radius: 9999px;
+  background: none;
+  color: var(--foreground);
+  font-size: 0.75rem;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.preview:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.updated {
+  margin: 0;
+  padding: 0.5rem 1rem 0.65rem;
+  border-top: 1px solid var(--rule, color-mix(in srgb, var(--foreground) 28%, transparent));
+  color: var(--foreground-muted);
+  font-size: 0.75rem;
+  text-align: left;
+}

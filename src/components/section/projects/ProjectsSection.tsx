@@ -1,10 +1,12 @@
 "use client";
 import { useRef, useState } from "react";
+import { flushSync } from "react-dom";
 import LazyProjectCard from "./card/LazyProjectCard";
+import MasonryItem from "./MasonryItem";
 import ProjectSearch from "./ProjectSearch";
 import SearchResults from "./SearchResults";
 import { useTranslation } from "../../../context/TranslationContext";
-import { useProjectSearch } from "../../../hooks/useProjectSearch";
+import { useProjectSearch, SortBy } from "../../../hooks/useProjectSearch";
 import { Project } from "../../../models/Project";
 import { descendants } from "../../../constants/techTaxonomy";
 import styles from './ProjectsSection.module.css';
@@ -13,6 +15,7 @@ import Section from "../Section";
 export default function ProjectsSection() {
   const { t } = useTranslation();
   const sectionRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
   const [chipHover, setChipHover] = useState<string | null>(null);
 
   const eulixTech = ["Android", "Kotlin", "UI", "UX", "Retrofit", "DataBinding", "MVVM", "XML", "Kotlin DSL", "LiveData", "Git", "Agile", "RESTful API", "International Team"];
@@ -252,6 +255,29 @@ export default function ProjectsSection() {
     setSortBy
   } = useProjectSearch(projects);
 
+  // Changing the sort re-orders the cards: each one glides to its new place instead of jumping. The browser animates
+  // elements that share a view-transition-name between the old and the new layout, so the names are only set for the moment.
+  const handleSortChange = (next: SortBy) => {
+    const grid = gridRef.current;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!grid || reduced || typeof document.startViewTransition !== "function") {
+      setSortBy(next);
+      return;
+    }
+    const cards = Array.from(grid.querySelectorAll<HTMLElement>("[data-card-id]"));
+    cards.forEach((card) => {
+      card.style.viewTransitionName = `card-${card.dataset.cardId}`;
+    });
+    const transition = document.startViewTransition(() => {
+      flushSync(() => setSortBy(next));
+    });
+    transition.finished.finally(() => {
+      cards.forEach((card) => {
+        card.style.viewTransitionName = "";
+      });
+    });
+  };
+
   return (
     <div ref={sectionRef}>
       <Section
@@ -275,19 +301,18 @@ export default function ProjectsSection() {
           totalCount={totalCount}
           hasActiveFilters={hasActiveFilters}
           showAllProjects={showAllProjects}
-          onToggleShowAll={() => setShowAllProjects(!showAllProjects)}
           sortBy={sortBy}
-          onSortChange={setSortBy}
+          onSortChange={handleSortChange}
         />        {/* Projects Grid */}
-        <div className={styles.masonryGrid}>
+        <div className={styles.masonryGrid} ref={gridRef}>
           {filteredProjects.map((project) => (
-            <div key={project.id} className={styles.masonryItem}>
+            <MasonryItem key={project.id} id={project.id}>
               <LazyProjectCard
                 project={project}
                 searchTerm={searchTerm}
                 highlightTags={chipHover ? Array.from(descendants(chipHover)) : undefined}
               />
-            </div>
+            </MasonryItem>
           ))}
         </div>
         

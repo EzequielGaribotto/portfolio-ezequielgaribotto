@@ -1,7 +1,10 @@
+/* Masonry: tiny rows, and each item spans the rows its card needs (see MasonryItem) */
 .masonryGrid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2rem;
+  grid-auto-rows: 4px;
+  column-gap: 2rem;
+  align-items: start;
   width: 100%;
   position: relative;
 }
@@ -12,19 +15,11 @@
   }
 }
 
-@media (min-width: 1024px) {
-  .masonryGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
 .masonryItem {
   width: 100%;
   max-width: 100%;
   min-width: 0;
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
 }
 
 .noResultsMessage {

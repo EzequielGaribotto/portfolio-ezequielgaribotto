@@ -1,5 +1,7 @@
 /* A closing page for the file: label and value rows separated by hairlines */
 .ledger {
+  /* The text color at 28%: a hairline that reads on the page gradient in both themes */
+  --rule: color-mix(in srgb, var(--foreground) 28%, transparent);
   max-width: 40rem;
   margin: 0 auto;
   text-align: left;
@@ -11,11 +13,11 @@
   align-items: center;
   column-gap: 1.5rem;
   padding: 1rem 0;
-  border-top: 1px solid var(--secondary-hover);
+  border-top: 1px solid var(--rule);
 }
 
 .row:last-child {
-  border-bottom: 1px solid var(--secondary-hover);
+  border-bottom: 1px solid var(--rule);
 }
 
 .label {
@@ -47,12 +49,12 @@
   overflow-wrap: anywhere;
 }
 
-.value a {
+.value > a {
   color: var(--link);
   text-decoration: none;
 }
 
-.value a:hover {
+.value > a:hover {
   text-decoration: underline;
   text-underline-offset: 4px;
 }
@@ -73,7 +75,7 @@
   gap: 0.4rem;
   min-height: 1.75rem;
   padding: 0.15rem 0.7rem;
-  border: 1px solid var(--secondary-hover);
+  border: 1px solid var(--rule);
   border-radius: 9999px;
   background: none;
   color: var(--foreground);

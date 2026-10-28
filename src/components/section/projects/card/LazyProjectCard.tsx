@@ -23,7 +23,9 @@ export default function LazyProjectCard({ project, searchTerm, highlightTags }: 
           // Don't disconnect so we can track visibility
         }
       },
-      { threshold: 0.1 } // Trigger when 10% of the card is visible
+      // Mount well before the card scrolls into view, so a placeholder is rarely seen and the masonry
+      // has settled its real height by the time the card is on screen
+      { rootMargin: "1500px 0px" }
     );
 
     if (cardRef.current) {
@@ -36,12 +38,7 @@ export default function LazyProjectCard({ project, searchTerm, highlightTags }: 
   }, [project.id]);
 
   return (
-    <div
-      ref={cardRef}
-      className={styles.lazyCardContainer}
-      // Adding min-height to make cards taller
-      style={{ minHeight: "500px" }}
-    >
+    <div ref={cardRef} className={styles.lazyCardContainer}>
       {isVisible ? (
         <ProjectCard project={project} searchTerm={searchTerm} externalHighlight={highlightTags} />
       ) : (

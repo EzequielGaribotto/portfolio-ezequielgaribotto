@@ -1,12 +1,13 @@
 "use client";
 
-import { useTranslation } from "../../../context/TranslationContext";
+import { useTranslation, useTheme } from "../../../context/TranslationContext";
 import { FaGithub } from "react-icons/fa";
 import styles from "./Footer.module.css";
 import { useEffect, useState } from "react";
 
 export default function Footer() {
-  const { t, theme, isHydrated } = useTranslation();
+  const { t, isHydrated } = useTranslation();
+  const { theme } = useTheme();
   const [isClient, setIsClient] = useState(false);
   
   // Set isClient to true when component mounts on client side

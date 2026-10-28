@@ -9,7 +9,6 @@ interface SearchResultsProps {
   totalCount: number;
   hasActiveFilters: boolean;
   showAllProjects?: boolean;
-  onToggleShowAll?: () => void;
   sortBy: SortBy;
   onSortChange: (sortBy: SortBy) => void;
 }
@@ -19,7 +18,6 @@ export default function SearchResults({
   totalCount, 
   hasActiveFilters,
   showAllProjects = false,
-  onToggleShowAll,
   sortBy,
   onSortChange
 }: SearchResultsProps) {
@@ -35,17 +33,6 @@ export default function SearchResults({
                 .replace("{count}", resultCount.toString())
                 .replace("{total}", totalCount.toString())
           }
-          {onToggleShowAll && (
-            <>
-              {" • "}
-              <button
-                onClick={onToggleShowAll}
-                className={styles.toggleLink}
-              >
-                {showAllProjects ? t("search.showLessLink") : t("search.showAllLink")}
-              </button>
-            </>
-          )}
         </p>
         
         {/* Sort toggle */}

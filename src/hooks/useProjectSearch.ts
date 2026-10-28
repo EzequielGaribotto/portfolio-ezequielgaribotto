@@ -80,7 +80,8 @@ function compareDates(a: Project, b: Project): number {
 
 export function useProjectSearch(projects: Project[]) {
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedKeywords, setSelectedKeywords] = useLocalStorage<string[]>("project-search-keywords", []);
+  // Filters last for this visit only: a returning visitor should never land on a list narrowed by an old click
+  const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
   const [showAllProjects, setShowAllProjects] = useLocalStorage<boolean>("show-all-projects", false);
   const [sortBy, setSortBy] = useLocalStorage<SortBy>("project-sort-by", "relevance");
 

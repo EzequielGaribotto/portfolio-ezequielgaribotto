@@ -1,63 +1,74 @@
-.languageSwitcher {
-  display: flex;
-  align-items: center;
-  font-size: 0.9rem;
-  margin-right: 5px;
-  transition: none;
+.switch {
+  --size: 30px;
+  --pad: 3px;
+  position: relative;
+  display: inline-flex;
+  padding: var(--pad);
+  border: 1px solid color-mix(in srgb, var(--foreground) 22%, transparent);
+  border-radius: 9999px;
+  background: color-mix(in srgb, var(--foreground) 6%, transparent);
 }
 
-.languageButton {
-  background: transparent;
+/* The highlight: an accent disc that slides under whichever flag is active */
+.thumb {
+  position: absolute;
+  top: var(--pad);
+  left: var(--pad);
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 2px 8px var(--tag-hl-glow);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.switch[data-locale="en"] .thumb {
+  transform: translateX(var(--size));
+}
+
+.option {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: var(--size);
+  height: var(--size);
+  padding: 0;
   border: none;
-  color: var(--foreground);
-  cursor: pointer;
-  padding: 0 2px;
+  border-radius: 50%;
+  background: none;
+  filter: grayscale(0.7);
   opacity: 0.7;
-  transition: none;
+  transition: filter 0.3s ease, opacity 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.languageButton:hover {
-  opacity: 0.9;
-}
-
-.languageButton.active {
+.option[aria-pressed="true"] {
+  filter: none;
   opacity: 1;
-  font-weight: 600;
+  transform: scale(0.92);
 }
 
-.languageText {
-  font-size: 0.9rem;
-  transition: none;
+.option:not([aria-pressed="true"]):hover {
+  filter: grayscale(0);
+  opacity: 1;
+  transform: scale(1.06);
 }
 
-.divider {
-  margin: 0 2px;
-  opacity: 0.5;
+.option:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
 }
 
-/* Mobile responsive styles */
-@media (max-width: 768px) {
-  .languageSwitcher {
-    font-size: 0.75rem;
-    margin-right: 3px;
-  }
-  
-  .languageText {
-    font-size: 0.75rem;
-  }
-  
-  .divider {
-    margin: 0 1px;
-  }
-}
-
-/* For very small screens */
 @media (max-width: 480px) {
-  .languageSwitcher {
-    font-size: 0.7rem;
+  .switch {
+    --size: 26px;
+    --pad: 2px;
   }
-  
-  .languageText {
-    font-size: 0.7rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .thumb,
+  .option {
+    transition: none;
   }
 }

@@ -404,11 +404,23 @@ footer a:hover {
 }
 
 
-/* Only while the theme is being switched (see changeTheme), colors cross-fade; hover and focus styles keep their own timing */
-html.theme-switching *,
-html.theme-switching *::before,
-html.theme-switching *::after {
-  transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease, box-shadow 200ms ease !important;
+/* Theme switch: the page cross-fades once (View Transitions API, see changeTheme) instead of every element
+   transitioning its own colors, shadows and borders */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 240ms;
+  animation-timing-function: ease;
+}
+
+/* Sorting the projects: every card moves to its new place with a long ease-out (named groups only, not the root) */
+::view-transition-group(*) {
+  animation-duration: 520ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+::view-transition-group(root) {
+  animation-duration: 240ms;
+  animation-timing-function: ease;
 }
 
 body.hydration-complete {

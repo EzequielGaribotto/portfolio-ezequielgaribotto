@@ -1,0 +1,123 @@
+.track {
+  --w: 58px;
+  --h: 32px;
+  --pad: 3px;
+  --thumb: calc(var(--h) - var(--pad) * 2 - 2px);
+  position: relative;
+  flex-shrink: 0;
+  width: var(--w);
+  height: var(--h);
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--foreground) 22%, transparent);
+  border-radius: 9999px;
+  background: color-mix(in srgb, var(--foreground) 6%, transparent);
+  overflow: hidden;
+}
+
+.thumb {
+  position: absolute;
+  top: var(--pad);
+  left: var(--pad);
+  display: grid;
+  place-items: center;
+  width: var(--thumb);
+  height: var(--thumb);
+  padding: 3px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--on-primary);
+  box-shadow: 0 2px 8px var(--tag-hl-glow);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.track[data-mode="dark"] .thumb {
+  transform: translateX(calc(var(--w) - var(--thumb) - var(--pad) * 2 - 2px));
+}
+
+.thumb svg {
+  overflow: visible;
+}
+
+/* Sun to moon: the rays fold in, the core grows, and a second disc slides across it to leave a crescent */
+.rays,
+.core,
+.cut {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+}
+
+.cut {
+  transform: translate(10px, -6px);
+}
+
+.track[data-mode="dark"] .cut {
+  transform: translate(0, 0);
+}
+
+.track[data-mode="dark"] .rays {
+  opacity: 0;
+  transform: rotate(60deg) scale(0.4);
+}
+
+.track[data-mode="dark"] .core {
+  transform: scale(1.25) rotate(-20deg);
+}
+
+/* A few stars appear on the dark side of the track */
+.stars {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.track[data-mode="dark"] .stars {
+  opacity: 1;
+}
+
+.stars i {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: var(--foreground);
+}
+
+.stars i:nth-child(1) {
+  top: 9px;
+  right: 11px;
+}
+
+.stars i:nth-child(2) {
+  top: 17px;
+  right: 19px;
+}
+
+.stars i:nth-child(3) {
+  top: 21px;
+  right: 9px;
+}
+
+.track:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+@media (max-width: 480px) {
+  .track {
+    --w: 50px;
+    --h: 28px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .thumb,
+  .rays,
+  .core,
+  .cut,
+  .stars {
+    transition: none;
+  }
+}

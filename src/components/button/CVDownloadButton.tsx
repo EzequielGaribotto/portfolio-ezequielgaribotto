@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { FaFileDownload, FaEye } from "react-icons/fa";
+import { FaFileDownload } from "react-icons/fa";
 import { useTranslation } from "../../context/TranslationContext";
 import { CVDownloadButtonProps } from "../../models/interfaces";
 import { useCVMetadata } from "../../hooks/useCVMetadata";
@@ -12,14 +12,12 @@ import PdfPreviewModal from "./PdfPreviewModal";
 import styles from "./CVDownloadButton.module.css";
 
 export default function CVDownloadButton({ className, variant = "outline", compact = false }: CVDownloadButtonProps) {
-  const { t, theme, locale } = useTranslation();
+  const { t, locale } = useTranslation();
   const { metadata } = useCVMetadata();
   const [isOpen, setIsOpen] = useState(false);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const [previewLang, setPreviewLang] = useState('es');
   const [supportsPdfViewer, setSupportsPdfViewer] = useState(true);
-  const [showDateInfo, setShowDateInfo] = useState(false);
-  const [fadeOut, setFadeOut] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
 
@@ -36,44 +34,12 @@ export default function CVDownloadButton({ className, variant = "outline", compa
     return new Date(dateString);
   };
 
-  const getMostRecentCV = () => {
-    if (!metadata) return { date: new Date("2024-12-15T10:30:00Z"), label: '' };
-    
-    const cvDates = [
-      { key: 'en_ats', date: new Date(metadata.lastUpdated.en_ats), label: t("cv.english_ats") },
-      { key: 'es', date: new Date(metadata.lastUpdated.es), label: t("cv.spanish") },
-      { key: 'en', date: new Date(metadata.lastUpdated.en), label: t("cv.english") }
-    ];
-    
-    // Find the most recent CV
-    const mostRecent = cvDates.reduce((latest, current) => 
-      current.date > latest.date ? current : latest
-    );
-    
-    return { date: mostRecent.date, label: mostRecent.label };
+  // The newest of the three CV files
+  const getMostRecentDate = () => {
+    if (!metadata) return null;
+    const dates = [metadata.lastUpdated.en_ats, metadata.lastUpdated.es, metadata.lastUpdated.en].map((value) => new Date(value));
+    return dates.reduce((latest, current) => (current > latest ? current : latest));
   };
-
-  // Handle opening and closing of dropdown
-  useEffect(() => {
-    let fadeTimeout: NodeJS.Timeout;
-    
-    if (isOpen) {
-      setShowDateInfo(true);
-      setFadeOut(false);
-    } else if (showDateInfo) {
-      // Start fade out animation
-      setFadeOut(true);
-      
-      // Remove element after animation completes
-      fadeTimeout = setTimeout(() => {
-        setShowDateInfo(false);
-      }, 1000); // 1 second matches the CSS transition duration
-    }
-    
-    return () => {
-      if (fadeTimeout) clearTimeout(fadeTimeout);
-    };
-  }, [isOpen, showDateInfo]);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -87,9 +53,7 @@ export default function CVDownloadButton({ className, variant = "outline", compa
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const dropdownStyle = compact
-    ? { left: 0, maxWidth: 'max-content', minWidth: 'fit-content' }
-    : { maxWidth: 'max-content', minWidth: 'fit-content', transform: 'translateX(-50%)', left: '50%' };
+  const dropdownStyle = { maxWidth: 'max-content', minWidth: 'fit-content', transform: 'translateX(-50%)', left: '50%' };
 
   const handlePreview = (lang: string) => {
     setPreviewLang(lang);
@@ -120,25 +84,6 @@ export default function CVDownloadButton({ className, variant = "outline", compa
 
   return (
     <div className={`relative ${className}`} ref={dropdownRef}>
-      {/* Date display with most recent CV version */}
-      {showDateInfo && metadata && !compact && (
-        <div 
-          className={`absolute text-center text-xs -top-6 left-1/2 transform -translate-x-1/2 transition-opacity duration-1000 ${fadeOut ? 'opacity-0' : 'opacity-80'}`}
-          aria-hidden={fadeOut}
-          style={{ 
-            whiteSpace: 'nowrap',
-            backgroundColor: 'rgba(0,0,0,0.1)',
-            padding: '2px 8px',
-            borderRadius: '4px'
-          }}
-        >
-          {(() => {
-            const mostRecent = getMostRecentCV();
-            return `${formatDate(mostRecent.date, locale)} - ${mostRecent.label}`;
-          })()}
-        </div>
-      )}
-      
       <button
         ref={triggerRef}
         onClick={() => setIsOpen(!isOpen)}
@@ -155,47 +100,36 @@ export default function CVDownloadButton({ className, variant = "outline", compa
           className={`absolute mt-2 top-full rounded-xl z-10 overflow-hidden whitespace-nowrap ${styles.menu}`}
           style={dropdownStyle}
         >
-          <div className="flex flex-col w-full">
-            {cvOptions.map((option, index) => (
-              <div key={option.key}>
-                {/* CV option */}
-                <div className={`group overflow-hidden ${
-                  index === 0 ? 'rounded-t-xl' : 
-                  index === cvOptions.length - 1 ? 'rounded-b-xl' : ''
-                }`}>
-                  <div className={`flex items-center justify-center w-full ${
-                    theme === 'dark' 
-                      ? 'group-hover:bg-gray-700 group-hover:bg-opacity-50' 
-                      : 'group-hover:bg-gray-200 group-hover:bg-opacity-50'
-                  }`}>
-                    <a 
-                      href={option.file}
-                      download
-                      className="block px-4 py-3 text-sm text-center hover:opacity-80 flex-grow"
-                      style={{ color: "var(--foreground)" }}
-                      onClick={() => setIsOpen(false)}
-                    >
-                      {option.label}
-                    </a>
-                    {supportsPdfViewer && (
-                      <button 
-                        onClick={() => handlePreview(option.previewLang)}
-                        className="px-3 py-3 text-sm opacity-70 hover:opacity-100 transition-all duration-300"
-                        aria-label={`${t("cv.preview")} ${option.label}`}
-                      >
-                        <FaEye size={20} className="transform hover:scale-110 transition-transform duration-300" />
-                      </button>
-                    )}
-                  </div>
-                </div>
-                
-                {/* Separator line - only show between items, not after the last one */}
-                {index < cvOptions.length - 1 && (
-                  <div style={{ borderTop: `1px solid var(--secondary-hover)` }}></div>
+          <ul className={styles.items} role="menu">
+            {cvOptions.map((option) => (
+              <li key={option.key} className={styles.item} role="none">
+                <a
+                  href={option.file}
+                  download
+                  role="menuitem"
+                  className={styles.itemLink}
+                  onClick={() => setIsOpen(false)}
+                >
+                  {option.label}
+                </a>
+                {supportsPdfViewer && (
+                  <button
+                    type="button"
+                    className={styles.preview}
+                    onClick={() => handlePreview(option.previewLang)}
+                    aria-label={`${t("cv.preview")} ${option.label}`}
+                  >
+                    {t("documents.preview")}
+                  </button>
                 )}
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
+          {metadata && getMostRecentDate() && (
+            <p className={styles.updated}>
+              {t("cv.lastUpdated")}: {formatDate(getMostRecentDate() as Date, locale)}
+            </p>
+          )}
         </div>
       )}
       

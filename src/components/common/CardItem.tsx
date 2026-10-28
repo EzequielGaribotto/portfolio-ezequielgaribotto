@@ -47,6 +47,7 @@ const CardItem: React.FC<CardItemProps> = ({
   const columnFits = useMediaQuery("(min-width: 901px)");
   const showEverything = split && columnFits;
   const expanded = showAllTags || showEverything;
+
   // Hovering a tag whose concrete technologies are folded away opens the list, and it stays open
   const handleTagHover = (tag: string | null) => {
     setHoveredTag(tag);
@@ -90,7 +91,7 @@ const CardItem: React.FC<CardItemProps> = ({
       <div className={styles.description} style={{ textAlign: 'left', whiteSpace: 'pre-line' }}>
         {description}
       </div>
-      
+
       <div className={`${styles.technologies} ${hoveredTag ? styles.techFocus : ""}`}>
         {(expanded ? technologies : technologies.slice(0, TAG_LIMIT)).map((tech, index) => (
           <span

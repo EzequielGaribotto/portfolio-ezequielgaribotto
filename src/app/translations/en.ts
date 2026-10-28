@@ -59,6 +59,7 @@ export const en: Translations = {
     switchToEnglish: "Switch to English",
     githubRepo: "GitHub repository",
     projectImage: "Project image",
+    language: "Language",
   },
   footer: {
     disclaimer: "© 2026 Ezequiel Garibotto.",

@@ -5,7 +5,6 @@
   border: 1px solid var(--secondary-hover);
   display: flex;
   flex-direction: column;
-  height: 100%;
   width: 100%;
   max-width: 100%;
   min-width: 0;
@@ -33,10 +32,16 @@
   color: var(--project-title);
   text-align: left !important;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   word-wrap: break-word;
   overflow-wrap: break-word;
   max-width: 100%;
+}
+
+/* The icon keeps its size when the title wraps, and sits on the first line */
+.projectTitle > svg {
+  flex-shrink: 0;
+  margin-top: 0.3em; /* centers a 1em icon on a 1.6 line */
 }
 
 .projectDescription {

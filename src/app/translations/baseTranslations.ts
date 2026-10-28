@@ -60,6 +60,7 @@ export const baseTranslations = {
     switchToEnglish: "",
     githubRepo: "",
     projectImage: "",
+    language: "",
   },
   footer: {
     disclaimer: "",

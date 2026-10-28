@@ -1,6 +1,7 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect, useRef } from "react";
+import React, { createContext, useCallback, useContext, useMemo, useState, useEffect, useRef } from "react";
+import { flushSync } from "react-dom";
 import translations from "../app/translations";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { STORAGE_KEYS, LOCALE, THEME, ThemeType } from "../constants";
@@ -9,8 +10,6 @@ interface TranslationContextType {
   t: (key: string) => string;
   locale: string;
   changeLocale: (newLocale: string) => void;
-  theme: ThemeType;
-  changeTheme: (newTheme: ThemeType) => void;
   pageLoadTime: number | null;
   isHydrated: boolean;
 }
@@ -24,6 +23,14 @@ type TranslationsType = {
 };
 
 const TranslationContext = createContext<TranslationContextType | null>(null);
+
+// The theme has its own context: switching it re-renders only the few components that read it,
+// not every component that uses a translation.
+interface ThemeContextType {
+  theme: ThemeType;
+  changeTheme: (newTheme: ThemeType) => void;
+}
+const ThemeContext = createContext<ThemeContextType | null>(null);
 
 export const TranslationProvider = ({
   children,
@@ -81,25 +88,30 @@ export const TranslationProvider = ({
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
+  // One cross-fade of the whole page (a single compositor animation) instead of transitioning every element's colors;
+  // browsers without View Transitions, and visitors who asked for reduced motion, switch instantly.
   const changeTheme = (newTheme: ThemeType) => {
-    setTheme(newTheme);
-    if (typeof document !== 'undefined') {
-      const root = document.documentElement;
-      root.classList.add("theme-switching");
-      root.setAttribute("data-theme", newTheme);
-      window.setTimeout(() => root.classList.remove("theme-switching"), 300);
-    }
+    const apply = () => {
+      flushSync(() => setTheme(newTheme));
+      document.documentElement.setAttribute("data-theme", newTheme);
+    };
+    const canAnimate =
+      typeof document.startViewTransition === "function" &&
+      !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (canAnimate) document.startViewTransition(apply);
+    else apply();
   };
 
-  const changeLocale = (newLocale: string) => {
+  const changeLocale = useCallback((newLocale: string) => {
     setLocale(newLocale);
     if (typeof document !== 'undefined') {
       document.documentElement.setAttribute('lang', newLocale);
       document.documentElement.dataset.locale = newLocale;
     }
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  const t = (key: string) => {
+  const t = useCallback((key: string) => {
     try {
       const keys = key.split(".");
       let value: NestedTranslation = (translations as TranslationsType)[locale];
@@ -128,19 +140,18 @@ export const TranslationProvider = ({
       console.warn(`Error accessing translation for key: ${key}`, error);
       return key;
     }
-  };
+  }, [locale]);
+
+  const translationValue = useMemo(
+    () => ({ t, locale, changeLocale, pageLoadTime, isHydrated }),
+    [t, locale, changeLocale, pageLoadTime, isHydrated]
+  );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const themeValue = useMemo(() => ({ theme, changeTheme }), [theme]);
 
   return (
-    <TranslationContext.Provider value={{ 
-      t, 
-      locale, 
-      changeLocale, 
-      theme, 
-      changeTheme, 
-      pageLoadTime, 
-      isHydrated 
-    }}>
-      {children}
+    <TranslationContext.Provider value={translationValue}>
+      <ThemeContext.Provider value={themeValue}>{children}</ThemeContext.Provider>
     </TranslationContext.Provider>
   );
 };
@@ -149,6 +160,14 @@ export const useTranslation = () => {
   const context = useContext(TranslationContext);
   if (!context) {
     throw new Error("useTranslation must be used within a TranslationProvider");
+  }
+  return context;
+};
+
+export const useTheme = () => {
+  const context = useContext(ThemeContext);
+  if (!context) {
+    throw new Error("useTheme must be used within a TranslationProvider");
   }
   return context;
 };
