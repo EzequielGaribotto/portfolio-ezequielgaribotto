@@ -54,7 +54,60 @@ export const es: Translations = {
     downloadInstead: "Descargar en su lugar",
     lastUpdated: "Última actualización"
   },
+  tagHints: {
+    appliedAI: "Applied AI: IA dentro de un producto. Mi responsabilidad termina en la interfaz que usa el cliente final, no en el modelo en sí. Incluye diseñar flujos de trabajo agénticos que encadenan llamadas a LLM para automatizar una tarea.",
+    aiEngineering: "AI Engineering: un rol más amplio que, en algunas empresas, roza la infraestructura (MLOps) o incluso el ajuste fino de modelos.",
+    agenticAI: "Agentic AI: la responsabilidad llega hasta el runtime del agente: su fiabilidad, la evaluación de su comportamiento y su escalabilidad (frameworks de agentes, arquitecturas planner-executor, orquestación multiagente, estado multi-turno).",
+    agenticDevelopment: "Agentic Development: usar agentes de IA (planner, subagentes, skills, servidores MCP) para construir software. Es parte de Applied AI y del desarrollo asistido por IA; no es lo mismo que construir sistemas de agentes (Agentic AI).",
+    dataEngineering: "Data Engineering: mi responsabilidad termina en un conjunto de datos limpio y fiable: ingesta, parseo, controles de calidad y programación de tareas.",
+  },
+  techHints: {
+    inProject: "Usado en este proyecto:",
+    inProgram: "Usado en este programa:",
+    acrossProjects: "Usado en mis proyectos:",
+  },
+  tagExamples: {
+    appliedAI: "Ejemplos:\n• Facts: resúmenes de noticias neutrales generados con LLM dentro de una app Android\n• Chatbot de carrito de compra con LangGraph: reconocimiento de intención, estado de la conversación y validación",
+    aiEngineering: "Ejemplos:\n• AI & Big Data: CNNs con Keras y PyTorch\n• Modelos de precios de vivienda (Random Forest, XGBoost, grid search) servidos con una API Flask\n• Facts: pipeline de embeddings y clustering semántico sobre más de 10 feeds de noticias",
+    agenticAI: "Ejemplos:\n• Ninguno construido todavía\n• Planificado para ProString: los reportes de bug críticos disparan un arreglo propuesto por un LLM que reviso y apruebo, y las incidencias, emails y feedback se envían a la persona o grupo adecuado",
+    agenticDevelopment: "Ejemplos:\n• ProString: agent harness propio con subagentes, skills, hooks y memoria persistente\n• 7 servidores MCP con acceso de mínimo privilegio (Supabase, GitHub, Stripe, Context7, Chrome DevTools, Hostinger, Laravel Boost)\n• Informes de coste de tokens por cada puerta de release\n• Análisis de competencia asistido por LLM que alimenta la hoja de ruta",
+    dataEngineering: "Ejemplos:\n• Facts: scraping de más de 10 feeds RSS y un pipeline ETL con parseo XML\n• ProString: ingesta semanal de datasets públicos con pg_cron y Edge Functions\n• ProString: pipeline de importación con detección de columnas, de-duplicación de catálogo y puntuación de confianza",
+  },
+  projectTagHints: {
+    "prostring": {
+      appliedAI: "En este proyecto:\n• En curso: asistente de ayuda con RAG\n• En curso: importación de datos y analíticas asistidas por LLM",
+      agenticAI: "En este proyecto:\n• Planificado: los reportes de bug críticos disparan un arreglo propuesto por un LLM que reviso y apruebo\n• Planificado: incidencias, emails y feedback enviados a la persona o grupo adecuado",
+      agenticDevelopment: "En este proyecto:\n• Agent harness propio: subagentes, skills, hooks y memoria persistente\n• 7 servidores MCP con acceso de mínimo privilegio (Supabase, GitHub, Stripe, Context7, Chrome DevTools, Hostinger, Laravel Boost)\n• Informes de coste de tokens por cada puerta de release\n• Análisis de competencia asistido por LLM que alimenta la hoja de ruta",
+      dataEngineering: "En este proyecto:\n• Ingesta semanal de datasets públicos con pg_cron y Edge Functions\n• Pipeline de importación: detección de columnas, de-duplicación de catálogo y puntuación de confianza\n• En curso: pipelines en Python que agregan datos públicos de tenis (rankings, raquetas, marcas, modelos)",
+    },
+    "neutral-news": {
+      appliedAI: "En este proyecto:\n• Resúmenes de noticias neutrales generados con LLM dentro de la app Android",
+      aiEngineering: "En este proyecto:\n• Embeddings y clustering semántico de noticias de más de 10 feeds RSS",
+      dataEngineering: "En este proyecto:\n• Scraping de más de 10 feeds RSS\n• Pipeline ETL con parseo XML",
+    },
+    "ia-bigdata": {
+      aiEngineering: "En este proyecto:\n• CNNs con Keras y PyTorch\n• Modelos de precios de vivienda (Random Forest, XGBoost, grid search) servidos con una API Flask\n• En curso: proyecto final de regresión y clustering sobre datos de e-commerce",
+    },
+    "shoppingcart-chatbot": {
+      appliedAI: "En este proyecto:\n• Chatbot con LangGraph y flujo de compra completo: reconocimiento de intención, estado de la conversación, validación y pruebas automáticas",
+    },
+    "linkia": {
+      aiEngineering: "En este programa:\n• CNNs con Keras y PyTorch\n• Modelos de precios de vivienda (Random Forest, XGBoost, grid search) servidos con una API Flask\n• En curso: proyecto final de regresión y clustering sobre datos de e-commerce",
+    },
+  },
+  tags: {
+    showMore: "+{count} más",
+    showLess: "Ver menos",
+  },
+  documents: {
+    preview: "Previsualizar",
+    download: "Descargar",
+    close: "Cerrar",
+    pages: "{count} págs.",
+  },
   search: {
+    scopeLabel: "Alcance",
+    techLabel: "Tecnología",
     placeholder: "Buscar proyectos por título, descripción o tecnología...",
     clearFilters: "Limpiar filtros",
     noResults: "No se encontraron proyectos que coincidan con tus criterios",
@@ -175,6 +228,12 @@ export const es: Translations = {
       footer: "Proyecto de Aprendizaje",
       startDate: "diciembre 2025",
       endDate: "diciembre 2026",
+      docs: {
+        ames: "Ames Housing: informe de predicción de precios de vivienda (PDF)",
+        keras: "CNN con Keras/TensorFlow: informe del ejercicio (PDF)",
+        pytorch: "CNN con PyTorch: informe del ejercicio (PDF)",
+        sklearn: "Perceptrón multicapa con scikit-learn: informe del ejercicio (PDF)",
+      },
     },
     prostring: {
       title: "ProString Manage - SaaS de Gestión de Talleres de Encordado y Torneos",
@@ -283,7 +342,7 @@ export const es: Translations = {
   },
   aboutMeSection: {
     title: "Sobre mí",
-    personalInfo: "Enfocado en ingeniería de software con IA aplicada, flujos de trabajo agénticos y AI engineering. Mi stack principal es Python, TypeScript, Vue, Supabase y APIs de LLM. Soy el desarrollador en solitario de ProString Manage, una plataforma SaaS multi-tenant en producción para talleres de encordado y gestión de torneos, construida con un agent harness propio. Representé a mi instituto en las finales nacionales de ProgramaMe 2024 y 2025, logrando el 4º puesto. Cursando una Especialización en IA y Big Data mientras codesarrollo Facts: News AI Summary, una solución Android + Python con pipeline ETL completo para generación de noticias neutrales — actualmente en pausa pero con planes de continuarlo.",
+    personalInfo: "Enfocado en ingeniería de software con IA aplicada y desarrollo agéntico. Mi stack principal es Python, TypeScript, Vue, Supabase y APIs de LLM. Soy el desarrollador en solitario de ProString Manage, una plataforma SaaS multi-tenant en producción para talleres de encordado y gestión de torneos, construida con un agent harness propio. Representé a mi instituto en las finales nacionales de ProgramaMe 2024 y 2025, logrando el 4º puesto. Cursando una Especialización en IA y Big Data mientras codesarrollo Facts: News AI Summary, una solución Android + Python con pipeline ETL completo para generación de noticias neutrales — actualmente en pausa pero con planes de continuarlo.",
     lifestyleInfo: "Y la segunda mejor decisión fue empezar a entrenar. Disfruto mantenerme activo y saludable, llevando un estilo de vida equilibrado.",
     musicInfo: "Escucho principalmente metal, rock, rap español, rock nacional (argentino). Y solía escuchar mucha música electrónica, ahora esa música me da nostalgia.",
     hobbiesInfo: "En cuanto a otros hobbies, solía jugar mucho Minecraft, pero no construir, ni hacer mecanismos de redstone, como muchos programadores que conozco, a mi me gustaba jugar el PvP competitivo de la 1.7.10. Pero soy una persona normal, lo juro, también disfruto de las experiencias inmersivas de un solo jugador que ofrecen narrativas ricas y exploración de mundo abierto como la saga de The Elder Scrolls, Red Dead Redemption, Spore, Atomic Heart, por mencionar algunos.",

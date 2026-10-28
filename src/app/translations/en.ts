@@ -54,7 +54,60 @@ export const en: Translations = {
     downloadInstead: "Download Instead",
     lastUpdated: "Last updated"
   },
+  tagHints: {
+    appliedAI: "Applied AI: AI inside a product. My responsibility ends at the interface the end user touches, not at the model itself. It includes designing agentic workflows that chain LLM calls to automate a task.",
+    aiEngineering: "AI Engineering: a broader scope that, in some companies, reaches infrastructure (MLOps) or even model fine-tuning.",
+    agenticAI: "Agentic AI: the scope extends into the agent's runtime: reliability, behavior evaluation and scalability (agent frameworks, planner-executor architectures, multi-agent orchestration, multi-turn state).",
+    agenticDevelopment: "Agentic Development: using AI agents (planner, subagents, skills, MCP servers) to build software. It is part of Applied AI and AI-assisted development; it is not the same as building agent systems (Agentic AI).",
+    dataEngineering: "Data Engineering: my responsibility ends at a clean, reliable dataset: ingestion, parsing, quality checks and scheduling.",
+  },
+  techHints: {
+    inProject: "Used in this project:",
+    inProgram: "Used in this program:",
+    acrossProjects: "Used across my projects:",
+  },
+  tagExamples: {
+    appliedAI: "Examples:\n• Facts: LLM-generated neutral news summaries inside an Android app\n• Shopping-cart chatbot with LangGraph: intent recognition, conversation state and validation",
+    aiEngineering: "Examples:\n• AI & Big Data: CNNs with Keras and PyTorch\n• House-price models (Random Forest, XGBoost, grid search) served through a Flask API\n• Facts: embeddings and semantic clustering pipeline over 10+ news feeds",
+    agenticAI: "Examples:\n• None built yet\n• Planned for ProString: critical bug reports trigger an LLM-proposed fix that I review and approve, and incidents, emails and feedback get routed to the right person or group",
+    agenticDevelopment: "Examples:\n• ProString: custom agent harness with subagents, skills, hooks and persistent memory\n• 7 MCP servers under least-privilege access (Supabase, GitHub, Stripe, Context7, Chrome DevTools, Hostinger, Laravel Boost)\n• Token-cost reporting per release gate\n• LLM-assisted competitor analysis that feeds the roadmap",
+    dataEngineering: "Examples:\n• Facts: scraping of 10+ RSS feeds and an ETL pipeline with XML parsing\n• ProString: weekly ingestion of public datasets with pg_cron and Edge Functions\n• ProString: import pipeline with column auto-detection, catalog deduplication and confidence scoring",
+  },
+  projectTagHints: {
+    "prostring": {
+      appliedAI: "In this project:\n• In progress: RAG help assistant\n• In progress: LLM-assisted data import and analytics",
+      agenticAI: "In this project:\n• Planned: critical bug reports trigger an LLM-proposed fix that I review and approve\n• Planned: incidents, emails and feedback routed to the right person or group",
+      agenticDevelopment: "In this project:\n• Custom agent harness: subagents, skills, hooks and persistent memory\n• 7 MCP servers under least-privilege access (Supabase, GitHub, Stripe, Context7, Chrome DevTools, Hostinger, Laravel Boost)\n• Token-cost reporting per release gate\n• LLM-assisted competitor analysis that feeds the roadmap",
+      dataEngineering: "In this project:\n• Weekly ingestion of public datasets with pg_cron and Edge Functions\n• Import pipeline: column auto-detection, catalog deduplication and confidence scoring\n• In progress: Python pipelines aggregating public tennis data (rankings, racquets, brands, models)",
+    },
+    "neutral-news": {
+      appliedAI: "In this project:\n• LLM-generated neutral news summaries inside the Android app",
+      aiEngineering: "In this project:\n• Embeddings and semantic clustering of news from 10+ RSS feeds",
+      dataEngineering: "In this project:\n• Scraping of 10+ RSS feeds\n• ETL pipeline with XML parsing",
+    },
+    "ia-bigdata": {
+      aiEngineering: "In this project:\n• CNNs with Keras and PyTorch\n• House-price models (Random Forest, XGBoost, grid search) served through a Flask API\n• In progress: capstone with regression and clustering on e-commerce data",
+    },
+    "shoppingcart-chatbot": {
+      appliedAI: "In this project:\n• LangGraph chatbot with a full purchase flow: intent recognition, conversation state, validation and automated tests",
+    },
+    "linkia": {
+      aiEngineering: "In this program:\n• CNNs with Keras and PyTorch\n• House-price models (Random Forest, XGBoost, grid search) served through a Flask API\n• In progress: capstone with regression and clustering on e-commerce data",
+    },
+  },
+  tags: {
+    showMore: "+{count} more",
+    showLess: "Show less",
+  },
+  documents: {
+    preview: "Preview",
+    download: "Download",
+    close: "Close",
+    pages: "{count} pp",
+  },
   search: {
+    scopeLabel: "Scope",
+    techLabel: "Technology",
     placeholder: "Search projects by title, description, or technology...",
     clearFilters: "Clear filters",
     noResults: "No projects found matching your criteria",
@@ -175,6 +228,12 @@ export const en: Translations = {
       footer: "Learning Project",
       startDate: "December 2025",
       endDate: "December 2026",
+      docs: {
+        ames: "Ames Housing: house-price prediction report (PDF, in Spanish)",
+        keras: "CNN with Keras/TensorFlow: exercise report (PDF, in Spanish)",
+        pytorch: "CNN with PyTorch: exercise report (PDF, in Spanish)",
+        sklearn: "Multilayer perceptron with scikit-learn: exercise report (PDF, in Spanish)",
+      },
     },
     prostring: {
       title: "ProString Manage - SaaS for Stringing Workshop & Tournament Management",
@@ -284,7 +343,7 @@ export const en: Translations = {
   },
   aboutMeSection: {
     title: "About Me",
-    personalInfo: "Focused on applied AI software engineering, agentic workflows and AI engineering. My core stack is Python, TypeScript, Vue, Supabase and LLM APIs. I am the solo developer of ProString Manage, a production multi-tenant SaaS platform for racket stringing workshops and tournament management, built with a custom agent harness. I represented my institute in the national ProgramaMe 2024 and 2025 finals, achieving 4th place. Pursuing a Specialization in AI and Big Data while also co-developing Facts: News AI Summary, an Android + Python solution with an end-to-end ETL pipeline for neutral news generation — currently paused but planned to continue.",
+    personalInfo: "Focused on applied AI software engineering and agentic development. My core stack is Python, TypeScript, Vue, Supabase and LLM APIs. I am the solo developer of ProString Manage, a production multi-tenant SaaS platform for racket stringing workshops and tournament management, built with a custom agent harness. I represented my institute in the national ProgramaMe 2024 and 2025 finals, achieving 4th place. Pursuing a Specialization in AI and Big Data while also co-developing Facts: News AI Summary, an Android + Python solution with an end-to-end ETL pipeline for neutral news generation — currently paused but planned to continue.",
     lifestyleInfo: "And the second best decision was starting to train. I enjoy staying active and healthy, maintaining a balanced lifestyle.",
     musicInfo: "I mostly listen to metal, rock, Spanish rap, national rock (Argentinean). I used to listen to electronic music a lot, now that music gives me nostalgia.",
     hobbiesInfo: "As for other hobbies, I used to play Minecraft a lot, but not building or making redstone mechanisms like many programmers I know. I enjoyed the competitive PvP of version 1.7.10. But I'm a normal person, I swear, I also enjoy immersive single-player experiences that offer rich narratives and open-world exploration like The Elder Scrolls saga, Red Dead Redemption, Spore, Atomic Heart, to mention a few.",

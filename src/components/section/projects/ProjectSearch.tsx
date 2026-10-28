@@ -4,25 +4,35 @@ import { useState, useEffect } from "react";
 import { FaSearch, FaTimes } from "react-icons/fa";
 import { useTranslation } from "../../../context/TranslationContext";
 import styles from "./ProjectSearch.module.css";
+import TagHint from "../../common/TagHint";
 
 interface ProjectSearchProps {
   onSearchChange: (searchTerm: string) => void;
   onKeywordsChange: (keywords: string[]) => void;
   selectedKeywords: string[];
+  projectTags: string[];
+  onChipHover?: (tag: string | null) => void;
 }
 
 export default function ProjectSearch({ 
   onSearchChange, 
   onKeywordsChange, 
-  selectedKeywords 
+  selectedKeywords,
+  projectTags,
+  onChipHover
 }: ProjectSearchProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const { t } = useTranslation();
 
-  // Hardcoded list of keywords - sorted by priority and categories
-  const availableKeywords = [
+  // Hardcoded keyword filters: what the work covers (scope) and the tools used (technology)
+  const scopeKeywords = [
     "Applied AI",
     "AI Engineering",
+    "Agentic Development",
+    "Agentic AI",
+    "Data Engineering",
+  ];
+  const techKeywords = [
     "Machine Learning",
     "Python",
     "Back-end",
@@ -87,19 +97,28 @@ export default function ProjectSearch({
 
       {/* Keyword Tags */}
       <div className={styles.keywordsContainer}>
-        <div className={styles.keywordTags}>
-          {availableKeywords.map((keyword) => (
-            <button
-              key={keyword}
-              onClick={() => handleKeywordToggle(keyword)}
-              className={`${styles.keywordTag} ${
-                selectedKeywords.includes(keyword) ? styles.selected : ""
-              }`}
-            >
-              {keyword}
-            </button>
-          ))}
-        </div>
+        {[
+          { label: t("search.scopeLabel"), keywords: scopeKeywords, scope: true },
+          { label: t("search.techLabel"), keywords: techKeywords, scope: false },
+        ].map((group) => (
+          <div key={group.label} className={styles.keywordGroup}>
+            <span className={styles.groupLabel}>{group.label}</span>
+            <div className={styles.keywordTags}>
+              {group.keywords.map((keyword) => (
+                <TagHint key={keyword} tag={keyword} pool={projectTags} onHoverChange={onChipHover}>
+                  <button
+                    onClick={() => handleKeywordToggle(keyword)}
+                    className={`${styles.keywordTag} ${group.scope ? styles.scopeTag : ""} ${
+                      selectedKeywords.includes(keyword) ? styles.selected : ""
+                    }`}
+                  >
+                    {keyword}
+                  </button>
+                </TagHint>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

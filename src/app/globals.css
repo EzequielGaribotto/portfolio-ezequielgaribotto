@@ -39,6 +39,11 @@
   --tech-text: #1a1a1a;
   --tech-hover-bg: #d1e2f5;
   --tech-hover-border: #0070f3;
+  /* Highlight of related tags: app blue on light backgrounds (gold in dark mode) */
+  --tag-hl-bg: rgba(31, 98, 160, 0.24);
+  --tag-hl-border: #1f62a0;
+  --tag-hl-text: #000000;
+  --tag-hl-glow: rgba(31, 98, 160, 0.4);
   
   /* Section padding variables */
   --section-padding-horizontal: 2rem;
@@ -74,6 +79,10 @@
     --tech-text: #f5f5f5;
     --tech-hover-bg: rgba(202, 165, 80, 0.25);
     --tech-hover-border: rgba(221, 185, 104, 0.8);
+  --tag-hl-bg: rgba(202, 165, 80, 0.45);
+  --tag-hl-border: #ddb968;
+  --tag-hl-text: #ffffff;
+  --tag-hl-glow: rgba(221, 185, 104, 0.5);
   }
   
   html:not([data-theme]) {
@@ -108,6 +117,10 @@
   --tech-text: #f5f5f5;
   --tech-hover-bg: rgba(202, 165, 80, 0.25);
   --tech-hover-border: rgba(221, 185, 104, 0.8);
+  --tag-hl-bg: rgba(202, 165, 80, 0.45);
+  --tag-hl-border: #ddb968;
+  --tag-hl-text: #ffffff;
+  --tag-hl-glow: rgba(221, 185, 104, 0.5);
 }
 
 [data-theme="light"] {

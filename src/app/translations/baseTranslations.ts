@@ -54,8 +54,45 @@ export const baseTranslations = {
     downloadInstead: "", // New translation key
     lastUpdated: "", // Add missing lastUpdated key to fix TypeScript error
   },
+  // Hover explanations for scope tags
+  tagHints: {
+    appliedAI: "",
+    aiEngineering: "",
+    agenticAI: "",
+    agenticDevelopment: "",
+    dataEngineering: "",
+  },
+  // Hover on a generic technology tag: the concrete technologies used under it
+  techHints: {
+    inProject: "",
+    inProgram: "",
+    acrossProjects: "",
+  },
+  tagExamples: {
+    appliedAI: "",
+    aiEngineering: "",
+    agenticAI: "",
+    agenticDevelopment: "",
+    dataEngineering: "",
+  },
+  // Per-project examples (shown when hovering a tag inside that project's card)
+  projectTagHints: {} as Record<string, Record<string, string>>,
+  // Collapsible tag lists on cards
+  tags: {
+    showMore: "",
+    showLess: "",
+  },
+  // Project documents (PDF preview / download)
+  documents: {
+    preview: "",
+    download: "",
+    close: "",
+    pages: "",
+  },
   // Search functionality translations
   search: {
+    scopeLabel: "",
+    techLabel: "",
     placeholder: "",
     clearFilters: "",
     noResults: "",
@@ -173,6 +210,7 @@ export const baseTranslations = {
       footer: string;
       startDate: string;
       endDate?: string | null;
+      docs?: { ames: string; keras: string; pytorch: string; sklearn: string };
     },
     prostring: {} as {
       title: string;

@@ -1,20 +1,22 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import LazyProjectCard from "./card/LazyProjectCard";
 import ProjectSearch from "./ProjectSearch";
 import SearchResults from "./SearchResults";
 import { useTranslation } from "../../../context/TranslationContext";
 import { useProjectSearch } from "../../../hooks/useProjectSearch";
 import { Project } from "../../../models/Project";
+import { descendants } from "../../../constants/techTaxonomy";
 import styles from './ProjectsSection.module.css';
 import Section from "../Section";
 
 export default function ProjectsSection() {
   const { t } = useTranslation();
   const sectionRef = useRef<HTMLDivElement>(null);
+  const [chipHover, setChipHover] = useState<string | null>(null);
 
   const eulixTech = ["Android", "Kotlin", "UI", "UX", "Retrofit", "DataBinding", "MVVM", "XML", "Kotlin DSL", "LiveData", "Git", "Agile", "RESTful API", "International Team"];
-  const neutralNewsTech = ["Applied AI", "AI Engineering", "Python", "LLM", "Generative AI", "Machine Learning", "Embeddings", "Clustering", "NLP", "ETL", "Scraping", "Crawling", "Parsing", "Pandas", "NumPy", "BeautifulSoup", "Back-end", "Google Cloud Platform", "Docker", "Firebase", "NoSQL", "Front-end", "UI", "UX", "Google Colab", "Jupyter Notebooks", "Android", "Kotlin", "Hilt", "Dagger", "Room", "DAO", "Datastore"];
+  const neutralNewsTech = ["Applied AI", "AI Engineering", "Data Engineering", "Python", "Pandas", "NumPy", "BeautifulSoup", "LLM", "Generative AI", "Machine Learning", "Embeddings", "Clustering", "NLP", "ETL", "Scraping", "Crawling", "Parsing", "Back-end", "Google Cloud Platform", "Docker", "Firebase", "NoSQL", "Front-end", "UI", "UX", "Google Colab", "Jupyter Notebooks", "Android", "Kotlin", "Hilt", "Dagger", "Room", "DAO", "Datastore"];
   const compTech = ["Java", "Algorithms", "Data Structures", "Problem Solving"];
   const apiListTech = ["Android", "Java", "UX", "Caching", "Coroutines", "Android SDK"];
   const zombTech = ["Game Development", "UX", "Python", "MakeCode Arcade", "Collision Detection", "Retro Gaming"];
@@ -23,11 +25,11 @@ export default function ProjectsSection() {
   const portfolioTech = ["Front-end", "UI", "UX", "React", "Next.js", "TypeScript", "TailwindCSS", "Portfolio", "Node.js", "Web Development", "Responsive Design", "Theme Switching", "Multi-language"];
   const peleaDeGallosTech = ["Back-end", "Front-end", "Kotlin", "Ktor", "UI", "UX", "Client-server Communication", "File processing", "Data access", "NoSQL", "MongoDB"];
   const hackerNewsAPITech = ["Back-end", "Python", "FastAPI", "Web Scraping", "API", "Docker", "TDD", "Caching", "Data Processing"];
-  const barcelonaInequalityTech = ["Python", "Machine Learning", "Classification", "Statistical Analysis", "Data Processing", "Data Visualization", "Pandas", "NumPy", "Google Colab", "Jupyter Notebooks", "Socioeconomic Analysis", "Back-end"];
+  const barcelonaInequalityTech = ["Python", "Machine Learning", "Exploratory Data Analysis (EDA)", "Classification", "Statistical Analysis", "Data Processing", "Data Visualization", "Pandas", "NumPy", "Google Colab", "Jupyter Notebooks", "Socioeconomic Analysis"];
   const ctennisstudioTech = ["Front-end", "React", "Next.js", "TypeScript", "TailwindCSS", "Vercel", "UI", "UX", "Responsive Design", "SEO", "Web Development", "Professional Services"];
-  const shoppingCartChatbotTech = ["Applied AI", "AI Engineering", "Python", "LLM", "LangGraph", "LangChain", "Conversational AI", "Chatbot", "NLP", "AI Integration", "Pydantic", "Pytest", "Back-end"];
-  const iaBigDataTech = ["Applied AI", "AI Engineering", "Machine Learning", "Deep Learning", "Python", "Neural Networks", "Computer Vision", "Keras", "TensorFlow", "PyTorch", "scikit-learn", "XGBoost", "Random Forest", "Gradient Boosting", "Hyperparameter Tuning", "K-Means", "KNN", "Clustering", "Regression", "Predictive Modeling", "Flask", "Pandas", "Polars", "PySpark", "MongoDB", "Big Data", "Data Processing", "Data Visualization", "Data Science", "Jupyter Notebooks"];
-  const proStringTech = ["Applied AI", "AI Engineering", "Agentic Development", "Agent Harness", "MCP", "Claude Code", "Subagents", "Vue 3", "TypeScript", "Back-end", "Front-end", "Supabase", "PostgreSQL", "PL/pgSQL", "Edge Functions", "Deno", "Serverless", "RPC", "Row Level Security", "RBAC", "MFA", "Multi-tenant", "SaaS", "Stripe", "Invoicing", "pg_cron", "Realtime", "Pinia", "Vite", "Playwright", "Vitest", "GitHub Actions", "CI/CD", "Zod", "ECharts", "ESC/POS", "QZ Tray", "i18n", "UX", "UI", "CSS", "SQL", "Data Processing", "Git"];
+  const shoppingCartChatbotTech = ["Applied AI", "Python", "LLM", "LangGraph", "LangChain", "Conversational AI", "Chatbot", "NLP", "AI Integration", "Pydantic", "Pytest"];
+  const iaBigDataTech = ["AI Engineering", "Machine Learning", "Deep Learning", "Exploratory Data Analysis (EDA)", "Python", "scikit-learn", "XGBoost", "Random Forest", "Gradient Boosting", "Keras", "TensorFlow", "PyTorch", "Neural Networks", "Computer Vision", "Hyperparameter Tuning", "K-Means", "KNN", "Clustering", "Regression", "Predictive Modeling", "Flask", "Pandas", "Polars", "PySpark", "MongoDB", "Big Data", "Data Processing", "Data Visualization", "Data Science", "Jupyter Notebooks"];
+  const proStringTech = ["Applied AI", "Agentic AI", "Agentic Development", "Data Engineering", "Agent Harness", "MCP", "Claude Code", "Subagents", "Vue 3", "TypeScript", "Back-end", "Front-end", "Supabase", "PostgreSQL", "PL/pgSQL", "Edge Functions", "Deno", "Serverless", "RPC", "Row Level Security", "RBAC", "MFA", "Multi-tenant", "SaaS", "Stripe", "Invoicing", "pg_cron", "Realtime", "Pinia", "Vite", "Playwright", "Vitest", "GitHub Actions", "CI/CD", "Zod", "ECharts", "ESC/POS", "QZ Tray", "i18n", "UX", "UI", "CSS", "SQL", "Data Processing", "Git"];
 
   const projects: Project[] = [
     {
@@ -70,10 +72,16 @@ export default function ProjectsSection() {
       description: t("projects.iaBigData.description"),
       footer: t("projects.iaBigData.footer"),
       startDate: t("projects.iaBigData.startDate"),
-      endDate: t("projects.iaBigData.endDate"),
+      endDate: null,
       image: "/images/projects/ia-bigdata.webp",
       technologies: iaBigDataTech,
       repoLink: "https://github.com/EzequielGaribotto/IA-BigData",
+      documents: [
+        { id: "ames", label: t("projects.iaBigData.docs.ames"), file: "/docs/ia-bigdata/ames-housing-price-prediction.pdf", pages: 34, technologies: ["Python", "Machine Learning", "scikit-learn", "XGBoost", "Random Forest", "Gradient Boosting", "Hyperparameter Tuning", "Regression", "Predictive Modeling", "Flask", "Pandas", "Data Visualization"] },
+        { id: "keras", label: t("projects.iaBigData.docs.keras"), file: "/docs/ia-bigdata/cnn-keras-tensorflow.pdf", pages: 23, technologies: ["Python", "Deep Learning", "Neural Networks", "Computer Vision", "Keras", "TensorFlow", "Data Visualization"] },
+        { id: "pytorch", label: t("projects.iaBigData.docs.pytorch"), file: "/docs/ia-bigdata/cnn-pytorch.pdf", pages: 18, technologies: ["Python", "Deep Learning", "Neural Networks", "Computer Vision", "PyTorch", "Data Visualization"] },
+        { id: "sklearn", label: t("projects.iaBigData.docs.sklearn"), file: "/docs/ia-bigdata/mlp-scikit-learn.pdf", pages: 5, technologies: ["Python", "Machine Learning", "Neural Networks", "scikit-learn"] },
+      ],
       weight: 1
     },
     {
@@ -226,6 +234,9 @@ export default function ProjectsSection() {
 
   ];
 
+  // Every tag used by any project: lets the filter chips list the concrete technologies behind a generic one
+  const allTags = Array.from(new Set(projects.flatMap((p) => p.technologies ?? [])));
+
   const {
     searchTerm,
     setSearchTerm,
@@ -253,6 +264,8 @@ export default function ProjectsSection() {
           onSearchChange={setSearchTerm}
           onKeywordsChange={setSelectedKeywords}
           selectedKeywords={selectedKeywords}
+          projectTags={allTags}
+          onChipHover={setChipHover}
         />
 
         {/* Results Counter */}
@@ -268,7 +281,11 @@ export default function ProjectsSection() {
         <div className={styles.masonryGrid}>
           {filteredProjects.map((project) => (
             <div key={project.id} className={styles.masonryItem}>
-              <LazyProjectCard project={project} searchTerm={searchTerm} />
+              <LazyProjectCard
+                project={project}
+                searchTerm={searchTerm}
+                highlightTags={chipHover ? Array.from(descendants(chipHover)) : undefined}
+              />
             </div>
           ))}
         </div>

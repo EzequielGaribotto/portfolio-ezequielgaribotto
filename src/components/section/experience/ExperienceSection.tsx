@@ -22,8 +22,9 @@ const ExperienceSection: React.FC = () => {
       description: t("experiences.prostring.description"),
       technologies: [
         "Applied AI",
-        "AI Engineering",
+        "Agentic AI",
         "Agentic Development",
+        "Data Engineering",
         "Agent Harness",
         "MCP",
         "Claude Code",

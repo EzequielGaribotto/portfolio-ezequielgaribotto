@@ -1,0 +1,77 @@
+.root {
+  position: relative;
+  display: inline-block;
+}
+
+.docButton {
+  width: auto !important;
+  min-width: 40px;
+  height: 40px !important;
+  padding: 0 0.7rem !important;
+  gap: 0.35rem;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.pages {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.docTooltip {
+  font-family: "Times New Roman", Times, serif !important;
+  font-size: 0.9rem !important;
+  font-weight: 700 !important;
+  white-space: normal !important;
+  width: max-content;
+  max-width: min(22rem, 85vw);
+  text-align: center;
+}
+
+/* Fully opaque black bubble and arrow */
+.docTooltip {
+  background-color: #000 !important;
+}
+
+.docTooltip::after {
+  border-color: transparent transparent #000 transparent !important;
+}
+
+.menu {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  min-width: 11rem;
+  display: flex;
+  flex-direction: column;
+  background: #1f2937;
+  border: 1px solid #4b5563;
+  border-radius: 0.5rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  z-index: 60;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 0.9rem;
+  color: #f5f5f5;
+  background: transparent;
+  border: none;
+  font-size: 0.875rem;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.menuItem:hover,
+.menuItem:focus-visible {
+  background: rgba(255, 255, 255, 0.1);
+}

@@ -8,9 +8,10 @@ import styles from "./LazyProjectCard.module.css";
 interface LazyProjectCardProps {
   project: Project;
   searchTerm?: string;
+  highlightTags?: string[];
 }
 
-export default function LazyProjectCard({ project, searchTerm }: LazyProjectCardProps) {
+export default function LazyProjectCard({ project, searchTerm, highlightTags }: LazyProjectCardProps) {
   const [isVisible, setIsVisible] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -42,7 +43,7 @@ export default function LazyProjectCard({ project, searchTerm }: LazyProjectCard
       style={{ minHeight: "500px" }}
     >
       {isVisible ? (
-        <ProjectCard project={project} searchTerm={searchTerm} />
+        <ProjectCard project={project} searchTerm={searchTerm} externalHighlight={highlightTags} />
       ) : (
         <div className={styles.placeholder}>
           <div className={styles.placeholderTitle}></div>

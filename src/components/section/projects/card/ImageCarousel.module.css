@@ -2,8 +2,7 @@
   position: relative;
   overflow: hidden;
   border-radius: 0.5rem;
-  height: auto;
-  max-height: 350px;
+  height: 350px;
   user-select: none;
 }
 
@@ -133,15 +132,41 @@
 }
 
 .imageSlide {
+  position: relative;
   flex: 0 0 100%;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 
-.imageSlide img {
-  width: 100%;
-  height: 100%;
+/* Blurred, darkened copy of the image behind the sharp one */
+.imageSlide img.slideBackdrop {
+  position: absolute;
+  top: -24px;
+  left: -24px;
+  width: calc(100% + 48px) !important;
+  height: calc(100% + 48px) !important;
+  max-width: none;
   object-fit: cover;
+  filter: blur(22px) brightness(0.7) saturate(1.2);
+  pointer-events: none;
+  cursor: default;
+}
+
+/* The wrapper div rendered by OptimizedImage: centre the sharp image over the backdrop */
+.imageSlide > div:not(:first-child) {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imageSlide > div img {
+  width: auto !important;
+  height: 100% !important;
+  max-width: 100%;
+  object-fit: contain;
   object-position: center;
   display: block;
   cursor: pointer;

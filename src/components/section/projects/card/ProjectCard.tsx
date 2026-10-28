@@ -9,18 +9,29 @@ import ClickableButton from "../../../button/ClickableButton";
 import OptimizedImage from '../../../OptimizedImage';
 import ImageCarousel from './ImageCarousel';
 import { HighlightText } from '../../../../utils/highlightText';
+import TagHint from '../../../common/TagHint';
+import DocumentButton from '../../../button/DocumentButton';
+import { descendants, orderTags } from '../../../../constants/techTaxonomy';
+
+const TAG_LIMIT = 12;
+const NO_TAGS: string[] = [];
 import styles from './ProjectCard.module.css';
 
 interface ProjectCardProps {
   project: Project;
   searchTerm?: string;
+  /** Tags to highlight because a filter chip is hovered. */
+  externalHighlight?: string[];
 }
 
-export default function ProjectCard({ project, searchTerm = '' }: ProjectCardProps) {
+export default function ProjectCard({ project, searchTerm = '', externalHighlight = NO_TAGS }: ProjectCardProps) {
   const { t, theme } = useTranslation();
   const fallbackImage = "/images/projects/fallback.webp";
   const [isExpanded, setIsExpanded] = useState(false);
   const [expandedImageIndex, setExpandedImageIndex] = useState(0);
+  const [showAllTags, setShowAllTags] = useState(false);
+  const [hoveredTag, setHoveredTag] = useState<string | null>(null);
+  const [hoveredDocTech, setHoveredDocTech] = useState<string[]>([]);
   const [isDraggingExpanded, setIsDraggingExpanded] = useState(false);
   const [startXExpanded, setStartXExpanded] = useState(0);
   const [dragOffsetExpanded, setDragOffsetExpanded] = useState(0);
@@ -218,6 +229,11 @@ export default function ProjectCard({ project, searchTerm = '' }: ProjectCardPro
       <div
         ref={cardRef}
         className={styles.projectCard}
+        onMouseLeave={() => {
+          // Safety net: never leave a highlight stuck when the pointer leaves the card
+          setHoveredTag(null);
+          setHoveredDocTech([]);
+        }}
       >
         <div onClick={handleTextClick}>
           <h3 className={styles.projectTitle}>
@@ -328,11 +344,52 @@ export default function ProjectCard({ project, searchTerm = '' }: ProjectCardPro
         {/* Technologies */}
         {project.technologies && project.technologies.length > 0 && (
           <div className={styles.technologies}>
-            {project.technologies.map((tech, index) => (
-              <span key={index} className={styles.techTag}>
-                <HighlightText text={tech} searchTerm={searchTerm} />
-              </span>
-            ))}
+            {(() => {
+              const all = orderTags(project.technologies);
+              const forceAll = !!searchTerm?.trim();
+              const below = hoveredTag ? descendants(hoveredTag) : null;
+              const relatedByTag = (x: string) => !!below && below.has(x);
+              const isRelated = (x: string) =>
+                relatedByTag(x) || hoveredDocTech.includes(x) || externalHighlight.includes(x);
+              const expanded = showAllTags || forceAll;
+              // Hovering a tag whose concrete technologies are folded away opens the list, and it stays open
+              const handleTagHover = (tag: string | null) => {
+                setHoveredTag(tag);
+                if (tag && all.slice(TAG_LIMIT).some((x) => descendants(tag).has(x))) setShowAllTags(true);
+              };
+              const shown = expanded ? all : all.slice(0, TAG_LIMIT);
+              return (
+                <>
+                  {shown.map((tech, index) => (
+                    <span
+                      key={index}
+                      className={`${styles.techTag} ${
+                        isRelated(tech) ? styles.techTagRelated : ""
+                      } ${hoveredTag === tech ? styles.techTagActive : ""}`}
+                    >
+                      <TagHint tag={tech} projectId={project.id} pool={all} onHoverChange={handleTagHover}>
+                        <HighlightText text={tech} searchTerm={searchTerm} />
+                      </TagHint>
+                    </span>
+                  ))}
+                  {all.length > TAG_LIMIT && !forceAll && (
+                    <button
+                      type="button"
+                      className={`${styles.moreTags} ${
+                        !expanded && all.slice(TAG_LIMIT).some(isRelated)
+                          ? styles.moreTagsRelated
+                          : ""
+                      }`}
+                      onClick={() => setShowAllTags((v) => !v)}
+                    >
+                      {expanded
+                        ? t("tags.showLess")
+                        : t("tags.showMore").replace("{count}", String(all.length - TAG_LIMIT))}
+                    </button>
+                  )}
+                </>
+              );
+            })()}
           </div>
         )}
 
@@ -409,6 +466,16 @@ export default function ProjectCard({ project, searchTerm = '' }: ProjectCardPro
               </svg>
             </ClickableButton>
           )}
+          {project.documents?.map((doc) => (
+            <DocumentButton
+              key={doc.id}
+              label={doc.label}
+              file={doc.file}
+              pages={doc.pages}
+              onHoverChange={(on) => setHoveredDocTech(on ? doc.technologies ?? [] : [])}
+              className={`${styles.socialIcon} ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : 'bg-blue-400 hover:bg-blue-300'} flex items-center justify-center`}
+            />
+          ))}
           {project.presentationLink && (
             <ClickableButton
               href={project.presentationLink}
