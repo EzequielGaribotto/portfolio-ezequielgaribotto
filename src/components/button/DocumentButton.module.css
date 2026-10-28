@@ -26,6 +26,7 @@
 .docTooltip {
   font-family: "Times New Roman", Times, serif !important;
   font-size: 0.9rem !important;
+  font-weight: 700 !important;
   white-space: normal !important;
   width: max-content;
   max-width: min(22rem, 85vw);

@@ -67,7 +67,7 @@ export default function DocumentButton({ label, file, pages, className = "", onH
       }}
       onBlur={() => onHoverChange?.(false)}
     >
-      <Tooltip text={label} tooltipClassName={styles.docTooltip}>
+      <Tooltip text={label} position="bottom" forcePosition disabled={menuOpen} tooltipClassName={styles.docTooltip}>
         <button
           type="button"
           className={`p-2 rounded-full transition-all duration-400 ${className} ${styles.docButton}`}

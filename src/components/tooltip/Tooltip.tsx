@@ -11,7 +11,8 @@ const Tooltip: React.FC<TooltipProps> = ({
   forcePosition = false,
   alternateText,
   showAlternate = false,
-  tooltipClassName = ''
+  tooltipClassName = '',
+  disabled = false
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [tooltipPosition, setTooltipPosition] = useState(position);
@@ -51,7 +52,7 @@ const Tooltip: React.FC<TooltipProps> = ({
       onMouseLeave={handleMouseLeave}
     >
       {children}
-      {isVisible && (
+      {isVisible && !disabled && (
         <div ref={tipRef} className={`${styles.tooltip} ${styles[tooltipPosition]} ${tooltipClassName}`}>
           {displayText}
         </div>

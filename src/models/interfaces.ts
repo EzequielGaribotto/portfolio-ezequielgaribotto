@@ -13,6 +13,8 @@ export interface TooltipProps {
   alternateText?: string;
   showAlternate?: boolean;
   tooltipClassName?: string;
+  /** Never show the tooltip (e.g. while a menu is open on the same element). */
+  disabled?: boolean;
 }
 
 export interface ClickableButtonProps {

@@ -19,8 +19,6 @@ interface CardItemProps {
   imageUrl?: string;
   linkUrl?: string;
   className?: string;
-  /** Open bean tooltips below the bean, in bold. */
-  tooltipBelow?: boolean;
 }
 
 const CardItem: React.FC<CardItemProps> = ({
@@ -34,7 +32,6 @@ const CardItem: React.FC<CardItemProps> = ({
   imageUrl,
   linkUrl,
   className = "",
-  tooltipBelow = false,
 }) => {
   const { t } = useTranslation();
   const technologies = orderTags(rawTechnologies);
@@ -95,7 +92,7 @@ const CardItem: React.FC<CardItemProps> = ({
               isRelated(tech) ? styles.techRelated : ""
             } ${hoveredTag === tech ? styles.techActive : ""}`}
           >
-            <TagHint tag={tech} projectId={id} pool={technologies} onHoverChange={handleTagHover} below={tooltipBelow} boldTip={tooltipBelow}>{tech}</TagHint>
+            <TagHint tag={tech} projectId={id} pool={technologies} onHoverChange={handleTagHover}>{tech}</TagHint>
           </span>
         ))}
         {technologies.length > TAG_LIMIT && (

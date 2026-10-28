@@ -32,10 +32,6 @@
   user-select: text;
 }
 
-.tipBold {
-  font-weight: 700;
-}
-
 .plain {
   position: relative;
   display: inline-block;
