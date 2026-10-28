@@ -1,3 +1,9 @@
+export interface ProjectDocument {
+  id: string;
+  label: string;
+  file: string;
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -17,4 +23,5 @@ export interface Project {
   websiteLink?: string;
   weight?: number;
   experienceId?: string;
+  documents?: ProjectDocument[];
 }

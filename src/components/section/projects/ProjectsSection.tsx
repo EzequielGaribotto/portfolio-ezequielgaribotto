@@ -74,6 +74,12 @@ export default function ProjectsSection() {
       image: "/images/projects/ia-bigdata.webp",
       technologies: iaBigDataTech,
       repoLink: "https://github.com/EzequielGaribotto/IA-BigData",
+      documents: [
+        { id: "ames", label: t("projects.iaBigData.docs.ames"), file: "/docs/ia-bigdata/ames-housing-price-prediction.pdf" },
+        { id: "keras", label: t("projects.iaBigData.docs.keras"), file: "/docs/ia-bigdata/cnn-keras-tensorflow.pdf" },
+        { id: "pytorch", label: t("projects.iaBigData.docs.pytorch"), file: "/docs/ia-bigdata/cnn-pytorch.pdf" },
+        { id: "sklearn", label: t("projects.iaBigData.docs.sklearn"), file: "/docs/ia-bigdata/mlp-scikit-learn.pdf" },
+      ],
       weight: 1
     },
     {

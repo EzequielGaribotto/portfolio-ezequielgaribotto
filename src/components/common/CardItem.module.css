@@ -62,6 +62,21 @@
   margin-top: 1rem;
 }
 
+.moreTags {
+  background: transparent;
+  border: 1px dashed var(--tech-border);
+  color: var(--primary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.moreTags:hover {
+  background-color: var(--tech-bg);
+}
+
 .tech {
   padding: 0.25rem 0.75rem;
   border-radius: 20px;

@@ -62,8 +62,21 @@ export const baseTranslations = {
     agenticDevelopment: "",
     dataEngineering: "",
   },
+  // Collapsible tag lists on cards
+  tags: {
+    showMore: "",
+    showLess: "",
+  },
+  // Project documents (PDF preview / download)
+  documents: {
+    preview: "",
+    download: "",
+    close: "",
+  },
   // Search functionality translations
   search: {
+    scopeLabel: "",
+    techLabel: "",
     placeholder: "",
     clearFilters: "",
     noResults: "",
@@ -181,6 +194,7 @@ export const baseTranslations = {
       footer: string;
       startDate: string;
       endDate?: string | null;
+      docs?: { ames: string; keras: string; pytorch: string; sklearn: string };
     },
     prostring: {} as {
       title: string;

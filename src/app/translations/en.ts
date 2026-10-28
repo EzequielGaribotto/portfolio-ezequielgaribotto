@@ -61,7 +61,18 @@ export const en: Translations = {
     agenticDevelopment: "Agentic Development: using AI agents (planner, subagents, skills, MCP servers) to build software. It is part of Applied AI and AI-assisted development; it is not the same as building agent systems (Agentic AI).\n\nExamples:\n• ProString: custom agent harness with subagents, skills, hooks and persistent memory\n• 7 MCP servers under least-privilege access (Supabase, GitHub, Stripe, Context7, Chrome DevTools, Hostinger, Laravel Boost)\n• Token-cost reporting per release gate\n• LLM-assisted competitor analysis that feeds the roadmap",
     dataEngineering: "Data Engineering: my responsibility ends at a clean, reliable dataset: ingestion, parsing, quality checks and scheduling.\n\nExamples:\n• Facts: scraping of 10+ RSS feeds and an ETL pipeline with XML parsing\n• ProString: weekly ingestion of public datasets with pg_cron and Edge Functions\n• ProString: import pipeline with column auto-detection, catalog deduplication and confidence scoring",
   },
+  tags: {
+    showMore: "+{count} more",
+    showLess: "Show less",
+  },
+  documents: {
+    preview: "Preview",
+    download: "Download",
+    close: "Close",
+  },
   search: {
+    scopeLabel: "Scope",
+    techLabel: "Technology",
     placeholder: "Search projects by title, description, or technology...",
     clearFilters: "Clear filters",
     noResults: "No projects found matching your criteria",
@@ -182,6 +193,12 @@ export const en: Translations = {
       footer: "Learning Project",
       startDate: "December 2025",
       endDate: "December 2026",
+      docs: {
+        ames: "Ames Housing: house-price prediction report (PDF, in Spanish)",
+        keras: "CNN with Keras/TensorFlow: exercise report (PDF, in Spanish)",
+        pytorch: "CNN with PyTorch: exercise report (PDF, in Spanish)",
+        sklearn: "Multilayer perceptron with scikit-learn: exercise report (PDF, in Spanish)",
+      },
     },
     prostring: {
       title: "ProString Manage - SaaS for Stringing Workshop & Tournament Management",

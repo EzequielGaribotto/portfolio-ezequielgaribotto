@@ -61,7 +61,18 @@ export const es: Translations = {
     agenticDevelopment: "Agentic Development: usar agentes de IA (planner, subagentes, skills, servidores MCP) para construir software. Es parte de Applied AI y del desarrollo asistido por IA; no es lo mismo que construir sistemas de agentes (Agentic AI).\n\nEjemplos:\n• ProString: agent harness propio con subagentes, skills, hooks y memoria persistente\n• 7 servidores MCP con acceso de mínimo privilegio (Supabase, GitHub, Stripe, Context7, Chrome DevTools, Hostinger, Laravel Boost)\n• Informes de coste de tokens por cada puerta de release\n• Análisis de competencia asistido por LLM que alimenta la hoja de ruta",
     dataEngineering: "Data Engineering: mi responsabilidad termina en un conjunto de datos limpio y fiable: ingesta, parseo, controles de calidad y programación de tareas.\n\nEjemplos:\n• Facts: scraping de más de 10 feeds RSS y un pipeline ETL con parseo XML\n• ProString: ingesta semanal de datasets públicos con pg_cron y Edge Functions\n• ProString: pipeline de importación con detección de columnas, de-duplicación de catálogo y puntuación de confianza",
   },
+  tags: {
+    showMore: "+{count} más",
+    showLess: "Ver menos",
+  },
+  documents: {
+    preview: "Previsualizar",
+    download: "Descargar",
+    close: "Cerrar",
+  },
   search: {
+    scopeLabel: "Alcance",
+    techLabel: "Tecnología",
     placeholder: "Buscar proyectos por título, descripción o tecnología...",
     clearFilters: "Limpiar filtros",
     noResults: "No se encontraron proyectos que coincidan con tus criterios",
@@ -182,6 +193,12 @@ export const es: Translations = {
       footer: "Proyecto de Aprendizaje",
       startDate: "diciembre 2025",
       endDate: "diciembre 2026",
+      docs: {
+        ames: "Ames Housing: informe de predicción de precios de vivienda (PDF)",
+        keras: "CNN con Keras/TensorFlow: informe del ejercicio (PDF)",
+        pytorch: "CNN con PyTorch: informe del ejercicio (PDF)",
+        sklearn: "Perceptrón multicapa con scikit-learn: informe del ejercicio (PDF)",
+      },
     },
     prostring: {
       title: "ProString Manage - SaaS de Gestión de Talleres de Encordado y Torneos",

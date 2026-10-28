@@ -20,13 +20,15 @@ export default function ProjectSearch({
   const [searchTerm, setSearchTerm] = useState("");
   const { t } = useTranslation();
 
-  // Hardcoded list of keywords - sorted by priority and categories
-  const availableKeywords = [
+  // Hardcoded keyword filters: what the work covers (scope) and the tools used (technology)
+  const scopeKeywords = [
     "Applied AI",
     "AI Engineering",
     "Agentic Development",
     "Agentic AI",
     "Data Engineering",
+  ];
+  const techKeywords = [
     "Machine Learning",
     "Python",
     "Back-end",
@@ -91,20 +93,28 @@ export default function ProjectSearch({
 
       {/* Keyword Tags */}
       <div className={styles.keywordsContainer}>
-        <div className={styles.keywordTags}>
-          {availableKeywords.map((keyword) => (
-            <TagHint key={keyword} tag={keyword}>
-              <button
-                onClick={() => handleKeywordToggle(keyword)}
-                className={`${styles.keywordTag} ${
-                  selectedKeywords.includes(keyword) ? styles.selected : ""
-                }`}
-              >
-                {keyword}
-              </button>
-            </TagHint>
-          ))}
-        </div>
+        {[
+          { label: t("search.scopeLabel"), keywords: scopeKeywords, scope: true },
+          { label: t("search.techLabel"), keywords: techKeywords, scope: false },
+        ].map((group) => (
+          <div key={group.label} className={styles.keywordGroup}>
+            <span className={styles.groupLabel}>{group.label}</span>
+            <div className={styles.keywordTags}>
+              {group.keywords.map((keyword) => (
+                <TagHint key={keyword} tag={keyword}>
+                  <button
+                    onClick={() => handleKeywordToggle(keyword)}
+                    className={`${styles.keywordTag} ${group.scope ? styles.scopeTag : ""} ${
+                      selectedKeywords.includes(keyword) ? styles.selected : ""
+                    }`}
+                  >
+                    {keyword}
+                  </button>
+                </TagHint>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

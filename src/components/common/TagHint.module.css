@@ -44,6 +44,7 @@
 
 /* Mouse: hover only. Keyboard: focus-visible (a click must not leave the tip open). */
 .hint:hover .tip,
+.hint.open .tip,
 .hint:focus-visible .tip,
 .hint:has(:focus-visible) .tip {
   opacity: 1;

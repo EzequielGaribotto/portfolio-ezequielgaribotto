@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from 'next/image';
 import styles from "./CardItem.module.css";
 import MetaInfoDisplay from './MetaInfoDisplay';
 import TagHint from './TagHint';
+import { useTranslation } from "../../context/TranslationContext";
+
+const TAG_LIMIT = 12;
 
 interface CardItemProps {
   id: string;
@@ -29,6 +32,8 @@ const CardItem: React.FC<CardItemProps> = ({
   linkUrl,
   className = "",
 }) => {
+  const { t } = useTranslation();
+  const [showAllTags, setShowAllTags] = useState(false);
   return (
     <div key={id} id={id} className={`${styles.cardItem} ${className}`}>
       <div className={styles.cardHeader}>
@@ -64,11 +69,18 @@ const CardItem: React.FC<CardItemProps> = ({
       </div>
       
       <div className={styles.technologies}>
-        {technologies.map((tech, index) => (
+        {(showAllTags ? technologies : technologies.slice(0, TAG_LIMIT)).map((tech, index) => (
           <span key={index} className={styles.tech}>
             <TagHint tag={tech}>{tech}</TagHint>
           </span>
         ))}
+        {technologies.length > TAG_LIMIT && (
+          <button type="button" className={styles.moreTags} onClick={() => setShowAllTags((v) => !v)}>
+            {showAllTags
+              ? t("tags.showLess")
+              : t("tags.showMore").replace("{count}", String(technologies.length - TAG_LIMIT))}
+          </button>
+        )}
       </div>
     </div>
   );

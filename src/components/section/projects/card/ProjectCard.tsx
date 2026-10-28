@@ -10,6 +10,9 @@ import OptimizedImage from '../../../OptimizedImage';
 import ImageCarousel from './ImageCarousel';
 import { HighlightText } from '../../../../utils/highlightText';
 import TagHint from '../../../common/TagHint';
+import DocumentButton from '../../../button/DocumentButton';
+
+const TAG_LIMIT = 12;
 import styles from './ProjectCard.module.css';
 
 interface ProjectCardProps {
@@ -22,6 +25,7 @@ export default function ProjectCard({ project, searchTerm = '' }: ProjectCardPro
   const fallbackImage = "/images/projects/fallback.webp";
   const [isExpanded, setIsExpanded] = useState(false);
   const [expandedImageIndex, setExpandedImageIndex] = useState(0);
+  const [showAllTags, setShowAllTags] = useState(false);
   const [isDraggingExpanded, setIsDraggingExpanded] = useState(false);
   const [startXExpanded, setStartXExpanded] = useState(0);
   const [dragOffsetExpanded, setDragOffsetExpanded] = useState(0);
@@ -329,13 +333,34 @@ export default function ProjectCard({ project, searchTerm = '' }: ProjectCardPro
         {/* Technologies */}
         {project.technologies && project.technologies.length > 0 && (
           <div className={styles.technologies}>
-            {project.technologies.map((tech, index) => (
-              <span key={index} className={styles.techTag}>
-                <TagHint tag={tech}>
-                  <HighlightText text={tech} searchTerm={searchTerm} />
-                </TagHint>
-              </span>
-            ))}
+            {(() => {
+              const all = project.technologies;
+              const forceAll = !!searchTerm?.trim();
+              const expanded = showAllTags || forceAll;
+              const shown = expanded ? all : all.slice(0, TAG_LIMIT);
+              return (
+                <>
+                  {shown.map((tech, index) => (
+                    <span key={index} className={styles.techTag}>
+                      <TagHint tag={tech}>
+                        <HighlightText text={tech} searchTerm={searchTerm} />
+                      </TagHint>
+                    </span>
+                  ))}
+                  {all.length > TAG_LIMIT && !forceAll && (
+                    <button
+                      type="button"
+                      className={styles.moreTags}
+                      onClick={() => setShowAllTags((v) => !v)}
+                    >
+                      {showAllTags
+                        ? t("tags.showLess")
+                        : t("tags.showMore").replace("{count}", String(all.length - TAG_LIMIT))}
+                    </button>
+                  )}
+                </>
+              );
+            })()}
           </div>
         )}
 
@@ -412,6 +437,14 @@ export default function ProjectCard({ project, searchTerm = '' }: ProjectCardPro
               </svg>
             </ClickableButton>
           )}
+          {project.documents?.map((doc) => (
+            <DocumentButton
+              key={doc.id}
+              label={doc.label}
+              file={doc.file}
+              className={`${styles.socialIcon} ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : 'bg-blue-400 hover:bg-blue-300'} flex items-center justify-center`}
+            />
+          ))}
           {project.presentationLink && (
             <ClickableButton
               href={project.presentationLink}

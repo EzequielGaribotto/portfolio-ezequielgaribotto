@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "../../context/TranslationContext";
 import { TAG_HINT_KEYS } from "../../constants/tagHints";
 import styles from "./TagHint.module.css";
@@ -10,15 +10,34 @@ interface TagHintProps {
   children: React.ReactNode;
 }
 
-/** Wraps a tag; if it has a hint, shows it on hover or keyboard focus. */
+/** Wraps a tag; if it has a hint, shows it on hover, keyboard focus, or a tap on touch screens. */
 export default function TagHint({ tag, children }: TagHintProps) {
   const { t } = useTranslation();
   const hintKey = TAG_HINT_KEYS[tag];
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef<HTMLSpanElement>(null);
+
+  // Touch screens have no hover: a tap opens the hint, a tap elsewhere closes it.
+  useEffect(() => {
+    if (!open) return;
+    const onPointerDown = (e: PointerEvent) => {
+      if (rootRef.current && !rootRef.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("pointerdown", onPointerDown);
+    return () => document.removeEventListener("pointerdown", onPointerDown);
+  }, [open]);
 
   if (!hintKey) return <>{children}</>;
 
   return (
-    <span className={styles.hint} tabIndex={0}>
+    <span
+      ref={rootRef}
+      className={`${styles.hint} ${open ? styles.open : ""}`}
+      tabIndex={0}
+      onClick={() => {
+        if (window.matchMedia("(hover: none)").matches) setOpen((o) => !o);
+      }}
+    >
       {children}
       <span role="tooltip" className={styles.tip}>
         {t(`tagHints.${hintKey}`)}
