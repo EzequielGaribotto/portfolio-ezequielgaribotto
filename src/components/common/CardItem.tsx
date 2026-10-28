@@ -71,7 +71,7 @@ const CardItem: React.FC<CardItemProps> = ({
       <div className={styles.technologies}>
         {(showAllTags ? technologies : technologies.slice(0, TAG_LIMIT)).map((tech, index) => (
           <span key={index} className={styles.tech}>
-            <TagHint tag={tech}>{tech}</TagHint>
+            <TagHint tag={tech} projectId={id}>{tech}</TagHint>
           </span>
         ))}
         {technologies.length > TAG_LIMIT && (

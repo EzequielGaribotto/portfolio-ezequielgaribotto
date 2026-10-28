@@ -9,3 +9,12 @@ export const TAG_HINT_KEYS: Record<string, string> = {
   "Agentic Development": "agenticDevelopment",
   "Data Engineering": "dataEngineering",
 };
+
+/** Project ids that have their own text for a hint (translations: projectTagHints.<id>.<hintKey>). */
+export const PROJECT_TAG_HINTS: Record<string, string[]> = {
+  prostring: ["appliedAI", "agenticAI", "agenticDevelopment", "dataEngineering"],
+  "neutral-news": ["appliedAI", "aiEngineering", "dataEngineering"],
+  "ia-bigdata": ["aiEngineering"],
+  "shoppingcart-chatbot": ["appliedAI"],
+  linkia: ["aiEngineering"],
+};

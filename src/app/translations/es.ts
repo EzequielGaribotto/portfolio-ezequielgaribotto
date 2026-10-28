@@ -55,11 +55,40 @@ export const es: Translations = {
     lastUpdated: "Última actualización"
   },
   tagHints: {
-    appliedAI: "Applied AI: IA dentro de un producto. Mi responsabilidad termina en la interfaz que usa el cliente final, no en el modelo en sí. Incluye diseñar flujos de trabajo agénticos que encadenan llamadas a LLM para automatizar una tarea.\n\nEjemplos:\n• Facts: resúmenes de noticias neutrales generados con LLM dentro de una app Android\n• Chatbot de carrito de compra con LangGraph: reconocimiento de intención, estado de la conversación y validación",
-    aiEngineering: "AI Engineering: un rol más amplio que, en algunas empresas, roza la infraestructura (MLOps) o incluso el ajuste fino de modelos.\n\nEjemplos:\n• AI & Big Data: CNNs con Keras y PyTorch\n• Modelos de precios de vivienda (Random Forest, XGBoost, grid search) servidos con una API Flask\n• Facts: pipeline de embeddings y clustering semántico sobre más de 10 feeds de noticias",
-    agenticAI: "Agentic AI: la responsabilidad llega hasta el runtime del agente: su fiabilidad, la evaluación de su comportamiento y su escalabilidad (frameworks de agentes, arquitecturas planner-executor, orquestación multiagente, estado multi-turno).\n\nEjemplos:\n• Ninguno construido todavía\n• Planificado para ProString: los reportes de bug críticos disparan un arreglo propuesto por un LLM que reviso y apruebo, y las incidencias, emails y feedback se envían a la persona o grupo adecuado",
-    agenticDevelopment: "Agentic Development: usar agentes de IA (planner, subagentes, skills, servidores MCP) para construir software. Es parte de Applied AI y del desarrollo asistido por IA; no es lo mismo que construir sistemas de agentes (Agentic AI).\n\nEjemplos:\n• ProString: agent harness propio con subagentes, skills, hooks y memoria persistente\n• 7 servidores MCP con acceso de mínimo privilegio (Supabase, GitHub, Stripe, Context7, Chrome DevTools, Hostinger, Laravel Boost)\n• Informes de coste de tokens por cada puerta de release\n• Análisis de competencia asistido por LLM que alimenta la hoja de ruta",
-    dataEngineering: "Data Engineering: mi responsabilidad termina en un conjunto de datos limpio y fiable: ingesta, parseo, controles de calidad y programación de tareas.\n\nEjemplos:\n• Facts: scraping de más de 10 feeds RSS y un pipeline ETL con parseo XML\n• ProString: ingesta semanal de datasets públicos con pg_cron y Edge Functions\n• ProString: pipeline de importación con detección de columnas, de-duplicación de catálogo y puntuación de confianza",
+    appliedAI: "Applied AI: IA dentro de un producto. Mi responsabilidad termina en la interfaz que usa el cliente final, no en el modelo en sí. Incluye diseñar flujos de trabajo agénticos que encadenan llamadas a LLM para automatizar una tarea.",
+    aiEngineering: "AI Engineering: un rol más amplio que, en algunas empresas, roza la infraestructura (MLOps) o incluso el ajuste fino de modelos.",
+    agenticAI: "Agentic AI: la responsabilidad llega hasta el runtime del agente: su fiabilidad, la evaluación de su comportamiento y su escalabilidad (frameworks de agentes, arquitecturas planner-executor, orquestación multiagente, estado multi-turno).",
+    agenticDevelopment: "Agentic Development: usar agentes de IA (planner, subagentes, skills, servidores MCP) para construir software. Es parte de Applied AI y del desarrollo asistido por IA; no es lo mismo que construir sistemas de agentes (Agentic AI).",
+    dataEngineering: "Data Engineering: mi responsabilidad termina en un conjunto de datos limpio y fiable: ingesta, parseo, controles de calidad y programación de tareas.",
+  },
+  tagExamples: {
+    appliedAI: "Ejemplos:\n• Facts: resúmenes de noticias neutrales generados con LLM dentro de una app Android\n• Chatbot de carrito de compra con LangGraph: reconocimiento de intención, estado de la conversación y validación",
+    aiEngineering: "Ejemplos:\n• AI & Big Data: CNNs con Keras y PyTorch\n• Modelos de precios de vivienda (Random Forest, XGBoost, grid search) servidos con una API Flask\n• Facts: pipeline de embeddings y clustering semántico sobre más de 10 feeds de noticias",
+    agenticAI: "Ejemplos:\n• Ninguno construido todavía\n• Planificado para ProString: los reportes de bug críticos disparan un arreglo propuesto por un LLM que reviso y apruebo, y las incidencias, emails y feedback se envían a la persona o grupo adecuado",
+    agenticDevelopment: "Ejemplos:\n• ProString: agent harness propio con subagentes, skills, hooks y memoria persistente\n• 7 servidores MCP con acceso de mínimo privilegio (Supabase, GitHub, Stripe, Context7, Chrome DevTools, Hostinger, Laravel Boost)\n• Informes de coste de tokens por cada puerta de release\n• Análisis de competencia asistido por LLM que alimenta la hoja de ruta",
+    dataEngineering: "Ejemplos:\n• Facts: scraping de más de 10 feeds RSS y un pipeline ETL con parseo XML\n• ProString: ingesta semanal de datasets públicos con pg_cron y Edge Functions\n• ProString: pipeline de importación con detección de columnas, de-duplicación de catálogo y puntuación de confianza",
+  },
+  projectTagHints: {
+    "prostring": {
+      appliedAI: "En este proyecto:\n• En curso: asistente de ayuda con RAG\n• En curso: importación de datos y analíticas asistidas por LLM",
+      agenticAI: "En este proyecto:\n• Planificado: los reportes de bug críticos disparan un arreglo propuesto por un LLM que reviso y apruebo\n• Planificado: incidencias, emails y feedback enviados a la persona o grupo adecuado",
+      agenticDevelopment: "En este proyecto:\n• Agent harness propio: subagentes, skills, hooks y memoria persistente\n• 7 servidores MCP con acceso de mínimo privilegio (Supabase, GitHub, Stripe, Context7, Chrome DevTools, Hostinger, Laravel Boost)\n• Informes de coste de tokens por cada puerta de release\n• Análisis de competencia asistido por LLM que alimenta la hoja de ruta",
+      dataEngineering: "En este proyecto:\n• Ingesta semanal de datasets públicos con pg_cron y Edge Functions\n• Pipeline de importación: detección de columnas, de-duplicación de catálogo y puntuación de confianza\n• En curso: pipelines en Python que agregan datos públicos de tenis (rankings, raquetas, marcas, modelos)",
+    },
+    "neutral-news": {
+      appliedAI: "En este proyecto:\n• Resúmenes de noticias neutrales generados con LLM dentro de la app Android",
+      aiEngineering: "En este proyecto:\n• Embeddings y clustering semántico de noticias de más de 10 feeds RSS",
+      dataEngineering: "En este proyecto:\n• Scraping de más de 10 feeds RSS\n• Pipeline ETL con parseo XML",
+    },
+    "ia-bigdata": {
+      aiEngineering: "En este proyecto:\n• CNNs con Keras y PyTorch\n• Modelos de precios de vivienda (Random Forest, XGBoost, grid search) servidos con una API Flask\n• En curso: proyecto final de regresión y clustering sobre datos de e-commerce",
+    },
+    "shoppingcart-chatbot": {
+      appliedAI: "En este proyecto:\n• Chatbot con LangGraph y flujo de compra completo: reconocimiento de intención, estado de la conversación, validación y pruebas automáticas",
+    },
+    "linkia": {
+      aiEngineering: "En este programa:\n• CNNs con Keras y PyTorch\n• Modelos de precios de vivienda (Random Forest, XGBoost, grid search) servidos con una API Flask\n• En curso: proyecto final de regresión y clustering sobre datos de e-commerce",
+    },
   },
   tags: {
     showMore: "+{count} más",

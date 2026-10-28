@@ -2,16 +2,18 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "../../context/TranslationContext";
-import { TAG_HINT_KEYS } from "../../constants/tagHints";
+import { TAG_HINT_KEYS, PROJECT_TAG_HINTS } from "../../constants/tagHints";
 import styles from "./TagHint.module.css";
 
 interface TagHintProps {
   tag: string;
+  /** Card the tag sits in: the hint then lists only what was done or planned there. */
+  projectId?: string;
   children: React.ReactNode;
 }
 
 /** Wraps a tag; if it has a hint, shows it on hover, keyboard focus, or a tap on touch screens. */
-export default function TagHint({ tag, children }: TagHintProps) {
+export default function TagHint({ tag, projectId, children }: TagHintProps) {
   const { t } = useTranslation();
   const hintKey = TAG_HINT_KEYS[tag];
   const [open, setOpen] = useState(false);
@@ -28,6 +30,7 @@ export default function TagHint({ tag, children }: TagHintProps) {
   }, [open]);
 
   if (!hintKey) return <>{children}</>;
+  const scoped = !!projectId && !!PROJECT_TAG_HINTS[projectId]?.includes(hintKey);
 
   return (
     <span
@@ -41,6 +44,8 @@ export default function TagHint({ tag, children }: TagHintProps) {
       {children}
       <span role="tooltip" className={styles.tip}>
         {t(`tagHints.${hintKey}`)}
+        {"\n\n"}
+        {scoped ? t(`projectTagHints.${projectId}.${hintKey}`) : t(`tagExamples.${hintKey}`)}
       </span>
     </span>
   );

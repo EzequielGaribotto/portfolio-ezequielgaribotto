@@ -62,6 +62,15 @@ export const baseTranslations = {
     agenticDevelopment: "",
     dataEngineering: "",
   },
+  tagExamples: {
+    appliedAI: "",
+    aiEngineering: "",
+    agenticAI: "",
+    agenticDevelopment: "",
+    dataEngineering: "",
+  },
+  // Per-project examples (shown when hovering a tag inside that project's card)
+  projectTagHints: {} as Record<string, Record<string, string>>,
   // Collapsible tag lists on cards
   tags: {
     showMore: "",

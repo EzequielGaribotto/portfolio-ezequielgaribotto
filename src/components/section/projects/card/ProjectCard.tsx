@@ -342,7 +342,7 @@ export default function ProjectCard({ project, searchTerm = '' }: ProjectCardPro
                 <>
                   {shown.map((tech, index) => (
                     <span key={index} className={styles.techTag}>
-                      <TagHint tag={tech}>
+                      <TagHint tag={tech} projectId={project.id}>
                         <HighlightText text={tech} searchTerm={searchTerm} />
                       </TagHint>
                     </span>
