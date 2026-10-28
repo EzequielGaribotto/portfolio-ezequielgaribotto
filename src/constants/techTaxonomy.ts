@@ -14,7 +14,9 @@ export const TAG_CHILDREN: Record<string, string[]> = {
   "Python": [
     "Pandas", "NumPy", "scikit-learn", "PyTorch", "TensorFlow", "Keras", "XGBoost", "Polars", "PySpark",
     "Flask", "FastAPI", "LangGraph", "LangChain", "BeautifulSoup", "Pydantic", "Pytest",
+    "Jupyter Notebooks", "Google Colab",
   ],
+  "Exploratory Data Analysis (EDA)": ["Statistical Analysis", "Data Visualization", "Socioeconomic Analysis", "Pandas"],
   "Machine Learning": [
     "scikit-learn", "Random Forest", "Gradient Boosting", "XGBoost", "K-Means", "KNN", "Clustering",
     "Regression", "Classification", "Predictive Modeling", "Hyperparameter Tuning", "Embeddings",
@@ -23,7 +25,7 @@ export const TAG_CHILDREN: Record<string, string[]> = {
   "LLM": ["LangGraph", "LangChain", "Generative AI", "Conversational AI", "Chatbot", "AI Integration"],
   "Data Science": ["Pandas", "NumPy", "scikit-learn", "Data Visualization", "Jupyter Notebooks"],
   "Data Processing": ["Pandas", "NumPy", "Polars", "PySpark", "ETL"],
-  "Big Data": ["PySpark", "Polars", "MongoDB", "Pandas"],
+  "Big Data": ["PySpark", "Spark", "Hadoop", "Polars", "MongoDB", "Pandas"],
   "ETL": ["Scraping", "Crawling", "Parsing", "BeautifulSoup", "Pandas"],
   "Back-end": [
     "Supabase", "PostgreSQL", "PL/pgSQL", "Edge Functions", "Deno", "RPC", "Row Level Security",
@@ -34,7 +36,15 @@ export const TAG_CHILDREN: Record<string, string[]> = {
   ],
   "Supabase": ["PostgreSQL", "PL/pgSQL", "Edge Functions", "Deno", "RPC", "Row Level Security", "Realtime", "pg_cron"],
   "CI/CD": ["GitHub Actions", "Playwright", "Vitest"],
-  "Android": ["Kotlin", "Retrofit", "Room", "Hilt", "Dagger", "DAO", "Datastore", "MVVM", "LiveData"],
+  "Android": [
+    "Kotlin", "Retrofit", "Room", "Hilt", "Dagger", "DAO", "Datastore", "MVVM", "LiveData",
+    "DataBinding", "XML", "Kotlin DSL", "Coroutines", "Android SDK", "Firebase", "Google Maps API",
+  ],
+  "Google Cloud Platform": ["Firebase", "Docker"],
+  "SaaS": ["Multi-tenant", "Stripe", "Invoicing", "RBAC", "MFA"],
+  "UX": ["QZ Tray", "ESC/POS", "Realtime", "i18n"],
+  "SQL": ["PostgreSQL", "PL/pgSQL"],
+  "Git": ["GitHub Actions", "CI/CD"],
 };
 
 /** Every bean below `tag`: children, grandchildren, and so on (cycle-safe). */
