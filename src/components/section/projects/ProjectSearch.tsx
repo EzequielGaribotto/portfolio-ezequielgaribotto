@@ -28,6 +28,7 @@ export default function ProjectSearch({
     "Back-end",
     "Front-end",
     "Vue",
+    "Supabase",
     "API",
     "Cloud",
     "UI",
