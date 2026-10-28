@@ -3,7 +3,7 @@ import Image from 'next/image';
 import styles from "./CardItem.module.css";
 import MetaInfoDisplay from './MetaInfoDisplay';
 import TagHint from './TagHint';
-import { descendants } from "../../constants/techTaxonomy";
+import { descendants, orderTags } from "../../constants/techTaxonomy";
 import { useTranslation } from "../../context/TranslationContext";
 
 const TAG_LIMIT = 12;
@@ -28,12 +28,13 @@ const CardItem: React.FC<CardItemProps> = ({
   period,
   location,
   description,
-  technologies,
+  technologies: rawTechnologies,
   imageUrl,
   linkUrl,
   className = "",
 }) => {
   const { t } = useTranslation();
+  const technologies = orderTags(rawTechnologies);
   const [showAllTags, setShowAllTags] = useState(false);
   const [hoveredTag, setHoveredTag] = useState<string | null>(null);
   const below = hoveredTag ? descendants(hoveredTag) : null;

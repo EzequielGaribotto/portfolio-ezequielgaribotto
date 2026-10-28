@@ -1,3 +1,5 @@
+import { TAG_HINT_KEYS } from "./tagHints";
+
 /**
  * Generic technology tag -> the concrete technologies under it, most important first.
  * Only names that exist as tags somewhere in the portfolio are useful here: a hint lists
@@ -53,4 +55,25 @@ export function usedDescendants(tag: string, pool: string[] | undefined): string
   if (!pool) return [];
   const below = descendants(tag);
   return pool.filter((x) => below.has(x));
+}
+
+/**
+ * Display order of a card's tags: scope beans first (their own order), then beans that highlight
+ * others, the ones with more beans below them first, then the rest in their original order.
+ */
+export function orderTags(tags: string[]): string[] {
+  const scope: string[] = [];
+  const parents: { tag: string; count: number }[] = [];
+  const rest: string[] = [];
+  for (const tag of tags) {
+    if (TAG_HINT_KEYS[tag]) {
+      scope.push(tag);
+      continue;
+    }
+    const count = usedDescendants(tag, tags).length;
+    if (count > 0) parents.push({ tag, count });
+    else rest.push(tag);
+  }
+  parents.sort((a, b) => b.count - a.count); // stable: ties keep their original order
+  return [...scope, ...parents.map((p) => p.tag), ...rest];
 }

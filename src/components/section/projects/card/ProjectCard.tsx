@@ -11,7 +11,7 @@ import ImageCarousel from './ImageCarousel';
 import { HighlightText } from '../../../../utils/highlightText';
 import TagHint from '../../../common/TagHint';
 import DocumentButton from '../../../button/DocumentButton';
-import { descendants } from '../../../../constants/techTaxonomy';
+import { descendants, orderTags } from '../../../../constants/techTaxonomy';
 
 const TAG_LIMIT = 12;
 const NO_TAGS: string[] = [];
@@ -345,7 +345,7 @@ export default function ProjectCard({ project, searchTerm = '', externalHighligh
         {project.technologies && project.technologies.length > 0 && (
           <div className={styles.technologies}>
             {(() => {
-              const all = project.technologies;
+              const all = orderTags(project.technologies);
               const forceAll = !!searchTerm?.trim();
               const below = hoveredTag ? descendants(hoveredTag) : null;
               const relatedByTag = (x: string) => !!below && below.has(x);
