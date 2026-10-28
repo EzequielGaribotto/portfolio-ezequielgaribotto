@@ -54,6 +54,12 @@ export const en: Translations = {
     downloadInstead: "Download Instead",
     lastUpdated: "Last updated"
   },
+  tagHints: {
+    appliedAI: "Applied AI: AI inside a product. My responsibility ends at the interface the end user touches, not at the model itself. It includes designing agentic workflows that chain LLM calls to automate a task.",
+    aiEngineering: "AI Engineering: a broader scope that, in some companies, reaches infrastructure (MLOps) or even model fine-tuning.",
+    agenticAI: "Agentic AI: the scope extends into the agent's runtime: reliability, behavior evaluation and scalability (agent frameworks, planner-executor architectures, multi-agent orchestration, multi-turn state). Not built yet. Next level for ProString: agents that triage incidents, route them to the right person and propose fixes for human approval.",
+    agenticDevelopment: "Agentic Development: using AI agents (planner, subagents, skills, MCP servers) to build software. It is part of Applied AI and AI-assisted development; it is not the same as building agent systems (Agentic AI).",
+  },
   search: {
     placeholder: "Search projects by title, description, or technology...",
     clearFilters: "Clear filters",

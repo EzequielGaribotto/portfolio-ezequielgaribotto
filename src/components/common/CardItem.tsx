@@ -2,6 +2,7 @@ import React from "react";
 import Image from 'next/image';
 import styles from "./CardItem.module.css";
 import MetaInfoDisplay from './MetaInfoDisplay';
+import TagHint from './TagHint';
 
 interface CardItemProps {
   id: string;
@@ -65,7 +66,7 @@ const CardItem: React.FC<CardItemProps> = ({
       <div className={styles.technologies}>
         {technologies.map((tech, index) => (
           <span key={index} className={styles.tech}>
-            {tech}
+            <TagHint tag={tech}>{tech}</TagHint>
           </span>
         ))}
       </div>

@@ -54,6 +54,12 @@ export const es: Translations = {
     downloadInstead: "Descargar en su lugar",
     lastUpdated: "Última actualización"
   },
+  tagHints: {
+    appliedAI: "Applied AI: IA dentro de un producto. Mi responsabilidad termina en la interfaz que usa el cliente final, no en el modelo en sí. Incluye diseñar flujos de trabajo agénticos que encadenan llamadas a LLM para automatizar una tarea.",
+    aiEngineering: "AI Engineering: un rol más amplio que, en algunas empresas, roza la infraestructura (MLOps) o incluso el ajuste fino de modelos.",
+    agenticAI: "Agentic AI: la responsabilidad llega hasta el runtime del agente: su fiabilidad, la evaluación de su comportamiento y su escalabilidad (frameworks de agentes, arquitecturas planner-executor, orquestación multiagente, estado multi-turno). Aún no lo he construido. Siguiente nivel para ProString: agentes que clasifican incidencias, las envían a la persona adecuada y proponen arreglos para aprobación humana.",
+    agenticDevelopment: "Agentic Development: usar agentes de IA (planner, subagentes, skills, servidores MCP) para construir software. Es parte de Applied AI y del desarrollo asistido por IA; no es lo mismo que construir sistemas de agentes (Agentic AI).",
+  },
   search: {
     placeholder: "Buscar proyectos por título, descripción o tecnología...",
     clearFilters: "Limpiar filtros",

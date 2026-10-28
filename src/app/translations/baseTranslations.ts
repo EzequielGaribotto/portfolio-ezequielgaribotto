@@ -54,6 +54,13 @@ export const baseTranslations = {
     downloadInstead: "", // New translation key
     lastUpdated: "", // Add missing lastUpdated key to fix TypeScript error
   },
+  // Hover explanations for scope tags
+  tagHints: {
+    appliedAI: "",
+    aiEngineering: "",
+    agenticAI: "",
+    agenticDevelopment: "",
+  },
   // Search functionality translations
   search: {
     placeholder: "",

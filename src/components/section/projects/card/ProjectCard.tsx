@@ -9,6 +9,7 @@ import ClickableButton from "../../../button/ClickableButton";
 import OptimizedImage from '../../../OptimizedImage';
 import ImageCarousel from './ImageCarousel';
 import { HighlightText } from '../../../../utils/highlightText';
+import TagHint from '../../../common/TagHint';
 import styles from './ProjectCard.module.css';
 
 interface ProjectCardProps {
@@ -330,7 +331,9 @@ export default function ProjectCard({ project, searchTerm = '' }: ProjectCardPro
           <div className={styles.technologies}>
             {project.technologies.map((tech, index) => (
               <span key={index} className={styles.techTag}>
-                <HighlightText text={tech} searchTerm={searchTerm} />
+                <TagHint tag={tech}>
+                  <HighlightText text={tech} searchTerm={searchTerm} />
+                </TagHint>
               </span>
             ))}
           </div>

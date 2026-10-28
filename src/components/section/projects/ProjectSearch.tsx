@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { FaSearch, FaTimes } from "react-icons/fa";
 import { useTranslation } from "../../../context/TranslationContext";
 import styles from "./ProjectSearch.module.css";
+import TagHint from "../../common/TagHint";
 
 interface ProjectSearchProps {
   onSearchChange: (searchTerm: string) => void;
@@ -89,15 +90,16 @@ export default function ProjectSearch({
       <div className={styles.keywordsContainer}>
         <div className={styles.keywordTags}>
           {availableKeywords.map((keyword) => (
-            <button
-              key={keyword}
-              onClick={() => handleKeywordToggle(keyword)}
-              className={`${styles.keywordTag} ${
-                selectedKeywords.includes(keyword) ? styles.selected : ""
-              }`}
-            >
-              {keyword}
-            </button>
+            <TagHint key={keyword} tag={keyword}>
+              <button
+                onClick={() => handleKeywordToggle(keyword)}
+                className={`${styles.keywordTag} ${
+                  selectedKeywords.includes(keyword) ? styles.selected : ""
+                }`}
+              >
+                {keyword}
+              </button>
+            </TagHint>
           ))}
         </div>
       </div>
