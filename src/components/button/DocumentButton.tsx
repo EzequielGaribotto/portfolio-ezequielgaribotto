@@ -24,6 +24,7 @@ export default function DocumentButton({ label, file, pages, className = "", onH
   const [previewOpen, setPreviewOpen] = useState(false);
   const [supportsPdfViewer, setSupportsPdfViewer] = useState(true);
   const rootRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     setSupportsPdfViewer(detectPdfSupport());
@@ -54,6 +55,7 @@ export default function DocumentButton({ label, file, pages, className = "", onH
     >
       <Tooltip text={label} position="bottom" forcePosition disabled={menuOpen} tooltipClassName={styles.docTooltip}>
         <button
+          ref={triggerRef}
           type="button"
           className={`p-2 rounded-full transition-all duration-400 ${className} ${styles.docButton}`}
           onClick={(e) => {
@@ -110,7 +112,7 @@ export default function DocumentButton({ label, file, pages, className = "", onH
         </div>
       )}
 
-      {previewOpen && <PdfPreviewModal title={label} file={file} onClose={() => setPreviewOpen(false)} />}
+      {previewOpen && <PdfPreviewModal title={label} file={file} returnFocusTo={triggerRef} onClose={() => setPreviewOpen(false)} />}
     </div>
   );
 }

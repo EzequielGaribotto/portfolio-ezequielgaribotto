@@ -16,6 +16,7 @@
 }
 
 .githubLink {
+  font-size: 24px; /* the icon is 1em, so it scales with the breakpoints below */
   color: var(--foreground);
   transition: none;
   display: flex;
@@ -31,6 +32,10 @@
 
 /* Mobile responsive styles */
 @media (max-width: 768px) {
+  .githubLink {
+    font-size: 20px;
+  }
+
   .footerContent {
     padding: 8px 15px;
     flex-direction: column;

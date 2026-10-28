@@ -20,6 +20,7 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
   const [showDateInfo, setShowDateInfo] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     setSupportsPdfViewer(detectPdfSupport());
@@ -162,6 +163,7 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
       )}
       
       <button
+        ref={triggerRef}
         onClick={() => setIsOpen(!isOpen)}
         className="w-auto px-5 py-2.5 font-semibold rounded-full flex items-center justify-center shadow-sm hover:shadow-md"
         style={buttonStyle}
@@ -232,6 +234,7 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
           title={previewLang === 'es' ? t("cv.spanish") : previewLang === 'en_ats' ? t("cv.english_ats") : t("cv.english")}
           subtitle={formatDate(getCurrentDate(previewLang), locale)}
           file={previewLang === 'es' ? CV_FILES.ES : previewLang === 'en_ats' ? CV_FILES.EN_ATS : CV_FILES.EN}
+          returnFocusTo={triggerRef}
           onClose={() => setIsPreviewOpen(false)}
         />
       )}

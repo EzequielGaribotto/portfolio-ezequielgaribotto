@@ -3,9 +3,9 @@
 
 /* Root Variables */
 :root {
-  --gradient-primary: #a3a6b4;
-  --gradient-secondary: #c6dcdd;
-  --gradient-accent: #667279;
+  --gradient-primary: #b9bdcb;
+  --gradient-secondary: #cfe2e3;
+  --gradient-accent: #b4c0c7;
   
   --background: linear-gradient(135deg, var(--gradient-primary) 0%, var(--gradient-secondary) 50%, var(--gradient-accent) 100%);
   
@@ -31,7 +31,13 @@
   
   /* Text colors for light mode */
   --mode-text: #000000; 
-  --mode-desc: #4b5563;
+  --mode-desc: #3f4a59;
+  --foreground-muted: #4a5565;
+  --color-text-secondary: #4a5565;
+  --primary-rgb: 31, 98, 160;
+  --secondary-lighter: #f1f5f9;
+  /* Skeleton fill while a card loads: the foreground at 12%, so it follows the theme */
+  --placeholder: rgba(var(--foreground-rgb), 0.12);
   
   /* Tech tag specific variables for light mode */
   --tech-bg: #e9f0f8;
@@ -40,10 +46,18 @@
   --tech-hover-bg: #d1e2f5;
   --tech-hover-border: #0070f3;
   /* Highlight of related tags: app blue on light backgrounds (gold in dark mode) */
-  --tag-hl-bg: rgba(31, 98, 160, 0.24);
+  --tag-hl-bg: rgba(31, 98, 160, 0.3);
   --tag-hl-border: #1f62a0;
   --tag-hl-text: #000000;
-  --tag-hl-glow: rgba(31, 98, 160, 0.4);
+  --tag-hl-glow: rgba(31, 98, 160, 0.35);
+  /* Text on a solid accent fill (the hovered tag, selected chips) */
+  --on-primary: #ffffff;
+  /* Cursor and text selection follow the theme: ink or paper arrow, accent when the target is clickable */
+  --cursor-default: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M5 3v16.2l4.3-3.9 2.9 6.4 2.7-1.2-2.9-6.3 5.9-.2z' fill='%231a1a1a' stroke='%23ffffff' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 5 3, auto;
+  --cursor-pointer: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M5 3v16.2l4.3-3.9 2.9 6.4 2.7-1.2-2.9-6.3 5.9-.2z' fill='%231f62a0' stroke='%23ffffff' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 5 3, auto;
+  --cursor-text: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke-linecap='round'%3E%3Cpath d='M9 4h6M12 4v16M9 20h6' stroke='%23ffffff' stroke-width='4'/%3E%3Cpath d='M9 4h6M12 4v16M9 20h6' stroke='%231f62a0' stroke-width='2'/%3E%3C/svg%3E") 12 12, text;
+  --selection-bg: #1f62a0;
+  --selection-ink: #ffffff;
   
   /* Section padding variables */
   --section-padding-horizontal: 2rem;
@@ -72,6 +86,11 @@
     --secondary-rgb: 45, 55, 72;
     --mode-text: #ffffff;
     --mode-desc: #e5e7eb;
+    --foreground-muted: #c9ced8;
+    --selected-ink: #1a1a1a;
+    --color-text-secondary: #c9ced8;
+    --primary-rgb: 202, 165, 80;
+    --secondary-lighter: #3a4556;
     --link: #caa550;
     --link-hover: #ddb968;
     --tech-bg: rgba(202, 165, 80, 0.1);
@@ -83,6 +102,13 @@
   --tag-hl-border: #ddb968;
   --tag-hl-text: #ffffff;
   --tag-hl-glow: rgba(221, 185, 104, 0.5);
+  --on-primary: #1a1a1a;
+    /* Cursor and text selection follow the theme: ink or paper arrow, accent when the target is clickable */
+    --cursor-default: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M5 3v16.2l4.3-3.9 2.9 6.4 2.7-1.2-2.9-6.3 5.9-.2z' fill='%23f5f5f5' stroke='%230f1115' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 5 3, auto;
+    --cursor-pointer: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M5 3v16.2l4.3-3.9 2.9 6.4 2.7-1.2-2.9-6.3 5.9-.2z' fill='%23caa550' stroke='%230f1115' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 5 3, auto;
+    --cursor-text: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke-linecap='round'%3E%3Cpath d='M9 4h6M12 4v16M9 20h6' stroke='%230f1115' stroke-width='4'/%3E%3Cpath d='M9 4h6M12 4v16M9 20h6' stroke='%23caa550' stroke-width='2'/%3E%3C/svg%3E") 12 12, text;
+    --selection-bg: #caa550;
+    --selection-ink: #14161b;
   }
   
   html:not([data-theme]) {
@@ -110,6 +136,11 @@
   --secondary-rgb: 45, 55, 72;
   --mode-text: #ffffff;
   --mode-desc: #e5e7eb;
+  --foreground-muted: #c9ced8;
+  --selected-ink: #1a1a1a;
+  --color-text-secondary: #c9ced8;
+  --primary-rgb: 202, 165, 80;
+  --secondary-lighter: #3a4556;
   --link: #caa550;
   --link-hover: #ddb968;
   --tech-bg: rgba(202, 165, 80, 0.1);
@@ -121,6 +152,13 @@
   --tag-hl-border: #ddb968;
   --tag-hl-text: #ffffff;
   --tag-hl-glow: rgba(221, 185, 104, 0.5);
+  --on-primary: #1a1a1a;
+  /* Cursor and text selection follow the theme: ink or paper arrow, accent when the target is clickable */
+  --cursor-default: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M5 3v16.2l4.3-3.9 2.9 6.4 2.7-1.2-2.9-6.3 5.9-.2z' fill='%23f5f5f5' stroke='%230f1115' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 5 3, auto;
+  --cursor-pointer: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M5 3v16.2l4.3-3.9 2.9 6.4 2.7-1.2-2.9-6.3 5.9-.2z' fill='%23caa550' stroke='%230f1115' stroke-width='1.5' stroke-linejoin='round'/%3E%3C/svg%3E") 5 3, auto;
+  --cursor-text: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke-linecap='round'%3E%3Cpath d='M9 4h6M12 4v16M9 20h6' stroke='%230f1115' stroke-width='4'/%3E%3Cpath d='M9 4h6M12 4v16M9 20h6' stroke='%23caa550' stroke-width='2'/%3E%3C/svg%3E") 12 12, text;
+  --selection-bg: #caa550;
+  --selection-ink: #14161b;
 }
 
 [data-theme="light"] {
@@ -134,14 +172,19 @@ html {
   overflow-y: auto;
   overflow-x: hidden;
   width: 100%;
-  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {
   background: var(--background);
   background-attachment: fixed;
   color: var(--foreground);
-  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
   margin: 0;
   padding: 0;
   line-height: 1.6;
@@ -150,7 +193,7 @@ body {
   min-height: 100vh;
   width: 100%;
   overflow-x: hidden;
-  touch-action: pan-y;
+  touch-action: pan-y pinch-zoom;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"),
     var(--background);
   background-blend-mode: overlay;
@@ -159,6 +202,48 @@ body {
 button {
   cursor: pointer;
   font-family: inherit;
+}
+
+/* Custom pointer: the theme's arrow everywhere, the accent arrow on anything clickable, an I-beam over reading text */
+html {
+  cursor: var(--cursor-default);
+}
+
+:where(p, h1, h2, h3, h4, h5, h6, li, blockquote, pre, code, figcaption, [class*="escription"]):not(a *, button *, [role="button"] *) {
+  cursor: var(--cursor-text);
+}
+
+a[href],
+button:not(:disabled),
+[role="button"],
+[role="menuitem"],
+summary,
+select,
+label[for],
+[tabindex="0"]:not([aria-describedby]) {
+  cursor: var(--cursor-pointer) !important;
+}
+
+button:disabled {
+  cursor: var(--cursor-default) !important;
+}
+
+input:not([type="checkbox"], [type="radio"], [type="button"], [type="submit"]),
+textarea,
+[contenteditable="true"] {
+  cursor: var(--cursor-text) !important;
+  caret-color: var(--primary);
+}
+
+/* Custom text selection: solid accent with the ink that clears 4.5:1 on it */
+::selection {
+  background: var(--selection-bg);
+  color: var(--selection-ink);
+}
+
+::-moz-selection {
+  background: var(--selection-bg);
+  color: var(--selection-ink);
 }
 
 /* Header button styles */
@@ -245,6 +330,12 @@ footer a:hover {
   margin: 0 auto;
 }
 
+@media (max-width: 768px) {
+  .centered-container {
+    padding: 0.5rem 0;
+  }
+}
+
 /* Social icons styling - keep for general use */
 .social-icon {
   width: 40px;
@@ -312,9 +403,11 @@ footer a:hover {
 }
 
 
-/* Once hydration is complete, enable smooth transitions */
-body.hydration-complete * {
-  transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+/* Only while the theme is being switched (see changeTheme), colors cross-fade; hover and focus styles keep their own timing */
+html.theme-switching *,
+html.theme-switching *::before,
+html.theme-switching *::after {
+  transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease, box-shadow 200ms ease !important;
 }
 
 body.hydration-complete {
@@ -324,4 +417,33 @@ body.hydration-complete {
 @keyframes fadeIn {
   from { opacity: 0.0; }
   to { opacity: 1; }
+}
+
+/* Reduced motion: keep every state change (color, opacity, shadow), drop movement and loops */
+@media (prefers-reduced-motion: reduce) {
+  .image-placeholder,
+  .animate-spin {
+    animation: none;
+  }
+
+  body.hydration-complete {
+    animation: none;
+  }
+
+  .social-icon:hover,
+  .social-icon:hover svg,
+  .social-icon:hover > * {
+    transform: none;
+  }
+}
+
+/* Header icon buttons: the hit area grows past the icon without moving the layout */
+.headerbutton {
+  position: relative;
+}
+
+.headerbutton::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
 }

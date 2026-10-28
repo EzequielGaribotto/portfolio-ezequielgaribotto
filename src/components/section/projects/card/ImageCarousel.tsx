@@ -1,7 +1,9 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { FaChevronLeft, FaChevronRight, FaExpand } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight, FaExpand, FaPause, FaPlay } from "react-icons/fa";
+import { useTranslation } from "../../../../context/TranslationContext";
+import { usePrefersReducedMotion } from "../../../../hooks/usePrefersReducedMotion";
 import OptimizedImage from '../../../OptimizedImage';
 import styles from './ImageCarousel.module.css';
 
@@ -12,23 +14,39 @@ interface ImageCarouselProps {
 }
 
 export default function ImageCarousel({ images, projectTitle, onExpand }: ImageCarouselProps) {
+  const { t } = useTranslation();
+  const reducedMotion = usePrefersReducedMotion();
   const [currentIndex, setCurrentIndex] = useState(0);
+  // Slideshow stops on its own while hovered, focused, offscreen or hidden; `playing` is the visitor's switch.
+  const [playing, setPlaying] = useState(true);
   const [isPaused, setIsPaused] = useState(false);
+  const [hasFocus, setHasFocus] = useState(false);
+  const [inView, setInView] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    const node = containerRef.current;
+    if (!node) return;
+    const observer = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), { threshold: 0.3 });
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [images.length]);
+
+  const autoplay = images.length > 1 && playing && !reducedMotion && !isPaused && !hasFocus && inView;
+
   // Auto-slide functionality
   useEffect(() => {
-    if (images.length <= 1 || isPaused) return;
+    if (!autoplay) return;
 
     intervalRef.current = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % images.length);
+      if (!document.hidden) setCurrentIndex((prev) => (prev + 1) % images.length);
     }, 4000); // Auto-slide every 4 seconds
 
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [images.length, isPaused]);
+  }, [autoplay, images.length]);
 
   const nextImage = () => {
     setCurrentIndex((prev) => (prev + 1) % images.length);
@@ -64,13 +82,13 @@ export default function ImageCarousel({ images, projectTitle, onExpand }: ImageC
         <button 
           className={styles.expandControl} 
           onClick={handleImageClick}
-          aria-label="Expand image"
+          aria-label={t("tooltips.expandImage")}
         >
           <FaExpand size={16} />
         </button>
         <OptimizedImage
           src={images[0]}
-          alt={`${projectTitle} image`}
+          alt={t("carousel.imageAlt").replace("{title}", projectTitle).replace("{n}", "1")}
           width={600}
           height={400}
           className="rounded-lg cursor-pointer"
@@ -90,6 +108,10 @@ export default function ImageCarousel({ images, projectTitle, onExpand }: ImageC
       className={`${styles.carouselContainer} ${isPaused ? styles.paused : ''}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onFocus={() => setHasFocus(true)}
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setHasFocus(false);
+      }}
     >
       <button 
         className={styles.expandControl} 
@@ -100,17 +122,33 @@ export default function ImageCarousel({ images, projectTitle, onExpand }: ImageC
             onExpand(currentIndex);
           }
         }}
-        aria-label="Expand image"
+        aria-label={t("tooltips.expandImage")}
       >
         <FaExpand size={16} />
       </button>
       
+      {!reducedMotion && (
+        <button
+          type="button"
+          className={styles.playControl}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            setPlaying((value) => !value);
+          }}
+          aria-label={playing ? t("carousel.pause") : t("carousel.play")}
+        >
+          {playing ? <FaPause size={14} /> : <FaPlay size={14} />}
+        </button>
+      )}
+
       <div className={styles.imagesWrapper}>
         <div 
           className={styles.imagesTrack}
+          aria-live={autoplay ? "off" : "polite"}
           style={{
             transform: `translateX(-${currentIndex * 100}%)`,
-            transition: 'transform 0.5s ease-in-out'
+            transition: reducedMotion ? 'none' : 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)'
           }}
         >
           {images.map((image, index) => (
@@ -120,7 +158,7 @@ export default function ImageCarousel({ images, projectTitle, onExpand }: ImageC
               <img src={image} alt="" aria-hidden="true" className={styles.slideBackdrop} loading="lazy" />
               <OptimizedImage
                 src={image}
-                alt={`${projectTitle} image ${index + 1}`}
+                alt={t("carousel.imageAlt").replace("{title}", projectTitle).replace("{n}", String(index + 1))}
                 width={600}
                 height={400}
                 className="rounded-lg cursor-pointer"
@@ -143,7 +181,7 @@ export default function ImageCarousel({ images, projectTitle, onExpand }: ImageC
           e.stopPropagation();
           prevImage();
         }}
-        aria-label="Previous image"
+        aria-label={t("carousel.previous")}
       >
         <FaChevronLeft size={16} />
       </button>
@@ -155,7 +193,7 @@ export default function ImageCarousel({ images, projectTitle, onExpand }: ImageC
           e.stopPropagation();
           nextImage();
         }}
-        aria-label="Next image"
+        aria-label={t("carousel.next")}
       >
         <FaChevronRight size={16} />
       </button>
@@ -171,7 +209,7 @@ export default function ImageCarousel({ images, projectTitle, onExpand }: ImageC
               e.stopPropagation();
               setCurrentIndex(index);
             }}
-            aria-label={`Go to image ${index + 1}`}
+            aria-label={t("carousel.goTo").replace("{n}", String(index + 1))}
           />
         ))}
       </div>

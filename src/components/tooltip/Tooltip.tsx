@@ -18,7 +18,7 @@ const Tooltip: React.FC<TooltipProps> = ({
   const [tooltipPosition, setTooltipPosition] = useState(position);
   const containerRef = React.useRef<HTMLDivElement>(null);
   
-  const handleMouseEnter = () => {
+  const show = () => {
     setIsVisible(true);
     
     // Only check for position adjustment if not forcing position
@@ -33,10 +33,20 @@ const Tooltip: React.FC<TooltipProps> = ({
     }
   };
   
-  const handleMouseLeave = () => {
+  const hide = () => {
     setIsVisible(false);
   };
-  
+
+  // Escape dismisses a visible tooltip without moving the pointer or focus
+  useEffect(() => {
+    if (!isVisible) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsVisible(false);
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [isVisible]);
+
   const tipRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (isVisible) placeTooltip(tipRef.current);
@@ -48,12 +58,16 @@ const Tooltip: React.FC<TooltipProps> = ({
     <div 
       ref={containerRef}
       className={`${styles.tooltipContainer}`}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onMouseEnter={show}
+      onMouseLeave={hide}
+      onFocus={(e) => {
+        if (e.target.matches(':focus-visible')) show();
+      }}
+      onBlur={hide}
     >
       {children}
       {isVisible && !disabled && (
-        <div ref={tipRef} className={`${styles.tooltip} ${styles[tooltipPosition]} ${tooltipClassName}`}>
+        <div ref={tipRef} role="tooltip" className={`${styles.tooltip} ${styles[tooltipPosition]} ${tooltipClassName}`}>
           {displayText}
         </div>
       )}

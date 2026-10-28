@@ -15,9 +15,13 @@ export default function ClickableButton({
 }: ClickableButtonProps) {
   const { t } = useTranslation(); // Add theme to extract current theme
 
+  // Use translation key if provided, otherwise use direct text
+  const tooltipDisplayText = tooltipKey ? t(tooltipKey) : tooltipText;
+
   const button = (
     <a
       href={href}
+      aria-label={tooltipDisplayText}
       target="_blank"
       rel="noopener noreferrer"
       className={`p-2 rounded-full transition-all duration-400 ${className}`}
@@ -29,9 +33,6 @@ export default function ClickableButton({
       {children}
     </a>
   );
-
-  // Use translation key if provided, otherwise use direct text
-  const tooltipDisplayText = tooltipKey ? t(tooltipKey) : tooltipText;
 
   if (tooltipDisplayText) {
     return <Tooltip text={tooltipDisplayText}>{button}</Tooltip>;

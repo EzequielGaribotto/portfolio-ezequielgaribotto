@@ -35,8 +35,28 @@ export const es: Translations = {
     viewWebsite: "Visitar sitio web",
     viewImage: "Ver imagen"
   },
+  carousel: {
+    previous: "Imagen anterior",
+    next: "Imagen siguiente",
+    goTo: "Ir a la imagen {n}",
+    pause: "Pausar presentación",
+    play: "Reproducir presentación",
+    imageAlt: "{title} imagen {n}",
+    unavailable: "Imagen no disponible",
+  },
+  a11y: {
+    home: "Volver arriba",
+    menu: "Abrir menú",
+    closeMenu: "Cerrar menú",
+    switchToDark: "Cambiar a modo oscuro",
+    switchToLight: "Cambiar a modo claro",
+    switchToSpanish: "Cambiar a español",
+    switchToEnglish: "Cambiar a inglés",
+    githubRepo: "Repositorio de GitHub",
+    projectImage: "Imagen del proyecto",
+  },
   footer: {
-    disclaimer: "© 2025 Ezequiel Garibotto.",
+    disclaimer: "© 2026 Ezequiel Garibotto.",
     githubLink: "GitHub repo"
   },
   aboutMe: {
@@ -55,11 +75,11 @@ export const es: Translations = {
     lastUpdated: "Última actualización"
   },
   tagHints: {
-    appliedAI: "Applied AI: IA dentro de un producto. Mi responsabilidad termina en la interfaz que usa el cliente final, no en el modelo en sí. Incluye diseñar flujos de trabajo agénticos que encadenan llamadas a LLM para automatizar una tarea.",
-    aiEngineering: "AI Engineering: un rol más amplio que, en algunas empresas, roza la infraestructura (MLOps) o incluso el ajuste fino de modelos.",
-    agenticAI: "Agentic AI: la responsabilidad llega hasta el runtime del agente: su fiabilidad, la evaluación de su comportamiento y su escalabilidad (frameworks de agentes, arquitecturas planner-executor, orquestación multiagente, estado multi-turno).",
-    agenticDevelopment: "Agentic Development: usar agentes de IA (planner, subagentes, skills, servidores MCP) para construir software. Es parte de Applied AI y del desarrollo asistido por IA; no es lo mismo que construir sistemas de agentes (Agentic AI).",
-    dataEngineering: "Data Engineering: mi responsabilidad termina en un conjunto de datos limpio y fiable: ingesta, parseo, controles de calidad y programación de tareas.",
+    appliedAI: "Applied AI: IA dentro de un producto.\nAlcance: desde la llamada al LLM hasta la interfaz que usa el cliente final. Incluye flujos de trabajo agénticos: cadenas de llamadas a LLM que automatizan una tarea.",
+    aiEngineering: "AI Engineering: trabajar en los modelos y sistemas que hay detrás de las funciones de IA, no solo usarlos en un producto.\nAlcance: más amplio que Applied AI. Según la empresa, llega también a la infraestructura (MLOps) o al ajuste fino de modelos.",
+    agenticAI: "Agentic AI: construir los propios agentes.\nAlcance: llega hasta el runtime del agente: su fiabilidad, la evaluación de su comportamiento y su escalabilidad (frameworks de agentes, arquitecturas planner-executor, orquestación multiagente, estado multi-turno).",
+    agenticDevelopment: "Agentic Development: usar agentes de IA (planner, subagentes, skills, servidores MCP) para construir software.\nForma parte de Applied AI y del desarrollo asistido por IA. No es lo mismo que construir sistemas de agentes (Agentic AI).",
+    dataEngineering: "Data Engineering: dejar los datos listos para usar.\nAlcance: termina en un conjunto de datos limpio y fiable: ingesta, parseo, controles de calidad y programación de tareas.",
   },
   techHints: {
     inProject: "Usado en este proyecto:",
@@ -67,11 +87,11 @@ export const es: Translations = {
     acrossProjects: "Usado en mis proyectos:",
   },
   tagExamples: {
-    appliedAI: "Ejemplos:\n• Facts: resúmenes de noticias neutrales generados con LLM dentro de una app Android\n• Chatbot de carrito de compra con LangGraph: reconocimiento de intención, estado de la conversación y validación",
-    aiEngineering: "Ejemplos:\n• AI & Big Data: CNNs con Keras y PyTorch\n• Modelos de precios de vivienda (Random Forest, XGBoost, grid search) servidos con una API Flask\n• Facts: pipeline de embeddings y clustering semántico sobre más de 10 feeds de noticias",
-    agenticAI: "Ejemplos:\n• Ninguno construido todavía\n• Planificado para ProString: los reportes de bug críticos disparan un arreglo propuesto por un LLM que reviso y apruebo, y las incidencias, emails y feedback se envían a la persona o grupo adecuado",
-    agenticDevelopment: "Ejemplos:\n• ProString: agent harness propio con subagentes, skills, hooks y memoria persistente\n• 7 servidores MCP con acceso de mínimo privilegio (Supabase, GitHub, Stripe, Context7, Chrome DevTools, Hostinger, Laravel Boost)\n• Informes de coste de tokens por cada puerta de release\n• Análisis de competencia asistido por LLM que alimenta la hoja de ruta",
-    dataEngineering: "Ejemplos:\n• Facts: scraping de más de 10 feeds RSS y un pipeline ETL con parseo XML\n• ProString: ingesta semanal de datasets públicos con pg_cron y Edge Functions\n• ProString: pipeline de importación con detección de columnas, de-duplicación de catálogo y puntuación de confianza",
+    appliedAI: "Ejemplos de mis proyectos:\n• Facts: resúmenes de noticias neutrales generados con LLM dentro de una app Android\n• Chatbot de carrito de compra con LangGraph: reconocimiento de intención, estado de la conversación y validación",
+    aiEngineering: "Ejemplos de mis proyectos:\n• AI & Big Data: CNNs con Keras y PyTorch\n• Modelos de precios de vivienda (Random Forest, XGBoost, grid search) servidos con una API Flask\n• Facts: pipeline de embeddings y clustering semántico sobre más de 10 feeds de noticias",
+    agenticAI: "Ejemplos de mis proyectos:\n• Ninguno construido todavía\n• Planificado para ProString: los reportes de bug críticos disparan un arreglo propuesto por un LLM que reviso y apruebo, y las incidencias, emails y feedback se envían a la persona o grupo adecuado",
+    agenticDevelopment: "Ejemplos de mis proyectos:\n• ProString: agent harness propio con subagentes, skills, hooks y memoria persistente\n• 7 servidores MCP con acceso de mínimo privilegio (Supabase, GitHub, Stripe, Context7, Chrome DevTools, Hostinger, Laravel Boost)\n• Informes de coste de tokens por cada puerta de release\n• Análisis de competencia asistido por LLM que alimenta la hoja de ruta",
+    dataEngineering: "Ejemplos de mis proyectos:\n• Facts: scraping de más de 10 feeds RSS y un pipeline ETL con parseo XML\n• ProString: ingesta semanal de datasets públicos con pg_cron y Edge Functions\n• ProString: pipeline de importación con detección de columnas, de-duplicación de catálogo y puntuación de confianza",
   },
   projectTagHints: {
     "prostring": {

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Image, { ImageProps } from 'next/image';
+import { useTranslation } from '../context/TranslationContext';
 
 interface OptimizedImageProps extends Omit<ImageProps, 'onLoadingComplete'> {
   fallbackSrc?: string;
@@ -21,6 +22,7 @@ export default function OptimizedImage({
   style,
   ...props
 }: OptimizedImageProps) {
+  const { t } = useTranslation();
   const [imgSrc, setImgSrc] = useState(src);
   const [hasError, setHasError] = useState(false);
   
@@ -61,7 +63,7 @@ export default function OptimizedImage({
           textAlign: 'center',
         }}
       >
-        <span>Image unavailable</span>
+        <span>{t("carousel.unavailable")}</span>
       </div>
     );
   }
@@ -71,7 +73,8 @@ export default function OptimizedImage({
       {lowQualitySrc && (
         <Image
           src={lowQualitySrc}
-          alt={`Low quality placeholder for ${alt}`}
+          alt=""
+          aria-hidden="true"
           fill
           className="absolute inset-0 blur-sm scale-105"
           priority

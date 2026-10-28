@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect, useRef } from "react";
 import translations from "../app/translations";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { STORAGE_KEYS, LOCALE, THEME, ThemeType } from "../constants";
@@ -54,16 +54,40 @@ export const TranslationProvider = ({
     }
   }, []);
 
+  // First visit (nothing stored): the theme script in layout.tsx already resolved the OS preference.
+  // Keep it instead of letting the "light" default overwrite it, then adopt it as the stored theme.
+  const osTheme = useRef<string | undefined>(
+    typeof document !== 'undefined' ? document.documentElement.dataset.theme : undefined
+  );
+  const followOsTheme = useRef(false);
   useEffect(() => {
-    if (typeof document !== 'undefined') {
-      document.documentElement.setAttribute("data-theme", theme);
+    try {
+      if (localStorage.getItem(STORAGE_KEYS.THEME) === null && osTheme.current === THEME.DARK) {
+        followOsTheme.current = true;
+        setTheme(THEME.DARK);
+      }
+    } catch {
+      // Storage unavailable: the theme script's choice stays for this visit
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+    if (followOsTheme.current) {
+      if (theme !== THEME.DARK) return; // wait for the stored value to catch up
+      followOsTheme.current = false;
+    }
+    document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
   const changeTheme = (newTheme: ThemeType) => {
     setTheme(newTheme);
     if (typeof document !== 'undefined') {
-      document.documentElement.setAttribute("data-theme", newTheme);
+      const root = document.documentElement;
+      root.classList.add("theme-switching");
+      root.setAttribute("data-theme", newTheme);
+      window.setTimeout(() => root.classList.remove("theme-switching"), 300);
     }
   };
 

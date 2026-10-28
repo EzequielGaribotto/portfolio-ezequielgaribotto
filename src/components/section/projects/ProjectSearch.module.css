@@ -39,7 +39,7 @@
 
 .searchInput::placeholder {
   color: var(--foreground-muted);
-  opacity: 0.7;
+  opacity: 1;
 }
 
 .searchIcon {
@@ -142,11 +142,6 @@
   border-color: var(--primary-hover);
 }
 
-.removeIcon {
-  font-size: 0.75rem;
-  margin-left: 0.25rem;
-}
-
 /* Mobile responsive */
 @media (max-width: 640px) {
   .searchInput {
@@ -176,7 +171,7 @@
 /* Dark theme adjustments */
 :global([data-theme="dark"]) .keywordTag.selected {
   background-color: var(--primary);
-  color: var(--background);
+  color: var(--selected-ink);
 }
 
 /* Animation for tag selection */
@@ -188,4 +183,18 @@
 
 .keywordTag.selected {
   animation: tagSelect 0.2s ease;
+}
+
+/* Reduced motion: no movement; color, border and shadow changes stay */
+@media (prefers-reduced-motion: reduce) {
+  .keywordTag:hover { transform: none; }
+
+  .keywordTag.selected { animation: none; }
+}
+
+/* Hit area grows past the visible control without moving the layout */
+.clearButton::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
 }

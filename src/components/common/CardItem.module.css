@@ -62,6 +62,55 @@
   margin-top: 1rem;
 }
 
+/* Split layout: text on the left, tags in a column on the right that follows while the text scrolls */
+.split {
+  display: grid;
+  grid-template-columns: calc(70% - 1.25rem) minmax(0, 1fr);
+  column-gap: 2.5rem;
+  row-gap: 1rem;
+  align-items: start;
+}
+
+.split .cardHeader {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+
+.split .description {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.split .technologies {
+  grid-column: 2;
+  grid-row: 2;
+  margin: 0;
+  align-content: start;
+  position: sticky;
+  top: 7rem;
+  padding-left: 1.5rem;
+  border-left: 1px solid var(--secondary-hover);
+}
+
+@media (max-width: 900px) {
+  .split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .split .description,
+  .split .technologies {
+    grid-column: 1;
+  }
+
+  .split .technologies {
+    grid-row: 3;
+    position: static;
+    padding-left: 0;
+    border-left: none;
+    margin-top: 0.5rem;
+  }
+}
+
 .tech > span {
   display: inline-block;
   margin: -0.25rem -0.75rem;
@@ -72,12 +121,21 @@
   background-color: var(--tag-hl-bg) !important;
   border-color: var(--tag-hl-border) !important;
   color: var(--tag-hl-text) !important;
-  box-shadow: 0 0 0 1px var(--tag-hl-border), 0 0 10px var(--tag-hl-glow);
+  box-shadow: 0 0 0 1px var(--tag-hl-border), 0 2px 8px var(--tag-hl-glow);
 }
 
+/* The hovered tag is the solid anchor; its related tags are the tinted ones */
 .techActive {
-  border-color: var(--tag-hl-border) !important;
-  box-shadow: 0 0 0 1px var(--tag-hl-border);
+  background-color: var(--primary) !important;
+  border-color: var(--primary) !important;
+  color: var(--on-primary) !important;
+  box-shadow: 0 2px 8px var(--tag-hl-glow);
+}
+
+/* Tags outside the hovered group step back, so the group reads at a glance */
+.techFocus .tech:not(.techRelated):not(.techActive),
+.techFocus .moreTags:not(.moreTagsRelated) {
+  opacity: 0.42;
 }
 
 .moreTags {
@@ -106,7 +164,7 @@
   padding: 0.25rem 0.75rem;
   border-radius: 20px;
   font-size: 0.85rem;
-  transition: none;
+  transition: opacity 0.15s ease;
   display: inline-block;
   background-color: var(--tech-bg);
   border: 1px solid var(--tech-border);
@@ -145,4 +203,9 @@
     padding: 0.2rem 0.5rem;
     font-size: 0.75rem;
   }
+}
+
+/* Reduced motion: no movement; color, border and shadow changes stay */
+@media (prefers-reduced-motion: reduce) {
+  .cardItem:hover { transform: none; }
 }

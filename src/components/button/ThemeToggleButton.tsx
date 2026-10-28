@@ -2,29 +2,17 @@
 
 import { useTranslation } from "../../context/TranslationContext";
 import { FaSun, FaMoon } from "react-icons/fa";
-import { useState, useEffect } from "react";
 import { ThemeToggleButtonProps } from "../../models/interfaces";
-import { getResponsiveIconSize } from "../../utils/browserHelpers";
 import { THEME, ThemeType } from "../../constants";
 
 export default function ThemeToggleButton({ className = "" }: ThemeToggleButtonProps) {
-  const { theme, changeTheme } = useTranslation();
-  const [iconSize, setIconSize] = useState(20);
-
-  useEffect(() => {
-    const updateIconSize = () => setIconSize(getResponsiveIconSize());
-    updateIconSize();
-    window.addEventListener("resize", updateIconSize);
-    return () => window.removeEventListener("resize", updateIconSize);
-  }, []);
-
+  const { t, theme, changeTheme } = useTranslation();
   const toggleTheme = () => {
     const newTheme: ThemeType = theme === THEME.LIGHT ? THEME.DARK : THEME.LIGHT;
     changeTheme(newTheme);
   };
 
   const buttonStyle = {
-    padding: iconSize <= 16 ? "0.25rem" : "0.5rem",
     borderRadius: "50%",
     backgroundColor: "transparent",
     color: "var(--foreground)",
@@ -38,11 +26,11 @@ export default function ThemeToggleButton({ className = "" }: ThemeToggleButtonP
   return (
     <button
       onClick={toggleTheme}
-      className={className}
+      className={`${className} p-2 max-[480px]:p-1 text-[20px] max-[768px]:text-[18px] max-[480px]:text-[16px]`}
       style={buttonStyle}
-      aria-label={theme === THEME.LIGHT ? "Switch to dark mode" : "Switch to light mode"}
+      aria-label={theme === THEME.LIGHT ? t("a11y.switchToDark") : t("a11y.switchToLight")}
     >
-      {theme === THEME.DARK ? <FaMoon size={iconSize} /> : <FaSun size={iconSize} />}
+      {theme === THEME.DARK ? <FaMoon size="1em" /> : <FaSun size="1em" />}
     </button>
   );
 }

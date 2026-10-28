@@ -5,6 +5,7 @@ import MetaInfoDisplay from './MetaInfoDisplay';
 import TagHint from './TagHint';
 import { descendants, orderTags } from "../../constants/techTaxonomy";
 import { useTranslation } from "../../context/TranslationContext";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 
 const TAG_LIMIT = 12;
 
@@ -19,6 +20,8 @@ interface CardItemProps {
   imageUrl?: string;
   linkUrl?: string;
   className?: string;
+  /** Wide layout: the description on the left, the tags in a column on the right. */
+  split?: boolean;
 }
 
 const CardItem: React.FC<CardItemProps> = ({
@@ -32,6 +35,7 @@ const CardItem: React.FC<CardItemProps> = ({
   imageUrl,
   linkUrl,
   className = "",
+  split = false,
 }) => {
   const { t } = useTranslation();
   const technologies = orderTags(rawTechnologies);
@@ -39,7 +43,10 @@ const CardItem: React.FC<CardItemProps> = ({
   const [hoveredTag, setHoveredTag] = useState<string | null>(null);
   const below = hoveredTag ? descendants(hoveredTag) : null;
   const isRelated = (x: string) => !!below && below.has(x);
-  const expanded = showAllTags;
+  // In the split layout the tag column has room for every tag; below 900px the tags sit under the text and stay folded
+  const columnFits = useMediaQuery("(min-width: 901px)");
+  const showEverything = split && columnFits;
+  const expanded = showAllTags || showEverything;
   // Hovering a tag whose concrete technologies are folded away opens the list, and it stays open
   const handleTagHover = (tag: string | null) => {
     setHoveredTag(tag);
@@ -49,7 +56,7 @@ const CardItem: React.FC<CardItemProps> = ({
     <div
       key={id}
       id={id}
-      className={`${styles.cardItem} ${className}`}
+      className={`${styles.cardItem} ${split ? styles.split : ""} ${className}`}
       onMouseLeave={() => setHoveredTag(null)}
     >
       <div className={styles.cardHeader}>
@@ -80,11 +87,11 @@ const CardItem: React.FC<CardItemProps> = ({
           <MetaInfoDisplay period={period} location={location} />
         </div>
       </div>
-      <div style={{ textAlign: 'left', whiteSpace: 'pre-line' }}>
+      <div className={styles.description} style={{ textAlign: 'left', whiteSpace: 'pre-line' }}>
         {description}
       </div>
       
-      <div className={styles.technologies}>
+      <div className={`${styles.technologies} ${hoveredTag ? styles.techFocus : ""}`}>
         {(expanded ? technologies : technologies.slice(0, TAG_LIMIT)).map((tech, index) => (
           <span
             key={index}
@@ -95,7 +102,7 @@ const CardItem: React.FC<CardItemProps> = ({
             <TagHint tag={tech} projectId={id} pool={technologies} onHoverChange={handleTagHover}>{tech}</TagHint>
           </span>
         ))}
-        {technologies.length > TAG_LIMIT && (
+        {technologies.length > TAG_LIMIT && !showEverything && (
           <button type="button" className={`${styles.moreTags} ${
               !expanded && technologies.slice(TAG_LIMIT).some(isRelated) ? styles.moreTagsRelated : ""
             }`}

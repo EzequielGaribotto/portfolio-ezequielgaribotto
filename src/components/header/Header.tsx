@@ -5,6 +5,7 @@ import LanguageSwitcher from '../language/LanguageSwitcher';
 import ThemeToggleButton from '../button/ThemeToggleButton';
 import styles from './Header.module.css';
 import Image from 'next/image';
+import { scrollBehavior } from '../../hooks/usePrefersReducedMotion';
   
 const Header: React.FC = () => {
   const { t, theme, isHydrated } = useTranslation();
@@ -37,7 +38,7 @@ const Header: React.FC = () => {
       // Smooth scroll to element without updating URL
       window.scrollTo({
         top: element.offsetTop - 100, // Offset for header height
-        behavior: 'smooth'
+        behavior: scrollBehavior()
       });
       // Close mobile menu if open
       setMobileMenuOpen(false);
@@ -82,12 +83,12 @@ const Header: React.FC = () => {
             href="#profile"
             onClick={scrollToSection('profile')}
             className={styles.logoLink}
-            aria-label="Logo"
+            aria-label={t("a11y.home")}
           >
             <div className={styles.logo}>
               <Image 
                 src="/images/logo/e332logo.webp" 
-                alt="Logo" 
+                alt="" 
                 width={60} 
                 height={60}
                 className={styles.logoImage}
@@ -152,7 +153,8 @@ const Header: React.FC = () => {
           <button 
             className={`${styles.mobileMenuButton} ${mobileMenuOpen ? styles.open : ''}`}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Menu"
+            aria-label={mobileMenuOpen ? t("a11y.closeMenu") : t("a11y.menu")}
+            aria-expanded={mobileMenuOpen}
           >
             <span className={styles.hamburgerLine}></span>
             <span className={styles.hamburgerLine}></span>
@@ -174,7 +176,7 @@ const Header: React.FC = () => {
         <button 
           className={styles.mobileMenuClose}
           onClick={() => setMobileMenuOpen(false)}
-          aria-label="Close menu"
+          aria-label={t("a11y.closeMenu")}
         >
           ×
         </button>

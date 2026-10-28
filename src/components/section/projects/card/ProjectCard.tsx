@@ -12,6 +12,8 @@ import { HighlightText } from '../../../../utils/highlightText';
 import TagHint from '../../../common/TagHint';
 import DocumentButton from '../../../button/DocumentButton';
 import { descendants, orderTags } from '../../../../constants/techTaxonomy';
+import { useDialogFocus } from '../../../../hooks/useDialogFocus';
+import { scrollBehavior } from '../../../../hooks/usePrefersReducedMotion';
 
 const TAG_LIMIT = 12;
 const NO_TAGS: string[] = [];
@@ -38,6 +40,7 @@ export default function ProjectCard({ project, searchTerm = '', externalHighligh
   const [hasDraggedExpanded, setHasDraggedExpanded] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
+  useDialogFocus(isExpanded, overlayRef);
   const expandedContainerRef = useRef<HTMLDivElement>(null);
 
   // Expanded view navigation functions
@@ -224,6 +227,9 @@ export default function ProjectCard({ project, searchTerm = '', externalHighligh
     }
   };
 
+  // While a tag, a document or a filter chip is hovered, tags outside its group step back
+  const focusingTags = !!hoveredTag || hoveredDocTech.length > 0 || externalHighlight.length > 0;
+
   return (
     <>
       <div
@@ -251,7 +257,7 @@ export default function ProjectCard({ project, searchTerm = '', externalHighligh
                 e.preventDefault();
                 e.stopPropagation();
                 const el = document.getElementById(project.experienceId!);
-                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                if (el) el.scrollIntoView({ behavior: scrollBehavior(), block: 'center' });
               }}
               className={styles.readMoreLink}
             >
@@ -306,7 +312,7 @@ export default function ProjectCard({ project, searchTerm = '', externalHighligh
                   )}
                   <OptimizedImage
                     src={project.image || fallbackImage}
-                    alt={project.title || "Project image"}
+                    alt={project.title || t("a11y.projectImage")}
                     width={600}
                     height={400}
                     className="rounded-lg cursor-pointer"
@@ -343,7 +349,7 @@ export default function ProjectCard({ project, searchTerm = '', externalHighligh
 
         {/* Technologies */}
         {project.technologies && project.technologies.length > 0 && (
-          <div className={styles.technologies}>
+          <div className={`${styles.technologies} ${focusingTags ? styles.techFocus : ""}`}>
             {(() => {
               const all = orderTags(project.technologies);
               const forceAll = !!searchTerm?.trim();
@@ -397,7 +403,7 @@ export default function ProjectCard({ project, searchTerm = '', externalHighligh
           {project.arcadeLink && (
             <ClickableButton
               href={project.arcadeLink}
-              className={`${styles.socialIcon} ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : 'bg-blue-400 hover:bg-blue-300'} rounded-full`}
+              className={`${styles.socialIcon} ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : styles.pillLight} rounded-full`}
               tooltipKey="tooltips.playArcadeGame"
             >
               <svg 
@@ -413,7 +419,7 @@ export default function ProjectCard({ project, searchTerm = '', externalHighligh
           {project.programameLink && (
             <ClickableButton
               href={project.programameLink}
-              className={`${styles.socialIcon} ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : 'bg-blue-400 hover:bg-blue-300'} rounded-full`}
+              className={`${styles.socialIcon} ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : styles.pillLight} rounded-full`}
               tooltipKey="tooltips.competition"
             >
               <FaTrophy 
@@ -425,7 +431,7 @@ export default function ProjectCard({ project, searchTerm = '', externalHighligh
           {project.playStoreLink && (
             <ClickableButton
               href={project.playStoreLink}
-              className={`${styles.socialIcon} ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : 'bg-blue-400 hover:bg-blue-300'} rounded-full`}
+              className={`${styles.socialIcon} ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : styles.pillLight} rounded-full`}
               tooltipKey="tooltips.playStore"
             >
               <FaGooglePlay 
@@ -437,7 +443,7 @@ export default function ProjectCard({ project, searchTerm = '', externalHighligh
           {project.appStoreLink && (
             <ClickableButton
               href={project.appStoreLink}
-              className={`${styles.socialIcon} ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : 'bg-blue-400 hover:bg-blue-300'} rounded-full`}
+              className={`${styles.socialIcon} ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : styles.pillLight} rounded-full`}
               tooltipKey="tooltips.appStore"
             >
               <svg 
@@ -453,7 +459,7 @@ export default function ProjectCard({ project, searchTerm = '', externalHighligh
           {project.repoLink && (
             <ClickableButton
               href={project.repoLink}
-              className={`${styles.socialIcon} ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : 'bg-blue-400 hover:bg-blue-300'} rounded-full flex items-center justify-center`}
+              className={`${styles.socialIcon} ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : styles.pillLight} rounded-full flex items-center justify-center`}
               tooltipKey={project.id === "competitive-programming" ? "tooltips.solvedProblems" : "tooltips.sourceCode"}
             >
               <svg
@@ -473,13 +479,13 @@ export default function ProjectCard({ project, searchTerm = '', externalHighligh
               file={doc.file}
               pages={doc.pages}
               onHoverChange={(on) => setHoveredDocTech(on ? doc.technologies ?? [] : [])}
-              className={`${styles.socialIcon} ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : 'bg-blue-400 hover:bg-blue-300'} flex items-center justify-center`}
+              className={`${styles.socialIcon} ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : styles.pillLight} flex items-center justify-center`}
             />
           ))}
           {project.presentationLink && (
             <ClickableButton
               href={project.presentationLink}
-              className={`${styles.socialIcon} ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : 'bg-blue-400 hover:bg-blue-300'} rounded-full flex items-center justify-center`}
+              className={`${styles.socialIcon} ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : styles.pillLight} rounded-full flex items-center justify-center`}
               tooltipKey="tooltips.viewPresentation"
             >
               <svg
@@ -495,7 +501,7 @@ export default function ProjectCard({ project, searchTerm = '', externalHighligh
           {project.websiteLink && (
             <ClickableButton
               href={project.websiteLink}
-              className={`${styles.socialIcon} ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : 'bg-blue-400 hover:bg-blue-300'} rounded-full flex items-center justify-center`}
+              className={`${styles.socialIcon} ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : styles.pillLight} rounded-full flex items-center justify-center`}
               tooltipKey="tooltips.viewWebsite"
             >
               <FaGlobe 
@@ -516,6 +522,10 @@ export default function ProjectCard({ project, searchTerm = '', externalHighligh
       ></div>
       <div 
         ref={overlayRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label={project.title}
+        tabIndex={-1}
         className={`${styles.expandedImageOverlay} ${isExpanded ? styles.active : ''}`}
         onClick={(e) => e.stopPropagation()}
       >
@@ -554,7 +564,7 @@ export default function ProjectCard({ project, searchTerm = '', externalHighligh
               src={project.images && project.images.length > 0 ? 
                 project.images[expandedImageIndex] : 
                 (project.image || fallbackImage)}
-              alt={`${project.title || "Project image"} ${expandedImageIndex + 1}`}
+              alt={t("carousel.imageAlt").replace("{title}", project.title || "").replace("{n}", String(expandedImageIndex + 1))}
               width={1920}
               height={1080}
               className={`${styles.expandedImage} ${isDraggingExpanded ? styles.dragging : ''}`}
@@ -575,7 +585,7 @@ export default function ProjectCard({ project, searchTerm = '', externalHighligh
                   e.stopPropagation();
                   prevExpandedImage();
                 }}
-                aria-label="Previous image"
+                aria-label={t("carousel.previous")}
               >
                 <FaChevronLeft size={24} />
               </button>
@@ -587,7 +597,7 @@ export default function ProjectCard({ project, searchTerm = '', externalHighligh
                   e.stopPropagation();
                   nextExpandedImage();
                 }}
-                aria-label="Next image"
+                aria-label={t("carousel.next")}
               >
                 <FaChevronRight size={24} />
               </button>
@@ -606,7 +616,7 @@ export default function ProjectCard({ project, searchTerm = '', externalHighligh
                     e.stopPropagation();
                     setExpandedImageIndex(index);
                   }}
-                  aria-label={`Go to image ${index + 1}`}
+                  aria-label={t("carousel.goTo").replace("{n}", String(index + 1))}
                 />
               ))}
             </div>

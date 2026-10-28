@@ -5,9 +5,24 @@ import Footer from "../components/section/footer/Footer";
 import { Metadata, Viewport } from 'next';
 import translations from '../app/translations';
 import Script from 'next/script';
+import { IBM_Plex_Sans, Source_Serif_4 } from 'next/font/google';
 import ScrollRestorationWrapper from '../components/ScrollRestorationWrapper';
 import HydrationGuard from '../components/HydrationGuard';
 import CloudflareScripts from '../components/analytics/CloudflareScripts';
+
+// Self-hosted at build time, so the CSP's font-src 'self' still holds
+const sans = IBM_Plex_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-sans',
+  display: 'swap',
+});
+const serif = Source_Serif_4({
+  subsets: ['latin'],
+  weight: ['600', '700'],
+  variable: '--font-serif',
+  display: 'swap',
+});
 
 // Generate metadata with translations
 export function generateMetadata(): Metadata {
@@ -70,7 +85,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const initialLocale = "es"; // Default language
 
   return (
-    <html lang={initialLocale} suppressHydrationWarning={true}>
+    <html lang={initialLocale} className={`${sans.variable} ${serif.variable}`} suppressHydrationWarning={true}>
       <head>
         {/* Add color-scheme meta tag to help browsers */}
         <meta name="color-scheme" content="dark light" />

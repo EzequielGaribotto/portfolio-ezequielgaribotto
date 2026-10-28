@@ -95,6 +95,11 @@
   border-color: var(--primary-hover);
 }
 
+/* Brass is a light fill: dark ink keeps the label above 4.5:1 */
+:global([data-theme="dark"]) .sortButtonActive {
+  color: var(--selected-ink);
+}
+
 @media (max-width: 640px) {
   .resultsText {
     font-size: 0.8rem;
@@ -108,4 +113,9 @@
     padding: 0.4rem 0.8rem;
     font-size: 0.8rem;
   }
+}
+
+/* Reduced motion: no movement; color, border and shadow changes stay */
+@media (prefers-reduced-motion: reduce) {
+  .sortButton:hover { transform: none; }
 }

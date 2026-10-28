@@ -76,6 +76,7 @@ const TrainingSection: React.FC = () => {
             imageUrl={training.imageUrl}
             linkUrl={training.institutionUrl}
             className={styles.trainingItem}
+            split
           />
         ))}
       </CardList>

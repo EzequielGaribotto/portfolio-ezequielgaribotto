@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useId, useRef, useState } from "react";
 import { useTranslation } from "../../context/TranslationContext";
 import { TAG_HINT_KEYS, PROJECT_TAG_HINTS } from "../../constants/tagHints";
 import { usedDescendants } from "../../constants/techTaxonomy";
@@ -32,6 +32,9 @@ export default function TagHint({ tag, projectId, pool, onHoverChange, children 
   const hasChildren = usedDescendants(tag, pool).length > 0;
   const notify = hasChildren ? onHoverChange : undefined;
   const [open, setOpen] = useState(false);
+  // Escape hides the tip while the pointer or focus is still on the tag; leaving the tag re-arms it.
+  const [dismissed, setDismissed] = useState(false);
+  const tipId = useId();
   const rootRef = useRef<HTMLSpanElement>(null);
   const tipRef = useRef<HTMLSpanElement>(null);
 
@@ -65,8 +68,14 @@ export default function TagHint({ tag, projectId, pool, onHoverChange, children 
   return (
     <span
       ref={rootRef}
-      className={`${hintKey ? styles.hint : styles.plain} ${open ? styles.open : ""}`}
+      className={`${hintKey ? styles.hint : styles.plain} ${open ? styles.open : ""} ${dismissed ? styles.dismissed : ""}`}
       tabIndex={0}
+      aria-describedby={hintKey ? tipId : undefined}
+      onKeyDown={(e) => {
+        if (e.key !== "Escape" || !hintKey) return;
+        setDismissed(true);
+        setOpen(false);
+      }}
       onClick={() => {
         if (!window.matchMedia("(hover: none)").matches) return;
         const next = !open;
@@ -78,18 +87,40 @@ export default function TagHint({ tag, projectId, pool, onHoverChange, children 
         place();
         notify?.(tag);
       }}
-      onMouseLeave={() => notify?.(null)}
+      onMouseLeave={() => {
+        setDismissed(false);
+        notify?.(null);
+      }}
       onFocus={(e) => {
         if (!e.currentTarget.matches(":focus-visible")) return;
         place();
         notify?.(tag);
       }}
-      onBlur={() => notify?.(null)}
+      onBlur={() => {
+        setDismissed(false);
+        notify?.(null);
+      }}
     >
       {children}
       {hintKey && (
-        <span ref={tipRef} role="tooltip" className={styles.tip}>
-          {text}
+        <span ref={tipRef} id={tipId} role="tooltip" className={styles.tip}>
+          {text.split("\n").map((line, i) => {
+            // A label at the start of a line ("Scope:", "In this project:") is set in bold; bullets stay plain
+            const label = line.match(/^([^:•]{1,32}:)(.*)$/);
+            return (
+              <React.Fragment key={i}>
+                {i > 0 && "\n"}
+                {label ? (
+                  <>
+                    <strong className={styles.tipLabel}>{label[1]}</strong>
+                    {label[2]}
+                  </>
+                ) : (
+                  line
+                )}
+              </React.Fragment>
+            );
+          })}
         </span>
       )}
     </span>

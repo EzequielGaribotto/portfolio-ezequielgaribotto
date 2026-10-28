@@ -153,6 +153,11 @@
   pointer-events: auto;
 }
 
+/* Focus lands on the dialog itself when it opens; the ring belongs on its controls */
+.expandedImageOverlay:focus {
+  outline: none;
+}
+
 .expandedBackdrop {
   backdrop-filter: blur(5px);
   position: fixed;
@@ -205,6 +210,20 @@
   transform: scale(1.1);
 }
 
+/* Light theme action pills: white icon and page count on a deepened Harbour Blue, which still clears 4.5:1 under the card's 0.9 opacity */
+.pillLight {
+  background-color: #1a5690;
+}
+
+.pillLight:hover {
+  background-color: #154776;
+}
+
+.pillLight.socialIcon:hover svg,
+.pillLight.socialIcon:hover > * {
+  color: #fff;
+}
+
 /* Technology tags */
 .technologies {
   margin-top: 0.75rem;
@@ -220,7 +239,7 @@
 }
 
 .techTag {
-  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
 }
 
 /* Same specificity as .techTag but later wins only with the doubled selector */
@@ -228,12 +247,21 @@
   background: var(--tag-hl-bg);
   border-color: var(--tag-hl-border);
   color: var(--tag-hl-text);
-  box-shadow: 0 0 0 1px var(--tag-hl-border), 0 0 10px var(--tag-hl-glow);
+  box-shadow: 0 0 0 1px var(--tag-hl-border), 0 2px 8px var(--tag-hl-glow);
 }
 
+/* The hovered tag is the solid anchor; its related tags are the tinted ones */
 .techTag.techTagActive {
-  border-color: var(--tag-hl-border);
-  box-shadow: 0 0 0 1px var(--tag-hl-border);
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--on-primary);
+  box-shadow: 0 2px 8px var(--tag-hl-glow);
+}
+
+/* Tags outside the hovered group step back, so the group reads at a glance */
+.techFocus .techTag:not(.techTagRelated):not(.techTagActive),
+.techFocus .moreTags:not(.moreTagsRelated) {
+  opacity: 0.42;
 }
 
 .moreTags {
@@ -252,7 +280,7 @@
   border-style: solid;
   border-color: var(--tag-hl-border);
   color: var(--tag-hl-text);
-  box-shadow: 0 0 10px var(--tag-hl-glow);
+  box-shadow: 0 2px 8px var(--tag-hl-glow);
 }
 
 .moreTags:hover {
@@ -368,30 +396,43 @@
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 12px;
+  gap: 0;
   z-index: 104;
   background-color: rgba(0, 0, 0, 0.3);
-  padding: 8px 16px;
+  padding: 4px 12px;
   border-radius: 20px;
   backdrop-filter: blur(8px);
 }
 
+/* 24px target (WCAG 2.5.8) around a 12px visible ring */
 .expandedDot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.7);
-  background-color: transparent;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  transition: all 0.2s ease;
 }
 
-.expandedDot:hover {
+.expandedDot::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.expandedDot:hover::before {
   border-color: white;
   transform: scale(1.2);
 }
 
-.expandedDot.expandedDotActive {
+.expandedDot.expandedDotActive::before {
   background-color: white;
   border-color: white;
   transform: scale(1.3);
@@ -431,12 +472,24 @@
   
   .expandedDotsContainer {
     bottom: 20px;
-    gap: 10px;
-    padding: 6px 12px;
+    gap: 0;
+    padding: 4px 8px;
   }
   
-  .expandedDot {
+  .expandedDot::before {
     width: 10px;
     height: 10px;
   }
+}
+
+/* Hit area grows past the visible control without moving the layout */
+.expandControl::after {
+  content: "";
+  position: absolute;
+  inset: -9px;
+}
+
+/* Logos are often transparent PNGs drawn for light backgrounds; give them a light mat in the dark theme */
+:global([data-theme="dark"]) .projectImageWrapper {
+  background-color: var(--secondary-hover-light, #e2e8f0);
 }

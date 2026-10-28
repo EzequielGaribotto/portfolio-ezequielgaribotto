@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 
 export default function Footer() {
   const { t, theme, isHydrated } = useTranslation();
-  const [iconSize, setIconSize] = useState(24);
   const [isClient, setIsClient] = useState(false);
   
   // Set isClient to true when component mounts on client side
@@ -26,26 +25,6 @@ export default function Footer() {
       ? 'rgba(255, 255, 255, 0.2)'
       : 'rgba(0, 0, 0, 0.2)'}`
   };
-
-  // Update icon size based on screen width
-  useEffect(() => {
-    const updateIconSize = () => {
-      if (window.innerWidth <= 480) {
-        setIconSize(18);
-      } else if (window.innerWidth <= 768) {
-        setIconSize(20);
-      } else {
-        setIconSize(24);
-      }
-    };
-
-    // Set initial size
-    updateIconSize();
-
-    // Update size on resize
-    window.addEventListener("resize", updateIconSize);
-    return () => window.removeEventListener("resize", updateIconSize);
-  }, []);
 
   // Don't render with styles until client-side hydration is complete
   if (!isClient || !isHydrated) {
@@ -69,9 +48,9 @@ export default function Footer() {
           className={styles.githubLink}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="GitHub Repository"
+          aria-label={t("a11y.githubRepo")}
         >
-          <FaGithub size={iconSize} />
+          <FaGithub size="1em" />
         </a>
       </div>
     </footer>

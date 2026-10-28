@@ -19,17 +19,24 @@ export default function EmailButton({ email, className = "" }: EmailButtonProps)
   };
   
   return (
-    <Tooltip 
-      text={t("tooltips.email")}
-      alternateText={t("tooltips.emailCopied")}
-      showAlternate={copied}
-    >
-      <button
-        onClick={copyToClipboard}
-        className={`p-2 rounded-full transition-all duration-500 ease-in-out ${className}`}
+    <>
+      <Tooltip
+        text={t("tooltips.email")}
+        alternateText={t("tooltips.emailCopied")}
+        showAlternate={copied}
       >
-        <FaEnvelope size={20} color="white" />
-      </button>
-    </Tooltip>
+        <button
+          onClick={copyToClipboard}
+          aria-label={t("tooltips.email")}
+          className={`p-2 rounded-full transition-all duration-500 ease-in-out ${className}`}
+        >
+          <FaEnvelope size={20} color="white" />
+        </button>
+      </Tooltip>
+      {/* Announces the copy for screen readers; the visible confirmation is the tooltip */}
+      <span className="sr-only" role="status">
+        {copied ? t("tooltips.emailCopied") : ""}
+      </span>
+    </>
   );
 }

@@ -28,8 +28,18 @@
   /* Short grace period before hiding, so the pointer can travel from the tag to the tip. */
   transition: opacity 0.15s ease, visibility 0s linear 0.3s;
   z-index: 50;
-  cursor: text;
+  cursor: var(--cursor-text, text);
   user-select: text;
+}
+
+.tip ::selection,
+.tip::selection {
+  background: #f5f5f5;
+  color: #1f2937;
+}
+
+.tipLabel {
+  font-weight: 600;
 }
 
 .plain {
@@ -56,6 +66,17 @@
   right: 0;
   top: 100%;
   height: 0.75rem;
+}
+
+/* Escape: hide the tip even while hover or focus keeps it open (placed after the rules it overrides) */
+.hint.dismissed .tip,
+.hint.dismissed:hover .tip,
+.hint.dismissed.open .tip,
+.hint.dismissed:focus-visible .tip,
+.hint.dismissed:has(:focus-visible) .tip {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 /* Mouse: hover only. Keyboard: focus-visible (a click must not leave the tip open). */

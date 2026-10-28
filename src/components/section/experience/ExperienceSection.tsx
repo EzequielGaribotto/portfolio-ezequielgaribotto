@@ -154,6 +154,7 @@ const ExperienceSection: React.FC = () => {
             imageUrl={exp.imageUrl}
             linkUrl={exp.companyUrl}
             className={styles.experienceItem}
+            split
           />
         ))}
       </CardList>

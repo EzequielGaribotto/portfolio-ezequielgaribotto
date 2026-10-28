@@ -34,6 +34,28 @@ export const baseTranslations = {
     viewImage: "",
   },
   // Footer translations
+  // Image carousel and expanded image controls
+  carousel: {
+    previous: "",
+    next: "",
+    goTo: "",
+    pause: "",
+    play: "",
+    imageAlt: "",
+    unavailable: "",
+  },
+  // Accessible names for controls that show only an icon or a symbol
+  a11y: {
+    home: "",
+    menu: "",
+    closeMenu: "",
+    switchToDark: "",
+    switchToLight: "",
+    switchToSpanish: "",
+    switchToEnglish: "",
+    githubRepo: "",
+    projectImage: "",
+  },
   footer: {
     disclaimer: "",
     githubLink: "",

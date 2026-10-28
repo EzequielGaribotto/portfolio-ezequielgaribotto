@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type RefObject } from "react";
 import { createPortal } from "react-dom";
 import { FaCalendarAlt, FaDownload, FaTimes } from "react-icons/fa";
 import { useTranslation } from "../../context/TranslationContext";
+import { useDialogFocus } from "../../hooks/useDialogFocus";
 import styles from "./PdfPreviewModal.module.css";
 
 interface PdfPreviewModalProps {
@@ -12,12 +13,16 @@ interface PdfPreviewModalProps {
   subtitle?: string;
   file: string;
   onClose: () => void;
+  /** Where focus goes on close when the opener (a menu item) no longer exists. */
+  returnFocusTo?: RefObject<HTMLElement | null>;
 }
 
 /** The one PDF preview used by the CV button and by the project documents. */
-export default function PdfPreviewModal({ title, subtitle, file, onClose }: PdfPreviewModalProps) {
+export default function PdfPreviewModal({ title, subtitle, file, onClose, returnFocusTo }: PdfPreviewModalProps) {
   const { t } = useTranslation();
   const fileName = file.split("/").pop() || "document.pdf";
+  const dialogRef = useRef<HTMLDivElement>(null);
+  useDialogFocus(true, dialogRef, returnFocusTo);
   const onCloseRef = useRef(onClose);
   useEffect(() => {
     onCloseRef.current = onClose;
@@ -39,7 +44,15 @@ export default function PdfPreviewModal({ title, subtitle, file, onClose }: PdfP
 
   return createPortal(
     <div className={styles.backdrop} onClick={onClose}>
-      <div className={styles.modal} role="dialog" aria-label={title} onClick={(e) => e.stopPropagation()}>
+      <div
+        ref={dialogRef}
+        className={styles.modal}
+        role="dialog"
+        aria-modal="true"
+        aria-label={title}
+        tabIndex={-1}
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className={styles.modalHeader}>
           <span className={styles.modalTitle}>
             {subtitle && (

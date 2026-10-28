@@ -24,6 +24,7 @@
 
 .logoLink {
   display: block;
+  width: 120px; /* Same width as .controls, so the navigation stays centered */
   cursor: pointer;
   transition: none;
 }
@@ -106,7 +107,7 @@
   display: flex;
   align-items: center;
   gap: 15px;
-  width: 60px; /* Match logo width for balance */
+  width: 120px; /* Room for "ES | EN" plus the theme toggle; mirrors .logoLink */
   justify-content: flex-end;
   flex-shrink: 0;
 }
@@ -122,6 +123,7 @@
   border: none;
   cursor: pointer;
   padding: 0;
+  position: relative;
   z-index: 1001;
   transition: none;
 }
@@ -266,6 +268,11 @@
     font-size: 0.85rem;
   }
   
+  .logoLink,
+  .controls {
+    width: 100px;
+  }
+
   .controls {
     gap: 8px;
   }
@@ -332,4 +339,18 @@
   .controls {
     gap: 10px;
   }
+}
+
+/* Reduced motion: no movement; color, border and shadow changes stay */
+@media (prefers-reduced-motion: reduce) {
+  .logoLink:hover { transform: none; }
+
+  .mobileMenuContent { transition: none; }
+}
+
+/* 30x24 icon, 50x44 target */
+.mobileMenuButton::after {
+  content: "";
+  position: absolute;
+  inset: -10px;
 }
