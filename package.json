@@ -38,6 +38,9 @@
     "tailwindcss": "^4",
     "typescript": "^5"
   },
+  "overrides": {
+    "postcss": "^8.5.32"
+  },
   "resolutions": {
     "@tailwindcss/oxide": ">=1.0.0"
   },
