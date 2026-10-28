@@ -57,7 +57,7 @@ export const en: Translations = {
   tagHints: {
     appliedAI: "Applied AI: AI inside a product. My responsibility ends at the interface the end user touches, not at the model itself. It includes designing agentic workflows that chain LLM calls to automate a task.",
     aiEngineering: "AI Engineering: a broader scope that, in some companies, reaches infrastructure (MLOps) or even model fine-tuning.",
-    agenticAI: "Agentic AI: the scope extends into the agent's runtime: reliability, behavior evaluation and scalability (agent frameworks, planner-executor architectures, multi-agent orchestration, multi-turn state). Not built yet. Next level for ProString: agents that triage incidents, route them to the right person and propose fixes for human approval.",
+    agenticAI: "Agentic AI: the scope extends into the agent's runtime: reliability, behavior evaluation and scalability (agent frameworks, planner-executor architectures, multi-agent orchestration, multi-turn state). Not built yet: planned as the next level for ProString: agents that triage incidents, route them to the right person and propose fixes for human approval.",
     agenticDevelopment: "Agentic Development: using AI agents (planner, subagents, skills, MCP servers) to build software. It is part of Applied AI and AI-assisted development; it is not the same as building agent systems (Agentic AI).",
   },
   search: {
@@ -290,7 +290,7 @@ export const en: Translations = {
   },
   aboutMeSection: {
     title: "About Me",
-    personalInfo: "Focused on applied AI software engineering, agentic workflows and AI engineering. My core stack is Python, TypeScript, Vue, Supabase and LLM APIs. I am the solo developer of ProString Manage, a production multi-tenant SaaS platform for racket stringing workshops and tournament management, built with a custom agent harness. I represented my institute in the national ProgramaMe 2024 and 2025 finals, achieving 4th place. Pursuing a Specialization in AI and Big Data while also co-developing Facts: News AI Summary, an Android + Python solution with an end-to-end ETL pipeline for neutral news generation — currently paused but planned to continue.",
+    personalInfo: "Focused on applied AI software engineering and agentic development. My core stack is Python, TypeScript, Vue, Supabase and LLM APIs. I am the solo developer of ProString Manage, a production multi-tenant SaaS platform for racket stringing workshops and tournament management, built with a custom agent harness. I represented my institute in the national ProgramaMe 2024 and 2025 finals, achieving 4th place. Pursuing a Specialization in AI and Big Data while also co-developing Facts: News AI Summary, an Android + Python solution with an end-to-end ETL pipeline for neutral news generation — currently paused but planned to continue.",
     lifestyleInfo: "And the second best decision was starting to train. I enjoy staying active and healthy, maintaining a balanced lifestyle.",
     musicInfo: "I mostly listen to metal, rock, Spanish rap, national rock (Argentinean). I used to listen to electronic music a lot, now that music gives me nostalgia.",
     hobbiesInfo: "As for other hobbies, I used to play Minecraft a lot, but not building or making redstone mechanisms like many programmers I know. I enjoyed the competitive PvP of version 1.7.10. But I'm a normal person, I swear, I also enjoy immersive single-player experiences that offer rich narratives and open-world exploration like The Elder Scrolls saga, Red Dead Redemption, Spore, Atomic Heart, to mention a few.",

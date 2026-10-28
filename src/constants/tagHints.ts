@@ -5,6 +5,6 @@
 export const TAG_HINT_KEYS: Record<string, string> = {
   "Applied AI": "appliedAI",
   "AI Engineering": "aiEngineering",
-  "Agentic AI (next)": "agenticAI",
+  "Agentic AI": "agenticAI",
   "Agentic Development": "agenticDevelopment",
 };

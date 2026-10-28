@@ -24,6 +24,8 @@ export default function ProjectSearch({
   const availableKeywords = [
     "Applied AI",
     "AI Engineering",
+    "Agentic Development",
+    "Agentic AI",
     "Machine Learning",
     "Python",
     "Back-end",
