@@ -33,6 +33,15 @@
   text-align: center;
 }
 
+/* Fully opaque black bubble and arrow */
+.docTooltip {
+  background-color: #000 !important;
+}
+
+.docTooltip::after {
+  border-color: transparent transparent #000 transparent !important;
+}
+
 .menu {
   position: absolute;
   top: calc(100% + 0.5rem);
