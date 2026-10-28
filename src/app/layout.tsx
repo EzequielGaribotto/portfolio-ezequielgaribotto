@@ -5,21 +5,28 @@ import Footer from "../components/section/footer/Footer";
 import { Metadata, Viewport } from 'next';
 import translations from '../app/translations';
 import Script from 'next/script';
-import { IBM_Plex_Sans, Source_Serif_4 } from 'next/font/google';
+import localFont from 'next/font/local';
 import ScrollRestorationWrapper from '../components/ScrollRestorationWrapper';
 import HydrationGuard from '../components/HydrationGuard';
 import CloudflareScripts from '../components/analytics/CloudflareScripts';
 
-// Self-hosted at build time, so the CSP's font-src 'self' still holds
-const sans = IBM_Plex_Sans({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+// The font files live in the repo (src/app/fonts), so a build never depends on reaching Google Fonts.
+// Latin subset: covers Spanish and English text.
+const sans = localFont({
+  src: [
+    { path: './fonts/ibm-plex-sans-latin-400-normal.woff2', weight: '400', style: 'normal' },
+    { path: './fonts/ibm-plex-sans-latin-500-normal.woff2', weight: '500', style: 'normal' },
+    { path: './fonts/ibm-plex-sans-latin-600-normal.woff2', weight: '600', style: 'normal' },
+    { path: './fonts/ibm-plex-sans-latin-700-normal.woff2', weight: '700', style: 'normal' },
+  ],
   variable: '--font-sans',
   display: 'swap',
 });
-const serif = Source_Serif_4({
-  subsets: ['latin'],
-  weight: ['600', '700'],
+const serif = localFont({
+  src: [
+    { path: './fonts/source-serif-4-latin-600-normal.woff2', weight: '600', style: 'normal' },
+    { path: './fonts/source-serif-4-latin-700-normal.woff2', weight: '700', style: 'normal' },
+  ],
   variable: '--font-serif',
   display: 'swap',
 });
