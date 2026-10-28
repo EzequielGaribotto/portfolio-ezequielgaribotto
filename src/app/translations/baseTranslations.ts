@@ -87,6 +87,7 @@ export const baseTranslations = {
     preview: "",
     download: "",
     close: "",
+    pages: "",
   },
   // Search functionality translations
   search: {

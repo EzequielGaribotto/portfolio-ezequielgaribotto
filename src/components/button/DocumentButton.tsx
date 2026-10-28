@@ -11,11 +11,14 @@ import styles from "./DocumentButton.module.css";
 interface DocumentButtonProps {
   label: string;
   file: string;
+  pages?: number;
   className?: string;
+  /** Called with true/false while the pointer or focus is on the button. */
+  onHoverChange?: (hovering: boolean) => void;
 }
 
 /** PDF icon button: hover shows the title (shared Tooltip); click offers preview or download. */
-export default function DocumentButton({ label, file, className = "" }: DocumentButtonProps) {
+export default function DocumentButton({ label, file, pages, className = "", onHoverChange }: DocumentButtonProps) {
   const { t } = useTranslation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [previewOpen, setPreviewOpen] = useState(false);
@@ -54,11 +57,18 @@ export default function DocumentButton({ label, file, className = "" }: Document
   const fileName = file.split("/").pop() || "document.pdf";
 
   return (
-    <div className={styles.root} ref={rootRef}>
+    <div
+      className={styles.root}
+      ref={rootRef}
+      onMouseEnter={() => onHoverChange?.(true)}
+      onMouseLeave={() => onHoverChange?.(false)}
+      onFocus={() => onHoverChange?.(true)}
+      onBlur={() => onHoverChange?.(false)}
+    >
       <Tooltip text={label}>
         <button
           type="button"
-          className={`p-2 rounded-full transition-all duration-400 ${className}`}
+          className={`p-2 rounded-full transition-all duration-400 ${className} ${styles.docButton}`}
           onClick={(e) => {
             e.stopPropagation();
             setMenuOpen((open) => !open);
@@ -67,7 +77,10 @@ export default function DocumentButton({ label, file, className = "" }: Document
           aria-expanded={menuOpen}
           aria-label={label}
         >
-          <FaFilePdf size={20} className="text-white hover:text-primary transition-colors duration-400" />
+          <FaFilePdf size={15} className="text-white" />
+          {pages ? (
+            <span className={styles.pages}>{t("documents.pages").replace("{count}", String(pages))}</span>
+          ) : null}
         </button>
       </Tooltip>
 

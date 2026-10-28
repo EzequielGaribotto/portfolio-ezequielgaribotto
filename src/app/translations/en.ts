@@ -103,6 +103,7 @@ export const en: Translations = {
     preview: "Preview",
     download: "Download",
     close: "Close",
+    pages: "{count} pp",
   },
   search: {
     scopeLabel: "Scope",

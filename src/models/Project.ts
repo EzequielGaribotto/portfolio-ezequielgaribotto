@@ -2,6 +2,9 @@ export interface ProjectDocument {
   id: string;
   label: string;
   file: string;
+  pages?: number;
+  /** Tags (of the same card) that this document is about: highlighted while hovering its button. */
+  technologies?: string[];
 }
 
 export interface Project {

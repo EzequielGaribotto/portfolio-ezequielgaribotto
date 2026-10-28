@@ -28,6 +28,7 @@ export default function ProjectCard({ project, searchTerm = '' }: ProjectCardPro
   const [expandedImageIndex, setExpandedImageIndex] = useState(0);
   const [showAllTags, setShowAllTags] = useState(false);
   const [hoveredTag, setHoveredTag] = useState<string | null>(null);
+  const [hoveredDocTech, setHoveredDocTech] = useState<string[]>([]);
   const [isDraggingExpanded, setIsDraggingExpanded] = useState(false);
   const [startXExpanded, setStartXExpanded] = useState(0);
   const [dragOffsetExpanded, setDragOffsetExpanded] = useState(0);
@@ -346,7 +347,7 @@ export default function ProjectCard({ project, searchTerm = '' }: ProjectCardPro
                     <span
                       key={index}
                       className={`${styles.techTag} ${
-                        hoveredTag && TAG_CHILDREN[hoveredTag]?.includes(tech) ? styles.techTagRelated : ""
+                        hoveredDocTech.includes(tech) || (hoveredTag && TAG_CHILDREN[hoveredTag]?.includes(tech)) ? styles.techTagRelated : ""
                       } ${hoveredTag === tech ? styles.techTagActive : ""}`}
                     >
                       <TagHint tag={tech} projectId={project.id} pool={all} onHoverChange={setHoveredTag}>
@@ -358,7 +359,7 @@ export default function ProjectCard({ project, searchTerm = '' }: ProjectCardPro
                     <button
                       type="button"
                       className={`${styles.moreTags} ${
-                        !expanded && hoveredTag && all.slice(TAG_LIMIT).some((x) => TAG_CHILDREN[hoveredTag]?.includes(x))
+                        !expanded && all.slice(TAG_LIMIT).some((x) => hoveredDocTech.includes(x) || (hoveredTag && TAG_CHILDREN[hoveredTag]?.includes(x)))
                           ? styles.moreTagsRelated
                           : ""
                       }`}
@@ -453,6 +454,8 @@ export default function ProjectCard({ project, searchTerm = '' }: ProjectCardPro
               key={doc.id}
               label={doc.label}
               file={doc.file}
+              pages={doc.pages}
+              onHoverChange={(on) => setHoveredDocTech(on ? doc.technologies ?? [] : [])}
               className={`${styles.socialIcon} ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : 'bg-blue-400 hover:bg-blue-300'} flex items-center justify-center`}
             />
           ))}
