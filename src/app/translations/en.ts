@@ -55,10 +55,10 @@ export const en: Translations = {
     lastUpdated: "Last updated"
   },
   tagHints: {
-    appliedAI: "Applied AI: AI inside a product. My responsibility ends at the interface the end user touches, not at the model itself. It includes designing agentic workflows that chain LLM calls to automate a task.",
-    aiEngineering: "AI Engineering: a broader scope that, in some companies, reaches infrastructure (MLOps) or even model fine-tuning.",
-    agenticAI: "Agentic AI: the scope extends into the agent's runtime: reliability, behavior evaluation and scalability (agent frameworks, planner-executor architectures, multi-agent orchestration, multi-turn state). Not built yet: planned as the next level for ProString: agents that triage incidents, route them to the right person and propose fixes for human approval.",
-    agenticDevelopment: "Agentic Development: using AI agents (planner, subagents, skills, MCP servers) to build software. It is part of Applied AI and AI-assisted development; it is not the same as building agent systems (Agentic AI).",
+    appliedAI: "Applied AI: AI inside a product. My responsibility ends at the interface the end user touches, not at the model itself. It includes designing agentic workflows that chain LLM calls to automate a task.\n\nExamples:\n• Facts: LLM-generated neutral news summaries inside an Android app\n• Shopping-cart chatbot with LangGraph: intent recognition, conversation state and validation",
+    aiEngineering: "AI Engineering: a broader scope that, in some companies, reaches infrastructure (MLOps) or even model fine-tuning.\n\nExamples:\n• AI & Big Data: CNNs with Keras and PyTorch\n• House-price models (Random Forest, XGBoost, grid search) served through a Flask API\n• Facts: embeddings and semantic clustering pipeline over 10+ news feeds",
+    agenticAI: "Agentic AI: the scope extends into the agent's runtime: reliability, behavior evaluation and scalability (agent frameworks, planner-executor architectures, multi-agent orchestration, multi-turn state).\n\nExamples:\n• None built yet\n• Planned for ProString: critical bug reports trigger an LLM-proposed fix that I review and approve, and incidents, emails and feedback get routed to the right person or group",
+    agenticDevelopment: "Agentic Development: using AI agents (planner, subagents, skills, MCP servers) to build software. It is part of Applied AI and AI-assisted development; it is not the same as building agent systems (Agentic AI).\n\nExamples:\n• ProString: custom agent harness with subagents, skills, hooks and persistent memory\n• 7 MCP servers under least-privilege access (Supabase, GitHub, Stripe, Context7, Chrome DevTools, Hostinger, Laravel Boost)\n• Token-cost reporting per release gate\n• LLM-assisted competitor analysis that feeds the roadmap",
   },
   search: {
     placeholder: "Search projects by title, description, or technology...",
