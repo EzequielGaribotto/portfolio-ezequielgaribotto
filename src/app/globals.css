@@ -42,7 +42,7 @@
   /* Highlight of related tags: app blue on light backgrounds (gold in dark mode) */
   --tag-hl-bg: rgba(31, 98, 160, 0.24);
   --tag-hl-border: #1f62a0;
-  --tag-hl-text: #0b2a4a;
+  --tag-hl-text: #000000;
   --tag-hl-glow: rgba(31, 98, 160, 0.4);
   
   /* Section padding variables */
