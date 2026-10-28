@@ -1,4 +1,4 @@
-/* Fixed to the viewport and clipped to the projects section from script, so it paints only what is on screen */
+/* Fixed to the viewport, behind the whole page */
 .backdrop {
   position: fixed;
   inset: 0;

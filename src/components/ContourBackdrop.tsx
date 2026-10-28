@@ -34,7 +34,7 @@ float noise(vec2 p) {
 float fbm(vec2 p) {
   float v = 0.0;
   float a = 0.5;
-  for (int i = 0; i < 4; i++) {
+  for (int i = 0; i < 3; i++) {
     v += a * noise(p);
     p = p * 2.02 + 7.3;
     a *= 0.5;
@@ -45,7 +45,7 @@ float fbm(vec2 p) {
 void main() {
   vec2 frag = vec2(gl_FragCoord.x, uRes.y - gl_FragCoord.y);
   vec2 p = vec2(frag.x, frag.y + uScroll * 0.35) / 520.0;
-  float h = fbm(p + vec2(0.0, uTime * 0.012) + 0.5 * fbm(p * 0.8 - uTime * 0.01));
+  float h = fbm(p + vec2(0.0, uTime * 0.012) + 0.6 * noise(p * 0.8 - uTime * 0.01));
   float level = h * 11.0;
   float d = min(fract(level), 1.0 - fract(level));
   float w = fwidth(level);
@@ -73,9 +73,9 @@ function readAccent(): [number, number, number] {
 }
 
 /**
- * A quiet generative backdrop for the projects section: contour lines in the accent colour that drift slowly.
- * The canvas is one viewport tall and fixed, clipped to the section's box, so the shader only ever paints what is
- * on screen, and it fills the empty corners the card columns leave. Decorative: no input, hidden from assistive tech.
+ * A quiet generative backdrop for the whole page: contour lines in the accent colour that drift slowly behind everything.
+ * The canvas is one viewport tall and fixed, so the shader only ever paints what is on screen, and it fills the empty
+ * corners the cards leave. Decorative: no input, hidden from assistive tech.
  */
 export default function ContourBackdrop() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -83,7 +83,13 @@ export default function ContourBackdrop() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const gl = canvas.getContext("webgl2", { premultipliedAlpha: true, alpha: true, antialias: false });
+    const gl = canvas.getContext("webgl2", {
+      premultipliedAlpha: true,
+      alpha: true,
+      antialias: false,
+      depth: false,
+      stencil: false,
+    });
     if (!gl) return; // no WebGL2: the page simply has no backdrop
 
     const vs = compile(gl, gl.VERTEX_SHADER, VERTEX);
@@ -110,24 +116,21 @@ export default function ContourBackdrop() {
     const uAlpha = gl.getUniformLocation(program, "uAlpha");
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-    let visible = false;
     let frame = 0;
-    let last = 0;
+    let lastFrame = 0;
+    let clock = 0; // seconds of drift, advanced only by frames that were drawn
     let accent = readAccent();
+    let dark = document.documentElement.dataset.theme === "dark";
+    let offset = window.scrollY; // the scroll position the lines follow, eased so they glide instead of stepping
+    let velocity = 0;
 
-    // The canvas is fixed to the viewport; only the part inside the section's box shows
-    const shell = canvas.parentElement as HTMLElement;
-    const clip = () => {
-      const box = shell.getBoundingClientRect();
-      const top = Math.max(0, box.top);
-      const bottom = Math.max(0, window.innerHeight - box.bottom);
-      canvas.style.clipPath = `inset(${top}px 0 ${bottom}px 0)`;
-    };
-
+    // Pixel budget: the lines are thin and faint, so the field never needs more than about a megapixel
     const resize = () => {
-      const scale = Math.min(window.devicePixelRatio || 1, 1.5);
-      const width = Math.max(1, Math.round(canvas.clientWidth * scale));
-      const height = Math.max(1, Math.round(canvas.clientHeight * scale));
+      const w = canvas.clientWidth;
+      const h = canvas.clientHeight;
+      const scale = Math.min(1, Math.sqrt(1_100_000 / Math.max(1, w * h)));
+      const width = Math.max(1, Math.round(w * scale));
+      const height = Math.max(1, Math.round(h * scale));
       if (canvas.width !== width || canvas.height !== height) {
         canvas.width = width;
         canvas.height = height;
@@ -135,66 +138,79 @@ export default function ContourBackdrop() {
       gl.viewport(0, 0, width, height);
     };
 
-    const draw = (now: number) => {
-      const dark = document.documentElement.dataset.theme === "dark";
+    const draw = () => {
       gl.clearColor(0, 0, 0, 0);
       gl.clear(gl.COLOR_BUFFER_BIT);
       gl.uniform2f(uRes, canvas.width, canvas.height);
-      gl.uniform1f(uTime, reduced.matches ? 0 : now / 1000);
-      gl.uniform1f(uScroll, reduced.matches ? 0 : window.scrollY);
+      gl.uniform1f(uTime, clock);
+      gl.uniform1f(uScroll, offset);
       gl.uniform3f(uColor, accent[0], accent[1], accent[2]);
-      gl.uniform1f(uAlpha, dark ? 0.16 : 0.2);
+      gl.uniform1f(uAlpha, dark ? 0.16 : 0.17);
       gl.drawArrays(gl.TRIANGLES, 0, 3);
     };
 
+    // The field is redrawn on every frame: the drift is only a few pixels a second, so any lower rate shows as
+    // visible half-pixel steps. While the page scrolls, the lines follow it with a damped spring.
+    const SMOOTH_TIME = 0.16; // seconds the lines take to settle onto the scroll position
     const loop = (now: number) => {
       frame = 0;
-      if (!visible || document.hidden) return;
-      // About 30 frames a second is plenty for something this slow
-      if (now - last >= 33) {
-        last = now;
-        draw(now);
+      if (document.hidden) return;
+      const dt = Math.min(0.1, (now - lastFrame) / 1000);
+      lastFrame = now;
+      if (reduced.matches) {
+        offset = 0;
+      } else {
+        // Critically damped spring toward the scroll position: unlike a plain ease it also smooths the speed, so the
+        // small timing differences between the page's scrolling and this canvas never show as a stutter
+        const target = window.scrollY;
+        const omega = 2 / SMOOTH_TIME;
+        const x = omega * dt;
+        const decay = 1 / (1 + x + 0.48 * x * x + 0.235 * x * x * x);
+        const change = offset - target;
+        const carry = (velocity + omega * change) * dt;
+        velocity = (velocity - omega * carry) * decay;
+        offset = target + (change + carry) * decay;
+        if (Math.abs(target - offset) < 0.05 && Math.abs(velocity) < 0.5) {
+          offset = target;
+          velocity = 0;
+        }
       }
+      if (!reduced.matches) clock += dt;
+      draw();
+      // Reduced motion: one still frame, redrawn only when something changes (resize, theme)
       if (!reduced.matches) frame = requestAnimationFrame(loop);
     };
 
     const start = () => {
-      if (!frame) frame = requestAnimationFrame(loop);
-    };
-
-    const observer = new IntersectionObserver(([entry]) => {
-      visible = entry.isIntersecting;
-      if (visible) {
-        resize();
-        start();
+      if (!frame) {
+        lastFrame = performance.now();
+        frame = requestAnimationFrame(loop);
       }
-    });
-    observer.observe(shell);
-
-    const onScroll = () => {
-      clip();
-      start();
     };
+
     const onResize = () => {
       resize();
-      clip();
       start();
     };
-    const onVisibility = () => start();
+    const onScroll = () => start();
+    const onVisibility = () => {
+      start();
+    };
     const themeObserver = new MutationObserver(() => {
       accent = readAccent();
+      dark = document.documentElement.dataset.theme === "dark";
       start();
     });
     themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
     window.addEventListener("resize", onResize);
     window.addEventListener("scroll", onScroll, { passive: true });
-    clip();
     document.addEventListener("visibilitychange", onVisibility);
     reduced.addEventListener("change", onVisibility);
+    resize();
+    start();
 
     return () => {
       cancelAnimationFrame(frame);
-      observer.disconnect();
       themeObserver.disconnect();
       window.removeEventListener("resize", onResize);
       window.removeEventListener("scroll", onScroll);

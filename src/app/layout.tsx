@@ -9,6 +9,7 @@ import localFont from 'next/font/local';
 import ScrollRestorationWrapper from '../components/ScrollRestorationWrapper';
 import HydrationGuard from '../components/HydrationGuard';
 import SkipLink from '../components/SkipLink';
+import ContourBackdrop from '../components/ContourBackdrop';
 import CloudflareScripts from '../components/analytics/CloudflareScripts';
 
 // The font files live in the repo (src/app/fonts), so a build never depends on reaching Google Fonts.
@@ -181,6 +182,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <ScrollRestorationWrapper>
             {/* Apply HydrationGuard within ScrollRestorationWrapper */}
             <HydrationGuard>
+              <ContourBackdrop />
               <SkipLink />
               <Header />
               <main id="main-content" tabIndex={-1} style={{

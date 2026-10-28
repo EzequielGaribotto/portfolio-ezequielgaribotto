@@ -2,7 +2,6 @@
 import { useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import LazyProjectCard from "./card/LazyProjectCard";
-import ContourBackdrop from "./ContourBackdrop";
 import MasonryItem from "./MasonryItem";
 import ProjectSearch from "./ProjectSearch";
 import SearchResults from "./SearchResults";
@@ -282,8 +281,7 @@ export default function ProjectsSection() {
   };
 
   return (
-    <div ref={sectionRef} className={styles.sectionShell}>
-      <ContourBackdrop />
+    <div ref={sectionRef}>
       <Section
         id="projects"
         title={t("projects.title")}
