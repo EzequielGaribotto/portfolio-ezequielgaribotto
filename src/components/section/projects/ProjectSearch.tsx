@@ -10,12 +10,14 @@ interface ProjectSearchProps {
   onSearchChange: (searchTerm: string) => void;
   onKeywordsChange: (keywords: string[]) => void;
   selectedKeywords: string[];
+  projectTags: string[];
 }
 
 export default function ProjectSearch({ 
   onSearchChange, 
   onKeywordsChange, 
-  selectedKeywords 
+  selectedKeywords,
+  projectTags
 }: ProjectSearchProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const { t } = useTranslation();
@@ -101,7 +103,7 @@ export default function ProjectSearch({
             <span className={styles.groupLabel}>{group.label}</span>
             <div className={styles.keywordTags}>
               {group.keywords.map((keyword) => (
-                <TagHint key={keyword} tag={keyword}>
+                <TagHint key={keyword} tag={keyword} pool={projectTags}>
                   <button
                     onClick={() => handleKeywordToggle(keyword)}
                     className={`${styles.keywordTag} ${group.scope ? styles.scopeTag : ""} ${

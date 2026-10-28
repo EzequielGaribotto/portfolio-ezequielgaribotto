@@ -61,6 +61,11 @@ export const en: Translations = {
     agenticDevelopment: "Agentic Development: using AI agents (planner, subagents, skills, MCP servers) to build software. It is part of Applied AI and AI-assisted development; it is not the same as building agent systems (Agentic AI).",
     dataEngineering: "Data Engineering: my responsibility ends at a clean, reliable dataset: ingestion, parsing, quality checks and scheduling.",
   },
+  techHints: {
+    inProject: "Used in this project:",
+    inProgram: "Used in this program:",
+    acrossProjects: "Used across my projects:",
+  },
   tagExamples: {
     appliedAI: "Examples:\n• Facts: LLM-generated neutral news summaries inside an Android app\n• Shopping-cart chatbot with LangGraph: intent recognition, conversation state and validation",
     aiEngineering: "Examples:\n• AI & Big Data: CNNs with Keras and PyTorch\n• House-price models (Random Forest, XGBoost, grid search) served through a Flask API\n• Facts: embeddings and semantic clustering pipeline over 10+ news feeds",
@@ -227,6 +232,7 @@ export const en: Translations = {
         keras: "CNN with Keras/TensorFlow: exercise report (PDF, in Spanish)",
         pytorch: "CNN with PyTorch: exercise report (PDF, in Spanish)",
         sklearn: "Multilayer perceptron with scikit-learn: exercise report (PDF, in Spanish)",
+        bi: "BI system proposal for a small business (PDF, in Spanish)",
       },
     },
     prostring: {

@@ -213,6 +213,27 @@
   gap: 0.25rem;
 }
 
+.techTag > span {
+  display: inline-block;
+  margin: -0.25rem -0.5rem;
+  padding: 0.25rem 0.5rem;
+}
+
+.techTag {
+  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.techTagRelated {
+  background: color-mix(in srgb, var(--primary) 28%, transparent);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 1px var(--primary);
+}
+
+.techTagActive {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 1px var(--primary);
+}
+
 .moreTags {
   background: transparent;
   border: 1px dashed var(--tech-border);
@@ -222,6 +243,12 @@
   padding: 0.25rem 0.6rem;
   border-radius: 9999px;
   cursor: pointer;
+}
+
+.moreTagsRelated {
+  background: color-mix(in srgb, var(--primary) 28%, transparent);
+  border-style: solid;
+  border-color: var(--primary);
 }
 
 .moreTags:hover {

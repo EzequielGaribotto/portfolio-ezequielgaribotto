@@ -3,6 +3,7 @@ import Image from 'next/image';
 import styles from "./CardItem.module.css";
 import MetaInfoDisplay from './MetaInfoDisplay';
 import TagHint from './TagHint';
+import { TAG_CHILDREN } from "../../constants/techTaxonomy";
 import { useTranslation } from "../../context/TranslationContext";
 
 const TAG_LIMIT = 12;
@@ -34,6 +35,7 @@ const CardItem: React.FC<CardItemProps> = ({
 }) => {
   const { t } = useTranslation();
   const [showAllTags, setShowAllTags] = useState(false);
+  const [hoveredTag, setHoveredTag] = useState<string | null>(null);
   return (
     <div key={id} id={id} className={`${styles.cardItem} ${className}`}>
       <div className={styles.cardHeader}>
@@ -70,12 +72,22 @@ const CardItem: React.FC<CardItemProps> = ({
       
       <div className={styles.technologies}>
         {(showAllTags ? technologies : technologies.slice(0, TAG_LIMIT)).map((tech, index) => (
-          <span key={index} className={styles.tech}>
-            <TagHint tag={tech} projectId={id}>{tech}</TagHint>
+          <span
+            key={index}
+            className={`${styles.tech} ${
+              hoveredTag && TAG_CHILDREN[hoveredTag]?.includes(tech) ? styles.techRelated : ""
+            } ${hoveredTag === tech ? styles.techActive : ""}`}
+          >
+            <TagHint tag={tech} projectId={id} pool={technologies} onHoverChange={setHoveredTag}>{tech}</TagHint>
           </span>
         ))}
         {technologies.length > TAG_LIMIT && (
-          <button type="button" className={styles.moreTags} onClick={() => setShowAllTags((v) => !v)}>
+          <button type="button" className={`${styles.moreTags} ${
+              !showAllTags && hoveredTag && technologies.slice(TAG_LIMIT).some((x) => TAG_CHILDREN[hoveredTag]?.includes(x))
+                ? styles.moreTagsRelated
+                : ""
+            }`}
+            onClick={() => setShowAllTags((v) => !v)}>
             {showAllTags
               ? t("tags.showLess")
               : t("tags.showMore").replace("{count}", String(technologies.length - TAG_LIMIT))}

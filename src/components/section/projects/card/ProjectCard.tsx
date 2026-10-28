@@ -11,6 +11,7 @@ import ImageCarousel from './ImageCarousel';
 import { HighlightText } from '../../../../utils/highlightText';
 import TagHint from '../../../common/TagHint';
 import DocumentButton from '../../../button/DocumentButton';
+import { TAG_CHILDREN } from '../../../../constants/techTaxonomy';
 
 const TAG_LIMIT = 12;
 import styles from './ProjectCard.module.css';
@@ -26,6 +27,7 @@ export default function ProjectCard({ project, searchTerm = '' }: ProjectCardPro
   const [isExpanded, setIsExpanded] = useState(false);
   const [expandedImageIndex, setExpandedImageIndex] = useState(0);
   const [showAllTags, setShowAllTags] = useState(false);
+  const [hoveredTag, setHoveredTag] = useState<string | null>(null);
   const [isDraggingExpanded, setIsDraggingExpanded] = useState(false);
   const [startXExpanded, setStartXExpanded] = useState(0);
   const [dragOffsetExpanded, setDragOffsetExpanded] = useState(0);
@@ -341,8 +343,13 @@ export default function ProjectCard({ project, searchTerm = '' }: ProjectCardPro
               return (
                 <>
                   {shown.map((tech, index) => (
-                    <span key={index} className={styles.techTag}>
-                      <TagHint tag={tech} projectId={project.id}>
+                    <span
+                      key={index}
+                      className={`${styles.techTag} ${
+                        hoveredTag && TAG_CHILDREN[hoveredTag]?.includes(tech) ? styles.techTagRelated : ""
+                      } ${hoveredTag === tech ? styles.techTagActive : ""}`}
+                    >
+                      <TagHint tag={tech} projectId={project.id} pool={all} onHoverChange={setHoveredTag}>
                         <HighlightText text={tech} searchTerm={searchTerm} />
                       </TagHint>
                     </span>
@@ -350,7 +357,11 @@ export default function ProjectCard({ project, searchTerm = '' }: ProjectCardPro
                   {all.length > TAG_LIMIT && !forceAll && (
                     <button
                       type="button"
-                      className={styles.moreTags}
+                      className={`${styles.moreTags} ${
+                        !expanded && hoveredTag && all.slice(TAG_LIMIT).some((x) => TAG_CHILDREN[hoveredTag]?.includes(x))
+                          ? styles.moreTagsRelated
+                          : ""
+                      }`}
                       onClick={() => setShowAllTags((v) => !v)}
                     >
                       {showAllTags

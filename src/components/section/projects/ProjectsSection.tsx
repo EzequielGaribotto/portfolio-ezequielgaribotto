@@ -14,7 +14,7 @@ export default function ProjectsSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   const eulixTech = ["Android", "Kotlin", "UI", "UX", "Retrofit", "DataBinding", "MVVM", "XML", "Kotlin DSL", "LiveData", "Git", "Agile", "RESTful API", "International Team"];
-  const neutralNewsTech = ["Applied AI", "AI Engineering", "Data Engineering", "Python", "LLM", "Generative AI", "Machine Learning", "Embeddings", "Clustering", "NLP", "ETL", "Scraping", "Crawling", "Parsing", "Pandas", "NumPy", "BeautifulSoup", "Back-end", "Google Cloud Platform", "Docker", "Firebase", "NoSQL", "Front-end", "UI", "UX", "Google Colab", "Jupyter Notebooks", "Android", "Kotlin", "Hilt", "Dagger", "Room", "DAO", "Datastore"];
+  const neutralNewsTech = ["Applied AI", "AI Engineering", "Data Engineering", "Python", "Pandas", "NumPy", "BeautifulSoup", "LLM", "Generative AI", "Machine Learning", "Embeddings", "Clustering", "NLP", "ETL", "Scraping", "Crawling", "Parsing", "Back-end", "Google Cloud Platform", "Docker", "Firebase", "NoSQL", "Front-end", "UI", "UX", "Google Colab", "Jupyter Notebooks", "Android", "Kotlin", "Hilt", "Dagger", "Room", "DAO", "Datastore"];
   const compTech = ["Java", "Algorithms", "Data Structures", "Problem Solving"];
   const apiListTech = ["Android", "Java", "UX", "Caching", "Coroutines", "Android SDK"];
   const zombTech = ["Game Development", "UX", "Python", "MakeCode Arcade", "Collision Detection", "Retro Gaming"];
@@ -26,7 +26,7 @@ export default function ProjectsSection() {
   const barcelonaInequalityTech = ["Python", "Machine Learning", "Exploratory Data Analysis (EDA)", "Classification", "Statistical Analysis", "Data Processing", "Data Visualization", "Pandas", "NumPy", "Google Colab", "Jupyter Notebooks", "Socioeconomic Analysis", "Back-end"];
   const ctennisstudioTech = ["Front-end", "React", "Next.js", "TypeScript", "TailwindCSS", "Vercel", "UI", "UX", "Responsive Design", "SEO", "Web Development", "Professional Services"];
   const shoppingCartChatbotTech = ["Applied AI", "Python", "LLM", "LangGraph", "LangChain", "Conversational AI", "Chatbot", "NLP", "AI Integration", "Pydantic", "Pytest", "Back-end"];
-  const iaBigDataTech = ["AI Engineering", "Machine Learning", "Deep Learning", "Exploratory Data Analysis (EDA)", "Python", "Neural Networks", "Computer Vision", "Keras", "TensorFlow", "PyTorch", "scikit-learn", "XGBoost", "Random Forest", "Gradient Boosting", "Hyperparameter Tuning", "K-Means", "KNN", "Clustering", "Regression", "Predictive Modeling", "Flask", "Pandas", "Polars", "PySpark", "MongoDB", "Big Data", "Data Processing", "Data Visualization", "Data Science", "Jupyter Notebooks"];
+  const iaBigDataTech = ["AI Engineering", "Machine Learning", "Deep Learning", "Exploratory Data Analysis (EDA)", "Python", "scikit-learn", "XGBoost", "Random Forest", "Gradient Boosting", "Keras", "TensorFlow", "PyTorch", "Neural Networks", "Computer Vision", "Hyperparameter Tuning", "K-Means", "KNN", "Clustering", "Regression", "Predictive Modeling", "Flask", "Pandas", "Polars", "PySpark", "MongoDB", "Big Data", "Data Processing", "Data Visualization", "Data Science", "Jupyter Notebooks"];
   const proStringTech = ["Applied AI", "Agentic AI", "Agentic Development", "Data Engineering", "Agent Harness", "MCP", "Claude Code", "Subagents", "Vue 3", "TypeScript", "Back-end", "Front-end", "Supabase", "PostgreSQL", "PL/pgSQL", "Edge Functions", "Deno", "Serverless", "RPC", "Row Level Security", "RBAC", "MFA", "Multi-tenant", "SaaS", "Stripe", "Invoicing", "pg_cron", "Realtime", "Pinia", "Vite", "Playwright", "Vitest", "GitHub Actions", "CI/CD", "Zod", "ECharts", "ESC/POS", "QZ Tray", "i18n", "UX", "UI", "CSS", "SQL", "Data Processing", "Git"];
 
   const projects: Project[] = [
@@ -79,6 +79,7 @@ export default function ProjectsSection() {
         { id: "keras", label: t("projects.iaBigData.docs.keras"), file: "/docs/ia-bigdata/cnn-keras-tensorflow.pdf" },
         { id: "pytorch", label: t("projects.iaBigData.docs.pytorch"), file: "/docs/ia-bigdata/cnn-pytorch.pdf" },
         { id: "sklearn", label: t("projects.iaBigData.docs.sklearn"), file: "/docs/ia-bigdata/mlp-scikit-learn.pdf" },
+        { id: "bi", label: t("projects.iaBigData.docs.bi"), file: "/docs/ia-bigdata/bi-system-proposal.pdf" },
       ],
       weight: 1
     },
@@ -232,6 +233,9 @@ export default function ProjectsSection() {
 
   ];
 
+  // Every tag used by any project: lets the filter chips list the concrete technologies behind a generic one
+  const allTags = Array.from(new Set(projects.flatMap((p) => p.technologies ?? [])));
+
   const {
     searchTerm,
     setSearchTerm,
@@ -259,6 +263,7 @@ export default function ProjectsSection() {
           onSearchChange={setSearchTerm}
           onKeywordsChange={setSelectedKeywords}
           selectedKeywords={selectedKeywords}
+          projectTags={allTags}
         />
 
         {/* Results Counter */}

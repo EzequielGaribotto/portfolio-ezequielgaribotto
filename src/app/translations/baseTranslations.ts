@@ -62,6 +62,12 @@ export const baseTranslations = {
     agenticDevelopment: "",
     dataEngineering: "",
   },
+  // Hover on a generic technology tag: the concrete technologies used under it
+  techHints: {
+    inProject: "",
+    inProgram: "",
+    acrossProjects: "",
+  },
   tagExamples: {
     appliedAI: "",
     aiEngineering: "",
@@ -203,7 +209,7 @@ export const baseTranslations = {
       footer: string;
       startDate: string;
       endDate?: string | null;
-      docs?: { ames: string; keras: string; pytorch: string; sklearn: string };
+      docs?: { ames: string; keras: string; pytorch: string; sklearn: string; bi: string };
     },
     prostring: {} as {
       title: string;
