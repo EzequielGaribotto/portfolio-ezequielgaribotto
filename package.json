@@ -17,8 +17,7 @@
   "dependencies": {
     "i18next": "^25.0.0",
     "lightningcss": "^1.29.3",
-    "next": "15.3.0",
-    "next-i18next": "^15.4.2",
+    "next": "15.5.28",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-i18next": "^15.4.1",
@@ -31,13 +30,16 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "15.3.0",
+    "eslint-config-next": "15.5.28",
     "gh-pages": "^6.3.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
     "prettier": "^3.9.4",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "overrides": {
+    "postcss": "^8.5.32"
   },
   "resolutions": {
     "@tailwindcss/oxide": ">=1.0.0"

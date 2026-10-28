@@ -32,13 +32,9 @@ jobs:
         run: |
           npm ci
 
-      - name: Install Tailwind dependencies 🧩
-        run: |
-          npm install -D tailwindcss@latest postcss@latest autoprefixer@latest
-
       - name: Fix Tailwind Oxide issue 🔧
         run: |
-          npm install @tailwindcss/oxide-linux-x64-gnu --ignore-scripts
+          npm install --no-save @tailwindcss/oxide-linux-x64-gnu@4.1.3 --ignore-scripts
           npm rebuild @tailwindcss/oxide --platform=linux --arch=x64
 
       - name: Configure Pages 🔧

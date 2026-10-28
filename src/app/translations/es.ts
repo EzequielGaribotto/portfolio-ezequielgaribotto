@@ -41,14 +41,14 @@ export const es: Translations = {
   },
   aboutMe: {
     title: "Ezequiel Garibotto",
-    description: "Desarrollador Junior Full Stack | Backend, IA & Big Data",
+    description: "Desarrollador Junior Full-Stack de IA Aplicada | AI Engineering, Backend & Datos",
     photoAlt: "Foto de Ezequiel Garibotto"
   },
   cv: {
     download: "Descargar CV",
     spanish: "CV en Español",
-    english: "CV en Inglés",
-    english_ats: "CV en Inglés (ATS)",
+    english: "CV en Inglés (2 páginas)",
+    english_ats: "CV en Inglés (1 página, ATS)",
     preview: "Visualizar CV",
     unableToDisplay: "No se puede mostrar el archivo PDF.",
     downloadInstead: "Descargar en su lugar",
@@ -170,15 +170,15 @@ export const es: Translations = {
       endDate: "enero 2026"
     },
     iaBigData: {
-      title: "Portfolio del Máster en IA y Big Data",
-      description: "Repositorio de aprendizaje centrado en implementaciones prácticas de inteligencia artificial, aprendizaje automático y análisis masivo de datos. Abarca temas avanzados, desde el modelado predictivo y procesamiento de lenguaje natural hasta la arquitectura de sistemas distribuidos a gran escala.",
+      title: "Portfolio de la Especialización en IA y Big Data",
+      description: "Repositorio de aprendizaje de la Especialización en IA y Big Data: aprendizaje automático, deep learning (CNNs con Keras y PyTorch), modelos de precios de vivienda (Random Forest, XGBoost) servidos con una API Flask y un proyecto final de regresión y clustering (en curso).",
       footer: "Proyecto de Aprendizaje",
       startDate: "diciembre 2025",
       endDate: "diciembre 2026",
     },
     prostring: {
       title: "ProString Manage - SaaS de Gestión de Talleres de Encordado y Torneos",
-      description: "Plataforma SaaS profesional para talleres de encordado de raquetas, tiendas especializadas, clubes deportivos y equipos de torneo. Gestión de pedidos de encordado, historial de clientes y raquetas, inventario de productos, facturación y negocios multi-sede. Organización de torneos con asignación de máquinas y encordadores, estadísticas de carga y seguimiento de premios. Incluye planes de suscripción, impresión automática de recibos y etiquetas, escaneo de códigos de barras, importación de datos con matching inteligente e internacionalización completa en 6 idiomas.",
+      description: "Plataforma SaaS profesional para talleres de encordado de raquetas, tiendas especializadas, clubes deportivos y equipos de torneo. Gestión de pedidos de encordado, historial de clientes y raquetas, inventario de productos, facturación y negocios multi-sede. Organización de torneos con asignación de máquinas y encordadores, estadísticas de carga y seguimiento de premios. Incluye planes de suscripción, impresión automática de recibos y etiquetas, escaneo de códigos de barras, importación de datos con matching inteligente, facturas inmutables con numeración consecutiva, MFA aplicado en la base de datos e internacionalización completa en 6 idiomas. Desarrollado en solitario con un agent harness propio (subagentes, skills y 7 servidores MCP).",
       footer: "Proyecto Profesional Actual",
       startDate: "mayo 2026",
       endDate: null
@@ -223,21 +223,21 @@ export const es: Translations = {
     },
     prostring: {
       company: "ProString Manage",
-      position: "Desarrollador Junior Full Stack",
+      position: "Desarrollador Junior de IA Aplicada",
       period: "",
       location: "Remoto",
       description:
-        "Diseño, desarrollo e implementación de una aplicación web SaaS para talleres de encordado de raquetas y gestión de torneos, combinando un frontend Vue 3 + Vite con un backend serverless en Supabase.\n\n" +
-        "• Diseñé una arquitectura dual (Torneo / Tienda) con 23 Pinia stores, 45 vistas, +265 componentes y 67 composables en Vue 3 + TypeScript\n" +
-        "• Apliqué aislamiento de datos con políticas de Row-Level Security limitando acceso por tenant/rol, con validación de precios del lado del servidor y garantías de atomicidad\n" +
-        "• Implementé control de acceso mode & role based con 2 modos, 3 roles y 31 features con 134 permisos granulares\n" +
-        "• Desarrollé y desplegué ~60 funciones RPC en PostgreSQL y Edge Functions en Supabase cubriendo ciclo de vida de usuarios, autenticación, sincronización automática, envío de emails y provisionamiento de tenants demo\n" +
-        "• Aproveché suscripciones Supabase Realtime con PostgreSQL para actualizaciones de datos en vivo en flujos de gestión de torneos y tienda\n" +
-        "• Integré QZ Tray y ESC/POS para impresión automática de recibos y etiquetas, saltando el diálogo de impresión del navegador, con editores de diseño custom para layouts de impresión\n" +
-        "• Construí un pipeline robusto de importación de datos con auto-detección de columnas, detección de splits, de-duplicación de catálogo y confidence scoring para matching de productos nuevos vs existentes\n" +
-        "• Optimicé la eficiencia de lectura con caché a nivel de store con Supabase Realtime: datos obtenidos una sola vez y re-consultados únicamente ante eventos reales en la base de datos\n" +
-        "• Implementé facturación por suscripción con Stripe en 4 planes y descuentos para miembros GRSA\n" +
-        "• Entregué internacionalización completa en 6 idiomas con sistema de overrides de traducciones por tenant",
+        "Diseño, desarrollo y despliegue en solitario de una aplicación web SaaS multi-tenant para talleres de encordado de raquetas y gestión de torneos, combinando un frontend Vue 3 + Vite con un backend serverless en Supabase, construida con un agent harness propio.\n\n" +
+        "• Diseñé una arquitectura dual (Torneo / Tienda) con 23 Pinia stores, 45+ vistas, 230+ componentes y 70+ composables en Vue 3 + TypeScript\n" +
+        "• Apliqué aislamiento de datos por tenant/rol con 180+ políticas de Row-Level Security, validación de precios del lado del servidor y operaciones atómicas, además de MFA TOTP con AAL2 exigido a nivel de base de datos\n" +
+        "• Implementé RBAC con 2 modos, 3 roles y 29 features con 130+ permisos granulares\n" +
+        "• Construí un backend serverless con 23 Edge Functions en Deno y 80+ RPCs transaccionales en PL/pgSQL que cubren ciclo de vida de usuarios, autenticación, envío de emails, provisionamiento demo y provisionamiento automático de tenants mediante webhooks de Stripe (4 planes, descuentos para miembros GRSA)\n" +
+        "• Implementé facturación: numeración consecutiva asignada por el servidor, facturas emitidas inmutables garantizadas por triggers de base de datos con correcciones mediante facturas rectificativas y formatos de factura para 7 países\n" +
+        "• Desarrollé pipelines de datos: ingesta semanal programada de datasets públicos con pg_cron y Edge Functions, un motor de informes configurable, snapshots con retención y restauración, y un pipeline de importación con auto-detección de columnas, detección de splits, de-duplicación de catálogo y confidence scoring\n" +
+        "• Entregué una UX optimizada para torneos en vivo: entrada de pedidos orientada a teclado con salto automático entre campos, impresión de recibos y etiquetas con un clic mediante QZ Tray y ESC/POS (sin diálogo de impresión del navegador) y sincronización con Supabase Realtime con caché a nivel de store\n" +
+        "• Mantuve la calidad con 1.500+ tests automatizados, 8 workflows de CI/CD en GitHub Actions y validación de migraciones desde cero; localicé la interfaz en 6 idiomas con un sistema de overrides de traducciones por tenant\n" +
+        "• Construí un agent harness propio: subagentes, skills, hooks y memoria persistente, con 7 servidores MCP (Supabase, GitHub, Stripe, Context7, Chrome DevTools, Hostinger, Laravel Boost) con acceso de mínimo privilegio\n" +
+        "• En curso: asistente RAG reforzado frente a prompt injection, importación de datos y generación de analíticas asistidas por LLM, y pipelines en Python que agregan datos públicos de tenis",
     }
   },
   training: {
@@ -257,15 +257,14 @@ export const es: Translations = {
     },
     linkia: {
       institution: "Linkia FP",
-      course: "Máster en Inteligencia Artificial y Big Data",
-      period: "2025 - 2026",
+      course: "Especialización en Inteligencia Artificial y Big Data",
+      period: "febrero 2026 - diciembre 2026 (previsto)",
       location: "Remoto",
-      description: "Máster especializado en inteligencia artificial, aprendizaje automático y análisis de big data, enfocado en aplicaciones prácticas y tecnologías emergentes.\n\n" +
-        "• Aprendizaje profundo y redes neuronales\n" +
-        "• Procesamiento de lenguaje natural (NLP)\n" +
-        "• Análisis y visualización de datos a gran escala\n" +
-        "• Arquitecturas de Big Data y sistemas distribuidos\n" +
-        "• Machine Learning y modelos predictivos",
+      description: "Especialización en inteligencia artificial y big data, centrada en AI engineering y desarrollo agéntico sobre bases de aprendizaje automático y big data.\n\n" +
+        "• Práctica: CNNs (Keras, PyTorch) y modelos de precios de vivienda (XGBoost, grid search) servidos con una API Flask\n" +
+        "• Proyecto final en curso: regresión y clustering sobre 540K registros de e-commerce\n" +
+        "• Módulos: programación de IA, sistemas de aprendizaje automático, big data aplicado, modelos de IA, sistemas de big data y un proyecto de IA y big data\n\n" +
+        "Nota: 9",
     },
     upf: {
       institution: "Universitat Pompeu Fabra (UPF)",
@@ -284,7 +283,7 @@ export const es: Translations = {
   },
   aboutMeSection: {
     title: "Sobre mí",
-    personalInfo: "Desarrollador de software con mentalidad analítica y enfoque en ingeniería backend, inteligencia artificial y big data. Actualmente desarrollo ProString Manage, una plataforma SaaS para talleres de encordado y gestión de torneos con Vue 3, Supabase y PostgreSQL. Representé a mi instituto en las finales nacionales de ProgramaMe 2024 y 2025, logrando el 4º puesto. Cursando un Máster en IA y Big Data mientras desarrollo Facts: News AI Summary, una solución Android + Python con pipeline ETL completo para generación de noticias neutrales — actualmente en pausa pero con planes de continuarlo.",
+    personalInfo: "Enfocado en ingeniería de software con IA aplicada, flujos de trabajo agénticos y AI engineering. Mi stack principal es Python, TypeScript, Vue, Supabase y APIs de LLM. Soy el desarrollador en solitario de ProString Manage, una plataforma SaaS multi-tenant en producción para talleres de encordado y gestión de torneos, construida con un agent harness propio. Representé a mi instituto en las finales nacionales de ProgramaMe 2024 y 2025, logrando el 4º puesto. Cursando una Especialización en IA y Big Data mientras codesarrollo Facts: News AI Summary, una solución Android + Python con pipeline ETL completo para generación de noticias neutrales — actualmente en pausa pero con planes de continuarlo.",
     lifestyleInfo: "Y la segunda mejor decisión fue empezar a entrenar. Disfruto mantenerme activo y saludable, llevando un estilo de vida equilibrado.",
     musicInfo: "Escucho principalmente metal, rock, rap español, rock nacional (argentino). Y solía escuchar mucha música electrónica, ahora esa música me da nostalgia.",
     hobbiesInfo: "En cuanto a otros hobbies, solía jugar mucho Minecraft, pero no construir, ni hacer mecanismos de redstone, como muchos programadores que conozco, a mi me gustaba jugar el PvP competitivo de la 1.7.10. Pero soy una persona normal, lo juro, también disfruto de las experiencias inmersivas de un solo jugador que ofrecen narrativas ricas y exploración de mundo abierto como la saga de The Elder Scrolls, Red Dead Redemption, Spore, Atomic Heart, por mencionar algunos.",
