@@ -72,7 +72,7 @@ export default function ProjectsSection() {
       description: t("projects.iaBigData.description"),
       footer: t("projects.iaBigData.footer"),
       startDate: t("projects.iaBigData.startDate"),
-      endDate: t("projects.iaBigData.endDate"),
+      endDate: null,
       image: "/images/projects/ia-bigdata.webp",
       technologies: iaBigDataTech,
       repoLink: "https://github.com/EzequielGaribotto/IA-BigData",

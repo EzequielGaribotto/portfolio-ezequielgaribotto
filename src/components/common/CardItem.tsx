@@ -39,8 +39,12 @@ const CardItem: React.FC<CardItemProps> = ({
   const [hoveredTag, setHoveredTag] = useState<string | null>(null);
   const below = hoveredTag ? descendants(hoveredTag) : null;
   const isRelated = (x: string) => !!below && below.has(x);
-  // Hovering a tag whose concrete technologies are folded away opens the list while it stays hovered
-  const expanded = showAllTags || technologies.slice(TAG_LIMIT).some(isRelated);
+  const expanded = showAllTags;
+  // Hovering a tag whose concrete technologies are folded away opens the list, and it stays open
+  const handleTagHover = (tag: string | null) => {
+    setHoveredTag(tag);
+    if (tag && technologies.slice(TAG_LIMIT).some((x) => descendants(tag).has(x))) setShowAllTags(true);
+  };
   return (
     <div
       key={id}
@@ -88,7 +92,7 @@ const CardItem: React.FC<CardItemProps> = ({
               isRelated(tech) ? styles.techRelated : ""
             } ${hoveredTag === tech ? styles.techActive : ""}`}
           >
-            <TagHint tag={tech} projectId={id} pool={technologies} onHoverChange={setHoveredTag}>{tech}</TagHint>
+            <TagHint tag={tech} projectId={id} pool={technologies} onHoverChange={handleTagHover}>{tech}</TagHint>
           </span>
         ))}
         {technologies.length > TAG_LIMIT && (

@@ -351,8 +351,12 @@ export default function ProjectCard({ project, searchTerm = '', externalHighligh
               const relatedByTag = (x: string) => !!below && below.has(x);
               const isRelated = (x: string) =>
                 relatedByTag(x) || hoveredDocTech.includes(x) || externalHighlight.includes(x);
-              // Hovering a tag whose concrete technologies are folded away opens the list while it stays hovered
-              const expanded = showAllTags || forceAll || all.slice(TAG_LIMIT).some(relatedByTag);
+              const expanded = showAllTags || forceAll;
+              // Hovering a tag whose concrete technologies are folded away opens the list, and it stays open
+              const handleTagHover = (tag: string | null) => {
+                setHoveredTag(tag);
+                if (tag && all.slice(TAG_LIMIT).some((x) => descendants(tag).has(x))) setShowAllTags(true);
+              };
               const shown = expanded ? all : all.slice(0, TAG_LIMIT);
               return (
                 <>
@@ -363,7 +367,7 @@ export default function ProjectCard({ project, searchTerm = '', externalHighligh
                         isRelated(tech) ? styles.techTagRelated : ""
                       } ${hoveredTag === tech ? styles.techTagActive : ""}`}
                     >
-                      <TagHint tag={tech} projectId={project.id} pool={all} onHoverChange={setHoveredTag}>
+                      <TagHint tag={tech} projectId={project.id} pool={all} onHoverChange={handleTagHover}>
                         <HighlightText text={tech} searchTerm={searchTerm} />
                       </TagHint>
                     </span>
