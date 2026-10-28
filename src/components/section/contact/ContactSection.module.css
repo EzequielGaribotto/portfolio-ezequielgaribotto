@@ -114,7 +114,26 @@
 @media (max-width: 560px) {
   .row {
     grid-template-columns: minmax(0, 1fr);
-    row-gap: 0.25rem;
+    row-gap: 0.4rem;
+    /* The text sits inside the hairlines instead of touching their ends */
+    padding: 1.1rem 0.75rem;
+  }
+
+  .value {
+    font-size: 1rem;
+  }
+
+  /* The address, then its two shortcuts on their own line, flush with it and big enough for a thumb */
+  .actions {
+    display: flex;
+    margin: 0.7rem 0 0;
+    gap: 0.6rem;
+  }
+
+  .action {
+    min-height: 2.5rem;
+    padding: 0.3rem 1.1rem;
+    font-size: 0.85rem;
   }
 }
 

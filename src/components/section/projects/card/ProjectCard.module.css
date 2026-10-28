@@ -77,9 +77,12 @@
   color: var(--foreground-muted);
 }
 
-.fileStatus + .fileDate::before {
+/* The dot stays with the status, so a wrapped date never starts a line with it */
+.fileStatus:not(:last-child)::after {
   content: "·";
-  margin-right: 0.6rem;
+  margin-left: 0.6rem;
+  color: var(--foreground-muted);
+  font-weight: 400;
 }
 
 /* Project card image expansion */
@@ -307,6 +310,7 @@
   margin-top: 1.5rem; /* Increased margin from previous content */
   margin-bottom: 1rem; /* Added margin before technologies */
   gap: 0.5rem;
+  flex-wrap: wrap; /* the page-count buttons wrap to a second row instead of running off the card */
 }
 
 .readMoreLink {

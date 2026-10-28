@@ -2,6 +2,7 @@
   padding: 5rem 0;
   position: relative;
   width: 100%;
+  margin-inline: auto; /* centred wherever it sits: the 95% width on small screens would otherwise hug the left edge in a block parent */
   color: var(--foreground);
   transition: none;
 }
@@ -43,8 +44,8 @@
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .section {
-    padding: 3rem 0;
-    width: 95%; /* Match header width (95% of viewport) */
+    padding: 2.5rem 0;
+    width: 100%; /* the page's side margin comes from .centered-container */
   }
   
   .container, .fullWidthContainer {
@@ -66,10 +67,10 @@
   .section {
     padding-left: var(--section-padding-horizontal-mobile);
     padding-right: var(--section-padding-horizontal-mobile);
-    width: 95%; /* Ensure consistent width */
+    width: 100%;
   }
   
   .container, .fullWidthContainer {
-    padding: 0 0.5rem; /* Further reduced padding */
+    padding: 0;
   }
 }
