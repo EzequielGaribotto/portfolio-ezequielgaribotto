@@ -265,6 +265,7 @@ export default function ProjectsSection() {
           onKeywordsChange={setSelectedKeywords}
           selectedKeywords={selectedKeywords}
           projectTags={allTags}
+          suggestionPool={[...allTags, ...projects.map((project) => project.title)]}
           onChipHover={setChipHover}
         />
 
@@ -290,6 +291,15 @@ export default function ProjectsSection() {
           ))}
         </div>
         
+        {/* The same switch as the status line, at the end of the list where the next step is obvious */}
+        {!hasActiveFilters && (
+          <div className={styles.listFooter}>
+            <button type="button" className={styles.listToggle} onClick={() => setShowAllProjects(!showAllProjects)}>
+              {showAllProjects ? t("search.showLessLink") : t("search.showAllLink")}
+            </button>
+          </div>
+        )}
+
         {/* No Results Message */}
         {filteredProjects.length === 0 && hasActiveFilters && (
           <div className={styles.noResultsMessage}>

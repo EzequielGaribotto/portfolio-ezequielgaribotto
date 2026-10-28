@@ -1,0 +1,116 @@
+/* A closing page for the file: label and value rows separated by hairlines */
+.ledger {
+  max-width: 40rem;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 9.5rem minmax(0, 1fr);
+  align-items: center;
+  column-gap: 1.5rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--secondary-hover);
+}
+
+.row:last-child {
+  border-bottom: 1px solid var(--secondary-hover);
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  transition: color 0.2s ease;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--foreground-muted);
+}
+
+/* The icon takes the label's color, and both turn accent while the row is under the pointer */
+.icon {
+  flex-shrink: 0;
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.row:hover .label {
+  color: var(--primary);
+}
+
+.value {
+  margin: 0;
+  font-size: 1.05rem;
+  overflow-wrap: anywhere;
+}
+
+.value a {
+  color: var(--link);
+  text-decoration: none;
+}
+
+.value a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 1rem;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+/* Small secondary pills next to the address: other ways to use it */
+.action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 1.75rem;
+  padding: 0.15rem 0.7rem;
+  border: 1px solid var(--secondary-hover);
+  border-radius: 9999px;
+  background: none;
+  color: var(--foreground);
+  font-size: 0.8rem;
+  text-decoration: none;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.value .action {
+  position: relative;
+  color: var(--foreground);
+}
+
+/* Fixed-size copy button: only the icon changes, the confirmation floats above it */
+.copiedTip {
+  position: absolute;
+  bottom: calc(100% + 0.45rem);
+  right: 0;
+  padding: 0.25rem 0.6rem;
+  border-radius: 0.5rem;
+  background: #1f2937;
+  color: #f5f5f5;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+.value .action:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  text-decoration: none;
+}
+
+@media (max-width: 560px) {
+  .row {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 0.25rem;
+  }
+}

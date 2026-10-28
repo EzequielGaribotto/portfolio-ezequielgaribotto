@@ -21,8 +21,8 @@ const Header: React.FC = () => {
   // Define styles directly in the component
   const headerContentStyle = {
     backgroundColor: theme === 'dark' 
-      ? 'rgba(45, 55, 72, 0.85)'
-      : 'rgba(226, 232, 240, 0.85)',
+      ? 'rgba(45, 55, 72, 0.95)'
+      : 'rgba(226, 232, 240, 0.95)',
     backdropFilter: 'blur(16px)',
     WebkitBackdropFilter: 'blur(16px)', // For Safari
     border: `1px solid ${theme === 'dark' 
@@ -48,7 +48,7 @@ const Header: React.FC = () => {
   // Update active section based on scroll position only
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['profile', 'projects', 'experience', 'training'/*, 'gaming'*/];
+      const sections = ['profile', 'projects', 'experience', 'training', 'contact'/*, 'gaming'*/];
       const scrollPosition = window.scrollY + 200; // Add offset for header
       
       for (const section of sections) {
@@ -135,6 +135,15 @@ const Header: React.FC = () => {
                 {t("navigation.training")}
               </a>
             </li>
+            <li className={styles.navItem}>
+              <a 
+                href="#contact"
+                onClick={scrollToSection('contact')}
+                className={activeSection === 'contact' ? styles.active : ''}
+              >
+                {t("navigation.contact")}
+              </a>
+            </li>
             {/* <li className={styles.navItem}>
               <a 
                 href="#aboutme" // Replace javascript:void(0) with actual anchor
@@ -216,6 +225,15 @@ const Header: React.FC = () => {
                 className={activeSection === 'training' ? styles.active : ''}
               >
                 {t("navigation.training")}
+              </a>
+            </li>
+            <li className={styles.mobileNavItem}>
+              <a 
+                href="#contact"
+                onClick={scrollToSection('contact')}
+                className={activeSection === 'contact' ? styles.active : ''}
+              >
+                {t("navigation.contact")}
               </a>
             </li>
           </ul>

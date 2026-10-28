@@ -2,6 +2,10 @@
   position: relative;
   display: inline-block;
   cursor: help;
+  /* A dotted underline marks the tags that explain themselves */
+  text-decoration: underline dotted;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
 }
 
 .tip {
@@ -30,6 +34,7 @@
   z-index: 50;
   cursor: var(--cursor-text, text);
   user-select: text;
+  text-decoration: none;
 }
 
 .tip ::selection,

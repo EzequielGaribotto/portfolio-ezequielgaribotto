@@ -14,7 +14,8 @@ export const es: Translations = {
     projects: "Proyectos",
     experience: "Experiencia",
     training: "Formación",
-    gaming: "Sobre mí"
+    gaming: "Sobre mí",
+    contact: "Contacto"
   },
   tooltips: {
     github: "Visita mi perfil de GitHub",
@@ -34,6 +35,10 @@ export const es: Translations = {
     viewPresentation: "Ver presentación",
     viewWebsite: "Visitar sitio web",
     viewImage: "Ver imagen"
+  },
+  contact: {
+    title: "Contacto",
+    email: "Correo",
   },
   carousel: {
     previous: "Imagen anterior",
@@ -75,11 +80,11 @@ export const es: Translations = {
     lastUpdated: "Última actualización"
   },
   tagHints: {
-    appliedAI: "Applied AI: IA dentro de un producto.\nAlcance: desde la llamada al LLM hasta la interfaz que usa el cliente final. Incluye flujos de trabajo agénticos: cadenas de llamadas a LLM que automatizan una tarea.",
-    aiEngineering: "AI Engineering: trabajar en los modelos y sistemas que hay detrás de las funciones de IA, no solo usarlos en un producto.\nAlcance: más amplio que Applied AI. Según la empresa, llega también a la infraestructura (MLOps) o al ajuste fino de modelos.",
-    agenticAI: "Agentic AI: construir los propios agentes.\nAlcance: llega hasta el runtime del agente: su fiabilidad, la evaluación de su comportamiento y su escalabilidad (frameworks de agentes, arquitecturas planner-executor, orquestación multiagente, estado multi-turno).",
+    appliedAI: "Applied AI: IA dentro de un producto.\nÁmbito: desde la llamada al LLM hasta la interfaz que usa el cliente final. Incluye flujos de trabajo agénticos: cadenas de llamadas a LLM que automatizan una tarea.",
+    aiEngineering: "AI Engineering: trabajar en los modelos y sistemas que hay detrás de las funciones de IA, no solo usarlos en un producto.\nÁmbito: más amplio que Applied AI. Según la empresa, llega también a la infraestructura (MLOps) o al ajuste fino de modelos.",
+    agenticAI: "Agentic AI: construir los propios agentes.\nÁmbito: llega hasta el runtime del agente: su fiabilidad, la evaluación de su comportamiento y su escalabilidad (frameworks de agentes, arquitecturas planner-executor, orquestación multiagente, estado multi-turno).",
     agenticDevelopment: "Agentic Development: usar agentes de IA (planner, subagentes, skills, servidores MCP) para construir software.\nForma parte de Applied AI y del desarrollo asistido por IA. No es lo mismo que construir sistemas de agentes (Agentic AI).",
-    dataEngineering: "Data Engineering: dejar los datos listos para usar.\nAlcance: termina en un conjunto de datos limpio y fiable: ingesta, parseo, controles de calidad y programación de tareas.",
+    dataEngineering: "Data Engineering: dejar los datos listos para usar.\nÁmbito: termina en un conjunto de datos limpio y fiable: ingesta, parseo, controles de calidad y programación de tareas.",
   },
   techHints: {
     inProject: "Usado en este proyecto:",
@@ -126,7 +131,7 @@ export const es: Translations = {
     pages: "{count} págs.",
   },
   search: {
-    scopeLabel: "Alcance",
+    scopeLabel: "Ámbito",
     techLabel: "Tecnología",
     placeholder: "Buscar proyectos por título, descripción o tecnología...",
     clearFilters: "Limpiar filtros",

@@ -1,8 +1,7 @@
 .experienceItem {
   padding: 2rem;
   border-radius: 12px;
-  background-color: var(--secondary); /* Match project card background */
-  opacity: 0.9; /* Add transparency */
+  background-color: color-mix(in srgb, var(--secondary) 92%, transparent); /* translucency lives in the background, so text keeps full contrast */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   transition: none;
 }
@@ -10,8 +9,8 @@
 .experienceItem:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-  opacity: 1; /* Full opacity on hover */
-  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  background-color: var(--secondary);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
 @media (max-width: 768px) {

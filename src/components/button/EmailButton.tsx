@@ -30,7 +30,7 @@ export default function EmailButton({ email, className = "" }: EmailButtonProps)
           aria-label={t("tooltips.email")}
           className={`p-2 rounded-full transition-all duration-500 ease-in-out ${className}`}
         >
-          <FaEnvelope size={20} color="white" />
+          <FaEnvelope size={20} />
         </button>
       </Tooltip>
       {/* Announces the copy for screen readers; the visible confirmation is the tooltip */}

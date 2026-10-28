@@ -1,8 +1,7 @@
 .cardItem {
   padding: 2rem;
   border-radius: 12px;
-  background-color: var(--secondary);
-  opacity: 0.9;
+  background-color: color-mix(in srgb, var(--secondary) 92%, transparent); /* translucency lives in the background, so text keeps full contrast */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   transition: none;
 }
@@ -10,8 +9,8 @@
 .cardItem:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-  opacity: 1;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  background-color: var(--secondary);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
 .cardHeader {
@@ -30,6 +29,7 @@
 }
 
 .title {
+  font-family: var(--font-serif), Georgia, serif;
   font-size: 1.5rem;
   font-weight: 600;
   margin: 0 0 0.25rem 0;

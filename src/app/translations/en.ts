@@ -14,7 +14,8 @@ export const en: Translations = {
     projects: "Projects",
     experience: "Experience",
     training: "Training",
-    gaming: "About Me"
+    gaming: "About Me",
+    contact: "Contact"
   },
   tooltips: {
     github: "Visit my GitHub profile",
@@ -34,6 +35,10 @@ export const en: Translations = {
     viewPresentation: "View Presentation",
     viewWebsite: "Visit website",
     viewImage: "View image"
+  },
+  contact: {
+    title: "Contact",
+    email: "Email",
   },
   carousel: {
     previous: "Previous image",
@@ -127,7 +132,7 @@ export const en: Translations = {
   },
   search: {
     scopeLabel: "Scope",
-    techLabel: "Technology",
+    techLabel: "Tech",
     placeholder: "Search projects by title, description, or technology...",
     clearFilters: "Clear filters",
     noResults: "No projects found matching your criteria",

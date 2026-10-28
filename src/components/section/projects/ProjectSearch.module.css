@@ -13,6 +13,11 @@
 }
 
 .searchBar {
+  /* Shared by the field and its inline completion, so the ghost text lines up with what is typed */
+  --search-pad-left: 2.5rem;
+  --search-pad-right: 1rem;
+  --search-pad-y: 0.75rem;
+  --search-font: 1rem;
   position: relative;
   width: 100%;
   max-width: 600px;
@@ -22,12 +27,12 @@
 
 .searchInput {
   width: 100%;
-  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  padding: var(--search-pad-y) var(--search-pad-right) var(--search-pad-y) var(--search-pad-left);
   border: 2px solid var(--secondary-hover);
   border-radius: 2rem;
   background-color: var(--secondary);
   color: var(--foreground);
-  font-size: 1rem;
+  font-size: var(--search-font);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
   outline: none;
 }
@@ -94,6 +99,51 @@
   color: var(--foreground-muted);
 }
 
+.keywordTags[hidden] {
+  display: none;
+}
+
+.groupToggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.75rem;
+  border: none;
+  border-radius: 9999px;
+  background: none;
+  cursor: pointer;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+/* No pill behind it: the label and chevron just turn accent and the chevron nudges down */
+.groupToggle:hover {
+  color: var(--primary);
+}
+
+.groupToggle:hover .groupChevron:not(.groupChevronOpen) {
+  transform: translateY(2px);
+}
+
+.groupToggle:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Mirrors the chevron on the left so the label text itself sits on the center line */
+.groupToggle::before {
+  content: "";
+  width: 0.7rem; /* same width as the chevron; the flex gap already mirrors on both sides */
+}
+
+.groupChevron {
+  font-size: 0.7rem;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.groupChevronOpen {
+  transform: rotate(180deg);
+}
+
 .keywordTag.scopeTag {
   border-color: var(--primary);
   font-weight: 600;
@@ -144,9 +194,11 @@
 
 /* Mobile responsive */
 @media (max-width: 640px) {
-  .searchInput {
-    padding: 0.5rem 0.75rem 0.5rem 2rem;
-    font-size: 0.9rem;
+  .searchBar {
+    --search-pad-left: 2rem;
+    --search-pad-right: 0.75rem;
+    --search-pad-y: 0.5rem;
+    --search-font: 0.9rem;
   }
   
   .searchIcon {
@@ -197,4 +249,73 @@
   content: "";
   position: absolute;
   inset: -8px;
+}
+
+/* Inline completion: the typed part is invisible but takes its width, the rest shows in the muted color */
+.ghost {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  padding-left: calc(var(--search-pad-left) + 2px);
+  padding-right: var(--search-pad-right);
+  overflow: hidden;
+  color: var(--foreground-muted);
+  font-size: var(--search-font);
+  white-space: pre;
+  pointer-events: none;
+}
+
+.ghostTyped {
+  visibility: hidden;
+}
+
+.suggestions {
+  position: absolute;
+  top: calc(100% + 0.4rem);
+  left: 0;
+  right: 0;
+  z-index: 30;
+  max-height: 18rem;
+  margin: 0;
+  padding: 0.35rem;
+  overflow-y: auto;
+  list-style: none;
+  text-align: left;
+  background: var(--secondary);
+  border: 1px solid var(--secondary-hover);
+  border-radius: 1.25rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+.suggestion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.55rem 0.9rem;
+  border-radius: 0.9rem;
+  color: var(--foreground);
+  font-size: 0.95rem;
+}
+
+.suggestionActive {
+  background: color-mix(in srgb, var(--primary) 16%, transparent);
+}
+
+.suggestionText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.suggestionKey {
+  flex-shrink: 0;
+  padding: 0.05rem 0.45rem;
+  border: 1px solid var(--secondary-hover);
+  border-radius: 0.4rem;
+  color: var(--foreground-muted);
+  font-family: inherit;
+  font-size: 0.7rem;
 }

@@ -246,6 +246,16 @@ export default function ProjectCard({ project, searchTerm = '', externalHighligh
             {getProjectIcon()}
             <HighlightText text={project.title} searchTerm={searchTerm} />
           </h3>
+          {(project.footer || project.startDate) && (
+            <div className={styles.fileMeta}>
+              {project.footer && <span className={styles.fileStatus}>{project.footer}</span>}
+              {project.startDate && (
+                <span className={styles.fileDate}>
+                  {project.startDate} {project.endDate ? `- ${project.endDate}` : `- ${t("projects.current")}`}
+                </span>
+              )}
+            </div>
+          )}
           <p className={styles.projectDescription}>
             <HighlightText text={project.description} searchTerm={searchTerm} />
           </p>
@@ -263,14 +273,6 @@ export default function ProjectCard({ project, searchTerm = '', externalHighligh
             >
               {t("projects.readMoreExperience")}
             </a>
-          )}
-
-          {project.startDate && (
-            <div className={styles.projectDate}>
-              {project.startDate} {project.endDate ? 
-                `- ${project.endDate}` : 
-                `- ${t("projects.current")}`}
-            </div>
           )}
         </div>
         
@@ -330,20 +332,6 @@ export default function ProjectCard({ project, searchTerm = '', externalHighligh
                 </>
               )}
             </div>
-            
-            {/* Project footer - added below image */}
-            {project.footer && (
-              <div className={styles.projectFooter}>
-                {project.footer}
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* Project footer - show outside image container if no image */}
-        {!(project.image || (project.images && project.images.length > 0)) && project.footer && (
-          <div className={styles.projectFooter}>
-            {project.footer}
           </div>
         )}
 

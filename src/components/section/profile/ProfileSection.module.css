@@ -114,32 +114,24 @@
   transform: scale(1.05);
 }
 
-.githubButton {
-  background-color: #1a202c;
-}
-
-.githubButton:hover {
-  background-color: #2d3748;
-}
-
-.linkedinButton {
-  background-color: #0077b5;
-}
-
-.linkedinButton:hover {
-  background-color: #0069a3;
-}
-
+/* Quiet secondary actions: neutral discs, the accent only on hover, so the filled CV button leads */
+.githubButton,
+.linkedinButton,
 .emailButton {
-  background-color: #e53e3e;
+  background-color: var(--secondary);
+  color: var(--foreground);
+  border: 1px solid var(--secondary-hover);
 }
 
+.githubButton:hover,
+.linkedinButton:hover,
 .emailButton:hover {
-  background-color: #c53030;
+  color: var(--primary);
+  border-color: var(--primary);
 }
 
 .socialIcon {
-  color: white;
+  color: inherit;
   font-size: 1.375rem;
 }
 

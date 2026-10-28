@@ -4,6 +4,7 @@ import ProfileSection from "../components/section/profile/ProfileSection";
 import ProjectsSection from "../components/section/projects/ProjectsSection";
 import ExperienceSection from "../components/section/experience/ExperienceSection";
 import TrainingSection from "../components/section/training/TrainingSection";
+import ContactSection from "../components/section/contact/ContactSection";
 // import GamingSection from "../components/section/gaming/GamingSection";
 import { useTranslation } from "../context/TranslationContext";
 
@@ -24,6 +25,7 @@ export default function Home() {
       <ProjectsSection />
       <ExperienceSection />
       <TrainingSection />
+      <ContactSection />
       {/* <GamingSection /> */}
     </div>
   );

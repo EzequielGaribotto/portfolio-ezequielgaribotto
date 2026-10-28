@@ -12,6 +12,7 @@ export const baseTranslations = {
     experience: "",
     training: "",
     gaming: "",
+    contact: "",
   },
   // Tooltip translations
   tooltips: {
@@ -34,6 +35,10 @@ export const baseTranslations = {
     viewImage: "",
   },
   // Footer translations
+  contact: {
+    title: "",
+    email: "",
+  },
   // Image carousel and expanded image controls
   carousel: {
     previous: "",

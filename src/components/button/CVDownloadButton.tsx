@@ -9,8 +9,9 @@ import { formatDate } from "../../utils/dateHelpers";
 import { detectPdfSupport } from "../../utils/browserHelpers";
 import { CV_FILES } from "../../constants";
 import PdfPreviewModal from "./PdfPreviewModal";
+import styles from "./CVDownloadButton.module.css";
 
-export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
+export default function CVDownloadButton({ className, variant = "outline", compact = false }: CVDownloadButtonProps) {
   const { t, theme, locale } = useTranslation();
   const { metadata } = useCVMetadata();
   const [isOpen, setIsOpen] = useState(false);
@@ -86,33 +87,9 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const buttonStyle = {
-    color: "var(--foreground)",
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    backdropFilter: 'blur(15px)',
-    WebkitBackdropFilter: 'blur(15px)',
-    border: '2px solid var(--foreground)',
-    borderRadius: '9999px',
-    transition: 'border-color 0.2s ease, color 0.2s ease',
-    position: 'relative' as const,
-  };
-
-  const buttonHoverStyle = {
-    color: ('var(--primary)'),
-    borderColor: ('var(--primary)'),
-  };
-
-  const dropdownStyle = {
-    color: "var(--foreground)",
-    backgroundColor: 'rgba(255, 255, 255, 0.25)',
-    backdropFilter: 'blur(15px)',
-    WebkitBackdropFilter: 'blur(15px)',
-    border: '2px solid var(--foreground)',
-    maxWidth: 'max-content',
-    minWidth: 'fit-content',
-    transform: 'translateX(-50%)',
-    left: '50%',
-  };
+  const dropdownStyle = compact
+    ? { left: 0, maxWidth: 'max-content', minWidth: 'fit-content' }
+    : { maxWidth: 'max-content', minWidth: 'fit-content', transform: 'translateX(-50%)', left: '50%' };
 
   const handlePreview = (lang: string) => {
     setPreviewLang(lang);
@@ -144,7 +121,7 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
   return (
     <div className={`relative ${className}`} ref={dropdownRef}>
       {/* Date display with most recent CV version */}
-      {showDateInfo && metadata && (
+      {showDateInfo && metadata && !compact && (
         <div 
           className={`absolute text-center text-xs -top-6 left-1/2 transform -translate-x-1/2 transition-opacity duration-1000 ${fadeOut ? 'opacity-0' : 'opacity-80'}`}
           aria-hidden={fadeOut}
@@ -165,15 +142,9 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
       <button
         ref={triggerRef}
         onClick={() => setIsOpen(!isOpen)}
-        className="w-auto px-5 py-2.5 font-semibold rounded-full flex items-center justify-center shadow-sm hover:shadow-md"
-        style={buttonStyle}
-        onMouseOver={(e) => {
-          Object.assign(e.currentTarget.style, buttonHoverStyle);
-        }}
-        onMouseOut={(e) => {
-          e.currentTarget.style.color = "var(--foreground)";
-          e.currentTarget.style.borderColor = "var(--foreground)";
-        }}
+        className={`${styles.button} ${variant === "primary" ? styles.primary : ""} ${compact ? styles.compact : ""}`}
+        aria-haspopup="menu"
+        aria-expanded={isOpen}
       >
         <FaFileDownload className="mr-2" />
         {t("cv.download")}
@@ -181,7 +152,7 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
       
       {isOpen && (
         <div 
-          className="absolute mt-2 top-full rounded-xl shadow-lg z-10 overflow-hidden whitespace-nowrap" 
+          className={`absolute mt-2 top-full rounded-xl z-10 overflow-hidden whitespace-nowrap ${styles.menu}`}
           style={dropdownStyle}
         >
           <div className="flex flex-col w-full">
@@ -220,7 +191,7 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
                 
                 {/* Separator line - only show between items, not after the last one */}
                 {index < cvOptions.length - 1 && (
-                  <div style={{ borderTop: `1px solid var(--foreground)` }}></div>
+                  <div style={{ borderTop: `1px solid var(--secondary-hover)` }}></div>
                 )}
               </div>
             ))}

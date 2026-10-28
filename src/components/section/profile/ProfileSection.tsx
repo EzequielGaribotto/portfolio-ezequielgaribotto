@@ -72,7 +72,7 @@ export default function ProfileSection() {
 
           {/* CV Download Button */}
           <div className={styles.cvButtonContainer}>
-            <CVDownloadButton />
+            <CVDownloadButton variant="primary" />
           </div>
         </div>
       </div>

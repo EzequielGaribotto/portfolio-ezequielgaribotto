@@ -33,6 +33,10 @@ export interface EmailButtonProps {
 
 export interface CVDownloadButtonProps {
   className?: string;
+  /** `primary` is the filled action; `outline` is the glass outline. */
+  variant?: "primary" | "outline";
+  /** Smaller pill for the header; hides the "last updated" line. */
+  compact?: boolean;
 }
 
 export interface ThemeToggleButtonProps {
