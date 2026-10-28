@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "../../context/TranslationContext";
 import { TAG_HINT_KEYS, PROJECT_TAG_HINTS } from "../../constants/tagHints";
-import { usedChildren } from "../../constants/techTaxonomy";
+import { usedDescendants } from "../../constants/techTaxonomy";
 import { placeTooltip } from "../../utils/tooltipPlacement";
 import styles from "./TagHint.module.css";
 
@@ -21,14 +21,15 @@ interface TagHintProps {
 /**
  * Wraps a tag.
  * - Scope tags (Applied AI...) show a tooltip explaining their scope.
- * - Generic technology tags (Python, Machine Learning...) show no tooltip: they only report the hover
- *   (onHoverChange) so the card can highlight the concrete technologies under them.
+ * - Any bean with beans below it (children, grandchildren...) reports the hover (onHoverChange) so the
+ *   card can highlight them. Generic technology tags (Python...) do only that; scope beans also show
+ *   their tooltip.
  * Triggers: mouse hover, keyboard focus (focus-visible only), or a tap on touch screens.
  */
 export default function TagHint({ tag, projectId, pool, onHoverChange, children }: TagHintProps) {
   const { t } = useTranslation();
   const hintKey = TAG_HINT_KEYS[tag];
-  const hasChildren = !hintKey && usedChildren(tag, pool).length > 0;
+  const hasChildren = usedDescendants(tag, pool).length > 0;
   const notify = hasChildren ? onHoverChange : undefined;
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLSpanElement>(null);

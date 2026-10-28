@@ -11,7 +11,7 @@ import ImageCarousel from './ImageCarousel';
 import { HighlightText } from '../../../../utils/highlightText';
 import TagHint from '../../../common/TagHint';
 import DocumentButton from '../../../button/DocumentButton';
-import { TAG_CHILDREN } from '../../../../constants/techTaxonomy';
+import { descendants } from '../../../../constants/techTaxonomy';
 
 const TAG_LIMIT = 12;
 const NO_TAGS: string[] = [];
@@ -347,7 +347,8 @@ export default function ProjectCard({ project, searchTerm = '', externalHighligh
             {(() => {
               const all = project.technologies;
               const forceAll = !!searchTerm?.trim();
-              const relatedByTag = (x: string) => !!hoveredTag && !!TAG_CHILDREN[hoveredTag]?.includes(x);
+              const below = hoveredTag ? descendants(hoveredTag) : null;
+              const relatedByTag = (x: string) => !!below && below.has(x);
               const isRelated = (x: string) =>
                 relatedByTag(x) || hoveredDocTech.includes(x) || externalHighlight.includes(x);
               // Hovering a tag whose concrete technologies are folded away opens the list while it stays hovered

@@ -6,7 +6,7 @@ import SearchResults from "./SearchResults";
 import { useTranslation } from "../../../context/TranslationContext";
 import { useProjectSearch } from "../../../hooks/useProjectSearch";
 import { Project } from "../../../models/Project";
-import { TAG_CHILDREN } from "../../../constants/techTaxonomy";
+import { descendants } from "../../../constants/techTaxonomy";
 import styles from './ProjectsSection.module.css';
 import Section from "../Section";
 
@@ -284,7 +284,7 @@ export default function ProjectsSection() {
               <LazyProjectCard
                 project={project}
                 searchTerm={searchTerm}
-                highlightTags={chipHover ? TAG_CHILDREN[chipHover] : undefined}
+                highlightTags={chipHover ? Array.from(descendants(chipHover)) : undefined}
               />
             </div>
           ))}

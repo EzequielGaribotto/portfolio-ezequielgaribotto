@@ -4,6 +4,11 @@
  * the intersection with the tags actually used (in a card, or across all projects).
  */
 export const TAG_CHILDREN: Record<string, string[]> = {
+  // Scope beans: their children may have children of their own (resolved recursively)
+  "Applied AI": ["LLM", "Generative AI", "Conversational AI", "NLP"],
+  "AI Engineering": ["Machine Learning", "Deep Learning", "NLP"],
+  "Agentic Development": ["Agent Harness", "MCP", "Claude Code", "Subagents"],
+  "Data Engineering": ["ETL", "Data Processing", "Big Data", "pg_cron", "Edge Functions"],
   "Python": [
     "Pandas", "NumPy", "scikit-learn", "PyTorch", "TensorFlow", "Keras", "XGBoost", "Polars", "PySpark",
     "Flask", "FastAPI", "LangGraph", "LangChain", "BeautifulSoup", "Pydantic", "Pytest",
@@ -30,10 +35,22 @@ export const TAG_CHILDREN: Record<string, string[]> = {
   "Android": ["Kotlin", "Retrofit", "Room", "Hilt", "Dagger", "DAO", "Datastore", "MVVM", "LiveData"],
 };
 
-/** Concrete technologies of `tag` that appear in `pool`, in importance order. */
-export function usedChildren(tag: string, pool: string[] | undefined): string[] {
-  const children = TAG_CHILDREN[tag];
-  if (!children || !pool) return [];
-  const available = new Set(pool);
-  return children.filter((c) => available.has(c));
+/** Every bean below `tag`: children, grandchildren, and so on (cycle-safe). */
+export function descendants(tag: string): Set<string> {
+  const out = new Set<string>();
+  const stack = [...(TAG_CHILDREN[tag] ?? [])];
+  while (stack.length) {
+    const next = stack.pop() as string;
+    if (next === tag || out.has(next)) continue;
+    out.add(next);
+    stack.push(...(TAG_CHILDREN[next] ?? []));
+  }
+  return out;
+}
+
+/** Beans below `tag` that appear in `pool`. */
+export function usedDescendants(tag: string, pool: string[] | undefined): string[] {
+  if (!pool) return [];
+  const below = descendants(tag);
+  return pool.filter((x) => below.has(x));
 }

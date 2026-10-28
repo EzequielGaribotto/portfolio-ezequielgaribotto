@@ -3,7 +3,7 @@ import Image from 'next/image';
 import styles from "./CardItem.module.css";
 import MetaInfoDisplay from './MetaInfoDisplay';
 import TagHint from './TagHint';
-import { TAG_CHILDREN } from "../../constants/techTaxonomy";
+import { descendants } from "../../constants/techTaxonomy";
 import { useTranslation } from "../../context/TranslationContext";
 
 const TAG_LIMIT = 12;
@@ -36,7 +36,8 @@ const CardItem: React.FC<CardItemProps> = ({
   const { t } = useTranslation();
   const [showAllTags, setShowAllTags] = useState(false);
   const [hoveredTag, setHoveredTag] = useState<string | null>(null);
-  const isRelated = (x: string) => !!hoveredTag && !!TAG_CHILDREN[hoveredTag]?.includes(x);
+  const below = hoveredTag ? descendants(hoveredTag) : null;
+  const isRelated = (x: string) => !!below && below.has(x);
   // Hovering a tag whose concrete technologies are folded away opens the list while it stays hovered
   const expanded = showAllTags || technologies.slice(TAG_LIMIT).some(isRelated);
   return (
