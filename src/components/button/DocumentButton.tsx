@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
-import { FaFilePdf, FaEye, FaDownload, FaTimes } from "react-icons/fa";
+import { FaFilePdf, FaEye, FaDownload } from "react-icons/fa";
 import Tooltip from "../tooltip/Tooltip";
+import PdfPreviewModal from "./PdfPreviewModal";
 import { useTranslation } from "../../context/TranslationContext";
 import { detectPdfSupport } from "../../utils/browserHelpers";
 import styles from "./DocumentButton.module.css";
@@ -38,21 +38,6 @@ export default function DocumentButton({ label, file, pages, className = "", onH
     document.addEventListener("pointerdown", onPointerDown);
     return () => document.removeEventListener("pointerdown", onPointerDown);
   }, [menuOpen]);
-
-  // Escape closes the preview; the page behind does not scroll while it is open
-  useEffect(() => {
-    if (!previewOpen) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setPreviewOpen(false);
-    };
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", onKey);
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      window.removeEventListener("keydown", onKey);
-    };
-  }, [previewOpen]);
 
   const fileName = file.split("/").pop() || "document.pdf";
 
@@ -125,40 +110,7 @@ export default function DocumentButton({ label, file, pages, className = "", onH
         </div>
       )}
 
-      {previewOpen &&
-        createPortal(
-          <div className={styles.backdrop} onClick={() => setPreviewOpen(false)}>
-            <div
-              className={styles.modal}
-              role="dialog"
-              aria-label={label}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className={styles.modalHeader}>
-                <span className={styles.modalTitle}>{label}</span>
-                <div className={styles.modalActions}>
-                  <a className={styles.modalButton} href={file} download={fileName}>
-                    <FaDownload /> {t("documents.download")}
-                  </a>
-                  <button
-                    type="button"
-                    className={styles.modalButton}
-                    onClick={() => setPreviewOpen(false)}
-                    aria-label={t("documents.close")}
-                  >
-                    <FaTimes />
-                  </button>
-                </div>
-              </div>
-              <object data={file} type="application/pdf" className={styles.pdf}>
-                <a href={file} download={fileName}>
-                  {t("documents.download")}
-                </a>
-              </object>
-            </div>
-          </div>,
-          document.body
-        )}
+      {previewOpen && <PdfPreviewModal title={label} file={file} onClose={() => setPreviewOpen(false)} />}
     </div>
   );
 }

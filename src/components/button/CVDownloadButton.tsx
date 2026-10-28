@@ -1,13 +1,14 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { FaFileDownload, FaEye, FaTimes, FaCalendarAlt } from "react-icons/fa";
+import { FaFileDownload, FaEye } from "react-icons/fa";
 import { useTranslation } from "../../context/TranslationContext";
 import { CVDownloadButtonProps } from "../../models/interfaces";
 import { useCVMetadata } from "../../hooks/useCVMetadata";
 import { formatDate } from "../../utils/dateHelpers";
 import { detectPdfSupport } from "../../utils/browserHelpers";
 import { CV_FILES } from "../../constants";
+import PdfPreviewModal from "./PdfPreviewModal";
 
 export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
   const { t, theme, locale } = useTranslation();
@@ -83,85 +84,6 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-
-  // Handle escape key to close preview and ensure header stays hidden during modal scrolling
-  useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isPreviewOpen) {
-        setIsPreviewOpen(false);
-      }
-    };
-    
-    const keepHeaderHidden = () => {
-      const header = document.querySelector('header') as HTMLElement;
-      if (header) header.style.display = 'none';
-    };
-    
-    const preventScroll = (e: WheelEvent | TouchEvent) => {
-      const pdfObject = document.querySelector('.cv-pdf-object');
-      if (pdfObject && pdfObject.contains(e.target as Node)) {
-        return;
-      }
-      
-      e.preventDefault();
-      return false;
-    };
-    
-    if (isPreviewOpen) {
-      document.body.style.overflow = 'hidden';
-      document.documentElement.style.overflow = 'hidden';
-      document.body.style.position = 'fixed';
-      document.body.style.width = '100%';
-      document.body.style.top = `-${window.scrollY}px`;
-      
-      const header = document.querySelector('header') as HTMLElement;
-      if (header) {
-        header.style.display = 'none';
-        header.classList.add('hidden-by-cv-modal');
-      }
-      
-      document.addEventListener('scroll', keepHeaderHidden, true);
-      document.addEventListener('wheel', preventScroll as EventListener, { passive: false });
-      document.addEventListener('touchmove', preventScroll as EventListener, { passive: false });
-      window.addEventListener('keydown', handleEscape);
-    } else {
-      const scrollY = document.body.style.top;
-      document.body.style.overflow = '';
-      document.documentElement.style.overflow = '';
-      document.body.style.position = '';
-      document.body.style.width = '';
-      document.body.style.top = '';
-      
-      if (scrollY) {
-        window.scrollTo(0, parseInt(scrollY || '0') * -1);
-      }
-      
-      const header = document.querySelector('header.hidden-by-cv-modal') as HTMLElement;
-      if (header) {
-        header.style.display = '';
-        header.classList.remove('hidden-by-cv-modal');
-      }
-    }
-    
-    return () => {
-      document.body.style.overflow = '';
-      document.documentElement.style.overflow = '';
-      document.body.style.position = '';
-      document.body.style.width = '';
-      document.body.style.top = '';
-      
-      const header = document.querySelector('header.hidden-by-cv-modal') as HTMLElement;
-      if (header) {
-        header.style.display = '';
-        header.classList.remove('hidden-by-cv-modal');
-      }
-      
-      document.removeEventListener('scroll', keepHeaderHidden, true);
-      document.removeEventListener('wheel', preventScroll as EventListener);
-      document.removeEventListener('touchmove', preventScroll as EventListener);
-      window.removeEventListener('keydown', handleEscape);
-    };
-  }, [isPreviewOpen]);
 
   const buttonStyle = {
     color: "var(--foreground)",
@@ -304,83 +226,14 @@ export default function CVDownloadButton({ className }: CVDownloadButtonProps) {
         </div>
       )}
       
-      {/* CV Preview Modal */}
+      {/* CV preview: same modal as the project PDFs */}
       {isPreviewOpen && metadata && (
-        <>
-          {/* Fixed backdrop with balanced diagonal blur effect - not too dark or bright */}
-          <div 
-            className="fixed inset-0 z-50 cursor-pointer"
-            style={{
-              background: 'rgba(0, 0, 0, 0.5)',  // Reduced opacity for less darkness
-              backgroundImage: `
-                linear-gradient(125deg, 
-                  rgba(0, 0, 0, 0.8) 0%, 
-                  rgba(0, 0, 0, 0.4) 30%,
-                  rgba(0, 0, 0, 0.3) 50%,
-                  rgba(0, 0, 0, 0.4) 70%,
-                  rgba(0, 0, 0, 0.8) 100%),
-                repeating-linear-gradient(125deg, 
-                  rgba(0, 0, 0, 0.2) 0px, 
-                  rgba(0, 0, 0, 0.2) 2px, 
-                  rgba(0, 0, 0, 0.05) 2px, 
-                  rgba(0, 0, 0, 0.05) 6px)
-              `,
-              backdropFilter: 'blur(12px) brightness(85%)',  // Increased brightness
-              WebkitBackdropFilter: 'blur(12px) brightness(85%)',
-              transform: 'translateZ(0)',
-              boxShadow: 'inset 0 0 150px rgba(0,0,0,0.5)'  // Less intense shadow
-            }}
-            onClick={() => setIsPreviewOpen(false)}
-          ></div>
-          
-          {/* Modal content */}
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
-            <div className="w-full max-w-4xl h-full max-h-[90vh] rounded-lg overflow-hidden flex flex-col pointer-events-auto shadow-2xl">
-              <div className="flex items-center justify-between p-2 border-b-0 bg-[#3c3c3c] relative">
-                {/* Left side - Date info without version */}
-                <div className="flex items-center text-white text-xs px-2 opacity-80 min-w-[200px] z-10">
-                  <FaCalendarAlt className="mr-1" />
-                  <span>
-                    {formatDate(getCurrentDate(previewLang), locale)}
-                  </span>
-                </div>
-                
-                {/* Absolutely centered title */}
-                <h3 className="font-medium text-white absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full text-center">
-                  {previewLang === 'es' ? t("cv.spanish") : previewLang === 'en_ats' ? t("cv.english_ats") : t("cv.english")}
-                </h3>
-                
-                {/* Right side - Close button */}
-                <button 
-                  onClick={() => setIsPreviewOpen(false)}
-                  className="p-1 rounded-full hover:bg-gray-600 text-white min-w-[40px] z-10"
-                >
-                  <FaTimes size={20} />
-                </button>
-              </div>
-              
-              <div className="flex-1 overflow-auto bg-[#3c3c3c]">
-                <object
-                  data={previewLang === 'es' ? CV_FILES.ES : previewLang === 'en_ats' ? CV_FILES.EN_ATS : CV_FILES.EN}
-                  type="application/pdf"
-                  className="w-full h-full cv-pdf-object"
-                  style={{ border: 'none', margin: 0, padding: 0 }}
-                >
-                  <div className="flex flex-col items-center justify-center h-full text-white">
-                    <p className="mb-4">{t("cv.unableToDisplay")}</p>
-                    <a 
-                      href={previewLang === 'es' ? CV_FILES.ES : previewLang === 'en_ats' ? CV_FILES.EN_ATS : CV_FILES.EN}
-                      download
-                      className="px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded-md"
-                    >
-                      {t("cv.downloadInstead")}
-                    </a>
-                  </div>
-                </object>
-              </div>
-            </div>
-          </div>
-        </>
+        <PdfPreviewModal
+          title={previewLang === 'es' ? t("cv.spanish") : previewLang === 'en_ats' ? t("cv.english_ats") : t("cv.english")}
+          subtitle={formatDate(getCurrentDate(previewLang), locale)}
+          file={previewLang === 'es' ? CV_FILES.ES : previewLang === 'en_ats' ? CV_FILES.EN_ATS : CV_FILES.EN}
+          onClose={() => setIsPreviewOpen(false)}
+        />
       )}
     </div>
   );

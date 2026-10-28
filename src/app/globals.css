@@ -39,11 +39,11 @@
   --tech-text: #1a1a1a;
   --tech-hover-bg: #d1e2f5;
   --tech-hover-border: #0070f3;
-  /* Highlight of related tags: app gold, stronger on light backgrounds */
-  --tag-hl-bg: rgba(202, 165, 80, 0.6);
-  --tag-hl-border: #a9791f;
-  --tag-hl-text: #1a1a1a;
-  --tag-hl-glow: rgba(169, 121, 31, 0.45);
+  /* Highlight of related tags: app blue on light backgrounds (gold in dark mode) */
+  --tag-hl-bg: rgba(31, 98, 160, 0.24);
+  --tag-hl-border: #1f62a0;
+  --tag-hl-text: #0b2a4a;
+  --tag-hl-glow: rgba(31, 98, 160, 0.4);
   
   /* Section padding variables */
   --section-padding-horizontal: 2rem;
