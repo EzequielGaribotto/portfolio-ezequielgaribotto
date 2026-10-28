@@ -15,6 +15,10 @@ interface TagHintProps {
   pool?: string[];
   /** Called with the tag on hover/focus and null on leave, for tags that have concrete technologies. */
   onHoverChange?: (tag: string | null) => void;
+  /** Always open the tooltip below the tag instead of above. */
+  below?: boolean;
+  /** Bold tooltip text. */
+  boldTip?: boolean;
   children: React.ReactNode;
 }
 
@@ -26,7 +30,7 @@ interface TagHintProps {
  *   their tooltip.
  * Triggers: mouse hover, keyboard focus (focus-visible only), or a tap on touch screens.
  */
-export default function TagHint({ tag, projectId, pool, onHoverChange, children }: TagHintProps) {
+export default function TagHint({ tag, projectId, pool, onHoverChange, below, boldTip, children }: TagHintProps) {
   const { t } = useTranslation();
   const hintKey = TAG_HINT_KEYS[tag];
   const hasChildren = usedDescendants(tag, pool).length > 0;
@@ -51,7 +55,9 @@ export default function TagHint({ tag, projectId, pool, onHoverChange, children 
   if (!hintKey && !hasChildren) return <>{children}</>;
 
   const place = () => {
-    if (hintKey) placeTooltip(tipRef.current, { flipBelowTop: 90 });
+    if (!hintKey) return;
+    placeTooltip(tipRef.current, { flipBelowTop: 90 });
+    if (below && tipRef.current) tipRef.current.dataset.below = "1";
   };
 
   let text = "";
@@ -88,7 +94,7 @@ export default function TagHint({ tag, projectId, pool, onHoverChange, children 
     >
       {children}
       {hintKey && (
-        <span ref={tipRef} role="tooltip" className={styles.tip}>
+        <span ref={tipRef} role="tooltip" className={`${styles.tip} ${boldTip ? styles.tipBold : ""}`}>
           {text}
         </span>
       )}

@@ -43,6 +43,7 @@ export const TAG_CHILDREN: Record<string, string[]> = {
   "Google Cloud Platform": ["Firebase", "Docker"],
   "SaaS": ["Multi-tenant", "Stripe", "Invoicing", "RBAC", "MFA"],
   "UX": ["QZ Tray", "ESC/POS", "Realtime", "i18n"],
+  "UI": ["CSS", "ECharts", "Vue 3"],
   "SQL": ["PostgreSQL", "PL/pgSQL"],
   "Git": ["GitHub Actions", "CI/CD"],
 };
