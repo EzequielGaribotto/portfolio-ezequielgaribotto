@@ -41,7 +41,7 @@ export const en: Translations = {
   },
   aboutMe: {
     title: "Ezequiel Garibotto",
-    description: "Junior Full Stack Developer | Backend, AI & Big Data",
+    description: "Junior Full-Stack Applied AI Developer | AI Engineering, Backend & Data",
     photoAlt: "Photo of Ezequiel Garibotto"
   },
   cv: {
@@ -170,15 +170,15 @@ export const en: Translations = {
       endDate: "January 2026"
     },
     iaBigData: {
-      title: "AI & Big Data Master's Portfolio",
-      description: "Learning repository focused on practical implementations of artificial intelligence, machine learning, and huge volume data analysis. It covers advanced topics ranging from predictive modeling and natural language processing to the architecture of large-scale distributed systems.",
+      title: "AI & Big Data Specialization Portfolio",
+      description: "Learning repository of the Specialization in AI and Big Data: machine learning, deep learning (CNNs with Keras and PyTorch), house-price models (Random Forest, XGBoost) served through a Flask API, and a capstone on regression and clustering (in progress).",
       footer: "Learning Project",
       startDate: "December 2025",
       endDate: "December 2026",
     },
     prostring: {
       title: "ProString Manage - SaaS for Stringing Workshop & Tournament Management",
-      description: "Professional SaaS platform for racket stringing workshops, specialized shops, sports clubs and tournament teams. Manage stringing orders, client and racket history, product inventory, invoicing, and multi-location businesses. Organize tournaments with machine and stringer assignment, workload statistics, and prize money tracking. Features subscription plans, automated receipt and label printing, barcode scanning, data import with smart matching, and full internationalization in 6 languages.",
+      description: "Professional SaaS platform for racket stringing workshops, specialized shops, sports clubs and tournament teams. Manage stringing orders, client and racket history, product inventory, invoicing, and multi-location businesses. Organize tournaments with machine and stringer assignment, workload statistics, and prize money tracking. Features subscription plans, automated receipt and label printing, barcode scanning, data import with smart matching, immutable consecutively numbered invoices, database-enforced MFA and full internationalization in 6 languages. Built solo with a custom agent harness (subagents, skills and 7 MCP servers).",
       footer: "Current Professional Project",
       startDate: "May 2026",
       endDate: null
@@ -223,21 +223,21 @@ export const en: Translations = {
     },
     prostring: {
       company: "ProString Manage",
-      position: "Junior Full Stack Developer",
+      position: "Applied AI Junior Developer",
       period: "",
       location: "Remote",
       description:
-        "Design, development and implementation of a SaaS web application for racket stringing workshops and tournament management, combining a Vue 3 + Vite frontend with a serverless Supabase backend.\n\n" +
-        "• Engineered a dual-mode architecture (Tournament / Shop) with 23 Pinia stores, 45 views, 265+ components and 67 composables in Vue 3 + TypeScript\n" +
-        "• Enforced data isolation with Row-Level Security policies scoping access to tenant/role, with server-side price validation and atomic operation guarantees\n" +
-        "• Implemented mode & role-based access control across 2 modes, 3 roles, and 31 features with 134 granular permissions\n" +
-        "• Developed and deployed ~60 PostgreSQL RPC functions and Supabase Edge Functions covering user lifecycle, authentication flows, automated sync, email delivery, and demo tenant provisioning\n" +
-        "• Leveraged Supabase Realtime subscriptions with PostgreSQL for live data updates across tournament and shop management flows\n" +
-        "• Integrated QZ Tray and ESC/POS for automated receipt and label printing, bypassing the browser print dialog, with custom design editors for print layouts\n" +
-        "• Built a robust data import pipeline with column auto-detection, split detection, catalog deduplication, and confidence scoring for new vs existing product matching\n" +
-        "• Optimized read efficiency through store-level caching with Supabase Realtime — data fetched once on load and re-queried only on actual DB events\n" +
-        "• Implemented subscription billing with Stripe across 4 plans and GRSA member discounts\n" +
-        "• Delivered full internationalization in 6 languages with per-tenant translation override system",
+        "Solo design, development and deployment of a multi-tenant SaaS web application for racket stringing workshops and tournament management, combining a Vue 3 + Vite frontend with a serverless Supabase backend, built with a custom agent harness.\n\n" +
+        "• Engineered a dual-mode architecture (Tournament / Shop) with 23 Pinia stores, 45+ views, 230+ components and 70+ composables in Vue 3 + TypeScript\n" +
+        "• Enforced tenant/role data isolation with 180+ Row-Level Security policies, server-side price validation and atomic operations, plus TOTP MFA with AAL2 enforced at the database level\n" +
+        "• Implemented RBAC across 2 modes, 3 roles and 29 features with 130+ granular permissions\n" +
+        "• Built a serverless backend of 23 Deno Edge Functions and 80+ transactional PL/pgSQL RPCs covering user lifecycle, authentication flows, email delivery, demo provisioning and automatic tenant provisioning via Stripe webhooks (4 plans, GRSA member discounts)\n" +
+        "• Implemented invoicing: server-allocated consecutive invoice numbers, immutable issued invoices enforced by database triggers with rectificative-invoice corrections, and invoice formats for 7 countries\n" +
+        "• Developed data pipelines: scheduled weekly ingestion of public datasets with pg_cron and Edge Functions, a configurable report engine, retention-based snapshots with restore, and an import pipeline with column auto-detection, split detection, catalog deduplication and confidence scoring\n" +
+        "• Delivered optimized UX for live tournaments: keyboard-first order entry with auto-jump between fields, one-click receipt/label printing via QZ Tray and ESC/POS (no browser print dialog) and Supabase Realtime sync with store-level caching\n" +
+        "• Maintained quality with 1,500+ automated tests, 8 GitHub Actions CI/CD workflows and from-scratch migration validation; localized the UI in 6 languages with a per-tenant translation override system\n" +
+        "• Built a custom agent harness: subagents, skills, hooks and persistent memory, with 7 MCP servers (Supabase, GitHub, Stripe, Context7, Chrome DevTools, Hostinger, Laravel Boost) under least-privilege access\n" +
+        "• In progress: RAG assistant hardened against prompt injection, LLM-assisted data import and analytics, and Python pipelines aggregating public tennis data",
     }
   },
   training: {
@@ -258,15 +258,14 @@ export const en: Translations = {
     },
     linkia: {
       institution: "Linkia FP",
-      course: "Master's in Artificial Intelligence and Big Data",
-      period: "2025 - 2026",
+      course: "Specialization in Artificial Intelligence and Big Data",
+      period: "February 2026 - December 2026 (expected)",
       location: "Remote",
-      description: "Specialized master's degree in artificial intelligence, machine learning, and big data analysis, focused on practical applications and emerging technologies.\n\n" +
-        "• Deep learning and neural networks\n" +
-        "• Natural Language Processing (NLP)\n" +
-        "• Large-scale data analysis and visualization\n" +
-        "• Big Data architectures and distributed systems\n" +
-        "• Machine Learning and predictive models",
+      description: "Specialization in artificial intelligence and big data, focused on AI engineering and agentic development on top of machine learning and big data foundations.\n\n" +
+        "• Hands-on: CNNs (Keras, PyTorch) and house-price models (XGBoost, grid search) served through a Flask API\n" +
+        "• Capstone in progress: regression and clustering on 540K e-commerce records\n" +
+        "• Modules: AI programming, machine learning systems, applied big data, AI models, big data systems and an AI and big data project\n\n" +
+        "Grade: 9",
     },
     upf: {
       institution: "Universitat Pompeu Fabra (UPF)",
@@ -285,7 +284,7 @@ export const en: Translations = {
   },
   aboutMeSection: {
     title: "About Me",
-    personalInfo: "Software developer with a strong analytical mindset and a clear focus on backend engineering, artificial intelligence, and big data. Currently building ProString Manage, a SaaS platform for racket stringing workshops and tournament management with Vue 3, Supabase, and PostgreSQL. I represented my institute in the national ProgramaMe 2024 and 2025 finals, achieving 4th place. Pursuing a Master's in AI and Big Data while also developing Facts: News AI Summary, an Android + Python solution with an end-to-end ETL pipeline for neutral news generation — currently paused but planned to continue.",
+    personalInfo: "Focused on applied AI software engineering, agentic workflows and AI engineering. My core stack is Python, TypeScript, Vue, Supabase and LLM APIs. I am the solo developer of ProString Manage, a production multi-tenant SaaS platform for racket stringing workshops and tournament management, built with a custom agent harness. I represented my institute in the national ProgramaMe 2024 and 2025 finals, achieving 4th place. Pursuing a Specialization in AI and Big Data while also co-developing Facts: News AI Summary, an Android + Python solution with an end-to-end ETL pipeline for neutral news generation — currently paused but planned to continue.",
     lifestyleInfo: "And the second best decision was starting to train. I enjoy staying active and healthy, maintaining a balanced lifestyle.",
     musicInfo: "I mostly listen to metal, rock, Spanish rap, national rock (Argentinean). I used to listen to electronic music a lot, now that music gives me nostalgia.",
     hobbiesInfo: "As for other hobbies, I used to play Minecraft a lot, but not building or making redstone mechanisms like many programmers I know. I enjoyed the competitive PvP of version 1.7.10. But I'm a normal person, I swear, I also enjoy immersive single-player experiences that offer rich narratives and open-world exploration like The Elder Scrolls saga, Red Dead Redemption, Spore, Atomic Heart, to mention a few.",
