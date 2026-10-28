@@ -7,7 +7,7 @@ export const es: Translations = {
   ...baseTranslations,
   meta: {
     title: "Ezequiel Garibotto - Portfolio",
-    description: "Desarrollador de software con experiencia en desarrollo móvil, web y servicios cloud."
+    description: "Desarrollador Junior Full-Stack de IA Aplicada. Creé en solitario ProString Manage, un SaaS en producción. Python, TypeScript, Vue, Supabase y APIs de LLM."
   },
   navigation: {
     profile: "Perfil",

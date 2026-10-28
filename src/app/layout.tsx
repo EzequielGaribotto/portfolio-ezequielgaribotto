@@ -33,8 +33,8 @@ const serif = localFont({
 
 // Generate metadata with translations
 export function generateMetadata(): Metadata {
-  // Use Spanish as default language for static metadata generation
-  const locale = 'es';
+  // Link previews and search results use one description per page; English is the one shared
+  const locale = 'en';
   const meta = translations[locale].meta;
   const root = '/images/logo'
 
@@ -57,8 +57,8 @@ export function generateMetadata(): Metadata {
       siteName: 'Ezequiel Garibotto',
       title: meta.title,
       description: meta.description,
-      locale: 'es_ES',
-      alternateLocale: ['en_US'],
+      locale: 'en_US',
+      alternateLocale: ['es_ES'],
       images: [shareImage],
     },
     twitter: {
