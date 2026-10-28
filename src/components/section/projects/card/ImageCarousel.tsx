@@ -115,6 +115,9 @@ export default function ImageCarousel({ images, projectTitle, onExpand }: ImageC
         >
           {images.map((image, index) => (
             <div key={index} className={styles.imageSlide}>
+              {/* Blurred copy of the screenshot fills the sides, so the full phone image fits without black bars */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={image} alt="" aria-hidden="true" className={styles.slideBackdrop} loading="lazy" />
               <OptimizedImage
                 src={image}
                 alt={`${projectTitle} image ${index + 1}`}
