@@ -44,6 +44,14 @@
 }
 
 .menu {
+  left: 50%;
+  transform: translateX(-50%);
+  /* As wide as its content, but never wider than the screen; the page may set overflow-wrap: anywhere on a parent,
+     which would collapse a menu opened from a narrow spot to one letter per line */
+  width: max-content;
+  max-width: calc(100vw - 1.5rem);
+  overflow-wrap: normal;
+  word-break: normal;
   background-color: var(--secondary);
   border: 1px solid var(--secondary-hover);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);

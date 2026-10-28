@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useLayoutEffect } from "react";
 import { FaFileDownload } from "react-icons/fa";
 import { useTranslation } from "../../context/TranslationContext";
 import { CVDownloadButtonProps } from "../../models/interfaces";
@@ -53,7 +53,18 @@ export default function CVDownloadButton({ className, variant = "outline", compa
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const dropdownStyle = { maxWidth: 'max-content', minWidth: 'fit-content', transform: 'translateX(-50%)', left: '50%' };
+
+  // The menu is centred under the button; near a screen edge it slides back inside, with a small margin
+  const menuRef = useRef<HTMLDivElement>(null);
+  useLayoutEffect(() => {
+    const menu = menuRef.current;
+    if (!isOpen || !menu) return;
+    menu.style.transform = "translateX(-50%)";
+    const box = menu.getBoundingClientRect();
+    const margin = 12;
+    const shift = box.left < margin ? margin - box.left : box.right > window.innerWidth - margin ? window.innerWidth - margin - box.right : 0;
+    if (shift) menu.style.transform = `translateX(calc(-50% + ${shift}px))`;
+  }, [isOpen]);
 
   const handlePreview = (lang: string) => {
     setPreviewLang(lang);
@@ -97,8 +108,8 @@ export default function CVDownloadButton({ className, variant = "outline", compa
       
       {isOpen && (
         <div 
-          className={`absolute mt-2 top-full rounded-xl z-10 overflow-hidden whitespace-nowrap ${styles.menu}`}
-          style={dropdownStyle}
+          ref={menuRef}
+          className={`absolute mt-2 top-full rounded-xl z-10 overflow-hidden ${styles.menu}`}
         >
           <ul className={styles.items} role="menu">
             {cvOptions.map((option) => (
