@@ -26,6 +26,7 @@ export default function ProjectSearch({
     "AI Engineering",
     "Agentic Development",
     "Agentic AI",
+    "Data Engineering",
     "Machine Learning",
     "Python",
     "Back-end",

@@ -60,6 +60,7 @@ export const baseTranslations = {
     aiEngineering: "",
     agenticAI: "",
     agenticDevelopment: "",
+    dataEngineering: "",
   },
   // Search functionality translations
   search: {

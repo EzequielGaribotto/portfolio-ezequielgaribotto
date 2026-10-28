@@ -7,4 +7,5 @@ export const TAG_HINT_KEYS: Record<string, string> = {
   "AI Engineering": "aiEngineering",
   "Agentic AI": "agenticAI",
   "Agentic Development": "agenticDevelopment",
+  "Data Engineering": "dataEngineering",
 };

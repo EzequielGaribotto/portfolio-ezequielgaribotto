@@ -24,6 +24,7 @@ const ExperienceSection: React.FC = () => {
         "Applied AI",
         "Agentic AI",
         "Agentic Development",
+        "Data Engineering",
         "Agent Harness",
         "MCP",
         "Claude Code",
