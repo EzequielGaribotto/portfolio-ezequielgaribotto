@@ -38,9 +38,35 @@ export function generateMetadata(): Metadata {
   const meta = translations[locale].meta;
   const root = '/images/logo'
 
+  const site = 'https://ezequielgaribotto.com';
+  const shareImage = {
+    url: '/og-image.jpg',
+    width: 1200,
+    height: 627,
+    alt: 'Ezequiel Garibotto, Junior Full-Stack Applied AI Developer',
+  };
+
   return {
+    metadataBase: new URL(site),
     title: meta.title,
     description: meta.description,
+    // Link previews (LinkedIn, WhatsApp, Slack...) use this card instead of guessing an image from the page
+    openGraph: {
+      type: 'website',
+      url: site,
+      siteName: 'Ezequiel Garibotto',
+      title: meta.title,
+      description: meta.description,
+      locale: 'es_ES',
+      alternateLocale: ['en_US'],
+      images: [shareImage],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: meta.title,
+      description: meta.description,
+      images: [shareImage.url],
+    },
     manifest: `${root}/site.webmanifest`,
     icons: {
       icon: [
