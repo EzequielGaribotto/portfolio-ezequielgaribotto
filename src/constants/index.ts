@@ -25,7 +25,8 @@ export const CONTACT = {
 
 export const CV_FILES = {
   ES: '/cv/CV_ES_EzequielGaribotto.pdf',
-  EN: '/cv/CV_EN_EzequielGaribotto.pdf',
+  ES_ATS: '/cv/CV_ES_EzequielGaribotto_ATS.pdf',
+  EN:'/cv/CV_EN_EzequielGaribotto.pdf',
   EN_ATS: '/cv/CV_EN_EzequielGaribotto_ATS.pdf',
   METADATA: '/cv/cv-metadata.json',
 } as const;

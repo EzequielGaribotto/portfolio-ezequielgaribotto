@@ -4,6 +4,7 @@ import { CV_FILES } from '../constants';
 export interface CVMetadata {
   lastUpdated: {
     es: string;
+    es_ats: string;
     en: string;
     en_ats: string;
   };
@@ -17,6 +18,7 @@ export interface CVMetadata {
 const FALLBACK_METADATA: CVMetadata = {
   lastUpdated: {
     es: "2024-12-15T10:30:00Z",
+    es_ats: "2024-12-15T10:30:00Z",
     en: "2024-12-15T10:30:00Z",
     en_ats: "2024-12-15T10:30:00Z"
   },

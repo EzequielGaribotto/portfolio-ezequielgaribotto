@@ -77,7 +77,8 @@ export const es: Translations = {
   },
   cv: {
     download: "Descargar CV",
-    spanish: "CV en Español",
+    spanish: "CV en Español (2 páginas)",
+    spanish_ats: "CV en Español (1 página, ATS)",
     english: "CV en Inglés (2 páginas)",
     english_ats: "CV en Inglés (1 página, ATS)",
     preview: "Visualizar CV",
@@ -85,7 +86,7 @@ export const es: Translations = {
     downloadInstead: "Descargar en su lugar",
     lastUpdated: "Última actualización",
     otherVersions: "Otras versiones",
-    downloadAts: "Descargar CV, inglés, 1 página (ATS)",
+    downloadAts: "Descargar CV, español, 1 página (ATS)",
   },
   tagHints: {
     appliedAI: "Applied AI: IA dentro de un producto.\nÁmbito: desde la llamada al LLM hasta la interfaz que usa el cliente final. Incluye flujos de trabajo agénticos: cadenas de llamadas a LLM que automatizan una tarea.",
@@ -180,10 +181,10 @@ export const es: Translations = {
     since: "desde",
     neutralNews: {
       title: "Neutral News / Facts",
-      description: "Aplicación con flujo ETL que genera noticias neutrales, combinando diversas tecnologías potentes para el backend: Scraping, parsing XML, algoritmos ML para embedding y clustering, uso de APIs de generación de texto, entre otros.\n" +
+      description: "Aplicación con flujo ETL que genera noticias neutrales. El backend combina scraping, parsing XML, embeddings y clustering con ML, y APIs de generación de texto.\n" +
         "• Implementé clustering semántico periódico de artículos de noticias obtenidos de feeds RSS de más de 10 medios españoles.\n" +
-        "• Construí un sistema robusto para asegurar la generación de versiones neutrales para clusters de noticias agrupadas semánticamente.\n" +
-        "• Desarrollé tanto un backend sólido y complejo como una aplicación Android amigable para el usuario.",
+        "• Construí el sistema que genera una versión neutral para cada cluster de noticias agrupadas semánticamente.\n" +
+        "• Desarrollé el backend y la aplicación Android.",
       footer: "En pausa",
       startDate: "diciembre 2024",
       websiteLink: "https://getfacts.app"
@@ -191,10 +192,10 @@ export const es: Translations = {
     ctennisstudio: {
       title: "Custom Tennis Studio",
       description: "Desarrollo de una página web de venta de servicios de tenis\n\n" +
-        "• Landing page moderna y responsive usando React, Next.js y TailwindCSS\n" +
-        "• Interfaz intuitiva para mostrar servicios profesionales, experiencia en torneos y programas de formación\n" +
-        "• Sistema de contacto integrado via Email para facilitar la comunicación con clientes\n" +
-        "• Optimicé el rendimiento web y SEO para maximizar la visibilidad online del negocio",
+        "• Landing page responsive con React, Next.js y TailwindCSS\n" +
+        "• Secciones para servicios profesionales, experiencia en torneos y programas de formación\n" +
+        "• Sistema de contacto por email para que los clientes puedan escribir\n" +
+        "• Optimicé el rendimiento web y el SEO para la visibilidad online del negocio",
       footer: "Proyecto Freelance",
       startDate: "noviembre 2025"
     },
@@ -228,14 +229,14 @@ export const es: Translations = {
     },
     cronScheduleEditor: {
       title: "Editor de Programación CRON",
-      description: "Editor visual e intuitivo para crear y gestionar expresiones cron. Herramienta web que permite construir programaciones cron sin necesidad de memorizar la sintaxis, desarrollada para mejorar mi comprensión de useEffect.",
+      description: "Editor visual para crear y gestionar expresiones cron. Herramienta web para construir programaciones cron sin necesidad de memorizar la sintaxis, desarrollada para mejorar mi comprensión de useEffect.",
       footer: "Proyecto de Aprendizaje",
       startDate: "enero 2025",
       endDate: "enero 2025"
     },
     portfolioWebsite: {
       title: "Sitio Web Portfolio",
-      description: "Sitio web portfolio personal moderno construido con React, Next.js y TypeScript. Incluye diseño responsivo, cambio de tema, soporte multi-idioma y muestra proyectos y experiencia profesional.",
+      description: "Sitio web portfolio personal construido con React, Next.js y TypeScript. Tiene diseño responsivo, cambio de tema y varios idiomas, y recoge mis proyectos y experiencia profesional.",
       footer: "Proyecto de Aprendizaje",
       startDate: "abril 2025",
       endDate: "julio 2025"
@@ -256,7 +257,7 @@ export const es: Translations = {
     },
     hackerNewsAPI: {
       title: "API Scraper HackerNews",
-      description: "Web scraper Python FastAPI que obtiene artículos de noticias de Hacker News con estrategia de caché inteligente. Incluye containerización Docker, desarrollo dirigido por pruebas y procesamiento eficiente de datos.",
+      description: "Web scraper Python FastAPI que obtiene artículos de noticias de Hacker News con una estrategia de caché. Usa Docker y desarrollo dirigido por pruebas, con procesamiento eficiente de datos.",
       footer: "Proyecto de Aprendizaje",
       startDate: "junio 2025",
       endDate: "junio 2025"
@@ -296,7 +297,7 @@ export const es: Translations = {
     },
     prostring: {
       title: "ProString Manage - SaaS de Gestión de Talleres de Encordado y Torneos",
-      description: "Plataforma SaaS profesional para talleres de encordado de raquetas, tiendas especializadas, clubes deportivos y equipos de torneo. Gestión de pedidos de encordado, historial de clientes y raquetas, inventario de productos, facturación y negocios multi-sede. Organización de torneos con asignación de máquinas y encordadores, estadísticas de carga y seguimiento de premios. Incluye planes de suscripción, impresión automática de recibos y etiquetas, escaneo de códigos de barras, importación de datos con matching inteligente, facturas inmutables con numeración consecutiva, MFA aplicado en la base de datos e internacionalización completa en 6 idiomas. Desarrollado en solitario con un agent harness propio (subagentes, skills y 7 servidores MCP).",
+      description: "Plataforma SaaS para talleres de encordado de raquetas, tiendas especializadas, clubes deportivos y equipos de torneo. Gestión de pedidos de encordado, historial de clientes y raquetas, inventario de productos, facturación y negocios multi-sede. Organización de torneos con asignación de máquinas y encordadores, estadísticas de carga y seguimiento de premios. Incluye planes de suscripción, impresión automática de recibos y etiquetas, escaneo de códigos de barras, importación de datos con matching inteligente, facturas inmutables con numeración consecutiva, MFA aplicado en la base de datos e internacionalización en 6 idiomas. Desarrollado en solitario con un agent harness propio (subagentes, skills y 7 servidores MCP).",
       footer: "Proyecto Profesional Actual",
       summary: "Plataforma SaaS para talleres de encordado, tiendas, clubes y equipos de torneo: pedidos, inventario, facturación y torneos. Desarrollada en solitario con un agent harness propio.",
       startDate: "mayo 2026",
@@ -312,19 +313,19 @@ export const es: Translations = {
       company: "Eulix",
       position: "Desarrollador Junior de Android",
       period: "09/2024 - 04/2025 (7 meses)",
-      description: "Desarrollo de una aplicación con el objetivo de recomendar contenidos (películas, series) basándose en la personalidad, estado de ánimo y preferencias del usuario.\n" +
-        "• Desarrollé un chatbot (Asistente Virtual) para onboarding y sección 'Cómo Funciona', mejorando el engagement y soporte al usuario.\n" +
-        "• Diseñé y mejoré la UI en todas las pantallas de la app, impulsando mejoras continuas de UX a través de ideas de diseño iterativo.\n" +
-        "• Integré API RESTful con Retrofit en colaboración con el equipo de back-end, asegurando intercambio de datos fluido y funcionalidad de la aplicación.\n" +
-        "• Coordiné con un equipo internacional en India, facilitando comunicación efectiva y alineación del proyecto a través de diferentes zonas horarias.",
+      description: "Desarrollo de una aplicación que recomienda contenidos (películas, series) según la personalidad, el estado de ánimo y las preferencias del usuario.\n" +
+        "• Creé un chatbot (asistente virtual) que recomienda contenidos a partir del prompt, el estado de ánimo y el comportamiento rastreado del usuario (qué contenidos abre, cuánto tiempo se queda), y cubre el onboarding y la sección 'Cómo Funciona'.\n" +
+        "• Creé muchas pantallas nuevas, entre ellas el onboarding, y edité la mayoría de las existentes en toda la app.\n" +
+        "• Integré una API RESTful con Retrofit, trabajando con el equipo de back-end.\n" +
+        "• Coordiné con un equipo internacional en India en distintas zonas horarias.",
       location: "Barcelona, España · Híbrido",
     },
     telus: {
       company: "TELUS Digital",
       position: "Anotador de Datos",
       period: "07/2023 - 01/2025 (1 año 7 meses)",
-      description: "• Clasifiqué, evalué y describí consultas, audio, video, imágenes y otros tipos de datos para asegurar relevancia y calidad.\n" +
-        "• Apliqué inglés profesional, conocimiento general y alfabetización digital para mejorar la precisión y comprensión contextual del contenido.",
+      description: "• Clasifiqué, evalué y describí consultas, audio, video, imágenes y otros tipos de datos según su relevancia y calidad.\n" +
+        "• Totalmente remoto con una carga de trabajo autogestionada (sin horas semanales fijas), usando inglés profesional, conocimiento general y alfabetización digital.",
       location: "España · Totalmente Remoto",
     },
     seidor: {
@@ -366,7 +367,7 @@ export const es: Translations = {
       course: "Desarrollo de Aplicaciones Multiplataforma - Sistemas Inteligentes (DAMi)",
       period: "2023 - 2025",
       location: "Nou Barris, Barcelona, España",
-      description: "Grado superior de desarrollo de aplicaciones móviles y web, con énfasis en tecnologías modernas y metodología Agile y Scrum.\n\n" +
+      description: "Grado superior de desarrollo de aplicaciones móviles y web, con énfasis en metodología Agile y Scrum.\n\n" +
         "• Kotlin, Jetpack Compose / XML, Retrofit, para desarrollo Android\n" +
         "• Machine Learning, Web Scraping, Sentiment Analysis, Algoritmos de Clasificación, Decisión y Predicción\n" +
         "• Gestión de bases de datos SQL y NoSQL como PostgreSQL, MongoDB y Firebase\n" +
@@ -402,10 +403,10 @@ export const es: Translations = {
   },
   aboutMeSection: {
     title: "Sobre mí",
-    personalInfo: "Enfocado en ingeniería de software con IA aplicada y desarrollo agéntico. Mi stack principal es Python, TypeScript, Vue, Supabase y APIs de LLM. Soy el desarrollador en solitario de ProString Manage, una plataforma SaaS multi-tenant en producción para talleres de encordado y gestión de torneos, construida con un agent harness propio. Representé a mi instituto en las finales nacionales de ProgramaMe 2024 y 2025, logrando el 4º puesto. Cursando una Especialización en IA y Big Data mientras codesarrollo Facts: News AI Summary, una solución Android + Python con pipeline ETL completo para generación de noticias neutrales — actualmente en pausa pero con planes de continuarlo.",
+    personalInfo: "Me enfoco en ingeniería de software con IA aplicada y desarrollo agéntico. Mi stack principal es Python, TypeScript, Vue, Supabase y APIs de LLM. Soy el desarrollador en solitario de ProString Manage, una plataforma SaaS multi-tenant en producción para talleres de encordado y gestión de torneos, construida con un agent harness propio. Representé a mi instituto en las finales nacionales de ProgramaMe 2024 y 2025 y quedé 4º. Curso una Especialización en IA y Big Data y codesarrollo Facts: News AI Summary, una solución Android + Python con un pipeline ETL completo que genera noticias neutrales. Facts está en pausa por ahora, pero pienso continuarlo.",
     lifestyleInfo: "Y la segunda mejor decisión fue empezar a entrenar. Disfruto mantenerme activo y saludable, llevando un estilo de vida equilibrado.",
     musicInfo: "Escucho principalmente metal, rock, rap español, rock nacional (argentino). Y solía escuchar mucha música electrónica, ahora esa música me da nostalgia.",
-    hobbiesInfo: "En cuanto a otros hobbies, solía jugar mucho Minecraft, pero no construir, ni hacer mecanismos de redstone, como muchos programadores que conozco, a mi me gustaba jugar el PvP competitivo de la 1.7.10. Pero soy una persona normal, lo juro, también disfruto de las experiencias inmersivas de un solo jugador que ofrecen narrativas ricas y exploración de mundo abierto como la saga de The Elder Scrolls, Red Dead Redemption, Spore, Atomic Heart, por mencionar algunos.",
+    hobbiesInfo: "En cuanto a otros hobbies, solía jugar mucho Minecraft, pero no construir, ni hacer mecanismos de redstone, como muchos programadores que conozco, a mi me gustaba jugar el PvP competitivo de la 1.7.10. Pero soy una persona normal, lo juro, también disfruto de las experiencias inmersivas de un solo jugador con buenas historias y exploración de mundo abierto, como la saga de The Elder Scrolls, Red Dead Redemption, Spore, Atomic Heart, por mencionar algunos.",
     heavyProfile: "Me puedes agregar en Hevy, si te van los hierros",
     spotifyPlaylist: "Te regalo mi playlist"
   },

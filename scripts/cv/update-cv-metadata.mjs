@@ -11,6 +11,7 @@ const projectRoot = path.join(__dirname, '..', '..');
 const cvDirectory = path.join(projectRoot, 'public', 'cv');
 const cvFiles = {
   es: path.join(cvDirectory, 'CV_ES_EzequielGaribotto.pdf'),
+  es_ats: path.join(cvDirectory, 'CV_ES_EzequielGaribotto_ATS.pdf'),
   en: path.join(cvDirectory, 'CV_EN_EzequielGaribotto.pdf'),
   en_ats: path.join(cvDirectory, 'CV_EN_EzequielGaribotto_ATS.pdf')
 };

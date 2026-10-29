@@ -77,7 +77,8 @@ export const en: Translations = {
   },
   cv: {
     download: "Download CV",
-    spanish: "Spanish CV",
+    spanish: "Spanish CV (2 pages)",
+    spanish_ats: "Spanish CV (1 page, ATS)",
     english: "English CV (2 pages)",
     english_ats: "English CV (1 page, ATS)",
     preview: "Preview CV",
@@ -85,8 +86,7 @@ export const en: Translations = {
     downloadInstead: "Download Instead",
     lastUpdated: "Last updated",
     otherVersions: "Other versions",
-    downloadAts: "Download CV, English, 1 page (ATS)",
-  },
+    downloadAts: "Download CV, English, 1 page (ATS)",  },
   tagHints: {
     appliedAI: "Applied AI: AI inside a product.\nScope: from the LLM call up to the interface the end user touches. It includes agentic workflows: chains of LLM calls that automate a task.",
     aiEngineering: "AI Engineering: working on the models and systems behind AI features, not only using them in a product.\nScope: broader than Applied AI. Depending on the company, it also reaches infrastructure (MLOps) or model fine-tuning.",
@@ -180,10 +180,10 @@ export const en: Translations = {
     since: "since",
     neutralNews: {
       title: "Neutral News / Facts",
-      description: "Application with ETL flow that generates neutral news, combining various powerful backend technologies: Scraping, XML parsing, ML algorithms for embedding and clustering, use of text generation APIs, among others.\n" +
+      description: "App with an ETL flow that generates neutral news. The backend combines scraping, XML parsing, ML embeddings and clustering, and text generation APIs.\n" +
         "• Implemented periodic semantic clustering of news articles sourced from the RSS feeds of more than 10 Spanish media outlets.\n" +
-        "• Built a robust system to ensure the generation of neutral versions for clusters of semantically grouped news.\n" +
-        "• Developed both a solid and complex backend and a user-friendly Android application.",
+        "• Built the system that generates a neutral version for each cluster of semantically grouped news.\n" +
+        "• Developed the backend and the Android application.",
       footer: "Paused",
       startDate: "December 2024",
       websiteLink: "https://getfacts.app"
@@ -191,10 +191,10 @@ export const en: Translations = {
     ctennisstudio: {
       title: "Custom Tennis Studio",
       description: "Development of a tennis services sales website.\n\n" +
-        "• Modern and responsive landing page using React, Next.js, and TailwindCSS\n" +
-        "• Intuitive interface to showcase professional services, tournament experience, and training programs\n" +
-        "• Integrated contact system with Email to facilitate client communication\n" +
-        "• Optimized web performance and SEO to maximize the business's online visibility",
+        "• Responsive landing page built with React, Next.js and TailwindCSS\n" +
+        "• Pages for professional services, tournament experience and training programs\n" +
+        "• Contact system by email so clients can reach out\n" +
+        "• Optimized web performance and SEO for the business's online visibility",
       footer: "Freelance Project",
       startDate: "November 2025"
     },
@@ -214,28 +214,28 @@ export const en: Translations = {
     },
     rickAndMorty: {
       title: "Efficient API List",
-      description: "Typical API List App, but made in Android with Java8, DataBinding, Caché, Pagination, SDK-Like architecture, Quick response times and simple efficiency tracking",
+      description: "A typical API list app, built in Android with Java8, DataBinding, caching, pagination, an SDK-like architecture, quick response times and simple efficiency tracking.",
       footer: "Learning Project",
       startDate: "April 2025",
       endDate: "April 2025"
     },
     zomb: {
       title: "Zomb - Retro Game",
-      description: "Infinite horizontal scroller retro game made with Makecode Arcade, featuring collision systems, enemies that follow the player, and survival mechanics in a zombie environment.",
+      description: "Infinite horizontal scroller retro game made with Makecode Arcade, with collision systems, enemies that follow the player and survival mechanics in a zombie environment.",
       footer: "Learning Project",
       startDate: "November 2024",
       endDate: "December 2024"
     },
     cronScheduleEditor: {
       title: "CRON Schedule Editor",
-      description: "User-friendly visual editor for creating and managing cron expressions. Web tool that helps build cron schedules without memorizing the syntax, developed to improve my understanding of useEffect.",
+      description: "Visual editor for creating and managing cron expressions. Web tool for building cron schedules without memorizing the syntax, developed to improve my understanding of useEffect.",
       footer: "Learning Project",
       startDate: "January 2025",
       endDate: "January 2025"
     },
     portfolioWebsite: {
       title: "Portfolio Website",
-      description: "Modern personal portfolio website built with React, Next.js, and TypeScript. Features responsive design, theme switching, multiple language support, and showcases projects and professional experience.",
+      description: "Personal portfolio website built with React, Next.js and TypeScript. It has a responsive design, theme switching and multiple languages, and lists my projects and professional experience.",
       footer: "Learning Project",
       startDate: "April 2025",
       endDate: "July 2025"
@@ -256,7 +256,7 @@ export const en: Translations = {
     },
     hackerNewsAPI: {
       title: "HackerNews Scraper API",
-      description: "Python FastAPI web scraper that fetches news articles from Hacker News with intelligent caching strategy. Features Docker containerization, test-driven development, and efficient data processing.",
+      description: "Python FastAPI web scraper that fetches news articles from Hacker News with a caching strategy. Uses Docker and test-driven development, with efficient data processing.",
       footer: "Learning Project",
       startDate: "June 2025",
       endDate: "June 2025"
@@ -296,7 +296,7 @@ export const en: Translations = {
     },
     prostring: {
       title: "ProString Manage - SaaS for Stringing Workshop & Tournament Management",
-      description: "Professional SaaS platform for racket stringing workshops, specialized shops, sports clubs and tournament teams. Manage stringing orders, client and racket history, product inventory, invoicing, and multi-location businesses. Organize tournaments with machine and stringer assignment, workload statistics, and prize money tracking. Features subscription plans, automated receipt and label printing, barcode scanning, data import with smart matching, immutable consecutively numbered invoices, database-enforced MFA and full internationalization in 6 languages. Built solo with a custom agent harness (subagents, skills and 7 MCP servers).",
+      description: "SaaS platform for racket stringing workshops, specialized shops, sports clubs and tournament teams. Manage stringing orders, client and racket history, product inventory, invoicing, and multi-location businesses. Organize tournaments with machine and stringer assignment, workload statistics, and prize money tracking. It also has subscription plans, automated receipt and label printing, barcode scanning, data import with smart matching, immutable consecutively numbered invoices, database-enforced MFA and internationalization in 6 languages. Built solo with a custom agent harness (subagents, skills and 7 MCP servers).",
       footer: "Current Professional Project",
       summary: "SaaS platform for racket stringing workshops, shops, clubs and tournament teams: orders, inventory, invoicing and tournaments. Built solo with a custom agent harness.",
       startDate: "May 2026",
@@ -312,19 +312,19 @@ export const en: Translations = {
       company: "Eulix",
       position: "Junior Android Developer",
       period: "October 2024 - April 2025 (7 months)",
-      description: "Development of an application with the objective of recommending content (movies, series), based on the user's personality, mood and preferences.\n" +
-        "• Developed a chatbot (Virtual Assistant) for onboarding and 'How It Works' section, enhancing user engagement and support.\n" +
-        "• Designed and enhanced the UI across all app screens, driving continuous UX improvements through iterative design ideas.\n" +
-        "• Integrated RESTful API with Retrofit in collaboration with the back-end team, ensuring seamless data exchange and application functionality.\n" +
-        "• Coordinated with an international team in India, facilitating effective communication and project alignment across different time zones.",
+      description: "Development of an application that recommends content (movies, series) based on the user's personality, mood and preferences.\n" +
+        "• Built a chatbot (virtual assistant) that recommends content from the user's prompt, mood and tracked behavior (which content they click, how long they stay), and covers onboarding and the 'How It Works' section.\n" +
+        "• Created many new screens, onboarding among them, and edited most of the existing ones across the app.\n" +
+        "• Integrated a RESTful API with Retrofit, working with the back-end team.\n" +
+        "• Coordinated with an international team in India across different time zones.",
       location: "Spain, Barcelona · Hybrid",
     },
     telus: {
       company: "TELUS Digital",
       position: "Data Annotator",
       period: "July 2023 - January 2025 (1 year 7 months)",
-      description: "• Classified, evaluated, and described queries, audio, video, images, and other data types to ensure relevance and quality.\n" +
-        "• Applied professional English, general knowledge, and digital literacy to enhance the accuracy and contextual understanding of content.",
+      description: "• Classified, evaluated and described queries, audio, video, images and other data types for relevance and quality.\n" +
+        "• Fully remote with a self-managed workload (no fixed weekly hours), using professional English, general knowledge and digital literacy.",
       location: "Spain · Fully Remote",
     },
     seidor: {
@@ -367,7 +367,7 @@ export const en: Translations = {
       period: "2023 - 2025",
       location: "Nou Barris, Barcelona, Spain",
 
-      description: "Higher vocational degree in cross-platform mobile and web application development, focusing on modern technologies and agile practices.\n\n" +
+      description: "Higher vocational degree in cross-platform mobile and web application development, with a focus on agile practices.\n\n" +
         "• Kotlin, Jetpack Compose / XML, Retrofit for Android development\n" +
         "• Machine Learning, Web Scraping, Sentiment Analysis, Classification, Decision and Prediction Algorithms\n" +
         "• SQL and NoSQL database management including PostgreSQL, MongoDB and Firebase\n" +
@@ -403,10 +403,10 @@ export const en: Translations = {
   },
   aboutMeSection: {
     title: "About Me",
-    personalInfo: "Focused on applied AI software engineering and agentic development. My core stack is Python, TypeScript, Vue, Supabase and LLM APIs. I am the solo developer of ProString Manage, a production multi-tenant SaaS platform for racket stringing workshops and tournament management, built with a custom agent harness. I represented my institute in the national ProgramaMe 2024 and 2025 finals, achieving 4th place. Pursuing a Specialization in AI and Big Data while also co-developing Facts: News AI Summary, an Android + Python solution with an end-to-end ETL pipeline for neutral news generation — currently paused but planned to continue.",
+    personalInfo: "I focus on applied AI software engineering and agentic development. My core stack is Python, TypeScript, Vue, Supabase and LLM APIs. I'm the solo developer of ProString Manage, a multi-tenant SaaS in production for racket stringing workshops and tournament management, built with a custom agent harness. I represented my institute in the national ProgramaMe finals in 2024 and 2025 and placed 4th. I'm doing a Specialization in AI and Big Data and co-developing Facts: News AI Summary, an Android + Python solution with an end-to-end ETL pipeline that generates neutral news. Facts is paused for now, but I plan to continue it.",
     lifestyleInfo: "And the second best decision was starting to train. I enjoy staying active and healthy, maintaining a balanced lifestyle.",
     musicInfo: "I mostly listen to metal, rock, Spanish rap, national rock (Argentinean). I used to listen to electronic music a lot, now that music gives me nostalgia.",
-    hobbiesInfo: "As for other hobbies, I used to play Minecraft a lot, but not building or making redstone mechanisms like many programmers I know. I enjoyed the competitive PvP of version 1.7.10. But I'm a normal person, I swear, I also enjoy immersive single-player experiences that offer rich narratives and open-world exploration like The Elder Scrolls saga, Red Dead Redemption, Spore, Atomic Heart, to mention a few.",
+    hobbiesInfo: "As for other hobbies, I used to play Minecraft a lot, but not building or making redstone mechanisms like many programmers I know. I enjoyed the competitive PvP of version 1.7.10. But I'm a normal person, I swear, I also enjoy immersive single-player experiences with strong stories and open-world exploration, like The Elder Scrolls saga, Red Dead Redemption, Spore, Atomic Heart, to mention a few.",
     heavyProfile: "You can add me on Hevy, if you're into lifting",
     spotifyPlaylist: "I gift you my playlist"
   },

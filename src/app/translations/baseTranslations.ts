@@ -80,6 +80,7 @@ export const baseTranslations = {
   cv: {
     download: "",
     spanish: "",
+    spanish_ats: "",
     english: "",
     english_ats: "",
     preview: "",

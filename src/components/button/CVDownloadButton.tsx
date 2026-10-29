@@ -16,7 +16,7 @@ export default function CVDownloadButton({ className, variant = "outline", compa
   const { metadata } = useCVMetadata();
   const [isOpen, setIsOpen] = useState(false);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
-  const [previewLang, setPreviewLang] = useState('es');
+  const [previewLang, setPreviewLang] = useState('en_ats');
   const [supportsPdfViewer, setSupportsPdfViewer] = useState(true);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -34,10 +34,11 @@ export default function CVDownloadButton({ className, variant = "outline", compa
     return new Date(dateString);
   };
 
-  // The newest of the three CV files
+  // The newest of the four CV files
   const getMostRecentDate = () => {
     if (!metadata) return null;
-    const dates = [metadata.lastUpdated.en_ats, metadata.lastUpdated.es, metadata.lastUpdated.en].map((value) => new Date(value));
+    const { en_ats, en, es_ats, es } = metadata.lastUpdated;
+    const dates = [en_ats, en, es_ats, es].filter(Boolean).map((value) => new Date(value));
     return dates.reduce((latest, current) => (current > latest ? current : latest));
   };
 
@@ -72,33 +73,25 @@ export default function CVDownloadButton({ className, variant = "outline", compa
     setIsOpen(false);
   };
 
-  const cvOptions = [
-    {
-      key: 'en_ats',
-      label: t("cv.english_ats"),
-      file: CV_FILES.EN_ATS,
-      previewLang: 'en_ats'
-    },
-    // {
-    //   key: 'es',
-    //   label: t("cv.spanish"),
-    //   file: CV_FILES.ES,
-    //   previewLang: 'es'
-    // },
-    {
-      key: 'en',
-      label: t("cv.english"),
-      file: CV_FILES.EN,
-      previewLang: 'en'
-    }
-  ];
+  const cvFiles = {
+    en_ats: { label: t("cv.english_ats"), file: CV_FILES.EN_ATS },
+    en: { label: t("cv.english"), file: CV_FILES.EN },
+    es_ats: { label: t("cv.spanish_ats"), file: CV_FILES.ES_ATS },
+    es: { label: t("cv.spanish"), file: CV_FILES.ES },
+  };
+  type CvKey = keyof typeof cvFiles;
+
+  // The CV in the visitor's language comes first
+  const order: CvKey[] = locale === 'es' ? ['es_ats', 'es', 'en_ats', 'en'] : ['en_ats', 'en', 'es_ats', 'es'];
+  const cvOptions = order.map((key) => ({ key, previewLang: key, ...cvFiles[key] }));
+  const preview = cvFiles[previewLang as CvKey] ?? cvFiles.en_ats;
 
   return (
     <div className={`relative ${className}`} ref={dropdownRef}>
-      {/* One click downloads the recommended CV (English, 1 page, ATS); the arrow offers the other versions */}
+      {/* One click downloads the recommended CV (1 page, ATS, in the site's language); the arrow offers the other versions */}
       <div className={styles.split}>
         <a
-          href={CV_FILES.EN_ATS}
+          href={cvOptions[0].file}
           download
           className={`${styles.button} ${styles.main} ${variant === "primary" ? styles.primary : ""} ${compact ? styles.compact : ""}`}
           aria-label={t("cv.downloadAts")}
@@ -161,9 +154,9 @@ export default function CVDownloadButton({ className, variant = "outline", compa
       {/* CV preview: same modal as the project PDFs */}
       {isPreviewOpen && metadata && (
         <PdfPreviewModal
-          title={previewLang === 'es' ? t("cv.spanish") : previewLang === 'en_ats' ? t("cv.english_ats") : t("cv.english")}
+          title={preview.label}
           subtitle={formatDate(getCurrentDate(previewLang), locale)}
-          file={previewLang === 'es' ? CV_FILES.ES : previewLang === 'en_ats' ? CV_FILES.EN_ATS : CV_FILES.EN}
+          file={preview.file}
           returnFocusTo={triggerRef}
           onClose={() => setIsPreviewOpen(false)}
         />
