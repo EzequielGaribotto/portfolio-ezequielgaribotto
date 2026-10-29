@@ -71,7 +71,9 @@ export const en: Translations = {
     proof: "Built ProString Manage solo, a SaaS in production",
     proofLink: "ProString Manage",
     description: "Junior Full-Stack Applied\u00a0AI Developer | AI\u00a0Engineering, Backend & Data",
-    photoAlt: "Photo of Ezequiel Garibotto"
+    photoAlt: "Photo of Ezequiel Garibotto",
+    availability: "Barcelona, Spain · Open to Spain, EU and remote roles",
+    scopesLabel: "Areas of work",
   },
   cv: {
     download: "Download CV",
@@ -81,7 +83,9 @@ export const en: Translations = {
     preview: "Preview CV",
     unableToDisplay: "Unable to display PDF file.",
     downloadInstead: "Download Instead",
-    lastUpdated: "Last updated"
+    lastUpdated: "Last updated",
+    otherVersions: "Other versions",
+    downloadAts: "Download CV, English, 1 page (ATS)",
   },
   tagHints: {
     appliedAI: "Applied AI: AI inside a product.\nScope: from the LLM call up to the interface the end user touches. It includes agentic workflows: chains of LLM calls that automate a task.",
@@ -124,6 +128,21 @@ export const en: Translations = {
       aiEngineering: "In this program:\n• CNNs with Keras and PyTorch\n• House-price models (Random Forest, XGBoost, grid search) served through a Flask API\n• In progress: capstone with regression and clustering on e-commerce data",
     },
   },
+  scopeStatus: {
+    planned: "planned",
+    inProgress: "in progress",
+    noneBuilt: "none built yet",
+  },
+  links: {
+    source: "Source",
+    solved: "Solved problems",
+    website: "Website",
+    playStore: "Play Store",
+    appStore: "App Store",
+    play: "Play",
+    competition: "Competition",
+    presentation: "Presentation",
+  },
   tags: {
     showMore: "+{count} more",
     showLess: "Show less",
@@ -133,6 +152,7 @@ export const en: Translations = {
     download: "Download",
     close: "Close",
     pages: "{count} pp",
+    inSpanish: "ES",
   },
   search: {
     scopeLabel: "Scope",
@@ -145,11 +165,14 @@ export const en: Translations = {
     showingFiltered: "Showing {filtered} of {total} projects",
     filtered: "(filtered)",
     tryAdjusting: "Try adjusting your search criteria or remove some filters.",
-    showAllLink: "Show all projects",
+    showAllLink: "Show all {count} projects",
     showLessLink: "Show less",
     sortBy: "Sort by",
     sortByRelevance: "Relevance",
-    sortByDate: "Date"
+    sortByDate: "Date",
+    byRelevance: "most relevant first",
+    byDate: "newest first",
+    explainerLabel: "About the selected scope",
   },
   projects: {
     title: "Projects",
@@ -264,15 +287,22 @@ export const en: Translations = {
         pytorch: "CNN with PyTorch: exercise report (PDF, in Spanish)",
         sklearn: "Multilayer perceptron with scikit-learn: exercise report (PDF, in Spanish)",
       },
+      docShort: {
+        ames: "Ames Housing",
+        keras: "Keras/TensorFlow",
+        pytorch: "PyTorch",
+        sklearn: "scikit-learn",
+      },
     },
     prostring: {
       title: "ProString Manage - SaaS for Stringing Workshop & Tournament Management",
       description: "Professional SaaS platform for racket stringing workshops, specialized shops, sports clubs and tournament teams. Manage stringing orders, client and racket history, product inventory, invoicing, and multi-location businesses. Organize tournaments with machine and stringer assignment, workload statistics, and prize money tracking. Features subscription plans, automated receipt and label printing, barcode scanning, data import with smart matching, immutable consecutively numbered invoices, database-enforced MFA and full internationalization in 6 languages. Built solo with a custom agent harness (subagents, skills and 7 MCP servers).",
       footer: "Current Professional Project",
+      summary: "SaaS platform for racket stringing workshops, shops, clubs and tournament teams: orders, inventory, invoicing and tournaments. Built solo with a custom agent harness.",
       startDate: "May 2026",
       endDate: null
     },
-    readMoreExperience: "Read more about my experience →",
+    readMoreExperience: "Full write-up under Experience →",
     showAllProjects: "Show all projects",
     showLess: "Show less"
   },

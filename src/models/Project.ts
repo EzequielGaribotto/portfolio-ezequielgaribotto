@@ -3,6 +3,8 @@ export interface ProjectDocument {
   label: string;
   file: string;
   pages?: number;
+  /** Visible name on the pill (the full label stays as the accessible name and the hover title). */
+  shortLabel?: string;
   /** Tags (of the same card) that this document is about: highlighted while hovering its button. */
   technologies?: string[];
 }
@@ -28,5 +30,7 @@ export interface Project {
   websiteLink?: string;
   weight?: number;
   experienceId?: string;
+  /** Short text the card shows in place of the description when the full write-up lives elsewhere (see experienceId). */
+  summary?: string;
   documents?: ProjectDocument[];
 }

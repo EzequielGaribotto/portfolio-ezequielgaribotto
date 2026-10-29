@@ -61,6 +61,7 @@ export default function ProjectsSection() {
       id: "prostring",
       title: t("projects.prostring.title"),
       description: t("projects.prostring.description"),
+      summary: t("projects.prostring.summary"),
       footer: t("projects.prostring.footer"),
       startDate: t("projects.prostring.startDate"),
       endDate: null,
@@ -82,10 +83,10 @@ export default function ProjectsSection() {
       technologies: iaBigDataTech,
       repoLink: "https://github.com/EzequielGaribotto/IA-BigData",
       documents: [
-        { id: "ames", label: t("projects.iaBigData.docs.ames"), file: "/docs/ia-bigdata/ames-housing-price-prediction.pdf", pages: 34, technologies: ["Python", "Machine Learning", "scikit-learn", "XGBoost", "Random Forest", "Gradient Boosting", "Hyperparameter Tuning", "Regression", "Predictive Modeling", "Flask", "Pandas", "Data Visualization"] },
-        { id: "keras", label: t("projects.iaBigData.docs.keras"), file: "/docs/ia-bigdata/cnn-keras-tensorflow.pdf", pages: 23, technologies: ["Python", "Deep Learning", "Neural Networks", "Computer Vision", "Keras", "TensorFlow", "Data Visualization"] },
-        { id: "pytorch", label: t("projects.iaBigData.docs.pytorch"), file: "/docs/ia-bigdata/cnn-pytorch.pdf", pages: 18, technologies: ["Python", "Deep Learning", "Neural Networks", "Computer Vision", "PyTorch", "Data Visualization"] },
-        { id: "sklearn", label: t("projects.iaBigData.docs.sklearn"), file: "/docs/ia-bigdata/mlp-scikit-learn.pdf", pages: 5, technologies: ["Python", "Machine Learning", "Neural Networks", "scikit-learn"] },
+        { id: "ames", label: t("projects.iaBigData.docs.ames"), shortLabel: t("projects.iaBigData.docShort.ames"), file: "/docs/ia-bigdata/ames-housing-price-prediction.pdf", pages: 34, technologies: ["Python", "Machine Learning", "scikit-learn", "XGBoost", "Random Forest", "Gradient Boosting", "Hyperparameter Tuning", "Regression", "Predictive Modeling", "Flask", "Pandas", "Data Visualization"] },
+        { id: "keras", label: t("projects.iaBigData.docs.keras"), shortLabel: t("projects.iaBigData.docShort.keras"), file: "/docs/ia-bigdata/cnn-keras-tensorflow.pdf", pages: 23, technologies: ["Python", "Deep Learning", "Neural Networks", "Computer Vision", "Keras", "TensorFlow", "Data Visualization"] },
+        { id: "pytorch", label: t("projects.iaBigData.docs.pytorch"), shortLabel: t("projects.iaBigData.docShort.pytorch"), file: "/docs/ia-bigdata/cnn-pytorch.pdf", pages: 18, technologies: ["Python", "Deep Learning", "Neural Networks", "Computer Vision", "PyTorch", "Data Visualization"] },
+        { id: "sklearn", label: t("projects.iaBigData.docs.sklearn"), shortLabel: t("projects.iaBigData.docShort.sklearn"), file: "/docs/ia-bigdata/mlp-scikit-learn.pdf", pages: 5, technologies: ["Python", "Machine Learning", "Neural Networks", "scikit-learn"] },
       ],
       weight: 1
     },
@@ -323,7 +324,7 @@ export default function ProjectsSection() {
         {!hasActiveFilters && (
           <div className={styles.listFooter}>
             <button type="button" className={styles.listToggle} onClick={() => setShowAllProjects(!showAllProjects)}>
-              {showAllProjects ? t("search.showLessLink") : t("search.showAllLink")}
+              {showAllProjects ? t("search.showLessLink") : t("search.showAllLink").replace("{count}", String(totalCount))}
             </button>
           </div>
         )}

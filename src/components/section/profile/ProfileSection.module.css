@@ -104,6 +104,58 @@
   color: var(--link-hover);
 }
 
+.availability {
+  margin: -0.75rem 0 1rem;
+  font-size: 0.9rem;
+  text-align: center;
+  color: var(--foreground-muted);
+  text-wrap: balance;
+}
+
+/* The five scopes: quiet outlined chips that filter the projects below; the one with nothing built is dashed and says so */
+.scopes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
+  margin: 0 0 1.5rem;
+}
+
+.scope {
+  min-height: 44px;
+  padding: 0.35rem 0.8rem;
+  border: 1px solid color-mix(in srgb, var(--primary) 70%, transparent);
+  border-radius: 9999px;
+  background: transparent;
+  color: var(--foreground);
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.scope:hover {
+  border-color: var(--primary);
+  background: var(--tech-bg);
+  color: var(--primary);
+}
+
+.scope[data-status] {
+  border-style: dashed;
+}
+
+.scopeStatus {
+  display: inline-block;
+  margin-left: 0.35em;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.scopeStatus::before {
+  content: "\00b7";
+  margin-right: 0.35em;
+  font-style: normal;
+}
+
 .buttonSection {
   display: flex;
   flex-direction: column;

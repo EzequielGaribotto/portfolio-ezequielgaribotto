@@ -12,6 +12,7 @@ export default function ClickableButton({
   onClick,
   tooltipText,
   tooltipKey,
+  label,
 }: ClickableButtonProps) {
   const { t } = useTranslation(); // Add theme to extract current theme
 
@@ -31,10 +32,11 @@ export default function ClickableButton({
       }}
     >
       {children}
+      {label && <span>{label}</span>}
     </a>
   );
 
-  if (tooltipDisplayText) {
+  if (tooltipDisplayText && !label) {
     return <Tooltip text={tooltipDisplayText}>{button}</Tooltip>;
   }
 

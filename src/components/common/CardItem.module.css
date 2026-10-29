@@ -212,7 +212,7 @@
   
   .tech {
     padding: 0.2rem 0.5rem;
-    font-size: 0.75rem;
+    font-size: max(12px, 0.75rem);
   }
 }
 
@@ -225,7 +225,7 @@
 .moreTags::after {
   content: "";
   position: absolute;
-  inset: -7px -4px;
+  inset: -8px -4px;
 }
 
 /* Two tiers: scope tags (what the work covers) are the strong ones; the tools behind them step back */
@@ -236,4 +236,9 @@
 .tech.techScope:not(.techRelated):not(.techActive) {
   border-color: var(--primary);
   font-weight: 600;
+}
+
+/* A scope tag with unfinished work behind it (planned, in progress) gets a dashed outline besides the words */
+.tech.techScope:has([data-status]) {
+  border-style: dashed;
 }

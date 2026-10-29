@@ -18,3 +18,15 @@ export const PROJECT_TAG_HINTS: Record<string, string[]> = {
   "shoppingcart-chatbot": ["appliedAI"],
   linkia: ["aiEngineering"],
 };
+
+export type ScopeStatus = "planned" | "inProgress" | "noneBuilt";
+
+/** Scope tags whose work in a given project is not finished: the chip says so itself, not only its hint. */
+export const PROJECT_SCOPE_STATUS: Record<string, Record<string, ScopeStatus>> = {
+  prostring: { "Agentic AI": "planned", "Applied AI": "inProgress" },
+};
+
+/** Scope tags with nothing built under them in any project (translations: scopeStatus.<status>). */
+export const GLOBAL_SCOPE_STATUS: Record<string, ScopeStatus> = {
+  "Agentic AI": "noneBuilt",
+};

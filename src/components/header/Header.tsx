@@ -22,8 +22,8 @@ const Header: React.FC = () => {
   // Define styles directly in the component
   const headerContentStyle = {
     backgroundColor: theme === 'dark' 
-      ? 'rgba(45, 55, 72, 0.95)'
-      : 'rgba(226, 232, 240, 0.95)',
+      ? 'rgba(45, 55, 72, 0.98)'
+      : 'rgba(226, 232, 240, 0.98)',
     backdropFilter: 'blur(16px)',
     WebkitBackdropFilter: 'blur(16px)', // For Safari
     border: `1px solid ${theme === 'dark' 

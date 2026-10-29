@@ -117,6 +117,7 @@ export default function ContourBackdrop() {
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
     let frame = 0;
+    let timer = 0; // pending idle redraw
     let lastFrame = 0;
     let clock = 0; // seconds of drift, advanced only by frames that were drawn
     let accent = readAccent();
@@ -149,9 +150,11 @@ export default function ContourBackdrop() {
       gl.drawArrays(gl.TRIANGLES, 0, 3);
     };
 
-    // The field is redrawn on every frame: the drift is only a few pixels a second, so any lower rate shows as
-    // visible half-pixel steps. While the page scrolls, the lines follow it with a damped spring.
+    // While the page scrolls the field is redrawn on every frame, and the lines follow the scroll with a damped spring.
+    // At rest only the drift moves it, a few pixels a second, so it is redrawn about 24 times a second: a full-rate
+    // redraw on a 165 Hz screen kept the GPU busy (about 10x the cost of a still page) and spun the fans for nothing.
     const SMOOTH_TIME = 0.16; // seconds the lines take to settle onto the scroll position
+    const IDLE_FRAME_MS = 1000 / 24;
     const loop = (now: number) => {
       frame = 0;
       if (document.hidden) return;
@@ -178,10 +181,24 @@ export default function ContourBackdrop() {
       if (!reduced.matches) clock += dt;
       draw();
       // Reduced motion: one still frame, redrawn only when something changes (resize, theme)
-      if (!reduced.matches) frame = requestAnimationFrame(loop);
+      if (reduced.matches) return;
+      const moving = offset !== window.scrollY || velocity !== 0;
+      if (moving) {
+        frame = requestAnimationFrame(loop);
+      } else {
+        timer = window.setTimeout(() => {
+          timer = 0;
+          frame = requestAnimationFrame(loop);
+        }, IDLE_FRAME_MS);
+      }
     };
 
     const start = () => {
+      // A pending idle redraw gives way to a frame right now (scroll, resize, theme change)
+      if (timer) {
+        clearTimeout(timer);
+        timer = 0;
+      }
       if (!frame) {
         lastFrame = performance.now();
         frame = requestAnimationFrame(loop);
@@ -211,6 +228,7 @@ export default function ContourBackdrop() {
 
     return () => {
       cancelAnimationFrame(frame);
+      clearTimeout(timer);
       themeObserver.disconnect();
       window.removeEventListener("resize", onResize);
       window.removeEventListener("scroll", onScroll);

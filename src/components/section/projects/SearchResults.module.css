@@ -80,20 +80,27 @@
 
 @media (max-width: 640px) {
   .resultsText {
-    font-size: 0.8rem;
+    font-size: max(12px, 0.8rem);
   }
   
   .sortLabel {
-    font-size: 0.8rem;
+    font-size: max(12px, 0.8rem);
   }
   
   .sortButton {
     padding: 0.4rem 0.8rem;
-    font-size: 0.8rem;
+    font-size: max(12px, 0.8rem);
   }
 }
 
 /* Reduced motion: no movement; color, border and shadow changes stay */
 @media (prefers-reduced-motion: reduce) {
   .sortButton:hover { transform: none; }
+}
+
+/* Touch: 44px-tall controls */
+@media (pointer: coarse) {
+  .sortButton {
+    min-height: 44px;
+  }
 }

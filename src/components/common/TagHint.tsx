@@ -2,9 +2,10 @@
 
 import React, { useEffect, useId, useRef, useState } from "react";
 import { useTranslation } from "../../context/TranslationContext";
-import { TAG_HINT_KEYS, PROJECT_TAG_HINTS } from "../../constants/tagHints";
+import { TAG_HINT_KEYS, PROJECT_TAG_HINTS, PROJECT_SCOPE_STATUS, ScopeStatus } from "../../constants/tagHints";
 import { usedDescendants } from "../../constants/techTaxonomy";
 import { placeTooltip } from "../../utils/tooltipPlacement";
+import HintText from "./HintText";
 import styles from "./TagHint.module.css";
 
 interface TagHintProps {
@@ -15,6 +16,14 @@ interface TagHintProps {
   pool?: string[];
   /** Called with the tag on hover/focus and null on leave, for tags that have concrete technologies. */
   onHoverChange?: (tag: string | null) => void;
+  /** The tag sits in a column beside plain text: with no room above, the tip opens to its left, not over the tags below. */
+  sideWhenCrowded?: boolean;
+  /** The child is itself focusable (a button): the wrapper is no extra tab stop and the child carries the description. */
+  childFocusable?: boolean;
+  /** Touch: a tap does not open the tip (the page shows the hint inline instead). */
+  noTouchTip?: boolean;
+  /** Work not finished under this tag; defaults to what the project says about it. Shown on the chip itself. */
+  status?: ScopeStatus;
   children: React.ReactNode;
 }
 
@@ -26,9 +35,20 @@ interface TagHintProps {
  *   their tooltip.
  * Triggers: mouse hover, keyboard focus (focus-visible only), or a tap on touch screens.
  */
-export default function TagHint({ tag, projectId, pool, onHoverChange, children }: TagHintProps) {
+export default function TagHint({
+  tag,
+  projectId,
+  pool,
+  onHoverChange,
+  sideWhenCrowded,
+  childFocusable,
+  noTouchTip,
+  status: statusProp,
+  children,
+}: TagHintProps) {
   const { t } = useTranslation();
   const hintKey = TAG_HINT_KEYS[tag];
+  const status = statusProp ?? (projectId ? PROJECT_SCOPE_STATUS[projectId]?.[tag] : undefined);
   const hasChildren = usedDescendants(tag, pool).length > 0;
   const notify = hasChildren ? onHoverChange : undefined;
   const [open, setOpen] = useState(false);
@@ -51,10 +71,10 @@ export default function TagHint({ tag, projectId, pool, onHoverChange, children 
     return () => document.removeEventListener("pointerdown", onPointerDown);
   }, [open, notify]);
 
-  if (!hintKey && !hasChildren) return <>{children}</>;
+  if (!hintKey && !hasChildren && !status) return <>{children}</>;
 
   const place = () => {
-    if (hintKey) placeTooltip(tipRef.current, { flipBelowTop: 90 });
+    if (hintKey) placeTooltip(tipRef.current, { flipBelowTop: 90, sideWhenCrowded });
   };
 
   let text = "";
@@ -69,8 +89,9 @@ export default function TagHint({ tag, projectId, pool, onHoverChange, children 
     <span
       ref={rootRef}
       className={`${hintKey ? styles.hint : styles.plain} ${open ? styles.open : ""} ${dismissed ? styles.dismissed : ""}`}
-      tabIndex={0}
-      aria-describedby={hintKey ? tipId : undefined}
+      data-status={status}
+      tabIndex={hintKey && !childFocusable ? 0 : undefined}
+      aria-describedby={hintKey && !childFocusable ? tipId : undefined}
       onKeyDown={(e) => {
         if (e.key !== "Escape" || !hintKey) return;
         setDismissed(true);
@@ -78,6 +99,7 @@ export default function TagHint({ tag, projectId, pool, onHoverChange, children 
       }}
       onClick={() => {
         if (!window.matchMedia("(hover: none)").matches) return;
+        if (noTouchTip) return;
         const next = !open;
         place();
         setOpen(next);
@@ -92,7 +114,7 @@ export default function TagHint({ tag, projectId, pool, onHoverChange, children 
         notify?.(null);
       }}
       onFocus={(e) => {
-        if (!e.currentTarget.matches(":focus-visible")) return;
+        if (!(e.target as HTMLElement).matches(":focus-visible")) return;
         place();
         notify?.(tag);
       }}
@@ -101,26 +123,13 @@ export default function TagHint({ tag, projectId, pool, onHoverChange, children 
         notify?.(null);
       }}
     >
-      {children}
+      {childFocusable && hintKey && React.isValidElement<{ "aria-describedby"?: string }>(children)
+        ? React.cloneElement(children, { "aria-describedby": tipId })
+        : children}
+      {status && <span className={styles.status}>{t(`scopeStatus.${status}`)}</span>}
       {hintKey && (
         <span ref={tipRef} id={tipId} role="tooltip" className={styles.tip}>
-          {text.split("\n").map((line, i) => {
-            // A label at the start of a line ("Scope:", "In this project:") is set in bold; bullets stay plain
-            const label = line.match(/^([^:•]{1,32}:)(.*)$/);
-            return (
-              <React.Fragment key={i}>
-                {i > 0 && "\n"}
-                {label ? (
-                  <>
-                    <strong className={styles.tipLabel}>{label[1]}</strong>
-                    {label[2]}
-                  </>
-                ) : (
-                  line
-                )}
-              </React.Fragment>
-            );
-          })}
+          <HintText text={text} labelClassName={styles.tipLabel} />
         </span>
       )}
     </span>

@@ -24,6 +24,8 @@ export interface ClickableButtonProps {
   onClick?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
   tooltipText?: string;
   tooltipKey?: string;
+  /** Visible text next to the icon; the link then needs no hover tooltip to be understood. */
+  label?: string;
 }
 
 export interface EmailButtonProps {

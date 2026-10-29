@@ -103,7 +103,7 @@ const CardItem: React.FC<CardItemProps> = ({
               isRelated(tech) ? styles.techRelated : ""
             } ${hoveredTag === tech ? styles.techActive : ""}`}
           >
-            <TagHint tag={tech} projectId={id} pool={technologies} onHoverChange={handleTagHover}>{tech}</TagHint>
+            <TagHint tag={tech} projectId={id} pool={technologies} onHoverChange={handleTagHover} sideWhenCrowded={showEverything}>{tech}</TagHint>
           </span>
         ))}
         {technologies.length > TAG_LIMIT && !showEverything && (

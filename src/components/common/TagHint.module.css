@@ -20,7 +20,7 @@
   background: #1f2937;
   color: #f5f5f5;
   border: 1px solid #4b5563;
-  font-size: 0.8rem;
+  font-size: max(12px, 0.8rem);
   font-weight: 400;
   line-height: 1.4;
   text-align: left;
@@ -63,6 +63,24 @@
   bottom: 100%;
 }
 
+/* No room above: open to the left of the tag, so the tags below it stay visible. */
+.tip[data-side="left"] {
+  bottom: auto;
+  left: auto;
+  top: var(--top, 0);
+  right: calc(100% + 0.5rem);
+  transform: none;
+}
+
+.tip[data-side="left"]::before {
+  top: 0;
+  bottom: 0;
+  left: 100%;
+  right: auto;
+  width: 0.75rem;
+  height: auto;
+}
+
 /* Invisible bridge over the gap between the tag and the tip: the pointer never leaves the hover area. */
 .tip::before {
   content: "";
@@ -93,4 +111,19 @@
   visibility: visible;
   pointer-events: auto;
   transition-delay: 0s;
+}
+
+/* Unfinished work under a scope tag: said on the chip itself, in words, so it reads at rest. inline-block keeps the dotted underline off it. */
+.status {
+  display: inline-block;
+  margin-left: 0.3em;
+  font-weight: 400;
+  font-style: italic;
+  white-space: nowrap;
+}
+
+.status::before {
+  content: "\00b7";
+  margin-right: 0.3em;
+  font-style: normal;
 }

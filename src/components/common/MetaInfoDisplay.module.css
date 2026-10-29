@@ -6,7 +6,7 @@
 }
 
 .separator {
-  font-size: 0.8rem;
+  font-size: max(12px, 0.8rem);
   opacity: 0.6;
   color: var(--primary);
 }

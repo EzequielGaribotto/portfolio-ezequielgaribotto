@@ -22,6 +22,8 @@ export default function SearchResults({
   onSortChange
 }: SearchResultsProps) {
   const { t } = useTranslation();
+  // Why these cards in this order
+  const order = sortBy === "date" ? t("search.byDate") : t("search.byRelevance");
 
   if (!hasActiveFilters) {
     return (
@@ -33,6 +35,7 @@ export default function SearchResults({
                 .replace("{count}", resultCount.toString())
                 .replace("{total}", totalCount.toString())
           }
+          {" · "}{order}
         </p>
         
         {/* Sort toggle */}
@@ -67,6 +70,7 @@ export default function SearchResults({
             {t("search.showingFiltered")
               .replace("{filtered}", resultCount.toString())
               .replace("{total}", totalCount.toString())}
+            {" · "}{order}
             {resultCount < totalCount && (
               <span className={styles.filteredNote}>
                 {" "}{t("search.filtered")}

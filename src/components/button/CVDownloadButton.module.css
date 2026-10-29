@@ -99,7 +99,7 @@
   border-radius: 9999px;
   background: none;
   color: var(--foreground);
-  font-size: 0.75rem;
+  font-size: max(12px, 0.75rem);
   transition: border-color 0.2s ease, color 0.2s ease;
 }
 
@@ -113,6 +113,50 @@
   padding: 0.5rem 1rem 0.65rem;
   border-top: 1px solid var(--rule, color-mix(in srgb, var(--foreground) 28%, transparent));
   color: var(--foreground-muted);
-  font-size: 0.75rem;
+  font-size: max(12px, 0.75rem);
   text-align: left;
+}
+
+/* Split button: the main part downloads, the arrow opens the other versions */
+.split {
+  display: inline-flex;
+  align-items: stretch;
+}
+
+a.button {
+  text-decoration: none;
+}
+
+.main {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right-width: 0;
+}
+
+.more {
+  padding-inline: 0.7rem;
+  min-width: 2.75rem;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left-width: 1px;
+}
+
+.primary.more {
+  border-left-color: color-mix(in srgb, var(--on-primary) 40%, transparent);
+}
+
+.moreIcon {
+  font-size: 0.75rem;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.moreIconOpen {
+  transform: rotate(180deg);
+}
+
+/* Touch: 44px-tall controls */
+@media (pointer: coarse) {
+  .button {
+    min-height: 44px;
+  }
 }

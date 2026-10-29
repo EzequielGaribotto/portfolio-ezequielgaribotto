@@ -5,6 +5,8 @@ import { FaSearch, FaTimes, FaChevronDown } from "react-icons/fa";
 import { useTranslation } from "../../../context/TranslationContext";
 import styles from "./ProjectSearch.module.css";
 import TagHint from "../../common/TagHint";
+import HintText from "../../common/HintText";
+import { TAG_HINT_KEYS } from "../../../constants/tagHints";
 import { suggest, remainder } from "../../../utils/searchSuggestions";
 import { scrollBehavior } from "../../../hooks/usePrefersReducedMotion";
 
@@ -77,6 +79,18 @@ export default function ProjectSearch({
     window.scrollTo({ top: Math.max(0, top), behavior: scrollBehavior() });
   };
 
+  // The hero's scope row applies a scope here: select it alone and bring the results into view
+  useEffect(() => {
+    const onScope = (e: Event) => {
+      const scope = (e as CustomEvent<string>).detail;
+      if (!scope) return;
+      onKeywordsChange([scope]);
+      requestAnimationFrame(scrollScopeUnderNavbar);
+    };
+    window.addEventListener("portfolio:scope", onScope);
+    return () => window.removeEventListener("portfolio:scope", onScope);
+  }, [onKeywordsChange]);
+
   const handleKeywordToggle = (keyword: string) => {
     const updatedKeywords = selectedKeywords.includes(keyword)
       ? selectedKeywords.filter(k => k !== keyword)
@@ -128,6 +142,7 @@ export default function ProjectSearch({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [clearSignal]);
 
+  const selectedScopes = scopeKeywords.filter((keyword) => selectedKeywords.includes(keyword) && TAG_HINT_KEYS[keyword]);
   const hasActiveFilters = searchTerm.trim() !== "" || selectedKeywords.length > 0;
   // Scope is the primary filter; the longer technology list opens on demand, and stays open while one of its chips is active
   const techVisible = techOpen || techKeywords.some((keyword) => selectedKeywords.includes(keyword));
@@ -221,7 +236,7 @@ export default function ProjectSearch({
             )}
             <div className={styles.keywordTags} id={group.scope ? undefined : "tech-keywords"} hidden={!group.scope && !techVisible}>
               {group.keywords.map((keyword) => (
-                <TagHint key={keyword} tag={keyword} pool={projectTags} onHoverChange={onChipHover}>
+                <TagHint key={keyword} tag={keyword} pool={projectTags} onHoverChange={onChipHover} childFocusable noTouchTip>
                   <button
                     onClick={() => {
                       handleKeywordToggle(keyword);
@@ -240,6 +255,21 @@ export default function ProjectSearch({
           </div>
         ))}
       </div>
+
+      {/* What the selected scope covers and what was built under it: the hover hint, kept in view for touch and keyboard */}
+      {selectedScopes.length > 0 && (
+        <div className={styles.explainer} role="region" aria-label={t("search.explainerLabel")}>
+          {selectedScopes.map((scope) => {
+            const hintKey = TAG_HINT_KEYS[scope];
+            return (
+              <div key={scope} className={styles.explainerItem}>
+                <p><HintText text={t(`tagHints.${hintKey}`)} labelClassName={styles.explainerLabel} /></p>
+                <p><HintText text={t(`tagExamples.${hintKey}`)} labelClassName={styles.explainerLabel} /></p>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }

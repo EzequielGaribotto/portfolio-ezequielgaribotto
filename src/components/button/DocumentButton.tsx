@@ -12,13 +12,14 @@ interface DocumentButtonProps {
   label: string;
   file: string;
   pages?: number;
+  shortLabel?: string;
   className?: string;
   /** Called with true/false while the pointer or focus is on the button. */
   onHoverChange?: (hovering: boolean) => void;
 }
 
 /** PDF icon button: hover shows the title (shared Tooltip); click offers preview or download. */
-export default function DocumentButton({ label, file, pages, className = "", onHoverChange }: DocumentButtonProps) {
+export default function DocumentButton({ label, file, pages, shortLabel, className = "", onHoverChange }: DocumentButtonProps) {
   const { t } = useTranslation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [previewOpen, setPreviewOpen] = useState(false);
@@ -67,9 +68,12 @@ export default function DocumentButton({ label, file, pages, className = "", onH
           aria-label={label}
         >
           <FaFilePdf size={15} className="text-white" />
-          {pages ? (
-            <span className={styles.pages}>{t("documents.pages").replace("{count}", String(pages))}</span>
-          ) : null}
+          {/* Name, length and language on the pill: the reports are in Spanish, which a visitor should know before opening one */}
+          <span className={styles.pages}>
+            {[shortLabel, pages ? t("documents.pages").replace("{count}", String(pages)) : "", t("documents.inSpanish")]
+              .filter(Boolean)
+              .join(" · ")}
+          </span>
         </button>
       </Tooltip>
 

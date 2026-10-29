@@ -232,3 +232,51 @@
   position: absolute;
   inset: -9px;
 }
+
+/* Touch: a 44px hit area around the control; what is drawn keeps its size */
+@media (pointer: coarse) {
+  .expandControl {
+    position: relative;
+  }
+
+  .expandControl::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: max(100%, 44px);
+    height: max(100%, 44px);
+    transform: translate(-50%, -50%);
+  }
+
+  .dot {
+    position: relative;
+  }
+
+  .dot::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: max(100%, 44px);
+    height: max(100%, 44px);
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* Touch: a 44px hit area around the control; what is drawn keeps its size */
+@media (pointer: coarse) {
+  .navButton {
+    position: relative;
+  }
+
+  .navButton::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: max(100%, 44px);
+    height: max(100%, 44px);
+    transform: translate(-50%, -50%);
+  }
+}

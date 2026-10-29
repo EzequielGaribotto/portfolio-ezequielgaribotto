@@ -42,6 +42,12 @@
   box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.1);
 }
 
+/* The halo alone is too faint to find the field by keyboard: a solid ring, like the other controls */
+.searchInput:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
 .searchInput::placeholder {
   color: var(--foreground-muted);
   opacity: 1;
@@ -92,7 +98,7 @@
 }
 
 .groupLabel {
-  font-size: 0.75rem;
+  font-size: max(12px, 0.75rem);
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -136,7 +142,7 @@
 }
 
 .groupChevron {
-  font-size: 0.7rem;
+  font-size: max(12px, 0.7rem);
   transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -212,7 +218,7 @@
   
   .keywordTag {
     padding: 0.4rem 0.8rem;
-    font-size: 0.8rem;
+    font-size: max(12px, 0.8rem);
   }
   
   .keywordTags {
@@ -317,5 +323,73 @@
   border-radius: 0.4rem;
   color: var(--foreground-muted);
   font-family: inherit;
-  font-size: 0.7rem;
+  font-size: max(12px, 0.7rem);
+}
+
+/* Selected scope: what it covers and what was built under it, in view instead of behind a hover */
+.explainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 60rem;
+  margin: 0 auto;
+}
+
+.explainerItem {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem 1.5rem;
+  padding: 0.85rem 1.1rem;
+  border: 1px solid var(--secondary-hover);
+  border-radius: 0.75rem;
+  background-color: var(--secondary);
+  color: var(--foreground);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.explainerItem p {
+  margin: 0;
+  white-space: pre-line;
+  text-align: left;
+}
+
+.explainerLabel {
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .explainerItem {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 0.75rem 0.9rem;
+  }
+}
+
+/* Touch: 44px-tall controls */
+@media (pointer: coarse) {
+  .keywordTag {
+    min-height: 44px;
+  }
+
+  .groupToggle {
+    min-height: 44px;
+  }
+}
+
+/* Touch: a 44px hit area around the control; what is drawn keeps its size */
+@media (pointer: coarse) {
+  .clearButton {
+    position: relative;
+  }
+
+  .clearButton::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: max(100%, 44px);
+    height: max(100%, 44px);
+    transform: translate(-50%, -50%);
+  }
 }

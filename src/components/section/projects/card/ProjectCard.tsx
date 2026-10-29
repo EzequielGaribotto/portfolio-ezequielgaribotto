@@ -268,7 +268,7 @@ export default function ProjectCard({ project, searchTerm = '', externalHighligh
             </div>
           )}
           <p className={styles.projectDescription}>
-            <HighlightText text={project.description} searchTerm={searchTerm} />
+            <HighlightText text={project.summary ?? project.description} searchTerm={searchTerm} />
           </p>
 
           {project.experienceId && (
@@ -402,8 +402,9 @@ export default function ProjectCard({ project, searchTerm = '', externalHighligh
           {project.arcadeLink && (
             <ClickableButton
               href={project.arcadeLink}
-              className={`${styles.socialIcon} ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : styles.pillLight} rounded-full`}
+              className={`${styles.socialIcon} ${styles.socialLabeled} ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : styles.pillLight} rounded-full`}
               tooltipKey="tooltips.playArcadeGame"
+              label={t("links.play")}
             >
               <svg 
                 xmlns="http://www.w3.org/2000/svg" 
@@ -418,8 +419,9 @@ export default function ProjectCard({ project, searchTerm = '', externalHighligh
           {project.programameLink && (
             <ClickableButton
               href={project.programameLink}
-              className={`${styles.socialIcon} ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : styles.pillLight} rounded-full`}
+              className={`${styles.socialIcon} ${styles.socialLabeled} ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : styles.pillLight} rounded-full`}
               tooltipKey="tooltips.competition"
+              label={t("links.competition")}
             >
               <FaTrophy 
                 size={20} 
@@ -430,8 +432,9 @@ export default function ProjectCard({ project, searchTerm = '', externalHighligh
           {project.playStoreLink && (
             <ClickableButton
               href={project.playStoreLink}
-              className={`${styles.socialIcon} ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : styles.pillLight} rounded-full`}
+              className={`${styles.socialIcon} ${styles.socialLabeled} ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : styles.pillLight} rounded-full`}
               tooltipKey="tooltips.playStore"
+              label={t("links.playStore")}
             >
               <FaGooglePlay 
                 size={20} 
@@ -442,8 +445,9 @@ export default function ProjectCard({ project, searchTerm = '', externalHighligh
           {project.appStoreLink && (
             <ClickableButton
               href={project.appStoreLink}
-              className={`${styles.socialIcon} ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : styles.pillLight} rounded-full`}
+              className={`${styles.socialIcon} ${styles.socialLabeled} ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : styles.pillLight} rounded-full`}
               tooltipKey="tooltips.appStore"
+              label={t("links.appStore")}
             >
               <svg 
                 xmlns="http://www.w3.org/2000/svg" 
@@ -458,8 +462,9 @@ export default function ProjectCard({ project, searchTerm = '', externalHighligh
           {project.repoLink && (
             <ClickableButton
               href={project.repoLink}
-              className={`${styles.socialIcon} ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : styles.pillLight} rounded-full flex items-center justify-center`}
+              className={`${styles.socialIcon} ${styles.socialLabeled} ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : styles.pillLight} rounded-full flex items-center justify-center`}
               tooltipKey={project.id === "competitive-programming" ? "tooltips.solvedProblems" : "tooltips.sourceCode"}
+              label={t(project.id === "competitive-programming" ? "links.solved" : "links.source")}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -477,6 +482,7 @@ export default function ProjectCard({ project, searchTerm = '', externalHighligh
               label={doc.label}
               file={doc.file}
               pages={doc.pages}
+              shortLabel={doc.shortLabel}
               onHoverChange={(on) => setHoveredDocTech(on ? doc.technologies ?? [] : [])}
               className={`${styles.socialIcon} ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : styles.pillLight} flex items-center justify-center`}
             />
@@ -484,8 +490,9 @@ export default function ProjectCard({ project, searchTerm = '', externalHighligh
           {project.presentationLink && (
             <ClickableButton
               href={project.presentationLink}
-              className={`${styles.socialIcon} ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : styles.pillLight} rounded-full flex items-center justify-center`}
+              className={`${styles.socialIcon} ${styles.socialLabeled} ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : styles.pillLight} rounded-full flex items-center justify-center`}
               tooltipKey="tooltips.viewPresentation"
+              label={t("links.presentation")}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -500,8 +507,9 @@ export default function ProjectCard({ project, searchTerm = '', externalHighligh
           {project.websiteLink && (
             <ClickableButton
               href={project.websiteLink}
-              className={`${styles.socialIcon} ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : styles.pillLight} rounded-full flex items-center justify-center`}
+              className={`${styles.socialIcon} ${styles.socialLabeled} ${theme === 'dark' ? 'bg-gray-800 hover:bg-gray-700' : styles.pillLight} rounded-full flex items-center justify-center`}
               tooltipKey="tooltips.viewWebsite"
+              label={t("links.website")}
             >
               <FaGlobe 
                 size={20} 

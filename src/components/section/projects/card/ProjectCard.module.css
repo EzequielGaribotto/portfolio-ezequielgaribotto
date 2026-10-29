@@ -62,7 +62,7 @@
   align-items: baseline;
   gap: 0.15rem 0.6rem;
   margin: 0.15rem 0 0.75rem;
-  font-size: 0.75rem;
+  font-size: max(12px, 0.75rem);
   letter-spacing: 0.06em;
   text-align: left;
   text-transform: uppercase;
@@ -202,6 +202,22 @@
   transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
+/* Icon plus a word: the pill grows to its text and keeps a 44px target */
+.socialIcon.socialLabeled {
+  width: auto;
+  min-width: 44px;
+  height: 44px;
+  gap: 0.4rem;
+  padding-inline: 0.9rem !important;
+}
+
+.socialLabeled > span {
+  color: #fff;
+  font-size: max(12px, 0.8rem);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
 .socialIcon svg,
 .socialIcon > * {
   transition: color 0.2s ease, transform 0.2s ease;
@@ -276,7 +292,7 @@
   background: transparent;
   border: 1px dashed var(--tech-border);
   color: var(--primary);
-  font-size: 0.8rem;
+  font-size: max(12px, 0.8rem);
   font-weight: 600;
   padding: 0.25rem 0.6rem;
   border-radius: 9999px;
@@ -299,7 +315,7 @@
   background: var(--tech-bg);
   border: 1px solid var(--tech-border);
   color: var(--tech-text);
-  font-size: 0.8rem;
+  font-size: max(12px, 0.8rem);
   padding: 0.25rem 0.5rem;
   border-radius: 9999px;
 }
@@ -511,7 +527,7 @@
 .moreTags::after {
   content: "";
   position: absolute;
-  inset: -7px -4px;
+  inset: -8px -4px;
 }
 
 /* Two tiers: scope tags (what the work covers) are the strong ones; the tools behind them step back */
@@ -522,4 +538,18 @@
 .techTag.techScope:not(.techTagRelated):not(.techTagActive) {
   border-color: var(--primary);
   font-weight: 600;
+}
+
+/* A scope tag with unfinished work behind it (planned, in progress) gets a dashed outline besides the words */
+.techTag.techScope:has([data-status]) {
+  border-style: dashed;
+}
+
+/* Touch: the link under a description is a 44px-tall target */
+@media (pointer: coarse) {
+  .readMoreLink {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+  }
 }

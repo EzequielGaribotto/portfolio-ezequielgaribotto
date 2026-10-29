@@ -74,6 +74,8 @@ export const baseTranslations = {
     title: "",
     description: "",
     photoAlt: "",
+    availability: "",
+    scopesLabel: "",
   },
   cv: {
     download: "",
@@ -83,7 +85,9 @@ export const baseTranslations = {
     preview: "",
     unableToDisplay: "", // New translation key
     downloadInstead: "", // New translation key
-    lastUpdated: "", // Add missing lastUpdated key to fix TypeScript error
+    lastUpdated: "", // Add missing lastUpdated key to fix TypeScript error,
+    otherVersions: "",
+    downloadAts: "",
   },
   // Hover explanations for scope tags
   tagHints: {
@@ -109,6 +113,21 @@ export const baseTranslations = {
   // Per-project examples (shown when hovering a tag inside that project's card)
   projectTagHints: {} as Record<string, Record<string, string>>,
   // Collapsible tag lists on cards
+  scopeStatus: {
+    planned: "",
+    inProgress: "",
+    noneBuilt: "",
+  },
+  links: {
+    source: "",
+    solved: "",
+    website: "",
+    playStore: "",
+    appStore: "",
+    play: "",
+    competition: "",
+    presentation: "",
+  },
   tags: {
     showMore: "",
     showLess: "",
@@ -119,6 +138,7 @@ export const baseTranslations = {
     download: "",
     close: "",
     pages: "",
+    inSpanish: "",
   },
   // Search functionality translations
   search: {
@@ -137,6 +157,9 @@ export const baseTranslations = {
     sortBy: "",
     sortByRelevance: "",
     sortByDate: "",
+    byRelevance: "",
+    byDate: "",
+    explainerLabel: "",
   },
   // Projects section translations
   projects: {
@@ -243,10 +266,12 @@ export const baseTranslations = {
       startDate: string;
       endDate?: string | null;
       docs?: { ames: string; keras: string; pytorch: string; sklearn: string };
+      docShort?: { ames: string; keras: string; pytorch: string; sklearn: string };
     },
     prostring: {} as {
       title: string;
       description: string;
+      summary: string;
       footer: string;
       startDate: string;
       endDate?: string | null;

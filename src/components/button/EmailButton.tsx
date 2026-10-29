@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { FaEnvelope } from "react-icons/fa";
+import { FaEnvelope, FaCheck } from "react-icons/fa";
 import Tooltip from "../tooltip/Tooltip";
 import { useTranslation } from "../../context/TranslationContext";
 import { EmailButtonProps } from "../../models/interfaces";
@@ -30,7 +30,8 @@ export default function EmailButton({ email, className = "" }: EmailButtonProps)
           aria-label={t("tooltips.email")}
           className={`p-2 rounded-full transition-all duration-500 ease-in-out ${className}`}
         >
-          <FaEnvelope size={20} />
+          {/* The icon itself confirms the copy: touch screens have no hover tooltip to show it */}
+          {copied ? <FaCheck size={20} aria-hidden="true" /> : <FaEnvelope size={20} />}
         </button>
       </Tooltip>
       {/* Announces the copy for screen readers; the visible confirmation is the tooltip */}

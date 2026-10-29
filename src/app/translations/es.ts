@@ -71,7 +71,9 @@ export const es: Translations = {
     proof: "Creé en solitario ProString Manage, un SaaS en producción",
     proofLink: "ProString Manage",
     description: "Desarrollador Junior Full-Stack de IA\u00a0Aplicada | AI\u00a0Engineering, Backend & Datos",
-    photoAlt: "Foto de Ezequiel Garibotto"
+    photoAlt: "Foto de Ezequiel Garibotto",
+    availability: "Barcelona, España · Abierto a España, UE y remoto",
+    scopesLabel: "Áreas de trabajo",
   },
   cv: {
     download: "Descargar CV",
@@ -81,7 +83,9 @@ export const es: Translations = {
     preview: "Visualizar CV",
     unableToDisplay: "No se puede mostrar el archivo PDF.",
     downloadInstead: "Descargar en su lugar",
-    lastUpdated: "Última actualización"
+    lastUpdated: "Última actualización",
+    otherVersions: "Otras versiones",
+    downloadAts: "Descargar CV, inglés, 1 página (ATS)",
   },
   tagHints: {
     appliedAI: "Applied AI: IA dentro de un producto.\nÁmbito: desde la llamada al LLM hasta la interfaz que usa el cliente final. Incluye flujos de trabajo agénticos: cadenas de llamadas a LLM que automatizan una tarea.",
@@ -124,6 +128,21 @@ export const es: Translations = {
       aiEngineering: "En este programa:\n• CNNs con Keras y PyTorch\n• Modelos de precios de vivienda (Random Forest, XGBoost, grid search) servidos con una API Flask\n• En curso: proyecto final de regresión y clustering sobre datos de e-commerce",
     },
   },
+  scopeStatus: {
+    planned: "planificado",
+    inProgress: "en curso",
+    noneBuilt: "sin construir aún",
+  },
+  links: {
+    source: "Código",
+    solved: "Problemas resueltos",
+    website: "Web",
+    playStore: "Play Store",
+    appStore: "App Store",
+    play: "Jugar",
+    competition: "Competición",
+    presentation: "Presentación",
+  },
   tags: {
     showMore: "+{count} más",
     showLess: "Ver menos",
@@ -133,6 +152,7 @@ export const es: Translations = {
     download: "Descargar",
     close: "Cerrar",
     pages: "{count} págs.",
+    inSpanish: "ES",
   },
   search: {
     scopeLabel: "Ámbito",
@@ -145,11 +165,14 @@ export const es: Translations = {
     showingFiltered: "Mostrando {filtered} de {total} proyectos",
     filtered: "(filtrado)",
     tryAdjusting: "Intenta ajustar tus criterios de búsqueda o eliminar algunos filtros.",
-    showAllLink: "Ver todos los proyectos",
+    showAllLink: "Ver los {count} proyectos",
     showLessLink: "Ver menos",
     sortBy: "Ordenar por",
     sortByDate: "Fecha",
-    sortByRelevance: "Relevancia"
+    sortByRelevance: "Relevancia",
+    byRelevance: "más relevantes primero",
+    byDate: "más recientes primero",
+    explainerLabel: "Sobre el ámbito seleccionado",
   },
   projects: {
     title: "Proyectos",
@@ -264,15 +287,22 @@ export const es: Translations = {
         pytorch: "CNN con PyTorch: informe del ejercicio (PDF)",
         sklearn: "Perceptrón multicapa con scikit-learn: informe del ejercicio (PDF)",
       },
+      docShort: {
+        ames: "Ames Housing",
+        keras: "Keras/TensorFlow",
+        pytorch: "PyTorch",
+        sklearn: "scikit-learn",
+      },
     },
     prostring: {
       title: "ProString Manage - SaaS de Gestión de Talleres de Encordado y Torneos",
       description: "Plataforma SaaS profesional para talleres de encordado de raquetas, tiendas especializadas, clubes deportivos y equipos de torneo. Gestión de pedidos de encordado, historial de clientes y raquetas, inventario de productos, facturación y negocios multi-sede. Organización de torneos con asignación de máquinas y encordadores, estadísticas de carga y seguimiento de premios. Incluye planes de suscripción, impresión automática de recibos y etiquetas, escaneo de códigos de barras, importación de datos con matching inteligente, facturas inmutables con numeración consecutiva, MFA aplicado en la base de datos e internacionalización completa en 6 idiomas. Desarrollado en solitario con un agent harness propio (subagentes, skills y 7 servidores MCP).",
       footer: "Proyecto Profesional Actual",
+      summary: "Plataforma SaaS para talleres de encordado, tiendas, clubes y equipos de torneo: pedidos, inventario, facturación y torneos. Desarrollada en solitario con un agent harness propio.",
       startDate: "mayo 2026",
       endDate: null
     },
-    readMoreExperience: "Leer más sobre mi experiencia →",
+    readMoreExperience: "Detalle completo en Experiencia →",
     showAllProjects: "Mostrar todos los proyectos",
     showLess: "Mostrar menos"
   },

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useLayoutEffect } from "react";
-import { FaFileDownload } from "react-icons/fa";
+import { FaFileDownload, FaChevronDown } from "react-icons/fa";
 import { useTranslation } from "../../context/TranslationContext";
 import { CVDownloadButtonProps } from "../../models/interfaces";
 import { useCVMetadata } from "../../hooks/useCVMetadata";
@@ -95,16 +95,30 @@ export default function CVDownloadButton({ className, variant = "outline", compa
 
   return (
     <div className={`relative ${className}`} ref={dropdownRef}>
-      <button
-        ref={triggerRef}
-        onClick={() => setIsOpen(!isOpen)}
-        className={`${styles.button} ${variant === "primary" ? styles.primary : ""} ${compact ? styles.compact : ""}`}
-        aria-haspopup="menu"
-        aria-expanded={isOpen}
-      >
-        <FaFileDownload className="mr-2" />
-        {t("cv.download")}
-      </button>
+      {/* One click downloads the recommended CV (English, 1 page, ATS); the arrow offers the other versions */}
+      <div className={styles.split}>
+        <a
+          href={CV_FILES.EN_ATS}
+          download
+          className={`${styles.button} ${styles.main} ${variant === "primary" ? styles.primary : ""} ${compact ? styles.compact : ""}`}
+          aria-label={t("cv.downloadAts")}
+        >
+          <FaFileDownload className="mr-2" aria-hidden="true" />
+          {t("cv.download")}
+        </a>
+        <button
+          ref={triggerRef}
+          type="button"
+          onClick={() => setIsOpen(!isOpen)}
+          className={`${styles.button} ${styles.more} ${variant === "primary" ? styles.primary : ""} ${compact ? styles.compact : ""}`}
+          aria-haspopup="menu"
+          aria-expanded={isOpen}
+          aria-label={t("cv.otherVersions")}
+          title={t("cv.otherVersions")}
+        >
+          <FaChevronDown aria-hidden="true" className={`${styles.moreIcon} ${isOpen ? styles.moreIconOpen : ""}`} />
+        </button>
+      </div>
       
       {isOpen && (
         <div 
